@@ -1,0 +1,420 @@
+﻿<Window
+    x:Class="MytoolMiniWPF.views.BloodGasPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:converters="clr-namespace:MaterialDesignThemes.Wpf.Converters;assembly=MaterialDesignThemes.Wpf"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:internal="clr-namespace:MaterialDesignThemes.Wpf.Internal;assembly=MaterialDesignThemes.Wpf"
+    xmlns:local="clr-namespace:MytoolMiniWPF.views"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:uc="clr-namespace:MytoolMiniWPF.customControls"
+    xmlns:wpf="clr-namespace:MaterialDesignThemes.Wpf;assembly=MaterialDesignThemes.Wpf"
+    xmlns:xf="clr-namespace:XamlFlair;assembly=XamlFlair.WPF"
+    Title="血气分析"
+    Width="850"
+    Height="550"
+    AllowDrop="True"
+    AllowsTransparency="True"
+    Background="#FFf6f3f7"
+    Icon="pack://application:,,,/resources/ico/bloodgas.ico"
+    MouseLeftButtonDown="DragWindow"
+    Opacity="0.95"
+    OpacityMask="White"
+    ResizeMode="NoResize"
+    WindowStartupLocation="CenterScreen"
+    WindowStyle="None"
+    mc:Ignorable="d">
+
+    <Window.Template>
+        <ControlTemplate TargetType="Window">
+            <Border Padding="64" Background="Transparent">
+                <Border Background="White" CornerRadius="10">
+                    <Border.Effect>
+                        <DropShadowEffect
+                            BlurRadius="24"
+                            Opacity="0.5"
+                            ShadowDepth="1" />
+
+                    </Border.Effect>
+
+                    <ContentPresenter ClipToBounds="True" />
+                </Border>
+            </Border>
+        </ControlTemplate>
+    </Window.Template>
+    <Window.Resources>
+        <Style x:Key="BtnClose" TargetType="Button">
+            <Setter Property="Width" Value="42" />
+            <Setter Property="Height" Value="30" />
+            <Setter Property="Foreground" Value="Black" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Background" Value="WhiteSmoke" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border
+                            x:Name="border"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="3 10 3 3"
+                            SnapsToDevicePixels="True">
+                            <TextBlock
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Foreground="{TemplateBinding Foreground}"
+                                Text="{TemplateBinding Content}" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="red" />
+                                <Setter Property="Foreground" Value="WhiteSmoke" />
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="DarkRed" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="Btncustom" TargetType="Button">
+            <Setter Property="Width" Value="42" />
+            <Setter Property="Height" Value="30" />
+            <Setter Property="Foreground" Value="Black" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Background" Value="WhiteSmoke" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border
+                            x:Name="border"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="3"
+                            SnapsToDevicePixels="True">
+                            <TextBlock
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Foreground="{TemplateBinding Foreground}"
+                                Text="{TemplateBinding Content}" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="gray" />
+                                <Setter Property="Foreground" Value="WhiteSmoke" />
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="DarkRed" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+
+
+
+
+    </Window.Resources>
+
+    <Grid x:Name="BloodGasGrid" xf:Animations.Primary="{xf:Animate BasedOn={StaticResource FadeIn}, Duration=1500}">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="35" />
+            <RowDefinition />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="0.8*" />
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" Cursor="">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="45" />
+                <ColumnDefinition Width="45" />
+                <ColumnDefinition Width="45" />
+            </Grid.ColumnDefinitions>
+
+
+            <TextBlock
+                Grid.Column="0"
+                Margin="0,5,0,0"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                FontSize="18"
+                FontWeight="UltraBold"
+                Text="血 气 分 析" />
+
+
+            <Button
+                x:Name="help"
+                Grid.Column="1"
+                Click="btnHelp_Click"
+                Content="?"
+                FontSize="18"
+                Style="{StaticResource Btncustom}"
+                ToolTip="帮助" />
+            <Button
+                x:Name="mini"
+                Grid.Column="2"
+                Click="mini_Click"
+                Content="-"
+                FontSize="25"
+                Style="{StaticResource Btncustom}"
+                ToolTip="最小化" />
+
+
+
+            <Button
+                x:Name="close"
+                Grid.Column="3"
+                Margin="00,0,1,0"
+                Click="close_Click"
+                Content="×"
+                FontSize="25"
+                Style="{StaticResource BtnClose}"
+                ToolTip="关闭" />
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <uc:LabelText
+                x:Name="ph_box"
+                Grid.Row="0"
+                Foreground="OrangeRed"
+                LeftText="Ph:"
+                PreviewKeyDown="limitTxtInput" />
+            <uc:LabelText
+                x:Name="pco2_box"
+                Grid.Row="1"
+                Foreground="OrangeRed"
+                LeftText="PCO2:"
+                RightText="mmHg" />
+            <uc:LabelText
+                x:Name="po2_box"
+                Grid.Row="2"
+                Foreground="OrangeRed"
+                LeftText="PO2:"
+                RightText="mmHg" />
+            
+            <uc:LabelText
+                x:Name="na_box"
+                Grid.Row="3"
+                Foreground="OrangeRed"
+                LeftText="Na+:"
+                RightText="mmol/L" />
+            <uc:LabelText
+                x:Name="cl_box"
+                Grid.Row="4"
+                Grid.Column="0"
+                Foreground="OrangeRed"
+                LeftText="Cl-:"
+                RightText="mmol/L" />
+            <uc:LabelText
+                x:Name="k_box"
+                Grid.Row="0"
+                Grid.Column="1"
+                LeftText="K+:"
+                RightText="mmol/L" />
+            <uc:LabelText
+                x:Name="glu_box"
+                Grid.Row="1"
+                Grid.Column="1"
+                LeftText="Glu:"
+                RightText="mmol/L" />
+            <uc:LabelText
+                x:Name="ab_box"
+                Grid.Row="2"
+                Grid.Column="1"
+                Foreground="OrangeRed"
+                LeftText="Ab:"
+                RightText="mmol/L" />
+            <uc:LabelText
+                x:Name="sb_box"
+                Grid.Row="3"
+                Grid.Column="1"
+                LeftText="Sb:"
+                RightText="mmol/L" />
+            <uc:LabelText
+                x:Name="be_box"
+                Grid.Row="4"
+                Grid.Column="1"
+                LeftText="Be:"
+                RightText="mmol/L" />
+            <uc:LabelText
+                x:Name="ag_box"
+                Grid.Row="0"
+                Grid.Column="2"
+                Foreground="OrangeRed"
+                LeftText="Ag:"
+                RightText="mmol/L" />
+            <uc:LabelText
+                x:Name="pop_box"
+                Grid.Row="1"
+                Grid.Column="2"
+                LeftText="POP:"
+                RightText="mmol/L" />
+            <!--<uc:LabelText x:Name="fio2_box" Grid.Row="2" Grid.Column="2" LeftText="FiO2:" RightText="L/min"/>-->
+            <uc:LabelText
+                x:Name="lac_box"
+                Grid.Row="2"
+                Grid.Column="2"
+                LeftText="Lac:"
+                RightText="mmol/L" />
+
+            <Grid Grid.Row="3" Grid.Column="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Label
+                    Grid.Column="0"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"
+                    Content="FiO2:"
+                    FontSize="14"
+                    Foreground="Black" />
+                <ComboBox
+                    x:Name="fio2_combobox"
+                    Grid.Column="1"
+                    Margin="5,0,5,0"
+                    HorizontalContentAlignment="Center"
+                    Cursor="Hand"
+                    FontSize="14" />
+                <Label
+                    Grid.Column="2"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Content="L/min"
+                    FontSize="14"
+                    Foreground="Black" />
+            </Grid>
+
+        </Grid>
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.5*" />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Label
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center"
+                Content="选择公式:"
+                Cursor="Hand"
+                FontSize="14" />
+            <RadioButton
+                x:Name="radioBtnQian"
+                Grid.Column="1"
+                HorizontalAlignment="Center"
+                Content="钱桂生"
+                Cursor="Hand"
+                FontSize="14" />
+            <RadioButton
+                x:Name="radioBtnZhong"
+                Grid.Column="2"
+                HorizontalAlignment="Center"
+                Content="钟南山"
+                Cursor="Hand"
+                FontSize="14" />
+            <RadioButton
+                x:Name="radioBtnZhen"
+                Grid.Column="3"
+                HorizontalAlignment="Center"
+                Content="诊断学"
+                Cursor="Hand"
+                FontSize="14" />
+        </Grid>
+        <Grid Grid.Row="3" Margin="5,2,5,5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="0.25*" />
+            </Grid.ColumnDefinitions>
+
+            <TextBox
+                x:Name="textBoxOut"
+                Grid.Column="0"
+                Margin="25,5,5,5"
+                Padding="5"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
+                AcceptsReturn="True"
+                Background="WhiteSmoke"
+                FontSize="12"
+                TextWrapping="Wrap"
+                VerticalScrollBarVisibility="Auto">
+                <TextBox.Resources>
+                    <Style TargetType="{x:Type Paragraph}">
+                        <Setter Property="Margin" Value="5,0,2,0" />
+                    </Style>
+                </TextBox.Resources>
+            </TextBox>
+
+            <Grid Grid.Column="1" Margin="0,0,10,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Button
+                    x:Name="btnStart"
+                    Grid.Row="0"
+                    Margin="5,2,10,2"
+                    Click="btnStart_Click"
+                    Content="开  始"
+                    Cursor="Hand"
+                    FontSize="16"
+                    Style="{StaticResource MaterialDesignPaperButton}"
+                    ToolTip="开始计算" />
+                <Button
+                    x:Name="btnCopy"
+                    Grid.Row="1"
+                    Margin="5,2,10,2"
+                    Click="copyString"
+                    Content="复  制"
+                    FontSize="16"
+                    Style="{StaticResource MaterialDesignPaperButton}"
+                    ToolTip="复制到剪切板" />
+                <Button
+                    x:Name="btnClear"
+                    Grid.Row="2"
+                    Margin="5,2,10,2"
+                    Click="btnClear_Click"
+                    Content="清  除"
+                    FontSize="16"
+                    Style="{StaticResource MaterialDesignPaperButton}"
+                    ToolTip="清除所有内容" />
+                <Button
+                    x:Name="btnHelp"
+                    Grid.Row="3"
+                    Margin="5,2,10,2"
+                    Click="btnHelp_Click"
+                    Content="帮  助"
+                    Cursor="Hand"
+                    FontSize="16"
+                    Style="{StaticResource MaterialDesignPaperButton}"
+                    ToolTip="帮助信息" />
+            </Grid>
+        </Grid>
+
+    </Grid>
+
+</Window>

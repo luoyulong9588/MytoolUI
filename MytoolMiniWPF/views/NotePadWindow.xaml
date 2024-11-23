@@ -1,0 +1,475 @@
+﻿<Window
+    x:Class="MytoolMiniWPF.views.NotePadWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:converters="clr-namespace:MaterialDesignThemes.Wpf.Converters;assembly=MaterialDesignThemes.Wpf"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:internal="clr-namespace:MaterialDesignThemes.Wpf.Internal;assembly=MaterialDesignThemes.Wpf"
+    xmlns:System="clr-namespace:System.Windows;assembly=PresentationCore"
+
+
+    xmlns:local="clr-namespace:MytoolMiniWPF.views"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:wpf="clr-namespace:MaterialDesignThemes.Wpf;assembly=MaterialDesignThemes.Wpf"
+    xmlns:xf="clr-namespace:XamlFlair;assembly=XamlFlair.WPF"
+    Title="记事小本"
+    Width="800"
+    Height="500"
+    AllowDrop="True"
+    AllowsTransparency="True"
+    Background="WhiteSmoke"
+    MouseLeftButtonDown="Window_MouseLeftButtonDown"
+    ResizeMode="NoResize"
+    WindowStartupLocation="CenterScreen"
+    WindowStyle="None"
+    mc:Ignorable="d">
+    <Window.Resources>
+        <Style x:Key="BtnInfoStyle" TargetType="Button">
+            <Setter Property="Width" Value="70" />
+            <Setter Property="Height" Value="25" />
+            <Setter Property="Foreground" Value="Black" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Background" Value="WhiteSmoke" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border
+                            x:Name="border"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="3"
+                            SnapsToDevicePixels="True">
+                            <TextBlock
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Foreground="{TemplateBinding Foreground}"
+                                Text="{TemplateBinding Content}" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#FFD1D1D1" />
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#FFBDB8B8" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="BtnClose" TargetType="Button">
+            <Setter Property="Width" Value="70" />
+            <Setter Property="Height" Value="25" />
+            <Setter Property="Foreground" Value="Black" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Background" Value="WhiteSmoke" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border
+                            x:Name="border"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="3"
+                            SnapsToDevicePixels="True">
+                            <TextBlock
+                                x:Name="txt"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Foreground="{TemplateBinding Foreground}"
+                                Text="{TemplateBinding Content}" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="red" />
+                                <Setter Property="Foreground" Value="WhiteSmoke" />
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="DarkRed" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+        <converters:NullableToVisibilityConverter x:Key="NullableToVisibilityConverter" />
+        <Style
+            x:Key="MaterialDesignCharacterCounterTextBlock"
+            BasedOn="{StaticResource {x:Type TextBlock}}"
+            TargetType="{x:Type TextBlock}">
+            <Setter Property="TextBlock.FontSize" Value="10" />
+            <Setter Property="Margin" Value="0,0,16,0" />
+            <Setter Property="Opacity" Value="0.56" />
+            <Setter Property="Text">
+                <Setter.Value>
+                    <MultiBinding>
+                        <Binding
+                            Converter="{StaticResource StringLengthValueConverter}"
+                            Path="Text"
+                            RelativeSource="{RelativeSource FindAncestor,
+                                                            AncestorType={x:Type TextBoxBase}}" />
+                        <Binding Path="MaxLength" RelativeSource="{RelativeSource FindAncestor, AncestorType={x:Type TextBoxBase}}" />
+                    </MultiBinding>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Visibility" Value="{Binding (wpf:TextFieldAssist.CharacterCounterVisibility), RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TextBox}}}" />
+        </Style>
+        <Style
+            x:Key="MaterialDesignHelperTextBlock"
+            BasedOn="{StaticResource {x:Type TextBlock}}"
+            TargetType="{x:Type TextBlock}">
+            <Setter Property="TextBlock.FontSize" Value="{Binding (wpf:HintAssist.HelperTextFontSize), RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+            <Setter Property="Opacity" Value="{Binding (wpf:HintAssist.HintOpacity), RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+            <Setter Property="Text" Value="{Binding (wpf:HintAssist.HelperText), RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+        </Style>
+        <Style x:Key="MaterialDesignTextBoxBase" TargetType="{x:Type TextBoxBase}">
+            <Setter Property="AllowDrop" Value="true" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="{DynamicResource MaterialDesignTextBoxBorder}" />
+            <Setter Property="BorderThickness" Value="0,0,0,0" />
+            <Setter Property="CaretBrush" Value="{DynamicResource PrimaryHueMidBrush}" />
+            <Setter Property="ContextMenu" Value="{StaticResource MaterialDesignDefaultContextMenu}" />
+            <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+            <Setter Property="Foreground" Value="{Binding (TextElement.Foreground), RelativeSource={RelativeSource AncestorType={x:Type FrameworkElement}}}" />
+            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+            <Setter Property="KeyboardNavigation.TabNavigation" Value="Local" />
+            <Setter Property="Padding" Value="{x:Static wpf:Constants.TextBoxDefaultPadding}" />
+            <Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst" />
+            <Setter Property="SelectionBrush" Value="{DynamicResource PrimaryHueLightBrush}" />
+            <Setter Property="Stylus.IsFlicksEnabled" Value="False" />
+
+            <Setter Property="Validation.ErrorTemplate" Value="{StaticResource MaterialDesignValidationErrorTemplate}" />
+            <Setter Property="VerticalContentAlignment" Value="Stretch" />
+            <Setter Property="internal:ClearText.HandlesClearCommand" Value="True" />
+            <Setter Property="wpf:HintAssist.Foreground" Value="{DynamicResource PrimaryHueMidBrush}" />
+            <Setter Property="wpf:HintAssist.HelperTextStyle" Value="{StaticResource MaterialDesignHelperTextBlock}" />
+            <Setter Property="wpf:TextFieldAssist.CharacterCounterStyle" Value="{StaticResource MaterialDesignCharacterCounterTextBlock}" />
+            <Setter Property="wpf:TextFieldAssist.CharacterCounterVisibility" Value="Visible" />
+            <Setter Property="wpf:TextFieldAssist.IncludeSpellingSuggestions" Value="{Binding (SpellCheck.IsEnabled), RelativeSource={RelativeSource Self}}" />
+            <Setter Property="wpf:TextFieldAssist.TextBoxViewMargin" Value="{x:Static wpf:Constants.DefaultTextBoxViewMargin}" />
+            <Setter Property="wpf:TextFieldAssist.UnderlineBrush" Value="{DynamicResource PrimaryHueMidBrush}" />
+        </Style>
+        <Style x:Key="MaterialDesignFlatButton" TargetType="{x:Type ButtonBase}">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}" />
+            <Setter Property="Foreground" Value="{DynamicResource PrimaryHueMidBrush}" />
+            <Setter Property="Height" Value="32" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="Padding" Value="16,4,16,4" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ButtonBase}">
+                        <Grid>
+                            <Border
+                                x:Name="border"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="{Binding (wpf:ButtonAssist.CornerRadius), RelativeSource={RelativeSource TemplatedParent}}" />
+                            <ProgressBar
+                                x:Name="ProgressBar"
+                                Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ButtonBase}}}"
+                                Height="{TemplateBinding Height}"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Background="{Binding (wpf:ButtonProgressAssist.IndicatorBackground), RelativeSource={RelativeSource TemplatedParent}}"
+                                BorderBrush="{Binding (wpf:ButtonProgressAssist.IndicatorBackground), RelativeSource={RelativeSource TemplatedParent}}"
+                                Foreground="{Binding (wpf:ButtonProgressAssist.IndicatorForeground), RelativeSource={RelativeSource TemplatedParent}}"
+                                IsIndeterminate="{Binding (wpf:ButtonProgressAssist.IsIndeterminate), RelativeSource={RelativeSource TemplatedParent}}"
+                                Maximum="{Binding (wpf:ButtonProgressAssist.Maximum), RelativeSource={RelativeSource TemplatedParent}}"
+                                Minimum="{Binding (wpf:ButtonProgressAssist.Minimum), RelativeSource={RelativeSource TemplatedParent}}"
+                                Opacity="{Binding (wpf:ButtonProgressAssist.Opacity), RelativeSource={RelativeSource TemplatedParent}}"
+                                Style="{DynamicResource MaterialDesignLinearProgressBar}"
+                                Visibility="{Binding (wpf:ButtonProgressAssist.IsIndicatorVisible), Converter={StaticResource BooleanToVisibilityConverter}, RelativeSource={RelativeSource TemplatedParent}}"
+                                Value="{Binding (wpf:ButtonProgressAssist.Value), RelativeSource={RelativeSource TemplatedParent}}">
+                                <ProgressBar.Clip>
+                                    <MultiBinding Converter="{StaticResource BorderClipConverter}">
+                                        <Binding ElementName="border" Path="ActualWidth" />
+                                        <Binding ElementName="border" Path="ActualHeight" />
+                                        <Binding ElementName="border" Path="CornerRadius" />
+                                        <Binding ElementName="border" Path="BorderThickness" />
+                                    </MultiBinding>
+                                </ProgressBar.Clip>
+                            </ProgressBar>
+                            <wpf:Ripple
+                                Padding="{TemplateBinding Padding}"
+                                HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                                Content="{TemplateBinding Content}"
+                                ContentStringFormat="{TemplateBinding ContentStringFormat}"
+                                ContentTemplate="{TemplateBinding ContentTemplate}"
+                                Focusable="False"
+                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
+                                <wpf:Ripple.Clip>
+                                    <MultiBinding Converter="{StaticResource BorderClipConverter}">
+                                        <Binding ElementName="border" Path="ActualWidth" />
+                                        <Binding ElementName="border" Path="ActualHeight" />
+                                        <Binding ElementName="border" Path="CornerRadius" />
+                                        <Binding ElementName="border" Path="BorderThickness" />
+                                    </MultiBinding>
+                                </wpf:Ripple.Clip>
+                            </wpf:Ripple>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter TargetName="border" Property="Background" Value="{Binding Foreground, ConverterParameter=0.16, Converter={StaticResource BrushOpacityConverter}, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Opacity" Value="0.38" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="TextBlock.FontSize" Value="14" />
+            <Setter Property="TextBlock.FontWeight" Value="Medium" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="wpf:ButtonAssist.CornerRadius" Value="2" />
+            <Setter Property="wpf:ButtonProgressAssist.IndicatorBackground" Value="Transparent" />
+            <Setter Property="wpf:ButtonProgressAssist.IndicatorForeground" Value="{DynamicResource PrimaryHueMidBrush}" />
+            <Setter Property="wpf:ButtonProgressAssist.IsIndicatorVisible" Value="False" />
+            <Setter Property="wpf:ButtonProgressAssist.Opacity" Value=".4" />
+            <Setter Property="wpf:RippleAssist.Feedback" Value="{DynamicResource PrimaryHueMidBrush}" />
+        </Style>
+        <Style
+            x:Key="MaterialDesignToolButton"
+            BasedOn="{StaticResource MaterialDesignFlatButton}"
+            TargetType="{x:Type ButtonBase}">
+            <Setter Property="Foreground" Value="{DynamicResource MaterialDesignToolForeground}" />
+            <Setter Property="Padding" Value="4" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ButtonBase}">
+                        <wpf:Ripple
+                            Padding="{TemplateBinding Padding}"
+                            HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                            VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                            Content="{TemplateBinding Content}"
+                            ContentStringFormat="{TemplateBinding ContentStringFormat}"
+                            ContentTemplate="{TemplateBinding ContentTemplate}"
+                            Focusable="False"
+                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Opacity" Value="0.38" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="wpf:RippleAssist.ClipToBounds" Value="False" />
+            <Setter Property="wpf:RippleAssist.IsCentered" Value="True" />
+        </Style>
+
+
+        <Style
+            x:Key="RichTextBoxStyleCustom"
+            BasedOn="{StaticResource MaterialDesignTextBoxBase}"
+            TargetType="{x:Type RichTextBox}">
+            <Setter Property="wpf:TextFieldAssist.CharacterCounterStyle" Value="{x:Null}" />
+            <Setter Property="wpf:TextFieldAssist.TextBoxViewMargin" Value="-4 0 1 0" />
+        </Style>
+        
+        <Style x:Key="CompactToggleButtonStyle" TargetType="ToggleButton">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ToggleButton">
+                        <Border Background="{TemplateBinding Background}"  
+                        BorderBrush="{TemplateBinding BorderBrush}"  
+                        BorderThickness="{TemplateBinding BorderThickness}">
+                            <ContentPresenter HorizontalAlignment="Center"  
+                                      VerticalAlignment="Center"  
+                                      Content="{TemplateBinding Content}" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+      
+        
+    </Window.Resources>
+    <Window.Template>
+        <ControlTemplate TargetType="Window">
+            <Border Padding="64" Background="Transparent">
+                <Border Background="WhiteSmoke" CornerRadius="5">
+                    <Border.Effect>
+                        <DropShadowEffect
+                            BlurRadius="15"
+                            Opacity="0.5"
+                            ShadowDepth="0" />
+                    </Border.Effect>
+                    <ContentPresenter ClipToBounds="True" />
+                </Border>
+            </Border>
+        </ControlTemplate>
+
+    </Window.Template>
+    <Grid xf:Animations.Primary="{xf:Animate BasedOn={StaticResource FadeIn}, Duration=1000}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40" />
+            <RowDefinition Height="40" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Border
+            Background="WhiteSmoke"
+            BorderBrush="#FFE0E0E0"
+            BorderThickness="0,0,0,1">
+            <Grid x:Name="titleGrid">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="40" />
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="40" />
+                </Grid.ColumnDefinitions>
+                <Label
+                    Grid.Column="1"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Content="记事小本"
+                    FontSize="12"
+                    FontWeight="Bold" />
+                <Button
+                    x:Name="btnClose"
+                    Grid.Column="2"
+                    Width="40"
+                    Height="30"
+                    Click="btnClose_Click"
+                    Content="×"
+                    FontSize="20"
+                    Style="{StaticResource BtnClose}" />
+            </Grid>
+        </Border>
+
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="60" />
+                <ColumnDefinition Width="60" />
+                <ColumnDefinition Width="100" />
+                <ColumnDefinition Width="60" />
+
+                <ColumnDefinition Width="20" />
+            </Grid.ColumnDefinitions>
+            <Menu
+                Grid.Row="1"
+                Margin="5,0,5,0"
+                VerticalContentAlignment="Center">
+                <MenuItem Height="40" Header="_文件">
+                    <MenuItem
+                        Height="30"
+                        Command="New"
+                        Header="_新建" />
+                    <MenuItem
+                        Height="30"
+                        Command="Save"
+                        Header="_保存" />
+                    <MenuItem
+                        Height="30"
+                        Command="Print"
+                        Header="_打印" />
+                    <MenuItem
+                        Height="30"
+                        Click="btnClose_Click"
+                        Header="_退出" />
+                </MenuItem>
+                <MenuItem Height="30" Header="_编辑">
+                    <MenuItem
+                        Height="30"
+                        Command="Cut"
+                        Header="_剪切" />
+                    <MenuItem
+                        Height="30"
+                        Command="Copy"
+                        Header="_复制" />
+                    <MenuItem
+                        Height="30"
+                        Command="Paste"
+                        Header="_粘贴" />
+                    <MenuItem
+                        Height="30"
+                        Command="Delete"
+                        Header="_删除" />
+                    <Separator />
+                    <MenuItem
+                        Height="30"
+                        Click="MenuItemFontStyle_Click"
+                        Header="_字体样式" />
+                    <Separator />
+                    <MenuItem
+                        Height="30"
+                        Header="_自动换行"
+                        IsCheckable="True"
+                        IsChecked="True" />
+
+                </MenuItem>
+                <MenuItem Height="30" Header="_工具">
+                    <MenuItem Click="MenuItemDischargeRecordBuild_Click" Header="_制作出院记录" />
+                    <MenuItem Click="MenuItemDragFormat_Click" Header="_带药格式化" />
+                    <MenuItem Click="MenuItemMedicalLaboratorydFormat_Click" Header="_检验格式化" />
+
+                </MenuItem>
+                
+            </Menu>
+            
+            <Button
+                x:Name="btnClean"
+                Grid.Column="2"
+                Width="60"
+                Height="30"
+                Click="btnClean_Click"
+                Content="清除"
+                FontSize="14"
+                FontWeight="Light"
+                Style="{StaticResource BtnInfoStyle}" />
+            <Label
+                Grid.Column="3"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center"
+                Content="笔记模式"
+                FontSize="14"
+                FontWeight="Light" Cursor="" />
+            <ToggleButton
+                Height="22"
+                Width="50"
+                x:Name="toggleBtnIsNoteMode"
+                Grid.Column="4"
+                
+                Click="toggleBtnIsNoteMode_Click"
+                IsChecked="False" 
+                Style="{StaticResource CustomToggleButtonWithSliderStyle}"
+                Cursor="Hand"/>
+        </Grid>
+
+        <RichTextBox
+            x:Name="richTextBoxContent"
+            Grid.Row="2"
+            Background="White"
+            FontSize="14"
+            HorizontalScrollBarVisibility="Auto"
+            Style="{DynamicResource RichTextBoxStyleCustom}"
+            VerticalScrollBarVisibility="Auto" >
+            <RichTextBox.Resources>
+                <Style TargetType="{x:Type Paragraph}">
+                    <Setter Property="Margin" Value="5,0,2,0" />
+                </Style>
+            </RichTextBox.Resources>
+        </RichTextBox>
+
+    </Grid>
+</Window>

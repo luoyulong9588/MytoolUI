@@ -1,0 +1,145 @@
+2024-09-12 07:31:09====>=========================================================================================================
+2024-09-12 07:31:09====>调用Exteinterf入参：insureSystem:48;FunctionNo:357;strAdvance:<root><OrgId>4480c78d-c3dd-4873-a0a8-d936963abf75</OrgId><EventId>EECE3C89-2759-4389-94AD-38B6F9571B88</EventId><GroupNo>25</GroupNo><Pid>BDA242D6-DA55-13A2-E054-9CDC71ADEEF6</Pid><DepId>2045fd3b-45ad-4f77-a1d8-a44f526e7888</DepId><DepName>全科医学科</DepName><OperId>49ff45a7-4212-48f8-ac3c-c0bf8e9805a3</OperId><OperName>罗玉龙</OperName></root>
+2024-09-12 07:31:09====>是否有检查检验项目：Select *
+                                From 个人医嘱记录 a
+                                Where a.机构id = '4480c78d-c3dd-4873-a0a8-d936963abf75'
+                                And a.事件id = 'EECE3C89-2759-4389-94AD-38B6F9571B88'
+                                And a.组序号 in (25)
+                                And a.诊疗类别 In ('C','D')
+2024-09-12 07:47:59====>=========================================================================================================
+2024-09-12 07:47:59====>调用Exteinterf入参：insureSystem:48;FunctionNo:357;strAdvance:<root><OrgId>4480c78d-c3dd-4873-a0a8-d936963abf75</OrgId><EventId>21CDA45F-8698-0F26-E064-9CDC71ADEB60</EventId><GroupNo>26,27,28</GroupNo><Pid>BDA242D8-0A85-13A2-E054-9CDC71ADEEF6</Pid><DepId>2045fd3b-45ad-4f77-a1d8-a44f526e7888</DepId><DepName>全科医学科</DepName><OperId>49ff45a7-4212-48f8-ac3c-c0bf8e9805a3</OperId><OperName>罗玉龙</OperName></root>
+2024-09-12 07:47:59====>是否有检查检验项目：Select *
+                                From 个人医嘱记录 a
+                                Where a.机构id = '4480c78d-c3dd-4873-a0a8-d936963abf75'
+                                And a.事件id = '21CDA45F-8698-0F26-E064-9CDC71ADEB60'
+                                And a.组序号 in (26,27,28)
+                                And a.诊疗类别 In ('C','D')
+2024-09-12 07:59:34====>=========================================================================================================
+2024-09-12 07:59:34====>调用Exteinterf入参：insureSystem:48;FunctionNo:357;strAdvance:<root><OrgId>4480c78d-c3dd-4873-a0a8-d936963abf75</OrgId><EventId>21CD25F3-A587-7507-E064-9CDC71ADEB60</EventId><GroupNo>25,26</GroupNo><Pid>BC2CC558-521B-4A78-A5ED-634553EE9237</Pid><DepId>2045fd3b-45ad-4f77-a1d8-a44f526e7888</DepId><DepName>全科医学科</DepName><OperId>49ff45a7-4212-48f8-ac3c-c0bf8e9805a3</OperId><OperName>罗玉龙</OperName></root>
+2024-09-12 07:59:34====>是否有检查检验项目：Select *
+                                From 个人医嘱记录 a
+                                Where a.机构id = '4480c78d-c3dd-4873-a0a8-d936963abf75'
+                                And a.事件id = '21CD25F3-A587-7507-E064-9CDC71ADEB60'
+                                And a.组序号 in (25,26)
+                                And a.诊疗类别 In ('C','D')
+2024-09-12 08:01:46====>=========================================================================================================
+2024-09-12 08:01:46====>调用Exteinterf入参：insureSystem:48;FunctionNo:357;strAdvance:<root><OrgId>4480c78d-c3dd-4873-a0a8-d936963abf75</OrgId><EventId>21CDA45F-8698-0F26-E064-9CDC71ADEB60</EventId><GroupNo>29</GroupNo><Pid>BDA242D8-0A85-13A2-E054-9CDC71ADEEF6</Pid><DepId>2045fd3b-45ad-4f77-a1d8-a44f526e7888</DepId><DepName>全科医学科</DepName><OperId>49ff45a7-4212-48f8-ac3c-c0bf8e9805a3</OperId><OperName>罗玉龙</OperName></root>
+2024-09-12 08:01:46====>是否有检查检验项目：Select *
+                                From 个人医嘱记录 a
+                                Where a.机构id = '4480c78d-c3dd-4873-a0a8-d936963abf75'
+                                And a.事件id = '21CDA45F-8698-0F26-E064-9CDC71ADEB60'
+                                And a.组序号 in (29)
+                                And a.诊疗类别 In ('C','D')
+2024-09-12 08:27:55====>=========================================================================================================
+2024-09-12 08:27:55====>调用Exteinterf入参：insureSystem:48;FunctionNo:357;strAdvance:<root><OrgId>4480c78d-c3dd-4873-a0a8-d936963abf75</OrgId><EventId>86BAEA95-6E02-4805-8B3F-D3D2AF7B055A</EventId><GroupNo>35</GroupNo><Pid>12cf33df-9617-45a6-b9b3-a2b1e7786cd9</Pid><DepId>2045fd3b-45ad-4f77-a1d8-a44f526e7888</DepId><DepName>全科医学科</DepName><OperId>49ff45a7-4212-48f8-ac3c-c0bf8e9805a3</OperId><OperName>罗玉龙</OperName></root>
+2024-09-12 08:27:55====>是否有检查检验项目：Select *
+                                From 个人医嘱记录 a
+                                Where a.机构id = '4480c78d-c3dd-4873-a0a8-d936963abf75'
+                                And a.事件id = '86BAEA95-6E02-4805-8B3F-D3D2AF7B055A'
+                                And a.组序号 in (35)
+                                And a.诊疗类别 In ('C','D')
+2024-09-12 08:29:33====>=========================================================================================================
+2024-09-12 08:29:33====>调用Exteinterf入参：insureSystem:48;FunctionNo:357;strAdvance:<root><OrgId>4480c78d-c3dd-4873-a0a8-d936963abf75</OrgId><EventId>21CC9A5B-8E97-1752-E064-9CDC71ADEEF6</EventId><GroupNo>23</GroupNo><Pid>dcf84e9a-ea01-44ce-b333-931b22c0f85c</Pid><DepId>2045fd3b-45ad-4f77-a1d8-a44f526e7888</DepId><DepName>全科医学科</DepName><OperId>49ff45a7-4212-48f8-ac3c-c0bf8e9805a3</OperId><OperName>罗玉龙</OperName></root>
+2024-09-12 08:29:33====>是否有检查检验项目：Select *
+                                From 个人医嘱记录 a
+                                Where a.机构id = '4480c78d-c3dd-4873-a0a8-d936963abf75'
+                                And a.事件id = '21CC9A5B-8E97-1752-E064-9CDC71ADEEF6'
+                                And a.组序号 in (23)
+                                And a.诊疗类别 In ('C','D')
+2024-09-12 08:32:10====>=========================================================================================================
+2024-09-12 08:32:10====>调用Exteinterf入参：insureSystem:48;FunctionNo:357;strAdvance:<root><OrgId>4480c78d-c3dd-4873-a0a8-d936963abf75</OrgId><EventId>21CEAEBF-0F23-2FAC-E064-9CDC71ADEEF6</EventId><GroupNo>29,30,31</GroupNo><Pid>0704ac91-e372-4544-a35d-2f24c03c8b9d</Pid><DepId>2045fd3b-45ad-4f77-a1d8-a44f526e7888</DepId><DepName>全科医学科</DepName><OperId>49ff45a7-4212-48f8-ac3c-c0bf8e9805a3</OperId><OperName>罗玉龙</OperName></root>
+2024-09-12 08:32:10====>是否有检查检验项目：Select *
+                                From 个人医嘱记录 a
+                                Where a.机构id = '4480c78d-c3dd-4873-a0a8-d936963abf75'
+                                And a.事件id = '21CEAEBF-0F23-2FAC-E064-9CDC71ADEEF6'
+                                And a.组序号 in (29,30,31)
+                                And a.诊疗类别 In ('C','D')
+2024-09-12 08:33:03====>=========================================================================================================
+2024-09-12 08:33:03====>调用Exteinterf入参：insureSystem:48;FunctionNo:357;strAdvance:<root><OrgId>4480c78d-c3dd-4873-a0a8-d936963abf75</OrgId><EventId>3DA221E0-F184-4BEF-8C83-84B57C87988B</EventId><GroupNo>36</GroupNo><Pid>355F06D2-388E-4A57-B8B0-27527028A3A1</Pid><DepId>2045fd3b-45ad-4f77-a1d8-a44f526e7888</DepId><DepName>全科医学科</DepName><OperId>49ff45a7-4212-48f8-ac3c-c0bf8e9805a3</OperId><OperName>罗玉龙</OperName></root>
+2024-09-12 08:33:03====>是否有检查检验项目：Select *
+                                From 个人医嘱记录 a
+                                Where a.机构id = '4480c78d-c3dd-4873-a0a8-d936963abf75'
+                                And a.事件id = '3DA221E0-F184-4BEF-8C83-84B57C87988B'
+                                And a.组序号 in (36)
+                                And a.诊疗类别 In ('C','D')
+2024-09-12 08:40:55====>=========================================================================================================
+2024-09-12 08:40:55====>调用Exteinterf入参：insureSystem:48;FunctionNo:357;strAdvance:<root><OrgId>4480c78d-c3dd-4873-a0a8-d936963abf75</OrgId><EventId>21CDA45F-8698-0F26-E064-9CDC71ADEB60</EventId><GroupNo>30,31,32</GroupNo><Pid>BDA242D8-0A85-13A2-E054-9CDC71ADEEF6</Pid><DepId>2045fd3b-45ad-4f77-a1d8-a44f526e7888</DepId><DepName>全科医学科</DepName><OperId>49ff45a7-4212-48f8-ac3c-c0bf8e9805a3</OperId><OperName>罗玉龙</OperName></root>
+2024-09-12 08:40:55====>是否有检查检验项目：Select *
+                                From 个人医嘱记录 a
+                                Where a.机构id = '4480c78d-c3dd-4873-a0a8-d936963abf75'
+                                And a.事件id = '21CDA45F-8698-0F26-E064-9CDC71ADEB60'
+                                And a.组序号 in (30,31,32)
+                                And a.诊疗类别 In ('C','D')
+2024-09-12 08:51:04====>=========================================================================================================
+2024-09-12 08:51:04====>调用Exteinterf入参：insureSystem:48;FunctionNo:357;strAdvance:<root><OrgId>4480c78d-c3dd-4873-a0a8-d936963abf75</OrgId><EventId>21CEAEBF-0F23-2FAC-E064-9CDC71ADEEF6</EventId><GroupNo>32</GroupNo><Pid>0704ac91-e372-4544-a35d-2f24c03c8b9d</Pid><DepId>2045fd3b-45ad-4f77-a1d8-a44f526e7888</DepId><DepName>全科医学科</DepName><OperId>49ff45a7-4212-48f8-ac3c-c0bf8e9805a3</OperId><OperName>罗玉龙</OperName></root>
+2024-09-12 08:51:04====>是否有检查检验项目：Select *
+                                From 个人医嘱记录 a
+                                Where a.机构id = '4480c78d-c3dd-4873-a0a8-d936963abf75'
+                                And a.事件id = '21CEAEBF-0F23-2FAC-E064-9CDC71ADEEF6'
+                                And a.组序号 in (32)
+                                And a.诊疗类别 In ('C','D')
+2024-09-12 08:51:45====>=========================================================================================================
+2024-09-12 08:51:45====>调用Exteinterf入参：insureSystem:48;FunctionNo:357;strAdvance:<root><OrgId>4480c78d-c3dd-4873-a0a8-d936963abf75</OrgId><EventId>21CEAEBF-0F23-2FAC-E064-9CDC71ADEEF6</EventId><GroupNo>33</GroupNo><Pid>0704ac91-e372-4544-a35d-2f24c03c8b9d</Pid><DepId>2045fd3b-45ad-4f77-a1d8-a44f526e7888</DepId><DepName>全科医学科</DepName><OperId>49ff45a7-4212-48f8-ac3c-c0bf8e9805a3</OperId><OperName>罗玉龙</OperName></root>
+2024-09-12 08:51:45====>是否有检查检验项目：Select *
+                                From 个人医嘱记录 a
+                                Where a.机构id = '4480c78d-c3dd-4873-a0a8-d936963abf75'
+                                And a.事件id = '21CEAEBF-0F23-2FAC-E064-9CDC71ADEEF6'
+                                And a.组序号 in (33)
+                                And a.诊疗类别 In ('C','D')
+2024-09-12 08:51:45====>获取的token：eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7IlVzZXJJZCI6MTcyOTQwNDM2NzcwODA5ODU2MCwiQXBwS2V5IjoiMTcyOTQwNDk0NTIxMzc3NTg3MiIsIkFjY291bnROYW1lIjoiIiwiQWNjb3VudFJlYWxOYW1lIjoiIiwiU2lnbktleSI6IjcxOTNjYzRjODEzYWRkZjRjYThjYWMzMWIyZmRjMTY5In0sImlzcyI6ImNlYyIsImV4cCI6MTcyNjE4MTc1NH0.E9TEhHPEFgOejGRi4ikBee2FojBYUS6sagM3hqKVhFs
+2024-09-12 08:51:45====>获取病人信息:Select A.Id As patientId,'01' As identityTypeCode,nvl(A.身份证号,'-') As identityNo,A.姓名 As personalName,A.性别 As sexCode,to_char(A.出生日期,'yyyymmdd') As birthDate,nvl(B.保险号,A.身份证号) As medicalCardNumber
+                              From 个人信息 A,保险个人档案 B
+                             Where A.Id=B.个人id(+) And B.系统(+)=100
+                               And A.Id='0704ac91-e372-4544-a35d-2f24c03c8b9d'
+2024-09-12 08:51:45====>获取就诊信息:Select Decode(B.急诊,1,'2','1') As visitTypeCode,A.ID As visitNo,to_char(A.开始时间,'yyyymmdd') As visitDate,
+                                   C.编码 As deptCode,C.简称 As deptName,'' As wardCode,'' As wardName,'' As bedNo,
+                                   D.编码 As doctorId,D.姓名 As doctorName,D.身份证号 As doctorIdentityNo
+                              From 服务活动记录 A,个人挂号记录 B,部门 C,医护人员 D
+                             Where A.Id=B.记录id And A.科室id=C.资源id And A.服务人id=D.资源id
+                               And A.id='21CEAEBF-0F23-2FAC-E064-9CDC71ADEEF6'
+                            Union All
+                            Select '3' As visitTypeCode,A.ID As visitNo,to_char(A.开始时间,'yyyymmdd') As visitDate,
+                                   C.编码 As deptCode,C.简称 As deptName,E.编码 As wardCode,E.简称 As wardName,B.床号 As bedNo,
+                                   D.编码 As doctorId,D.姓名 As doctorName,D.身份证号 As doctorIdentityNo
+                              From 服务活动记录 A,个人入院记录 B,部门 C,医护人员 D,部门 E
+                             Where A.Id=B.事件id And A.科室id=C.资源id And A.服务人id=D.资源id And B.病房id=E.资源id(+)
+                               And A.id='21CEAEBF-0F23-2FAC-E064-9CDC71ADEEF6'
+2024-09-12 08:51:45====>获取诊断信息:Select B.主诉 As chiefCompliant,C.问题名称 As diagName,C.问题编码 As diagCode
+                              From 服务活动记录 A,个人挂号记录 B,个人问题列表 C
+                             Where A.Id=B.记录id And A.Id=C.服务记录id(+)
+                               And A.id='21CEAEBF-0F23-2FAC-E064-9CDC71ADEEF6'
+                               And Rownum<2
+                            Union All
+                            Select Distinct '' As chiefCompliant,C.问题名称 As diagName,C.问题编码 As diagCode
+                              From 服务活动记录 A,个人入院记录 B,个人问题列表 C
+                             Where A.Id=B.事件id  And A.Id=C.服务记录id(+) And C.记录性质=2 
+                               And A.id='21CEAEBF-0F23-2FAC-E064-9CDC71ADEEF6'
+                               And Rownum<2
+2024-09-12 08:51:45====>获取检验项目编码:Select D.编码 As labItemCode,D.名称 As labItemName
+                              From 个人医嘱记录 A,诊疗项目目录 D
+                             Where A.诊疗项目id=D.id
+                               And A.事件ID='21CEAEBF-0F23-2FAC-E064-9CDC71ADEEF6'
+                               And A.机构id='4480c78d-c3dd-4873-a0a8-d936963abf75'
+                               And A.组序号 in (33)
+                               And A.诊疗类别='C'
+                               And (D.撤档时间 Is Null Or D.撤档时间>Sysdate)
+2024-09-12 08:51:45====>调用【检验结果互认提醒】接口URL:http://ds-ucc.cq.hc:443/frontapi/api/v3/reportUrl/recogRemind
+2024-09-12 08:51:45====>调用【检验结果互认提醒】入参:{"messages":{"EVN":{"eventTypeCode":"02","eventTypeName":"检验结果互认提醒"},"PID":{"patientId":"0704ac91-e372-4544-a35d-2f24c03c8b9d","identityTypeCode":"01","identityNo":"510223194202256412","visitCardTypeCode":"","visitCardNo":"","personalName":"黄治良","birthDate":"19420225","sexCode":"1","medicalCardNumber":"JM2038155919"},"PV1":{"visitTypeCode":"3","visitNo":"21CEAEBF-0F23-2FAC-E064-9CDC71ADEEF6","visitDate":"20240911","orgCode":"125002227094723044","orgName":"重庆市綦江区文龙街道社区卫生服务中心","branchCode":"","branchName":"","deptCode":"21030","deptName":"全科医学科","wardCode":"21030","wardName":"全科医学科","bedNo":"28","doctorId":"696","doctorName":"罗玉龙","doctorIdentityNo":"500222199108088613","computerMac":"D4:C9:EF:D9:6B:20","computerIp":"10.61.28.66"},"DG1":{"chiefCompliant":"","diagCode":"R13.x00","diagName":"吞咽困难"},"OBR":{"lab":[{"labItemCode":"100304","labItemName":"电解质测定","labRecognCode":"","labRecognName":""}]}}}
+2024-09-12 08:51:48====>调用【检验结果互认提醒】出参:{"code":"200","message":"操作成功","data":{"EVN":{"eventTypeCode":"02","eventTypeName":"检验结果互认提醒"},"QAK":{"queryResponseStatus":"1","url":"http://10.185.100.89:443/manager-org-view/#/accredit/result?serial_number_his=b7e459c5ff875c669e055f90e5d53c3a&timestamp=1726102525&sign=d3efbb4b1707b6be5becb9d63c5bb8cdac79fde6cbc0246b85a927870a4ff48b","reminder":"您开立的项目有可互认的结果，请确认是否互认!","brief":{"entry":["钾(K);钠(Na) 20240911110943 重庆市綦江区文龙街道社区卫生服务中心"]}}}}
+2024-09-12 08:51:49====>要打开URL:http://10.185.100.89:443/manager-org-view/#/accredit/result?serial_number_his=b7e459c5ff875c669e055f90e5d53c3a&timestamp=1726102525&sign=d3efbb4b1707b6be5becb9d63c5bb8cdac79fde6cbc0246b85a927870a4ff48b
+2024-09-12 09:27:51====>=========================================================================================================
+2024-09-12 09:27:51====>调用Exteinterf入参：insureSystem:48;FunctionNo:357;strAdvance:<root><OrgId>4480c78d-c3dd-4873-a0a8-d936963abf75</OrgId><EventId>2192D245-E107-5A9E-E064-9CDC71ADEEF6</EventId><GroupNo>51,52,53</GroupNo><Pid>47d47e9e-8a74-499a-82d1-027672c2aab1</Pid><DepId>2045fd3b-45ad-4f77-a1d8-a44f526e7888</DepId><DepName>全科医学科</DepName><OperId>49ff45a7-4212-48f8-ac3c-c0bf8e9805a3</OperId><OperName>罗玉龙</OperName></root>
+2024-09-12 09:27:51====>是否有检查检验项目：Select *
+                                From 个人医嘱记录 a
+                                Where a.机构id = '4480c78d-c3dd-4873-a0a8-d936963abf75'
+                                And a.事件id = '2192D245-E107-5A9E-E064-9CDC71ADEEF6'
+                                And a.组序号 in (51,52,53)
+                                And a.诊疗类别 In ('C','D')
+2024-09-12 09:34:50====>=========================================================================================================
+2024-09-12 09:34:50====>调用Exteinterf入参：insureSystem:48;FunctionNo:357;strAdvance:<root><OrgId>4480c78d-c3dd-4873-a0a8-d936963abf75</OrgId><EventId>82B074EF-3178-4AF3-BE03-5C2F102AFEC4</EventId><GroupNo>36,37</GroupNo><Pid>93D9DDED-D765-4489-B243-5692F09B2B01</Pid><DepId>2045fd3b-45ad-4f77-a1d8-a44f526e7888</DepId><DepName>全科医学科</DepName><OperId>49ff45a7-4212-48f8-ac3c-c0bf8e9805a3</OperId><OperName>罗玉龙</OperName></root>
+2024-09-12 09:34:50====>是否有检查检验项目：Select *
+                                From 个人医嘱记录 a
+                                Where a.机构id = '4480c78d-c3dd-4873-a0a8-d936963abf75'
+                                And a.事件id = '82B074EF-3178-4AF3-BE03-5C2F102AFEC4'
+                                And a.组序号 in (36,37)
+                                And a.诊疗类别 In ('C','D')

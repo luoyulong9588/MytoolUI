@@ -1,0 +1,514 @@
+﻿<Window
+    x:Class="MytoolMiniWPF.views.ChronicDiseaseWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:MytoolMiniWPF.views"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:xf="clr-namespace:XamlFlair;assembly=XamlFlair.WPF"
+    Title="慢病报卡"
+    Width="800"
+    Height="450"
+    AllowDrop="True"
+    AllowsTransparency="True"
+    Background="#A0f6f3f7"
+    Icon="pack://application:,,,/resources/ico/ChronicDisease.ico"
+    MouseLeftButtonDown="Window_MouseLeftButtonDown"
+    Opacity="0.95"
+    OpacityMask="White"
+    ResizeMode="NoResize"
+    WindowStartupLocation="CenterScreen"
+    WindowStyle="None"
+    mc:Ignorable="d">
+
+
+    <Window.Template>
+        <ControlTemplate TargetType="Window">
+            <Border Padding="64" Background="Transparent">
+                <Border Background="White" CornerRadius="10">
+                    <Border.Effect>
+                        <DropShadowEffect BlurRadius="24" Opacity="0.5" />
+                    </Border.Effect>
+                    <ContentPresenter ClipToBounds="True" />
+                </Border>
+            </Border>
+        </ControlTemplate>
+
+    </Window.Template>
+
+    <Grid xf:Animations.Primary="{xf:Animate BasedOn={StaticResource FadeIn}, Duration=800}" AllowDrop="True">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid
+            x:Name="title"
+            Grid.Row="0"
+            Margin="0,0,2,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="42" />
+                <ColumnDefinition Width="42" />
+            </Grid.ColumnDefinitions>
+
+            <TextBlock
+                Grid.Column="0"
+                Margin="0,0,300,0"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                FontSize="18"
+                FontWeight="UltraBold"
+                Text="慢 病 报 卡" />
+
+
+            <Button
+                x:Name="min"
+                Grid.Column="1"
+                Width="40"
+                Height="34"
+                Click="min_Click"
+                Content="-"
+                FontSize="25"
+                ToolTip="最小化">
+
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Width" Value="70" />
+                        <Setter Property="Height" Value="25" />
+                        <Setter Property="Foreground" Value="Black" />
+                        <Setter Property="BorderThickness" Value="0" />
+                        <Setter Property="Background" Value="WhiteSmoke" />
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="Button">
+                                    <Border
+                                        x:Name="border"
+                                        Background="{TemplateBinding Background}"
+                                        BorderBrush="{TemplateBinding BorderBrush}"
+                                        BorderThickness="{TemplateBinding BorderThickness}"
+                                        CornerRadius="3"
+                                        SnapsToDevicePixels="True">
+                                        <TextBlock
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"
+                                            Foreground="{TemplateBinding Foreground}"
+                                            Text="{TemplateBinding Content}" />
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter TargetName="border" Property="Background" Value="gray" />
+                                            <Setter Property="Foreground" Value="WhiteSmoke" />
+                                        </Trigger>
+                                        <Trigger Property="IsPressed" Value="True">
+                                            <Setter TargetName="border" Property="Background" Value="DarkRed" />
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Button.Style>
+            </Button>
+            <!--<TextBlock Text="&#xf2df;" FontSize="16" FontFamily="pack://application:,,,/resources/font/#iconfont"/>-->
+
+
+            <Grid Grid.Column="2">
+                <Button
+                    x:Name="close"
+                    Width="40"
+                    Height="34"
+                    Click="close_Click"
+                    Content="×"
+                    FontSize="25"
+                    ToolTip="关闭">
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Width" Value="70" />
+                            <Setter Property="Height" Value="25" />
+                            <Setter Property="Foreground" Value="Black" />
+                            <Setter Property="BorderThickness" Value="0" />
+                            <Setter Property="Background" Value="WhiteSmoke" />
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border
+                                            x:Name="border"
+                                            Background="{TemplateBinding Background}"
+                                            BorderBrush="{TemplateBinding BorderBrush}"
+                                            BorderThickness="{TemplateBinding BorderThickness}"
+                                            CornerRadius="3 10 3 3"
+                                            SnapsToDevicePixels="True">
+                                            <TextBlock
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center"
+                                                Foreground="{TemplateBinding Foreground}"
+                                                Text="{TemplateBinding Content}" />
+                                        </Border>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter TargetName="border" Property="Background" Value="red" />
+                                                <Setter Property="Foreground" Value="WhiteSmoke" />
+                                            </Trigger>
+                                            <Trigger Property="IsPressed" Value="True">
+                                                <Setter TargetName="border" Property="Background" Value="DarkRed" />
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </Button.Style>
+                </Button>
+
+
+                <!--  materialDesign:ButtonAssist.CornerRadius="0 10 0 0"  -->
+                <!--  IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}">  -->
+                <!--<TextBlock Text="&#xe650;" FontSize="18" FontFamily="pack://application:,,,/resources/font/#iconfont"/>-->
+
+            </Grid>
+
+        </Grid>
+        <Grid
+            x:Name="panal"
+            Grid.Row="1"
+            AllowDrop="True">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40" />
+                <RowDefinition Height="40" />
+                <RowDefinition />
+
+            </Grid.RowDefinitions>
+            <Grid
+                x:Name="pathGrid"
+                Grid.Row="0"
+                Margin="5,5,10,5"
+                AllowDrop="True">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="80" />
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="120" />
+                </Grid.ColumnDefinitions>
+                <Label
+                    Grid.Column="0"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"
+                    Content="文件名:"
+                    FontSize="16"
+                    FontWeight="Medium" />
+                <TextBox
+                    x:Name="txtBoxfilePath"
+                    Grid.Column="1"
+                    Margin="5,0,5,0"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch"
+                    materialDesign:HintAssist.Hint="拖放文件至此处"
+                    AllowDrop="True"
+                    FontSize="16"
+                    FontWeight="Medium"
+                    PreviewDragOver="TextBox_PreviewDragOver"
+                    PreviewDrop="TextBox_PreviewDrop" />
+
+                <Button
+                    x:Name="btnBrowse"
+                    Grid.Column="2"
+                    Height="28"
+                    Margin="0"
+                    Click="btnBrowse_Click"
+                    Content="浏 览 ..."
+                    Cursor="Hand"
+                    FontSize="16"
+                    IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                    ToolTip="单击选择导出的excel文件.">
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Width" Value="120" />
+                            <Setter Property="Height" Value="30" />
+                            <Setter Property="Foreground" Value="Black" />
+                            <Setter Property="BorderThickness" Value="0" />
+                            <Setter Property="Background" Value="White" />
+                            <Setter Property="Cursor" Value="Arrow" />
+
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border
+                                            x:Name="border"
+                                            Background="{TemplateBinding Background}"
+                                            BorderBrush="{TemplateBinding BorderBrush}"
+                                            BorderThickness="{TemplateBinding BorderThickness}"
+                                            CornerRadius="3"
+                                            SnapsToDevicePixels="True">
+                                            <TextBlock
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center"
+                                                Foreground="{TemplateBinding Foreground}"
+                                                Text="{TemplateBinding Content}" />
+                                        </Border>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter TargetName="border" Property="Background" Value="#FF673AB7" />
+
+                                                <Setter Property="Foreground" Value="WhiteSmoke" />
+                                            </Trigger>
+                                            <Trigger Property="IsPressed" Value="True">
+                                                <Setter TargetName="border" Property="Background" Value="Gray" />
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Cursor" Value="Hand" />
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+
+            </Grid>
+
+            <Grid
+                x:Name="checkGrid"
+                Grid.Row="1"
+                Margin="5,5,5,5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="80" />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="120" />
+                </Grid.ColumnDefinitions>
+                <Label
+                    Grid.Column="0"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"
+                    Content="用户名:"
+                    FontSize="16"
+                    FontWeight="Medium" />
+                <ComboBox
+                    Name="selectUserComboBox"
+                    Grid.Column="1"
+                    Margin="5,0,25,0"
+                    materialDesign:HintAssist.Hint="单击选择姓名"
+                    FontSize="16">
+                    <ComboBoxItem Content="罗玉龙" />
+                    <ComboBoxItem Content="刘益宏" />
+                    <ComboBoxItem Content="彭育欢" />
+                    <ComboBoxItem Content="朱庆霞" />
+                    <ComboBoxItem Content="李小琴" />
+                    <ComboBoxItem Content="王雪玲" />
+                    <ComboBoxItem Content="张李" />
+                    <ComboBoxItem Content="付饶" />
+                </ComboBox>
+
+                <CheckBox
+                    x:Name="chkBoxCheckAMI"
+                    Grid.Column="2"
+                    Margin="0,0,0,0"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Content="检查心血管事件"
+                    FontSize="16"
+                    IsChecked="True" />
+                <CheckBox
+                    x:Name="chkBoxCheckapoplexy"
+                    Grid.Column="3"
+                    Margin="0,0,0,0"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Content="检查脑卒中"
+                    FontSize="16"
+                    IsChecked="True" />
+
+            </Grid>
+
+
+            <Grid
+                x:Name="showMessageGrid"
+                Grid.Row="2"
+                Margin="0,20,10,5">
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="120" />
+                </Grid.ColumnDefinitions>
+
+                <Border
+                    Grid.Column="0"
+                    Margin="10,5,5,5"
+                    BorderBrush="MediumPurple"
+                    BorderThickness="1"
+                    CornerRadius="5">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="30" />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <Border Background="#FF673AB7" CornerRadius="4 4 0 0 ">
+                            <Label
+                                x:Name="labelTitleCOPD"
+                                HorizontalContentAlignment="Center"
+                                FontFamily="微软雅黑"
+                                FontSize="16"
+                                Foreground="White">
+                                慢性肺病
+                            </Label>
+                        </Border>
+                        <ListView
+                            x:Name="listViewCopd"
+                            Grid.Row="1"
+                            Height="auto"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Stretch"
+                            FontSize="12"
+                            ScrollViewer.VerticalScrollBarVisibility="Auto" />
+                    </Grid>
+
+                </Border>
+
+                <Border
+                    Grid.Column="1"
+                    Margin="7.5,5,7.5,5"
+                    BorderBrush="MediumPurple"
+                    BorderThickness="1"
+                    CornerRadius="5">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="30" />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <Border Background="#FF673AB7" CornerRadius="4 4 0 0 ">
+                            <Label
+                                Name="labelTitleAMI"
+                                HorizontalContentAlignment="Center"
+                                FontFamily="微软雅黑"
+                                FontSize="16"
+                                Foreground="White">
+                                心血管事件
+                            </Label>
+                        </Border>
+                        <ListView
+                            x:Name="listViewAMI"
+                            Grid.Row="1"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Stretch"
+                            FontSize="12" />
+
+                    </Grid>
+
+                </Border>
+                <Border
+                    Grid.Column="2"
+                    Margin="5,5,10,5"
+                    BorderBrush="MediumPurple"
+                    BorderThickness="1"
+                    CornerRadius="5">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="30" />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <Border Background="#FF673AB7" CornerRadius="4 4 0 0 ">
+                            <Label
+                                x:Name="labelTitleAPoplexy"
+                                HorizontalContentAlignment="Center"
+                                FontFamily="微软雅黑"
+                                FontSize="16"
+                                Foreground="White">
+                                脑卒中
+                            </Label>
+                        </Border>
+                        <ListView
+                            x:Name="listViewApoplexy"
+                            Grid.Row="1"
+                            Grid.Column="2"
+                            Margin="5,5,10,5"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Stretch"
+                            FontSize="12" />
+                    </Grid>
+
+                </Border>
+                <Grid x:Name="optionsGrid" Grid.Column="3">
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+
+                    </Grid.RowDefinitions>
+
+                    <Button
+                        x:Name="btnStart"
+                        Grid.Column="0"
+                        Height="28"
+                        Margin="0"
+                        materialDesign:ButtonProgressAssist.IsIndeterminate="False"
+                        materialDesign:ButtonProgressAssist.IsIndicatorVisible="True"
+                        materialDesign:ButtonProgressAssist.Value="-1"
+                        Click="btnStart_Click"
+                        Content="开      始"
+                        Cursor="Hand"
+                        FontSize="16"
+                        Style="{StaticResource MaterialDesignOutlinedButton}"
+                        ToolTip="开始格式化文件" />
+
+
+                    <Button
+                        x:Name="btnOpenDir"
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        Height="28"
+                        Margin="0"
+                        Click="btnOpenDir_Click"
+                        Content="打开目录"
+                        Cursor="Hand"
+                        FontSize="16"
+                        IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                        Style="{StaticResource MaterialDesignOutlinedButton}"
+                        ToolTip="打开保存的慢病报卡目录" />
+                    <Button
+                        x:Name="cleanBtn"
+                        Grid.Row="2"
+                        Grid.Column="0"
+                        Height="28"
+                        Margin="0"
+                        Click="cleanBtn_Click"
+                        Content="清      除"
+                        Cursor="Hand"
+                        FontSize="16"
+                        IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                        Style="{StaticResource MaterialDesignOutlinedButton}"
+                        ToolTip="清除所有已填报的报卡信息" />
+
+                    <Button
+                        Name="btnPrint"
+                        Grid.Row="3"
+                        Grid.Column="0"
+                        Height="28"
+                        Margin="0"
+                        Click="btnPrint_Click"
+                        Content="打      印"
+                        Cursor="Hand"
+                        FontSize="16"
+                        IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                        Style="{StaticResource MaterialDesignOutlinedButton}"
+                        ToolTip="打印本次所有生成的报卡（仅限本次）" />
+
+                </Grid>
+            </Grid>
+
+
+
+        </Grid>
+        <!--<Border BorderThickness="1" BorderBrush="Gray"  CornerRadius="15,15,0,0"  />-->
+    </Grid>
+
+</Window>

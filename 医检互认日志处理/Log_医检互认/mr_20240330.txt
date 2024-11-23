@@ -1,0 +1,1014 @@
+2024-03-30 08:09:57====>=========================================================================================================
+2024-03-30 08:09:57====>调用Exteinterf入参：insureSystem:48;FunctionNo:357;strAdvance:<root><OrgId>4480c78d-c3dd-4873-a0a8-d936963abf75</OrgId><EventId>5B093D25-B292-483E-97A6-470699D5B900</EventId><GroupNo>38</GroupNo><Pid>BDA242DA-45A5-13A2-E054-9CDC71ADEEF6</Pid><DepId>2045fd3b-45ad-4f77-a1d8-a44f526e7888</DepId><DepName>全科医学科</DepName><OperId>49ff45a7-4212-48f8-ac3c-c0bf8e9805a3</OperId><OperName>罗玉龙</OperName></root>
+2024-03-30 08:09:57====>是否有检查检验项目：Select *
+                                From 个人医嘱记录 a
+                                Where a.机构id = '4480c78d-c3dd-4873-a0a8-d936963abf75'
+                                And a.事件id = '5B093D25-B292-483E-97A6-470699D5B900'
+                                And a.组序号 in (38)
+                                And a.诊疗类别 In ('C','D')
+2024-03-30 08:10:06====>=========================================================================================================
+2024-03-30 08:10:06====>调用Exteinterf入参：insureSystem:48;FunctionNo:357;strAdvance:<root><OrgId>4480c78d-c3dd-4873-a0a8-d936963abf75</OrgId><EventId>5B093D25-B292-483E-97A6-470699D5B900</EventId><GroupNo>39</GroupNo><Pid>BDA242DA-45A5-13A2-E054-9CDC71ADEEF6</Pid><DepId>2045fd3b-45ad-4f77-a1d8-a44f526e7888</DepId><DepName>全科医学科</DepName><OperId>49ff45a7-4212-48f8-ac3c-c0bf8e9805a3</OperId><OperName>罗玉龙</OperName></root>
+2024-03-30 08:10:06====>是否有检查检验项目：Select *
+                                From 个人医嘱记录 a
+                                Where a.机构id = '4480c78d-c3dd-4873-a0a8-d936963abf75'
+                                And a.事件id = '5B093D25-B292-483E-97A6-470699D5B900'
+                                And a.组序号 in (39)
+                                And a.诊疗类别 In ('C','D')
+2024-03-30 08:43:55====>=========================================================================================================
+2024-03-30 08:43:55====>调用Exteinterf入参：insureSystem:48;FunctionNo:357;strAdvance:<root><OrgId>4480c78d-c3dd-4873-a0a8-d936963abf75</OrgId><EventId>63A37794-FF58-4802-AEC3-766C88EF0288</EventId><GroupNo>1,2,3,4,5,6,7,8,9,10,11,12</GroupNo><Pid>7241e07e-f6d6-48c9-981e-7f1fbe14bd15</Pid><DepId>2045fd3b-45ad-4f77-a1d8-a44f526e7888</DepId><DepName>全科医学科</DepName><OperId>49ff45a7-4212-48f8-ac3c-c0bf8e9805a3</OperId><OperName>罗玉龙</OperName></root>
+2024-03-30 08:43:55====>是否有检查检验项目：Select *
+                                From 个人医嘱记录 a
+                                Where a.机构id = '4480c78d-c3dd-4873-a0a8-d936963abf75'
+                                And a.事件id = '63A37794-FF58-4802-AEC3-766C88EF0288'
+                                And a.组序号 in (1,2,3,4,5,6,7,8,9,10,11,12)
+                                And a.诊疗类别 In ('C','D')
+2024-03-30 08:43:55====>获取的token：eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7IlVzZXJJZCI6MTcyOTQwNDM2NzcwODA5ODU2MCwiQXBwS2V5IjoiIiwiQWNjb3VudE5hbWUiOiIiLCJBY2NvdW50UmVhbE5hbWUiOiIiLCJTaWduS2V5IjoiNzE5M2NjNGM4MTNhZGRmNGNhOGNhYzMxYjJmZGMxNjkifSwiaXNzIjoiY2VjIiwiZXhwIjoxNzExODQxNjI4fQ.cJOJpnOFOq010t9ACYdHl4l5V_K2XesuGUmw4Y00rdc
+2024-03-30 08:43:55====>获取病人信息:Select A.Id As patientId,'01' As identityTypeCode,nvl(A.身份证号,'-') As identityNo,A.姓名 As personalName,A.性别 As sexCode,to_char(A.出生日期,'yyyymmdd') As birthDate,nvl(B.保险号,A.身份证号) As medicalCardNumber
+                              From 个人信息 A,保险个人档案 B
+                             Where A.Id=B.个人id(+) And B.系统(+)=100
+                               And A.Id='7241e07e-f6d6-48c9-981e-7f1fbe14bd15'
+2024-03-30 08:43:55====>获取就诊信息:Select Decode(B.急诊,1,'2','1') As visitTypeCode,A.ID As visitNo,to_char(A.开始时间,'yyyymmdd') As visitDate,
+                                   C.编码 As deptCode,C.简称 As deptName,'' As wardCode,'' As wardName,'' As bedNo,
+                                   D.编码 As doctorId,D.姓名 As doctorName,D.身份证号 As doctorIdentityNo
+                              From 服务活动记录 A,个人挂号记录 B,部门 C,医护人员 D
+                             Where A.Id=B.记录id And A.科室id=C.资源id And A.服务人id=D.资源id
+                               And A.id='63A37794-FF58-4802-AEC3-766C88EF0288'
+                            Union All
+                            Select '3' As visitTypeCode,A.ID As visitNo,to_char(A.开始时间,'yyyymmdd') As visitDate,
+                                   C.编码 As deptCode,C.简称 As deptName,E.编码 As wardCode,E.简称 As wardName,B.床号 As bedNo,
+                                   D.编码 As doctorId,D.姓名 As doctorName,D.身份证号 As doctorIdentityNo
+                              From 服务活动记录 A,个人入院记录 B,部门 C,医护人员 D,部门 E
+                             Where A.Id=B.事件id And A.科室id=C.资源id And A.服务人id=D.资源id And B.病房id=E.资源id(+)
+                               And A.id='63A37794-FF58-4802-AEC3-766C88EF0288'
+2024-03-30 08:43:55====>获取诊断信息:Select B.主诉 As chiefCompliant,C.问题名称 As diagName,C.问题编码 As diagCode
+                              From 服务活动记录 A,个人挂号记录 B,个人问题列表 C
+                             Where A.Id=B.记录id And A.Id=C.服务记录id(+)
+                               And A.id='63A37794-FF58-4802-AEC3-766C88EF0288'
+                               And Rownum<2
+                            Union All
+                            Select Distinct '' As chiefCompliant,C.问题名称 As diagName,C.问题编码 As diagCode
+                              From 服务活动记录 A,个人入院记录 B,个人问题列表 C
+                             Where A.Id=B.事件id  And A.Id=C.服务记录id(+) And C.记录性质=2 
+                               And A.id='63A37794-FF58-4802-AEC3-766C88EF0288'
+                               And Rownum<2
+2024-03-30 08:43:55====>获取检验项目编码:Select D.编码 As labItemCode,D.名称 As labItemName
+                              From 个人医嘱记录 A,诊疗项目目录 D
+                             Where A.诊疗项目id=D.id
+                               And A.事件ID='63A37794-FF58-4802-AEC3-766C88EF0288'
+                               And A.机构id='4480c78d-c3dd-4873-a0a8-d936963abf75'
+                               And A.组序号 in (1,2,3,4,5,6,7,8,9,10,11,12)
+                               And A.诊疗类别='C'
+                               And (D.撤档时间 Is Null Or D.撤档时间>Sysdate)
+2024-03-30 08:43:55====>调用【检验结果互认提醒】接口URL:http://ds-ucc.cq.hc:443/frontapi/api/v3/reportUrl/recogRemind
+2024-03-30 08:43:55====>调用【检验结果互认提醒】入参:{"messages":{"EVN":{"eventTypeCode":"02","eventTypeName":"检验结果互认提醒"},"PID":{"patientId":"7241e07e-f6d6-48c9-981e-7f1fbe14bd15","identityTypeCode":"01","identityNo":"510223195902130735","visitCardTypeCode":"","visitCardNo":"","personalName":"刘兴伍","birthDate":"19590213","sexCode":"1","medicalCardNumber":"JM2038044029"},"PV1":{"visitTypeCode":"3","visitNo":"63A37794-FF58-4802-AEC3-766C88EF0288","visitDate":"20240330","orgCode":"125002227094723044","orgName":"重庆市綦江区文龙街道社区卫生服务中心","branchCode":"","branchName":"","deptCode":"21030","deptName":"全科医学科","wardCode":"21030","wardName":"全科医学科","bedNo":"19","doctorId":"696","doctorName":"罗玉龙","doctorIdentityNo":"500222199108088613","computerMac":"D4:C9:EF:D9:6B:20","computerIp":"10.61.28.66"},"DG1":{"chiefCompliant":"","diagCode":"R05.x00","diagName":"咳嗽"},"OBR":{"lab":[{"labItemCode":"100323","labItemName":"（住院）血细胞分析（五分类）","labRecognCode":"","labRecognName":""},{"labItemCode":"422018101035480176","labItemName":"C反应蛋白（CRP）","labRecognCode":"","labRecognName":""},{"labItemCode":"100304","labItemName":"电解质测定","labRecognCode":"","labRecognName":""},{"labItemCode":"100316","labItemName":"凝血酶测定","labRecognCode":"","labRecognName":""},{"labItemCode":"100340","labItemName":"血浆D-二聚体(D-Dimer)测定(仪器法)","labRecognCode":"","labRecognName":""},{"labItemCode":"422018101035480174","labItemName":"餐后2H血糖","labRecognCode":"","labRecognName":""},{"labItemCode":"42201800101035479437","labItemName":"肝功1","labRecognCode":"","labRecognName":""},{"labItemCode":"100318","labItemName":"肾功","labRecognCode":"","labRecognName":""},{"labItemCode":"100319","labItemName":"心肌酶谱","labRecognCode":"","labRecognName":""},{"labItemCode":"100335","labItemName":"血脂2号(六项)","labRecognCode":"","labRecognName":""}]}}}
+2024-03-30 08:43:55====>1
+2024-03-30 08:43:55====>2
+2024-03-30 08:43:55====>3
+2024-03-30 08:43:55====>4
+2024-03-30 08:43:55====>5
+2024-03-30 08:43:55====>6
+2024-03-30 08:43:55====>7
+2024-03-30 08:43:55====>8
+2024-03-30 08:43:55====>9
+2024-03-30 08:43:55====>调用【检验结果互认提醒】出参:{"code":"1000","message":"操作失败","data":{"EVN":{"eventTypeCode":"02","eventTypeName":"检验结果互认提醒"},"QAK":{"queryResponseStatus":"0","url":null,"reminder":null,"brief":null}}}
+2024-03-30 08:53:49====>=========================================================================================================
+2024-03-30 08:53:49====>调用Extemenu入参：insureSystem:48;FunctionNo:02;strAdvance:<root><OrgId>4480c78d-c3dd-4873-a0a8-d936963abf75</OrgId><EventId>63A37794-FF58-4802-AEC3-766C88EF0288</EventId><Pid>7241e07e-f6d6-48c9-981e-7f1fbe14bd15</Pid><DepId>2045fd3b-45ad-4f77-a1d8-a44f526e7888</DepId><DepName>全科医学科</DepName><OperId>49ff45a7-4212-48f8-ac3c-c0bf8e9805a3</OperId><OperName>罗玉龙</OperName><DoctorId>14D6019E-B966-2569-E064-9CDC71ADEEF6</DoctorId><No>2404077</No><DocumentNumber>2403176825</DocumentNumber></root>
+2024-03-30 08:53:49====>获取的token：eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7IlVzZXJJZCI6MTcyOTQwNDM2NzcwODA5ODU2MCwiQXBwS2V5IjoiIiwiQWNjb3VudE5hbWUiOiIiLCJBY2NvdW50UmVhbE5hbWUiOiIiLCJTaWduS2V5IjoiNzE5M2NjNGM4MTNhZGRmNGNhOGNhYzMxYjJmZGMxNjkifSwiaXNzIjoiY2VjIiwiZXhwIjoxNzExODQxNjI4fQ.cJOJpnOFOq010t9ACYdHl4l5V_K2XesuGUmw4Y00rdc
+2024-03-30 08:53:49====>获取病人信息:Select A.Id As Id,A.姓名 As Name,'01' As id_no_type,A.身份证号 As id_no,to_char(A.出生日期,'yyyy-mm-dd') As birthday,nvl(B.号码,A.身份证号) As health_card_no,
+                                       A.性别 As gender,A.本人电话 As phone,A.现地址 As address,' ' As main_key
+                                  From 个人信息 A,个人标识号 B
+                                 Where A.Id=B.个人ID(+) and B.类别(+)=2
+                                   and A.Id='7241e07e-f6d6-48c9-981e-7f1fbe14bd15'
+2024-03-30 08:53:49====>获取医生信息:Select A.资源id As Id,A.姓名 As Name,A.身份证号 As idcard,extractValue(附加信息,'root/执业证代码') As practice_number, 
+                               (Select p.名称 From 人员性质 p Where Instr(',' || A.性质 || ',', ',' || p.编码 || ',') > 0 And Rownum=1) As profession 
+                          From 医护人员 A
+                         Where A.资源id='49ff45a7-4212-48f8-ac3c-c0bf8e9805a3'
+2024-03-30 08:53:49====>获取就诊信息:Select B.编码 As visit_departments,B.简称 As visit_departments_name,'1' As visit_type,A.Id As visit_no,'' As ward_code,'' As ward_name,'' As bed_no,nvl(D.保险号,'-') As medical_insurance_number
+                          From 服务活动记录 A,部门 B,保险个人档案 D
+                         Where A.Id='63A37794-FF58-4802-AEC3-766C88EF0288'
+                           And A.科室id=B.资源id And A.个人id=D.个人id(+)
+                           And A.项目id='F4DA8ED2-5033-47EB-A08F-E442A5E65DAB'
+                        Union All
+                        Select B.编码 As visit_departments,B.简称 As visit_departments_name,'3' As visit_type,A.Id As visit_no,E.编码 As ward_code,E.简称 As ward_name,C.床号 As bed_no,nvl(D.保险号,'-') As medical_insurance_number
+                          From 服务活动记录 A,部门 B,保险个人档案 D,个人当前状态 C,部门 E
+                         Where A.Id='63A37794-FF58-4802-AEC3-766C88EF0288'
+                           And A.科室id=B.资源id And A.个人id=D.个人id(+) And A.Id=C.就诊id And C.病房id=E.资源id
+                           And A.项目id='EC3E41BF-BACD-46BA-9D3C-E2493D73C1DF'
+2024-03-30 08:53:49====>调用【应用管理系统portal页URL获取接口】入参(未加密)：{"app_key":"1729404945213775872","hospital":{"accredit_id":"125002227094723044","accredit_name":"重庆市綦江区文龙街道社区卫生服务中心","branch_code":"","branch_name":""},"patience":{"id":"7241e07e-f6d6-48c9-981e-7f1fbe14bd15","name":"刘兴伍","id_no_type":"01","id_no":"510223195902130735","birthday":"1959-02-13","health_card_no":"510223195902130735","gender":"1","phone":"15923220948","address":"重庆市綦江区文龙街道山予城1-14-3","main_key":" ","guardian":null},"doctor":{"id":"49ff45a7-4212-48f8-ac3c-c0bf8e9805a3","name":"罗玉龙","idcard":"500222199108088613","practice_number":"110500222000711","profession":"医生"},"visit_order":{"visit_departments":"21030","visit_departments_name":"全科医学科","visit_type":"3","visit_no":"63A37794-FF58-4802-AEC3-766C88EF0288","ward_code":"21030","ward_name":"全科医学科","bed_no":"19","medical_insurance_number":"B45657364","project_list":[]},"extend":{"scene":"1","his_ip":"10.61.28.66","his_mac":"D4:C9:EF:D9:6B:20"}}
+2024-03-30 08:53:49====>调用【应用管理系统portal页URL获取接口】接口URL:http://ds-ucc.cq.hc:443/frontapi/api/v1/mutual/his/geturl
+2024-03-30 08:53:49====>调用【应用管理系统portal页URL获取接口】入参:{"param_encrypt":"dHY5oRYCiJxuVe++soLNbOIVZBBKJVvH6FJXg/MWMpKuhJx0GceTq+qUJy7hWjHS50xZAru2sAjTfiqGG7OybwxkqY+jII6zqOMUJZEQyOiP5t2ZrMVUaNojgOp1MJlPE92Fp3m2DNr7JLzmyV39aHVdHXYsAFovmhRUIY99ocvoMX0M2NRLknqdFNZJMCN5S5o9IQpePIkKRF5HFF7uw9uREmuD4dJOrGwgY/QYoXHy/TFYMthqblHgU957utoZneJajqYZtFxad2W45DCdm5CTJxnMyCbaUCQNlpB5hYvrjWFOGBBh8+7zlTZcjzRRwcqlHam3jtHVSWdolBtFLZ6KlCFFn7VgHjV//FGPJSuJxBoBkcI1pHSDrzQFaAW7ZcraA3lS2+8LgdBdulMhozZ80QgMQpw/7bU8TQpuBPuGAwo4hhy2Kfjl0B2QfvWMhBEddS+sbWpxopG+Ui/4nrbctp1V5m/21oJ7eZ1OS6MZ68E2abt3AJk1qVirplwocJTwZEWiyfxgzZ7amgDYAL9uAp/fIOLouUtM4ZKkokspTPdEHjU5D3My8aTCqs1NF5hPctgMnDw8nWZDx9TKA5k6AGOIOYngsR0DBAscukaxkeLG+Fxf6PblpKh0/E/I+ZGz1UBxBFTCmXJ1oYA+fxIxwP9pogjBfS4hsV5mBsIUv2JDBkUEJdD9md6la30DIReIE5ZSA/qBs1lqBEsBxrcTEYhYWnx07GHM3+kWYwk472Oq9gDAl+qXCCb8lBt+3kyD624Q998CjR9dsCaHvhU3aZBtFLliU1hFA6DLP0fvBrMOL98U1EEFEVKG2hazaRDOmB2ZPw2aJPYA2xx6nRxkuTbKrPjrSefP1kEdfr7HyNg8HwEcSaRfrimuTETRD+M7kNKiPhUxyVGQJjyad7TWWbatSCtpH4/kKdw3AVTAXDe+9afrWBGdqp+cBg16wr/TOIr7Ugaw3X/LsaU8UPVFA0tcrksSnPLrq2lbRJsWMRIyNTkW8dmDT2vOPLLhOuYfJ9mZyjZ8A2VWtdcalFX4aFN/+k7iEyXYD9vP5A/mXTW1XN7pYXGwKSkUa7JG1aFxGZyhADRKj/tyCdE38g6fj/lftM9SGfvSTaCvI8KLRfujRahVJX6Mh5VDi2el21fZu+iYFpXZrlPS8B2jO0rfp7Jt8EFPQLE/nQlSBcywNk56n3MsuD8NyWSgeiS1Tl9e/lCcWGebec3OQbBOtd4uVs3cnR/PFYPLxANQ+9OcmWEDVd9NXmFQmWucRgSN4d1QK6Jg9ZSMWkXqZTO4KSYHaCygJtmg7AYO4IEP9itStUa4O68+CJNoIHQB9L+BqrdPC1KYbh0P81N9oZpgzQ==","encrypt_method":"aes"}
+2024-03-30 08:53:49====>1
+2024-03-30 08:53:49====>2
+2024-03-30 08:53:49====>3
+2024-03-30 08:53:49====>4
+2024-03-30 08:53:49====>5
+2024-03-30 08:53:49====>6
+2024-03-30 08:53:49====>7
+2024-03-30 08:53:49====>8
+2024-03-30 08:53:49====>9
+2024-03-30 08:53:49====>调用【应用管理系统portal页URL获取接口】出参:{"code":200,"message":"成功","data":{"portal_url":"http://10.185.100.89:443/manager-org-view/#/accredit/index?serial_number_his=c29b5968dc703b291f6cd75c012b1fd8\u0026timestamp=1711760161\u0026sign=50b6c4bb1767bc757100928226fbf79bd6a81397e24fca6330276b45e50bdc7a"},"error":{"error_code":0,"error_msg":""},"meta":{"trace":{"trace_id":"fe017667-edea-44be-83fd-8dbc33e6b4f3","parent_id":"","span_id":"1698f237-d3d3-477b-bd99-9d23f181f146","request_id":""}}}
+2024-03-30 09:26:38====>=========================================================================================================
+2024-03-30 09:26:38====>调用Extemenu入参：insureSystem:48;FunctionNo:02;strAdvance:<root><OrgId>4480c78d-c3dd-4873-a0a8-d936963abf75</OrgId><EventId>63A37794-FF58-4802-AEC3-766C88EF0288</EventId><Pid>7241e07e-f6d6-48c9-981e-7f1fbe14bd15</Pid><DepId>2045fd3b-45ad-4f77-a1d8-a44f526e7888</DepId><DepName>全科医学科</DepName><OperId>49ff45a7-4212-48f8-ac3c-c0bf8e9805a3</OperId><OperName>罗玉龙</OperName><DoctorId>14D6019E-B91F-2561-E064-9CDC71ADEEF6</DoctorId><No>2404077</No><DocumentNumber>2403176810</DocumentNumber></root>
+2024-03-30 09:26:38====>获取的token：eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7IlVzZXJJZCI6MTcyOTQwNDM2NzcwODA5ODU2MCwiQXBwS2V5IjoiIiwiQWNjb3VudE5hbWUiOiIiLCJBY2NvdW50UmVhbE5hbWUiOiIiLCJTaWduS2V5IjoiNzE5M2NjNGM4MTNhZGRmNGNhOGNhYzMxYjJmZGMxNjkifSwiaXNzIjoiY2VjIiwiZXhwIjoxNzExODQxNjI4fQ.cJOJpnOFOq010t9ACYdHl4l5V_K2XesuGUmw4Y00rdc
+2024-03-30 09:26:38====>获取病人信息:Select A.Id As Id,A.姓名 As Name,'01' As id_no_type,A.身份证号 As id_no,to_char(A.出生日期,'yyyy-mm-dd') As birthday,nvl(B.号码,A.身份证号) As health_card_no,
+                                       A.性别 As gender,A.本人电话 As phone,A.现地址 As address,' ' As main_key
+                                  From 个人信息 A,个人标识号 B
+                                 Where A.Id=B.个人ID(+) and B.类别(+)=2
+                                   and A.Id='7241e07e-f6d6-48c9-981e-7f1fbe14bd15'
+2024-03-30 09:26:39====>获取医生信息:Select A.资源id As Id,A.姓名 As Name,A.身份证号 As idcard,extractValue(附加信息,'root/执业证代码') As practice_number, 
+                               (Select p.名称 From 人员性质 p Where Instr(',' || A.性质 || ',', ',' || p.编码 || ',') > 0 And Rownum=1) As profession 
+                          From 医护人员 A
+                         Where A.资源id='49ff45a7-4212-48f8-ac3c-c0bf8e9805a3'
+2024-03-30 09:26:39====>获取就诊信息:Select B.编码 As visit_departments,B.简称 As visit_departments_name,'1' As visit_type,A.Id As visit_no,'' As ward_code,'' As ward_name,'' As bed_no,nvl(D.保险号,'-') As medical_insurance_number
+                          From 服务活动记录 A,部门 B,保险个人档案 D
+                         Where A.Id='63A37794-FF58-4802-AEC3-766C88EF0288'
+                           And A.科室id=B.资源id And A.个人id=D.个人id(+)
+                           And A.项目id='F4DA8ED2-5033-47EB-A08F-E442A5E65DAB'
+                        Union All
+                        Select B.编码 As visit_departments,B.简称 As visit_departments_name,'3' As visit_type,A.Id As visit_no,E.编码 As ward_code,E.简称 As ward_name,C.床号 As bed_no,nvl(D.保险号,'-') As medical_insurance_number
+                          From 服务活动记录 A,部门 B,保险个人档案 D,个人当前状态 C,部门 E
+                         Where A.Id='63A37794-FF58-4802-AEC3-766C88EF0288'
+                           And A.科室id=B.资源id And A.个人id=D.个人id(+) And A.Id=C.就诊id And C.病房id=E.资源id
+                           And A.项目id='EC3E41BF-BACD-46BA-9D3C-E2493D73C1DF'
+2024-03-30 09:26:39====>调用【应用管理系统portal页URL获取接口】入参(未加密)：{"app_key":"1729404945213775872","hospital":{"accredit_id":"125002227094723044","accredit_name":"重庆市綦江区文龙街道社区卫生服务中心","branch_code":"","branch_name":""},"patience":{"id":"7241e07e-f6d6-48c9-981e-7f1fbe14bd15","name":"刘兴伍","id_no_type":"01","id_no":"510223195902130735","birthday":"1959-02-13","health_card_no":"510223195902130735","gender":"1","phone":"15923220948","address":"重庆市綦江区文龙街道山予城1-14-3","main_key":" ","guardian":null},"doctor":{"id":"49ff45a7-4212-48f8-ac3c-c0bf8e9805a3","name":"罗玉龙","idcard":"500222199108088613","practice_number":"110500222000711","profession":"医生"},"visit_order":{"visit_departments":"21030","visit_departments_name":"全科医学科","visit_type":"3","visit_no":"63A37794-FF58-4802-AEC3-766C88EF0288","ward_code":"21030","ward_name":"全科医学科","bed_no":"19","medical_insurance_number":"B45657364","project_list":[]},"extend":{"scene":"1","his_ip":"10.61.28.66","his_mac":"D4:C9:EF:D9:6B:20"}}
+2024-03-30 09:26:39====>调用【应用管理系统portal页URL获取接口】接口URL:http://ds-ucc.cq.hc:443/frontapi/api/v1/mutual/his/geturl
+2024-03-30 09:26:39====>调用【应用管理系统portal页URL获取接口】入参:{"param_encrypt":"dHY5oRYCiJxuVe++soLNbOIVZBBKJVvH6FJXg/MWMpKuhJx0GceTq+qUJy7hWjHS50xZAru2sAjTfiqGG7OybwxkqY+jII6zqOMUJZEQyOiP5t2ZrMVUaNojgOp1MJlPE92Fp3m2DNr7JLzmyV39aHVdHXYsAFovmhRUIY99ocvoMX0M2NRLknqdFNZJMCN5S5o9IQpePIkKRF5HFF7uw9uREmuD4dJOrGwgY/QYoXHy/TFYMthqblHgU957utoZneJajqYZtFxad2W45DCdm5CTJxnMyCbaUCQNlpB5hYvrjWFOGBBh8+7zlTZcjzRRwcqlHam3jtHVSWdolBtFLZ6KlCFFn7VgHjV//FGPJSuJxBoBkcI1pHSDrzQFaAW7ZcraA3lS2+8LgdBdulMhozZ80QgMQpw/7bU8TQpuBPuGAwo4hhy2Kfjl0B2QfvWMhBEddS+sbWpxopG+Ui/4nrbctp1V5m/21oJ7eZ1OS6MZ68E2abt3AJk1qVirplwocJTwZEWiyfxgzZ7amgDYAL9uAp/fIOLouUtM4ZKkokspTPdEHjU5D3My8aTCqs1NF5hPctgMnDw8nWZDx9TKA5k6AGOIOYngsR0DBAscukaxkeLG+Fxf6PblpKh0/E/I+ZGz1UBxBFTCmXJ1oYA+fxIxwP9pogjBfS4hsV5mBsIUv2JDBkUEJdD9md6la30DIReIE5ZSA/qBs1lqBEsBxrcTEYhYWnx07GHM3+kWYwk472Oq9gDAl+qXCCb8lBt+3kyD624Q998CjR9dsCaHvhU3aZBtFLliU1hFA6DLP0fvBrMOL98U1EEFEVKG2hazaRDOmB2ZPw2aJPYA2xx6nRxkuTbKrPjrSefP1kEdfr7HyNg8HwEcSaRfrimuTETRD+M7kNKiPhUxyVGQJjyad7TWWbatSCtpH4/kKdw3AVTAXDe+9afrWBGdqp+cBg16wr/TOIr7Ugaw3X/LsaU8UPVFA0tcrksSnPLrq2lbRJsWMRIyNTkW8dmDT2vOPLLhOuYfJ9mZyjZ8A2VWtdcalFX4aFN/+k7iEyXYD9vP5A/mXTW1XN7pYXGwKSkUa7JG1aFxGZyhADRKj/tyCdE38g6fj/lftM9SGfvSTaCvI8KLRfujRahVJX6Mh5VDi2el21fZu+iYFpXZrlPS8B2jO0rfp7Jt8EFPQLE/nQlSBcywNk56n3MsuD8NyWSgeiS1Tl9e/lCcWGebec3OQbBOtd4uVs3cnR/PFYPLxANQ+9OcmWEDVd9NXmFQmWucRgSN4d1QK6Jg9ZSMWkXqZTO4KSYHaCygJtmg7AYO4IEP9itStUa4O68+CJNoIHQB9L+BqrdPC1KYbh0P81N9oZpgzQ==","encrypt_method":"aes"}
+2024-03-30 09:26:39====>1
+2024-03-30 09:26:39====>2
+2024-03-30 09:26:39====>3
+2024-03-30 09:26:39====>4
+2024-03-30 09:26:39====>5
+2024-03-30 09:26:39====>6
+2024-03-30 09:26:39====>7
+2024-03-30 09:26:39====>8
+2024-03-30 09:26:39====>9
+2024-03-30 09:26:39====>调用【应用管理系统portal页URL获取接口】出参:{"code":200,"message":"成功","data":{"portal_url":"http://10.185.100.89:443/manager-org-view/#/accredit/index?serial_number_his=c29b5968dc703b291f6cd75c012b1fd8\u0026timestamp=1711762129\u0026sign=c8a6994ab8a79b6ddfc35a0f38097d808977eeb3c097bbddc0fd382c3951829f"},"error":{"error_code":0,"error_msg":""},"meta":{"trace":{"trace_id":"6be98b96-9cc1-4145-abeb-fd2af55882a9","parent_id":"","span_id":"683e05a4-3a36-4feb-b59c-c1aa9212ab22","request_id":""}}}
+2024-03-30 09:28:32====>=========================================================================================================
+2024-03-30 09:28:32====>调用Exteinterf入参：insureSystem:48;FunctionNo:357;strAdvance:<root><OrgId>4480c78d-c3dd-4873-a0a8-d936963abf75</OrgId><EventId>63A37794-FF58-4802-AEC3-766C88EF0288</EventId><GroupNo>13,14,15,16,17,18</GroupNo><Pid>7241e07e-f6d6-48c9-981e-7f1fbe14bd15</Pid><DepId>2045fd3b-45ad-4f77-a1d8-a44f526e7888</DepId><DepName>全科医学科</DepName><OperId>49ff45a7-4212-48f8-ac3c-c0bf8e9805a3</OperId><OperName>罗玉龙</OperName></root>
+2024-03-30 09:28:32====>是否有检查检验项目：Select *
+                                From 个人医嘱记录 a
+                                Where a.机构id = '4480c78d-c3dd-4873-a0a8-d936963abf75'
+                                And a.事件id = '63A37794-FF58-4802-AEC3-766C88EF0288'
+                                And a.组序号 in (13,14,15,16,17,18)
+                                And a.诊疗类别 In ('C','D')
+2024-03-30 09:30:13====>=========================================================================================================
+2024-03-30 09:30:13====>调用Exteinterf入参：insureSystem:48;FunctionNo:357;strAdvance:<root><OrgId>4480c78d-c3dd-4873-a0a8-d936963abf75</OrgId><EventId>63A37794-FF58-4802-AEC3-766C88EF0288</EventId><GroupNo>19</GroupNo><Pid>7241e07e-f6d6-48c9-981e-7f1fbe14bd15</Pid><DepId>2045fd3b-45ad-4f77-a1d8-a44f526e7888</DepId><DepName>全科医学科</DepName><OperId>49ff45a7-4212-48f8-ac3c-c0bf8e9805a3</OperId><OperName>罗玉龙</OperName></root>
+2024-03-30 09:30:13====>是否有检查检验项目：Select *
+                                From 个人医嘱记录 a
+                                Where a.机构id = '4480c78d-c3dd-4873-a0a8-d936963abf75'
+                                And a.事件id = '63A37794-FF58-4802-AEC3-766C88EF0288'
+                                And a.组序号 in (19)
+                                And a.诊疗类别 In ('C','D')
+2024-03-30 09:32:53====>=========================================================================================================
+2024-03-30 09:32:53====>调用Exteinterf入参：insureSystem:48;FunctionNo:357;strAdvance:<root><OrgId>4480c78d-c3dd-4873-a0a8-d936963abf75</OrgId><EventId>63A37794-FF58-4802-AEC3-766C88EF0288</EventId><GroupNo>20,21</GroupNo><Pid>7241e07e-f6d6-48c9-981e-7f1fbe14bd15</Pid><DepId>2045fd3b-45ad-4f77-a1d8-a44f526e7888</DepId><DepName>全科医学科</DepName><OperId>49ff45a7-4212-48f8-ac3c-c0bf8e9805a3</OperId><OperName>罗玉龙</OperName></root>
+2024-03-30 09:32:53====>是否有检查检验项目：Select *
+                                From 个人医嘱记录 a
+                                Where a.机构id = '4480c78d-c3dd-4873-a0a8-d936963abf75'
+                                And a.事件id = '63A37794-FF58-4802-AEC3-766C88EF0288'
+                                And a.组序号 in (20,21)
+                                And a.诊疗类别 In ('C','D')
+2024-03-30 09:36:47====>=========================================================================================================
+2024-03-30 09:36:47====>调用Exteinterf入参：insureSystem:48;FunctionNo:357;strAdvance:<root><OrgId>4480c78d-c3dd-4873-a0a8-d936963abf75</OrgId><EventId>B42965A1-6FCD-4782-9A5D-3D956CFFC181</EventId><GroupNo>32</GroupNo><Pid>b2e4d636-a434-4d6d-a50f-63f6f2c427ed</Pid><DepId>2045fd3b-45ad-4f77-a1d8-a44f526e7888</DepId><DepName>全科医学科</DepName><OperId>49ff45a7-4212-48f8-ac3c-c0bf8e9805a3</OperId><OperName>罗玉龙</OperName></root>
+2024-03-30 09:36:47====>是否有检查检验项目：Select *
+                                From 个人医嘱记录 a
+                                Where a.机构id = '4480c78d-c3dd-4873-a0a8-d936963abf75'
+                                And a.事件id = 'B42965A1-6FCD-4782-9A5D-3D956CFFC181'
+                                And a.组序号 in (32)
+                                And a.诊疗类别 In ('C','D')
+2024-03-30 09:42:39====>=========================================================================================================
+2024-03-30 09:42:39====>调用Extemenu入参：insureSystem:48;FunctionNo:02;strAdvance:<root><OrgId>4480c78d-c3dd-4873-a0a8-d936963abf75</OrgId><EventId>63A37794-FF58-4802-AEC3-766C88EF0288</EventId><Pid>7241e07e-f6d6-48c9-981e-7f1fbe14bd15</Pid><DepId>2045fd3b-45ad-4f77-a1d8-a44f526e7888</DepId><DepName>全科医学科</DepName><OperId>49ff45a7-4212-48f8-ac3c-c0bf8e9805a3</OperId><OperName>罗玉龙</OperName><DoctorId>14D6019E-B966-2569-E064-9CDC71ADEEF6</DoctorId><No>2404077</No><DocumentNumber>2403176825</DocumentNumber></root>
+2024-03-30 09:42:39====>获取的token：eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7IlVzZXJJZCI6MTcyOTQwNDM2NzcwODA5ODU2MCwiQXBwS2V5IjoiIiwiQWNjb3VudE5hbWUiOiIiLCJBY2NvdW50UmVhbE5hbWUiOiIiLCJTaWduS2V5IjoiNzE5M2NjNGM4MTNhZGRmNGNhOGNhYzMxYjJmZGMxNjkifSwiaXNzIjoiY2VjIiwiZXhwIjoxNzExODQxNjI4fQ.cJOJpnOFOq010t9ACYdHl4l5V_K2XesuGUmw4Y00rdc
+2024-03-30 09:42:39====>获取病人信息:Select A.Id As Id,A.姓名 As Name,'01' As id_no_type,A.身份证号 As id_no,to_char(A.出生日期,'yyyy-mm-dd') As birthday,nvl(B.号码,A.身份证号) As health_card_no,
+                                       A.性别 As gender,A.本人电话 As phone,A.现地址 As address,' ' As main_key
+                                  From 个人信息 A,个人标识号 B
+                                 Where A.Id=B.个人ID(+) and B.类别(+)=2
+                                   and A.Id='7241e07e-f6d6-48c9-981e-7f1fbe14bd15'
+2024-03-30 09:42:39====>获取医生信息:Select A.资源id As Id,A.姓名 As Name,A.身份证号 As idcard,extractValue(附加信息,'root/执业证代码') As practice_number, 
+                               (Select p.名称 From 人员性质 p Where Instr(',' || A.性质 || ',', ',' || p.编码 || ',') > 0 And Rownum=1) As profession 
+                          From 医护人员 A
+                         Where A.资源id='49ff45a7-4212-48f8-ac3c-c0bf8e9805a3'
+2024-03-30 09:42:39====>获取就诊信息:Select B.编码 As visit_departments,B.简称 As visit_departments_name,'1' As visit_type,A.Id As visit_no,'' As ward_code,'' As ward_name,'' As bed_no,nvl(D.保险号,'-') As medical_insurance_number
+                          From 服务活动记录 A,部门 B,保险个人档案 D
+                         Where A.Id='63A37794-FF58-4802-AEC3-766C88EF0288'
+                           And A.科室id=B.资源id And A.个人id=D.个人id(+)
+                           And A.项目id='F4DA8ED2-5033-47EB-A08F-E442A5E65DAB'
+                        Union All
+                        Select B.编码 As visit_departments,B.简称 As visit_departments_name,'3' As visit_type,A.Id As visit_no,E.编码 As ward_code,E.简称 As ward_name,C.床号 As bed_no,nvl(D.保险号,'-') As medical_insurance_number
+                          From 服务活动记录 A,部门 B,保险个人档案 D,个人当前状态 C,部门 E
+                         Where A.Id='63A37794-FF58-4802-AEC3-766C88EF0288'
+                           And A.科室id=B.资源id And A.个人id=D.个人id(+) And A.Id=C.就诊id And C.病房id=E.资源id
+                           And A.项目id='EC3E41BF-BACD-46BA-9D3C-E2493D73C1DF'
+2024-03-30 09:42:39====>调用【应用管理系统portal页URL获取接口】入参(未加密)：{"app_key":"1729404945213775872","hospital":{"accredit_id":"125002227094723044","accredit_name":"重庆市綦江区文龙街道社区卫生服务中心","branch_code":"","branch_name":""},"patience":{"id":"7241e07e-f6d6-48c9-981e-7f1fbe14bd15","name":"刘兴伍","id_no_type":"01","id_no":"510223195902130735","birthday":"1959-02-13","health_card_no":"510223195902130735","gender":"1","phone":"15923220948","address":"重庆市綦江区文龙街道山予城1-14-3","main_key":" ","guardian":null},"doctor":{"id":"49ff45a7-4212-48f8-ac3c-c0bf8e9805a3","name":"罗玉龙","idcard":"500222199108088613","practice_number":"110500222000711","profession":"医生"},"visit_order":{"visit_departments":"21030","visit_departments_name":"全科医学科","visit_type":"3","visit_no":"63A37794-FF58-4802-AEC3-766C88EF0288","ward_code":"21030","ward_name":"全科医学科","bed_no":"19","medical_insurance_number":"B45657364","project_list":[]},"extend":{"scene":"1","his_ip":"10.61.28.66","his_mac":"D4:C9:EF:D9:6B:20"}}
+2024-03-30 09:42:39====>调用【应用管理系统portal页URL获取接口】接口URL:http://ds-ucc.cq.hc:443/frontapi/api/v1/mutual/his/geturl
+2024-03-30 09:42:39====>调用【应用管理系统portal页URL获取接口】入参:{"param_encrypt":"dHY5oRYCiJxuVe++soLNbOIVZBBKJVvH6FJXg/MWMpKuhJx0GceTq+qUJy7hWjHS50xZAru2sAjTfiqGG7OybwxkqY+jII6zqOMUJZEQyOiP5t2ZrMVUaNojgOp1MJlPE92Fp3m2DNr7JLzmyV39aHVdHXYsAFovmhRUIY99ocvoMX0M2NRLknqdFNZJMCN5S5o9IQpePIkKRF5HFF7uw9uREmuD4dJOrGwgY/QYoXHy/TFYMthqblHgU957utoZneJajqYZtFxad2W45DCdm5CTJxnMyCbaUCQNlpB5hYvrjWFOGBBh8+7zlTZcjzRRwcqlHam3jtHVSWdolBtFLZ6KlCFFn7VgHjV//FGPJSuJxBoBkcI1pHSDrzQFaAW7ZcraA3lS2+8LgdBdulMhozZ80QgMQpw/7bU8TQpuBPuGAwo4hhy2Kfjl0B2QfvWMhBEddS+sbWpxopG+Ui/4nrbctp1V5m/21oJ7eZ1OS6MZ68E2abt3AJk1qVirplwocJTwZEWiyfxgzZ7amgDYAL9uAp/fIOLouUtM4ZKkokspTPdEHjU5D3My8aTCqs1NF5hPctgMnDw8nWZDx9TKA5k6AGOIOYngsR0DBAscukaxkeLG+Fxf6PblpKh0/E/I+ZGz1UBxBFTCmXJ1oYA+fxIxwP9pogjBfS4hsV5mBsIUv2JDBkUEJdD9md6la30DIReIE5ZSA/qBs1lqBEsBxrcTEYhYWnx07GHM3+kWYwk472Oq9gDAl+qXCCb8lBt+3kyD624Q998CjR9dsCaHvhU3aZBtFLliU1hFA6DLP0fvBrMOL98U1EEFEVKG2hazaRDOmB2ZPw2aJPYA2xx6nRxkuTbKrPjrSefP1kEdfr7HyNg8HwEcSaRfrimuTETRD+M7kNKiPhUxyVGQJjyad7TWWbatSCtpH4/kKdw3AVTAXDe+9afrWBGdqp+cBg16wr/TOIr7Ugaw3X/LsaU8UPVFA0tcrksSnPLrq2lbRJsWMRIyNTkW8dmDT2vOPLLhOuYfJ9mZyjZ8A2VWtdcalFX4aFN/+k7iEyXYD9vP5A/mXTW1XN7pYXGwKSkUa7JG1aFxGZyhADRKj/tyCdE38g6fj/lftM9SGfvSTaCvI8KLRfujRahVJX6Mh5VDi2el21fZu+iYFpXZrlPS8B2jO0rfp7Jt8EFPQLE/nQlSBcywNk56n3MsuD8NyWSgeiS1Tl9e/lCcWGebec3OQbBOtd4uVs3cnR/PFYPLxANQ+9OcmWEDVd9NXmFQmWucRgSN4d1QK6Jg9ZSMWkXqZTO4KSYHaCygJtmg7AYO4IEP9itStUa4O68+CJNoIHQB9L+BqrdPC1KYbh0P81N9oZpgzQ==","encrypt_method":"aes"}
+2024-03-30 09:42:39====>1
+2024-03-30 09:42:39====>2
+2024-03-30 09:42:40====>3
+2024-03-30 09:42:40====>4
+2024-03-30 09:42:40====>5
+2024-03-30 09:42:40====>6
+2024-03-30 09:42:40====>7
+2024-03-30 09:42:40====>8
+2024-03-30 09:42:40====>9
+2024-03-30 09:42:40====>调用【应用管理系统portal页URL获取接口】出参:{"code":200,"message":"成功","data":{"portal_url":"http://10.185.100.89:443/manager-org-view/#/accredit/index?serial_number_his=c29b5968dc703b291f6cd75c012b1fd8\u0026timestamp=1711763091\u0026sign=6ca7fc5f30984776a8b6e8beea6bf8940265ca863956b62a32bed260dd0a00c9"},"error":{"error_code":0,"error_msg":""},"meta":{"trace":{"trace_id":"2c41f547-8e0a-4b17-86bf-a58184a180e9","parent_id":"","span_id":"e73cf5a0-37e6-493d-bbd6-dce3a612a112","request_id":""}}}
+2024-03-30 09:52:03====>=========================================================================================================
+2024-03-30 09:52:03====>调用Exteinterf入参：insureSystem:48;FunctionNo:357;strAdvance:<root><OrgId>4480c78d-c3dd-4873-a0a8-d936963abf75</OrgId><EventId>131E7048-58C5-6F2E-E064-9CDC71ADEEF6</EventId><GroupNo>111,112</GroupNo><Pid>90C2968E-4BD7-49E9-BD96-997D75FAAD9A</Pid><DepId>2045fd3b-45ad-4f77-a1d8-a44f526e7888</DepId><DepName>全科医学科</DepName><OperId>49ff45a7-4212-48f8-ac3c-c0bf8e9805a3</OperId><OperName>罗玉龙</OperName></root>
+2024-03-30 09:52:03====>是否有检查检验项目：Select *
+                                From 个人医嘱记录 a
+                                Where a.机构id = '4480c78d-c3dd-4873-a0a8-d936963abf75'
+                                And a.事件id = '131E7048-58C5-6F2E-E064-9CDC71ADEEF6'
+                                And a.组序号 in (111,112)
+                                And a.诊疗类别 In ('C','D')
+2024-03-30 10:07:29====>=========================================================================================================
+2024-03-30 10:07:29====>调用Extemenu入参：insureSystem:48;FunctionNo:02;strAdvance:<root><OrgId>4480c78d-c3dd-4873-a0a8-d936963abf75</OrgId><EventId>63A37794-FF58-4802-AEC3-766C88EF0288</EventId><Pid>7241e07e-f6d6-48c9-981e-7f1fbe14bd15</Pid><DepId>2045fd3b-45ad-4f77-a1d8-a44f526e7888</DepId><DepName>全科医学科</DepName><OperId>49ff45a7-4212-48f8-ac3c-c0bf8e9805a3</OperId><OperName>罗玉龙</OperName><DoctorId>14D6019E-B965-2569-E064-9CDC71ADEEF6</DoctorId><No>2404077</No><DocumentNumber>2403176824</DocumentNumber></root>
+2024-03-30 10:07:29====>获取的token：eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7IlVzZXJJZCI6MTcyOTQwNDM2NzcwODA5ODU2MCwiQXBwS2V5IjoiIiwiQWNjb3VudE5hbWUiOiIiLCJBY2NvdW50UmVhbE5hbWUiOiIiLCJTaWduS2V5IjoiNzE5M2NjNGM4MTNhZGRmNGNhOGNhYzMxYjJmZGMxNjkifSwiaXNzIjoiY2VjIiwiZXhwIjoxNzExODQxNjI4fQ.cJOJpnOFOq010t9ACYdHl4l5V_K2XesuGUmw4Y00rdc
+2024-03-30 10:07:29====>获取病人信息:Select A.Id As Id,A.姓名 As Name,'01' As id_no_type,A.身份证号 As id_no,to_char(A.出生日期,'yyyy-mm-dd') As birthday,nvl(B.号码,A.身份证号) As health_card_no,
+                                       A.性别 As gender,A.本人电话 As phone,A.现地址 As address,' ' As main_key
+                                  From 个人信息 A,个人标识号 B
+                                 Where A.Id=B.个人ID(+) and B.类别(+)=2
+                                   and A.Id='7241e07e-f6d6-48c9-981e-7f1fbe14bd15'
+2024-03-30 10:07:29====>获取医生信息:Select A.资源id As Id,A.姓名 As Name,A.身份证号 As idcard,extractValue(附加信息,'root/执业证代码') As practice_number, 
+                               (Select p.名称 From 人员性质 p Where Instr(',' || A.性质 || ',', ',' || p.编码 || ',') > 0 And Rownum=1) As profession 
+                          From 医护人员 A
+                         Where A.资源id='49ff45a7-4212-48f8-ac3c-c0bf8e9805a3'
+2024-03-30 10:07:29====>获取就诊信息:Select B.编码 As visit_departments,B.简称 As visit_departments_name,'1' As visit_type,A.Id As visit_no,'' As ward_code,'' As ward_name,'' As bed_no,nvl(D.保险号,'-') As medical_insurance_number
+                          From 服务活动记录 A,部门 B,保险个人档案 D
+                         Where A.Id='63A37794-FF58-4802-AEC3-766C88EF0288'
+                           And A.科室id=B.资源id And A.个人id=D.个人id(+)
+                           And A.项目id='F4DA8ED2-5033-47EB-A08F-E442A5E65DAB'
+                        Union All
+                        Select B.编码 As visit_departments,B.简称 As visit_departments_name,'3' As visit_type,A.Id As visit_no,E.编码 As ward_code,E.简称 As ward_name,C.床号 As bed_no,nvl(D.保险号,'-') As medical_insurance_number
+                          From 服务活动记录 A,部门 B,保险个人档案 D,个人当前状态 C,部门 E
+                         Where A.Id='63A37794-FF58-4802-AEC3-766C88EF0288'
+                           And A.科室id=B.资源id And A.个人id=D.个人id(+) And A.Id=C.就诊id And C.病房id=E.资源id
+                           And A.项目id='EC3E41BF-BACD-46BA-9D3C-E2493D73C1DF'
+2024-03-30 10:07:29====>调用【应用管理系统portal页URL获取接口】入参(未加密)：{"app_key":"1729404945213775872","hospital":{"accredit_id":"125002227094723044","accredit_name":"重庆市綦江区文龙街道社区卫生服务中心","branch_code":"","branch_name":""},"patience":{"id":"7241e07e-f6d6-48c9-981e-7f1fbe14bd15","name":"刘兴伍","id_no_type":"01","id_no":"510223195902130735","birthday":"1959-02-13","health_card_no":"510223195902130735","gender":"1","phone":"15923220948","address":"重庆市綦江区文龙街道山予城1-14-3","main_key":" ","guardian":null},"doctor":{"id":"49ff45a7-4212-48f8-ac3c-c0bf8e9805a3","name":"罗玉龙","idcard":"500222199108088613","practice_number":"110500222000711","profession":"医生"},"visit_order":{"visit_departments":"21030","visit_departments_name":"全科医学科","visit_type":"3","visit_no":"63A37794-FF58-4802-AEC3-766C88EF0288","ward_code":"21030","ward_name":"全科医学科","bed_no":"19","medical_insurance_number":"B45657364","project_list":[]},"extend":{"scene":"1","his_ip":"10.61.28.66","his_mac":"D4:C9:EF:D9:6B:20"}}
+2024-03-30 10:07:29====>调用【应用管理系统portal页URL获取接口】接口URL:http://ds-ucc.cq.hc:443/frontapi/api/v1/mutual/his/geturl
+2024-03-30 10:07:29====>调用【应用管理系统portal页URL获取接口】入参:{"param_encrypt":"dHY5oRYCiJxuVe++soLNbOIVZBBKJVvH6FJXg/MWMpKuhJx0GceTq+qUJy7hWjHS50xZAru2sAjTfiqGG7OybwxkqY+jII6zqOMUJZEQyOiP5t2ZrMVUaNojgOp1MJlPE92Fp3m2DNr7JLzmyV39aHVdHXYsAFovmhRUIY99ocvoMX0M2NRLknqdFNZJMCN5S5o9IQpePIkKRF5HFF7uw9uREmuD4dJOrGwgY/QYoXHy/TFYMthqblHgU957utoZneJajqYZtFxad2W45DCdm5CTJxnMyCbaUCQNlpB5hYvrjWFOGBBh8+7zlTZcjzRRwcqlHam3jtHVSWdolBtFLZ6KlCFFn7VgHjV//FGPJSuJxBoBkcI1pHSDrzQFaAW7ZcraA3lS2+8LgdBdulMhozZ80QgMQpw/7bU8TQpuBPuGAwo4hhy2Kfjl0B2QfvWMhBEddS+sbWpxopG+Ui/4nrbctp1V5m/21oJ7eZ1OS6MZ68E2abt3AJk1qVirplwocJTwZEWiyfxgzZ7amgDYAL9uAp/fIOLouUtM4ZKkokspTPdEHjU5D3My8aTCqs1NF5hPctgMnDw8nWZDx9TKA5k6AGOIOYngsR0DBAscukaxkeLG+Fxf6PblpKh0/E/I+ZGz1UBxBFTCmXJ1oYA+fxIxwP9pogjBfS4hsV5mBsIUv2JDBkUEJdD9md6la30DIReIE5ZSA/qBs1lqBEsBxrcTEYhYWnx07GHM3+kWYwk472Oq9gDAl+qXCCb8lBt+3kyD624Q998CjR9dsCaHvhU3aZBtFLliU1hFA6DLP0fvBrMOL98U1EEFEVKG2hazaRDOmB2ZPw2aJPYA2xx6nRxkuTbKrPjrSefP1kEdfr7HyNg8HwEcSaRfrimuTETRD+M7kNKiPhUxyVGQJjyad7TWWbatSCtpH4/kKdw3AVTAXDe+9afrWBGdqp+cBg16wr/TOIr7Ugaw3X/LsaU8UPVFA0tcrksSnPLrq2lbRJsWMRIyNTkW8dmDT2vOPLLhOuYfJ9mZyjZ8A2VWtdcalFX4aFN/+k7iEyXYD9vP5A/mXTW1XN7pYXGwKSkUa7JG1aFxGZyhADRKj/tyCdE38g6fj/lftM9SGfvSTaCvI8KLRfujRahVJX6Mh5VDi2el21fZu+iYFpXZrlPS8B2jO0rfp7Jt8EFPQLE/nQlSBcywNk56n3MsuD8NyWSgeiS1Tl9e/lCcWGebec3OQbBOtd4uVs3cnR/PFYPLxANQ+9OcmWEDVd9NXmFQmWucRgSN4d1QK6Jg9ZSMWkXqZTO4KSYHaCygJtmg7AYO4IEP9itStUa4O68+CJNoIHQB9L+BqrdPC1KYbh0P81N9oZpgzQ==","encrypt_method":"aes"}
+2024-03-30 10:07:29====>1
+2024-03-30 10:07:29====>2
+2024-03-30 10:07:29====>3
+2024-03-30 10:07:29====>4
+2024-03-30 10:07:29====>5
+2024-03-30 10:07:29====>6
+2024-03-30 10:07:29====>7
+2024-03-30 10:07:29====>8
+2024-03-30 10:07:29====>9
+2024-03-30 10:07:29====>调用【应用管理系统portal页URL获取接口】出参:{"code":200,"message":"成功","data":{"portal_url":"http://10.185.100.89:443/manager-org-view/#/accredit/index?serial_number_his=c29b5968dc703b291f6cd75c012b1fd8\u0026timestamp=1711764580\u0026sign=b596b8b453f223d4ba807e8820e5d019d98908e9cb7e145e930fb11409c2e92a"},"error":{"error_code":0,"error_msg":""},"meta":{"trace":{"trace_id":"f8ba56ec-49f5-47b3-8a79-ab722bfc41fc","parent_id":"","span_id":"5cfbd80a-2399-4c9e-ab99-ebe389570cfd","request_id":""}}}
+2024-03-30 11:46:00====>=========================================================================================================
+2024-03-30 11:46:00====>调用Exteinterf入参：insureSystem:48;FunctionNo:357;strAdvance:<root><OrgId>4480c78d-c3dd-4873-a0a8-d936963abf75</OrgId><EventId>B8078181-DD48-47BA-9A30-8475516730E8</EventId><GroupNo>1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19</GroupNo><Pid>26b38508-be91-4904-be54-116a7c62e77e</Pid><DepId>2045fd3b-45ad-4f77-a1d8-a44f526e7888</DepId><DepName>全科医学科</DepName><OperId>49ff45a7-4212-48f8-ac3c-c0bf8e9805a3</OperId><OperName>罗玉龙</OperName></root>
+2024-03-30 11:46:00====>是否有检查检验项目：Select *
+                                From 个人医嘱记录 a
+                                Where a.机构id = '4480c78d-c3dd-4873-a0a8-d936963abf75'
+                                And a.事件id = 'B8078181-DD48-47BA-9A30-8475516730E8'
+                                And a.组序号 in (1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19)
+                                And a.诊疗类别 In ('C','D')
+2024-03-30 11:46:00====>获取的token：eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7IlVzZXJJZCI6MTcyOTQwNDM2NzcwODA5ODU2MCwiQXBwS2V5IjoiIiwiQWNjb3VudE5hbWUiOiIiLCJBY2NvdW50UmVhbE5hbWUiOiIiLCJTaWduS2V5IjoiNzE5M2NjNGM4MTNhZGRmNGNhOGNhYzMxYjJmZGMxNjkifSwiaXNzIjoiY2VjIiwiZXhwIjoxNzExODQxNjI4fQ.cJOJpnOFOq010t9ACYdHl4l5V_K2XesuGUmw4Y00rdc
+2024-03-30 11:46:00====>获取病人信息:Select A.Id As patientId,'01' As identityTypeCode,nvl(A.身份证号,'-') As identityNo,A.姓名 As personalName,A.性别 As sexCode,to_char(A.出生日期,'yyyymmdd') As birthDate,nvl(B.保险号,A.身份证号) As medicalCardNumber
+                              From 个人信息 A,保险个人档案 B
+                             Where A.Id=B.个人id(+) And B.系统(+)=100
+                               And A.Id='26b38508-be91-4904-be54-116a7c62e77e'
+2024-03-30 11:46:00====>获取就诊信息:Select Decode(B.急诊,1,'2','1') As visitTypeCode,A.ID As visitNo,to_char(A.开始时间,'yyyymmdd') As visitDate,
+                                   C.编码 As deptCode,C.简称 As deptName,'' As wardCode,'' As wardName,'' As bedNo,
+                                   D.编码 As doctorId,D.姓名 As doctorName,D.身份证号 As doctorIdentityNo
+                              From 服务活动记录 A,个人挂号记录 B,部门 C,医护人员 D
+                             Where A.Id=B.记录id And A.科室id=C.资源id And A.服务人id=D.资源id
+                               And A.id='B8078181-DD48-47BA-9A30-8475516730E8'
+                            Union All
+                            Select '3' As visitTypeCode,A.ID As visitNo,to_char(A.开始时间,'yyyymmdd') As visitDate,
+                                   C.编码 As deptCode,C.简称 As deptName,E.编码 As wardCode,E.简称 As wardName,B.床号 As bedNo,
+                                   D.编码 As doctorId,D.姓名 As doctorName,D.身份证号 As doctorIdentityNo
+                              From 服务活动记录 A,个人入院记录 B,部门 C,医护人员 D,部门 E
+                             Where A.Id=B.事件id And A.科室id=C.资源id And A.服务人id=D.资源id And B.病房id=E.资源id(+)
+                               And A.id='B8078181-DD48-47BA-9A30-8475516730E8'
+2024-03-30 11:46:01====>获取诊断信息:Select B.主诉 As chiefCompliant,C.问题名称 As diagName,C.问题编码 As diagCode
+                              From 服务活动记录 A,个人挂号记录 B,个人问题列表 C
+                             Where A.Id=B.记录id And A.Id=C.服务记录id(+)
+                               And A.id='B8078181-DD48-47BA-9A30-8475516730E8'
+                               And Rownum<2
+                            Union All
+                            Select Distinct '' As chiefCompliant,C.问题名称 As diagName,C.问题编码 As diagCode
+                              From 服务活动记录 A,个人入院记录 B,个人问题列表 C
+                             Where A.Id=B.事件id  And A.Id=C.服务记录id(+) And C.记录性质=2 
+                               And A.id='B8078181-DD48-47BA-9A30-8475516730E8'
+                               And Rownum<2
+2024-03-30 11:46:01====>获取检验项目编码:Select D.编码 As labItemCode,D.名称 As labItemName
+                              From 个人医嘱记录 A,诊疗项目目录 D
+                             Where A.诊疗项目id=D.id
+                               And A.事件ID='B8078181-DD48-47BA-9A30-8475516730E8'
+                               And A.机构id='4480c78d-c3dd-4873-a0a8-d936963abf75'
+                               And A.组序号 in (1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19)
+                               And A.诊疗类别='C'
+                               And (D.撤档时间 Is Null Or D.撤档时间>Sysdate)
+2024-03-30 11:46:01====>调用【检验结果互认提醒】接口URL:http://ds-ucc.cq.hc:443/frontapi/api/v3/reportUrl/recogRemind
+2024-03-30 11:46:01====>调用【检验结果互认提醒】入参:{"messages":{"EVN":{"eventTypeCode":"02","eventTypeName":"检验结果互认提醒"},"PID":{"patientId":"26b38508-be91-4904-be54-116a7c62e77e","identityTypeCode":"01","identityNo":"510223194704238134","visitCardTypeCode":"","visitCardNo":"","personalName":"李明贵","birthDate":"19470423","sexCode":"1","medicalCardNumber":"ZG1005851859"},"PV1":{"visitTypeCode":"3","visitNo":"B8078181-DD48-47BA-9A30-8475516730E8","visitDate":"20240330","orgCode":"125002227094723044","orgName":"重庆市綦江区文龙街道社区卫生服务中心","branchCode":"","branchName":"","deptCode":"21030","deptName":"全科医学科","wardCode":"21030","wardName":"全科医学科","bedNo":"01","doctorId":"696","doctorName":"罗玉龙","doctorIdentityNo":"500222199108088613","computerMac":"D4:C9:EF:D9:6B:20","computerIp":"10.61.28.66"},"DG1":{"chiefCompliant":"","diagCode":"J44.900","diagName":"慢性阻塞性肺病"},"OBR":{"lab":[{"labItemCode":"10410000101035477692","labItemName":"血气分析","labRecognCode":"","labRecognName":""},{"labItemCode":"xq201800101035481630","labItemName":"尿液分析","labRecognCode":"","labRecognName":""},{"labItemCode":"xq201800101035481632","labItemName":"尿液分析(同时加做尿微量白蛋白加收)","labRecognCode":"","labRecognName":""},{"labItemCode":"100329","labItemName":"大便隐血试验","labRecognCode":"","labRecognName":""},{"labItemCode":"42201800101035478426","labItemName":"粪便常规","labRecognCode":"","labRecognName":""},{"labItemCode":"100323","labItemName":"（住院）血细胞分析（五分类）","labRecognCode":"","labRecognName":""},{"labItemCode":"422018101035480176","labItemName":"C反应蛋白（CRP）","labRecognCode":"","labRecognName":""},{"labItemCode":"WLNNT01","labItemName":"N-末端脑钠肽前体","labRecognCode":"","labRecognName":""},{"labItemCode":"100304","labItemName":"电解质测定","labRecognCode":"","labRecognName":""},{"labItemCode":"100346","labItemName":"血清肌钙蛋白Ⅰ测定(干免疫法)","labRecognCode":"","labRecognName":""},{"labItemCode":"100316","labItemName":"凝血酶测定","labRecognCode":"","labRecognName":""},{"labItemCode":"100340","labItemName":"血浆D-二聚体(D-Dimer)测定(仪器法)","labRecognCode":"","labRecognName":""},{"labItemCode":"422018101035480174","labItemName":"餐后2H血糖","labRecognCode":"","labRecognName":""},{"labItemCode":"42201800101035479437","labItemName":"肝功1","labRecognCode":"","labRecognName":""},{"labItemCode":"100318","labItemName":"肾功","labRecognCode":"","labRecognName":""},{"labItemCode":"100319","labItemName":"心肌酶谱","labRecognCode":"","labRecognName":""},{"labItemCode":"100335","labItemName":"血脂2号(六项)","labRecognCode":"","labRecognName":""}]}}}
+2024-03-30 11:46:01====>1
+2024-03-30 11:46:01====>2
+2024-03-30 11:46:01====>3
+2024-03-30 11:46:01====>4
+2024-03-30 11:46:01====>5
+2024-03-30 11:46:01====>6
+2024-03-30 11:46:01====>7
+2024-03-30 11:46:01====>8
+2024-03-30 11:46:01====>9
+2024-03-30 11:46:01====>调用【检验结果互认提醒】出参:{"code":"1000","message":"操作失败","data":{"EVN":{"eventTypeCode":"02","eventTypeName":"检验结果互认提醒"},"QAK":{"queryResponseStatus":"0","url":null,"reminder":null,"brief":null}}}
+2024-03-30 12:17:09====>=========================================================================================================
+2024-03-30 12:17:09====>调用Extemenu入参：insureSystem:48;FunctionNo:02;strAdvance:<root><OrgId>4480c78d-c3dd-4873-a0a8-d936963abf75</OrgId><EventId>B8078181-DD48-47BA-9A30-8475516730E8</EventId><Pid>26b38508-be91-4904-be54-116a7c62e77e</Pid><DepId>2045fd3b-45ad-4f77-a1d8-a44f526e7888</DepId><DepName>全科医学科</DepName><OperId>49ff45a7-4212-48f8-ac3c-c0bf8e9805a3</OperId><OperName>罗玉龙</OperName><DoctorId>14D88760-7389-33F5-E064-9CDC71ADEB60</DoctorId><No>2404092</No><DocumentNumber>2403178901</DocumentNumber></root>
+2024-03-30 12:17:09====>获取的token：eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7IlVzZXJJZCI6MTcyOTQwNDM2NzcwODA5ODU2MCwiQXBwS2V5IjoiIiwiQWNjb3VudE5hbWUiOiIiLCJBY2NvdW50UmVhbE5hbWUiOiIiLCJTaWduS2V5IjoiNzE5M2NjNGM4MTNhZGRmNGNhOGNhYzMxYjJmZGMxNjkifSwiaXNzIjoiY2VjIiwiZXhwIjoxNzExODQxNjI4fQ.cJOJpnOFOq010t9ACYdHl4l5V_K2XesuGUmw4Y00rdc
+2024-03-30 12:17:09====>获取病人信息:Select A.Id As Id,A.姓名 As Name,'01' As id_no_type,A.身份证号 As id_no,to_char(A.出生日期,'yyyy-mm-dd') As birthday,nvl(B.号码,A.身份证号) As health_card_no,
+                                       A.性别 As gender,A.本人电话 As phone,A.现地址 As address,' ' As main_key
+                                  From 个人信息 A,个人标识号 B
+                                 Where A.Id=B.个人ID(+) and B.类别(+)=2
+                                   and A.Id='26b38508-be91-4904-be54-116a7c62e77e'
+2024-03-30 12:17:09====>获取医生信息:Select A.资源id As Id,A.姓名 As Name,A.身份证号 As idcard,extractValue(附加信息,'root/执业证代码') As practice_number, 
+                               (Select p.名称 From 人员性质 p Where Instr(',' || A.性质 || ',', ',' || p.编码 || ',') > 0 And Rownum=1) As profession 
+                          From 医护人员 A
+                         Where A.资源id='49ff45a7-4212-48f8-ac3c-c0bf8e9805a3'
+2024-03-30 12:17:09====>获取就诊信息:Select B.编码 As visit_departments,B.简称 As visit_departments_name,'1' As visit_type,A.Id As visit_no,'' As ward_code,'' As ward_name,'' As bed_no,nvl(D.保险号,'-') As medical_insurance_number
+                          From 服务活动记录 A,部门 B,保险个人档案 D
+                         Where A.Id='B8078181-DD48-47BA-9A30-8475516730E8'
+                           And A.科室id=B.资源id And A.个人id=D.个人id(+)
+                           And A.项目id='F4DA8ED2-5033-47EB-A08F-E442A5E65DAB'
+                        Union All
+                        Select B.编码 As visit_departments,B.简称 As visit_departments_name,'3' As visit_type,A.Id As visit_no,E.编码 As ward_code,E.简称 As ward_name,C.床号 As bed_no,nvl(D.保险号,'-') As medical_insurance_number
+                          From 服务活动记录 A,部门 B,保险个人档案 D,个人当前状态 C,部门 E
+                         Where A.Id='B8078181-DD48-47BA-9A30-8475516730E8'
+                           And A.科室id=B.资源id And A.个人id=D.个人id(+) And A.Id=C.就诊id And C.病房id=E.资源id
+                           And A.项目id='EC3E41BF-BACD-46BA-9D3C-E2493D73C1DF'
+2024-03-30 12:17:09====>调用【应用管理系统portal页URL获取接口】入参(未加密)：{"app_key":"1729404945213775872","hospital":{"accredit_id":"125002227094723044","accredit_name":"重庆市綦江区文龙街道社区卫生服务中心","branch_code":"","branch_name":""},"patience":{"id":"26b38508-be91-4904-be54-116a7c62e77e","name":"李明贵","id_no_type":"01","id_no":"510223194704238134","birthday":"1947-04-23","health_card_no":"510223194704238134","gender":"1","phone":"13098784292","address":"重庆市綦江区赶水镇官田村4组","main_key":" ","guardian":null},"doctor":{"id":"49ff45a7-4212-48f8-ac3c-c0bf8e9805a3","name":"罗玉龙","idcard":"500222199108088613","practice_number":"110500222000711","profession":"医生"},"visit_order":{"visit_departments":"21030","visit_departments_name":"全科医学科","visit_type":"3","visit_no":"B8078181-DD48-47BA-9A30-8475516730E8","ward_code":"21030","ward_name":"全科医学科","bed_no":"01","medical_insurance_number":"A50135918","project_list":[]},"extend":{"scene":"1","his_ip":"10.61.28.66","his_mac":"D4:C9:EF:D9:6B:20"}}
+2024-03-30 12:17:09====>调用【应用管理系统portal页URL获取接口】接口URL:http://ds-ucc.cq.hc:443/frontapi/api/v1/mutual/his/geturl
+2024-03-30 12:17:09====>调用【应用管理系统portal页URL获取接口】入参:{"param_encrypt":"dHY5oRYCiJxuVe++soLNbOIVZBBKJVvH6FJXg/MWMpKuhJx0GceTq+qUJy7hWjHS50xZAru2sAjTfiqGG7OybwxkqY+jII6zqOMUJZEQyOiP5t2ZrMVUaNojgOp1MJlPE92Fp3m2DNr7JLzmyV39aHVdHXYsAFovmhRUIY99ocvoMX0M2NRLknqdFNZJMCN5S5o9IQpePIkKRF5HFF7uw9uREmuD4dJOrGwgY/QYoXHy/TFYMthqblHgU957utoZnnUXut/BZfpO2GSze/bgV7iToitCHA3dydsdKVmmShusi3mqsoB7/X+0OwviMnrW3ZbD+nt7tYbC1CrSmDI2PHcGk9OsIqg+B530spctC2f8/sDdz8JASRDoMS9ak+H7M0vvP/n0bWWvQyppBWXjVfkIorIjTWqgAR5ryjwp/+1VEdhLe0IYz32V8VQBS5VgMBJxChWdCeCmIbOWiYD49jaAZdMigFI5RMNc5JZh8KEjFYWISjsqZ63v5oXhWlHi8VJDd9ms/9vdD2nqttg1W3z3/XWDyjZ93oA21j2LW+I/wQyD+MZkqjX7e4stmVvgNVa7czt/H7lJ5FdOLRJvvK6hxm/NBoDdeGKnfOUlQBnTeN9gRrO7ALCrZwFkue8hAWM9fA3tFXb14jtosL1mRwS0GkhSWLu/8YyZD+ceZXSYgOD4loiCV6FcOBiwc/xo8r3jCkD0vQVg702kyIAMmXV3MZ+gGwvLUBr5aCbcSm25M4d3gL1JDdkgOaly5a7md3YVofw715qGbdKeMuQW4CuSnBD0zDZmKQlFhc3avjB20aEeOKtlR/Q9kgtkY07XVVRN1pNe0sr+F2OSrV3NQWaCtyGB2yt7PGabBymOKcLIB2mMxHN/Cdk/Au9QVFCqjRFlkl9cYbtJnHxRa5p0FTwNS4svw2P1K5QBJ+VGUSkvmEWV6nPqVoMC+oxHXTaf9MjxVg/oCB/8NQM8A+Kba8JqJW1hGutZpeoS2zLMlde5gsSdQ9O8IYGrIMhxakSjk9+x/43Q5IAzO3gmDUF0+ztIblRxIeEjuROiUjRrEk5B3d9Q66d1ENVia4CC5zkkENxq/s23Cj5dcUQ5HNuRZJHnoUSDeMo3SefLJ3msgqzKapyfu5SCZDUtHAikinEM0SNh+8Z8dhp7Bsjlphb+YtmCGOaDhoAP0A0QO7QTNhfFdiKQubNYgCS7yvHuc1laH4zN9cMXcT/meZKe4UHjvzdxoqeYz2eMo3+EEYEtEgdoyuqVxkwhZ5MpbYIDXCEW7AtCHkTtXA1DYG/UDHIpZMT4utIwWoph4V5iEZmjYZco/EisPN977B2ItxZ55cPr","encrypt_method":"aes"}
+2024-03-30 12:17:09====>1
+2024-03-30 12:17:09====>2
+2024-03-30 12:17:09====>3
+2024-03-30 12:17:09====>4
+2024-03-30 12:17:09====>5
+2024-03-30 12:17:09====>6
+2024-03-30 12:17:09====>7
+2024-03-30 12:17:09====>8
+2024-03-30 12:17:09====>9
+2024-03-30 12:17:09====>调用【应用管理系统portal页URL获取接口】出参:{"code":200,"message":"成功","data":{"portal_url":"http://10.185.100.89:443/manager-org-view/#/accredit/index?serial_number_his=6d58e97e03539197a9a7959e6d177df7\u0026timestamp=1711772360\u0026sign=03bf52c2c0bad9c8a2ea8bf2dcaaf6a7a1bae8d9d370ace047edb6ea8d207b0b"},"error":{"error_code":0,"error_msg":""},"meta":{"trace":{"trace_id":"f729b4a5-523e-4de1-b1c8-6bb1646a61e8","parent_id":"","span_id":"339faaa6-44a6-40c7-a2d7-dc517a6bd53c","request_id":""}}}
+2024-03-30 12:19:36====>=========================================================================================================
+2024-03-30 12:19:36====>调用Extemenu入参：insureSystem:48;FunctionNo:02;strAdvance:<root><OrgId>4480c78d-c3dd-4873-a0a8-d936963abf75</OrgId><EventId>3D564839-82D2-4121-9B66-B71215BC7380</EventId><Pid>BDA242D8-4B4B-13A2-E054-9CDC71ADEEF6</Pid><DepId>2045fd3b-45ad-4f77-a1d8-a44f526e7888</DepId><DepName>全科医学科</DepName><OperId>49ff45a7-4212-48f8-ac3c-c0bf8e9805a3</OperId><OperName>罗玉龙</OperName><DoctorId>14D88760-7389-33F5-E064-9CDC71ADEB60</DoctorId><No>2404079</No><DocumentNumber>2403178901</DocumentNumber></root>
+2024-03-30 12:19:36====>获取的token：eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7IlVzZXJJZCI6MTcyOTQwNDM2NzcwODA5ODU2MCwiQXBwS2V5IjoiIiwiQWNjb3VudE5hbWUiOiIiLCJBY2NvdW50UmVhbE5hbWUiOiIiLCJTaWduS2V5IjoiNzE5M2NjNGM4MTNhZGRmNGNhOGNhYzMxYjJmZGMxNjkifSwiaXNzIjoiY2VjIiwiZXhwIjoxNzExODQxNjI4fQ.cJOJpnOFOq010t9ACYdHl4l5V_K2XesuGUmw4Y00rdc
+2024-03-30 12:19:36====>获取病人信息:Select A.Id As Id,A.姓名 As Name,'01' As id_no_type,A.身份证号 As id_no,to_char(A.出生日期,'yyyy-mm-dd') As birthday,nvl(B.号码,A.身份证号) As health_card_no,
+                                       A.性别 As gender,A.本人电话 As phone,A.现地址 As address,' ' As main_key
+                                  From 个人信息 A,个人标识号 B
+                                 Where A.Id=B.个人ID(+) and B.类别(+)=2
+                                   and A.Id='BDA242D8-4B4B-13A2-E054-9CDC71ADEEF6'
+2024-03-30 12:19:36====>获取医生信息:Select A.资源id As Id,A.姓名 As Name,A.身份证号 As idcard,extractValue(附加信息,'root/执业证代码') As practice_number, 
+                               (Select p.名称 From 人员性质 p Where Instr(',' || A.性质 || ',', ',' || p.编码 || ',') > 0 And Rownum=1) As profession 
+                          From 医护人员 A
+                         Where A.资源id='49ff45a7-4212-48f8-ac3c-c0bf8e9805a3'
+2024-03-30 12:19:36====>获取就诊信息:Select B.编码 As visit_departments,B.简称 As visit_departments_name,'1' As visit_type,A.Id As visit_no,'' As ward_code,'' As ward_name,'' As bed_no,nvl(D.保险号,'-') As medical_insurance_number
+                          From 服务活动记录 A,部门 B,保险个人档案 D
+                         Where A.Id='3D564839-82D2-4121-9B66-B71215BC7380'
+                           And A.科室id=B.资源id And A.个人id=D.个人id(+)
+                           And A.项目id='F4DA8ED2-5033-47EB-A08F-E442A5E65DAB'
+                        Union All
+                        Select B.编码 As visit_departments,B.简称 As visit_departments_name,'3' As visit_type,A.Id As visit_no,E.编码 As ward_code,E.简称 As ward_name,C.床号 As bed_no,nvl(D.保险号,'-') As medical_insurance_number
+                          From 服务活动记录 A,部门 B,保险个人档案 D,个人当前状态 C,部门 E
+                         Where A.Id='3D564839-82D2-4121-9B66-B71215BC7380'
+                           And A.科室id=B.资源id And A.个人id=D.个人id(+) And A.Id=C.就诊id And C.病房id=E.资源id
+                           And A.项目id='EC3E41BF-BACD-46BA-9D3C-E2493D73C1DF'
+2024-03-30 12:19:36====>调用【应用管理系统portal页URL获取接口】入参(未加密)：{"app_key":"1729404945213775872","hospital":{"accredit_id":"125002227094723044","accredit_name":"重庆市綦江区文龙街道社区卫生服务中心","branch_code":"","branch_name":""},"patience":{"id":"BDA242D8-4B4B-13A2-E054-9CDC71ADEEF6","name":"牟有中","id_no_type":"01","id_no":"510223194903054610","birthday":"1949-03-05","health_card_no":"510223194903054610","gender":"1","phone":"13635433130","address":"重庆市綦江区永新镇永新社区紫荆组122号","main_key":" ","guardian":null},"doctor":{"id":"49ff45a7-4212-48f8-ac3c-c0bf8e9805a3","name":"罗玉龙","idcard":"500222199108088613","practice_number":"110500222000711","profession":"医生"},"visit_order":{"visit_departments":"21030","visit_departments_name":"全科医学科","visit_type":"3","visit_no":"3D564839-82D2-4121-9B66-B71215BC7380","ward_code":"21030","ward_name":"全科医学科","bed_no":"22","medical_insurance_number":"ZG1013544670","project_list":[]},"extend":{"scene":"1","his_ip":"10.61.28.66","his_mac":"D4:C9:EF:D9:6B:20"}}
+2024-03-30 12:19:36====>调用【应用管理系统portal页URL获取接口】接口URL:http://ds-ucc.cq.hc:443/frontapi/api/v1/mutual/his/geturl
+2024-03-30 12:19:36====>调用【应用管理系统portal页URL获取接口】入参:{"param_encrypt":"dHY5oRYCiJxuVe++soLNbOIVZBBKJVvH6FJXg/MWMpKuhJx0GceTq+qUJy7hWjHS50xZAru2sAjTfiqGG7OybwxkqY+jII6zqOMUJZEQyOiP5t2ZrMVUaNojgOp1MJlPE92Fp3m2DNr7JLzmyV39aHVdHXYsAFovmhRUIY99ocvoMX0M2NRLknqdFNZJMCN5S5o9IQpePIkKRF5HFF7uw9uREmuD4dJOrGwgY/QYoXHy/TFYMthqblHgU957utoZKr4PrDV7fn54MRjbv8ZEI/m29xTArFEK027GPgmfJgukgoiyQ0ss+Hd6W8XOZ0MNY9ZFDRNZxKt3EL5QRN6WZZF+b1GbHM+TikYf0gkQ1iSblABv44m76VVjGOJZcWdCqIihPhU9xD5BZyCVV1GUjFFklW0KMBFOJYXpb28pIeScPNEBfx8lA72hT/Bzg7RB1yz5ruPmDXB+EZ5NFNil4RXM04VFkUbEUAb+meUZ7b4L3ladooU8ms1YK+d/OxvRWsUsIfahy0c3cBvaIDH4sH7Zug39m8svfgIXsvVNWk+PeFN1Rsy1i0FQZtFma/z2cqnYbHxZRg7g6grIZgFc7xywBSYtMcrF7A/9/eQpvqkzGjLo8JpPehMFoXA7G/hvJ8onII0J/Lk2NAwq+V1FvzzkKfbokvyMhyB5YMoD2pFHXPZkK/SoJV7YXV6y77Z8JhoSBh0gFa9u0WnYm8qmsjjf8I5Wacr3pkLQhnkq8oo1QTBxt8ZK3KSdwcH5CDqC9fB2Q8z5BVAQbOgP0o/7gv2RXjKcNSmaT6tUcFfo6PlO2w0wPaDaack13WBgP6RPuWOe9yY4uLRwm2t1Xr02T+/fjHWKnKrm9gX+5oua5yr+plVajpMwSgZjB/KHTTTtaFc7GPppReFVVTp+DiPvVmISXh7P1qtBKGmEogF1a99z9fVuEFVu2AxLSMlXbc2WKvbnzSVz1OhvneUM9L3msU5g+iOCuH4nRFLyQPwme8rddnChg/1uD7k+v/JzK8X0bpnynw4pv4gZVmkE0B3xxc5LAQ2OAtyOoQab77COCoX5VrIq24BivlOi+nyio2kCEi+V+Iy+n/aavfxGilB+OAIt7pP2Y+/s30LAogsfaxNSkbQBUbp1kou3dZcapjdJpaZwbtYeuco6LvpLZMTo2s9GLHDj0uL0FAZ/M0VHkYbfhS7Sdln6TpkH5jW4ZroNJq+Qsyys+NTEXi+3uTiB3xC+Qk/AUjMprxflSwTUUIb0FQJC66qCSNK4Qi++lGt0o9l4sx2Q1m3hDoNwCaxcgnCYHVs6FLxhrr6ZZW7etR/MBrqBYn6nuOWEe6islT3AUcLtXV5O2rvJ4eQBlaJlng==","encrypt_method":"aes"}
+2024-03-30 12:19:36====>1
+2024-03-30 12:19:36====>2
+2024-03-30 12:19:36====>3
+2024-03-30 12:19:36====>4
+2024-03-30 12:19:36====>5
+2024-03-30 12:19:36====>6
+2024-03-30 12:19:36====>7
+2024-03-30 12:19:36====>8
+2024-03-30 12:19:36====>9
+2024-03-30 12:19:36====>调用【应用管理系统portal页URL获取接口】出参:{"code":200,"message":"成功","data":{"portal_url":"http://10.185.100.89:443/manager-org-view/#/accredit/index?serial_number_his=d6d9ea1fd20ef60006381d74ff150977\u0026timestamp=1711772507\u0026sign=5e17c0d72a2b140269588fc2cb1efcb61ddc878f788970a57beba0c33e7f048a"},"error":{"error_code":0,"error_msg":""},"meta":{"trace":{"trace_id":"5f9329c8-f6df-4793-9771-d2475b572d67","parent_id":"","span_id":"9504b688-25ad-48bf-8bd9-12c494b4e55e","request_id":""}}}
+2024-03-30 12:26:51====>=========================================================================================================
+2024-03-30 12:26:51====>调用Extemenu入参：insureSystem:48;FunctionNo:02;strAdvance:<root><OrgId>4480c78d-c3dd-4873-a0a8-d936963abf75</OrgId><EventId>CA5096EF-1BCA-4ED0-ADFE-3105CAFA1E90</EventId><Pid>7C3071D6-104B-42CC-91F4-F911066C67D2</Pid><DepId>2045fd3b-45ad-4f77-a1d8-a44f526e7888</DepId><DepName>全科医学科</DepName><OperId>49ff45a7-4212-48f8-ac3c-c0bf8e9805a3</OperId><OperName>罗玉龙</OperName><DoctorId>14D88760-7389-33F5-E064-9CDC71ADEB60</DoctorId><No>2404061</No><DocumentNumber>2403178901</DocumentNumber></root>
+2024-03-30 12:26:51====>获取的token：eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7IlVzZXJJZCI6MTcyOTQwNDM2NzcwODA5ODU2MCwiQXBwS2V5IjoiIiwiQWNjb3VudE5hbWUiOiIiLCJBY2NvdW50UmVhbE5hbWUiOiIiLCJTaWduS2V5IjoiNzE5M2NjNGM4MTNhZGRmNGNhOGNhYzMxYjJmZGMxNjkifSwiaXNzIjoiY2VjIiwiZXhwIjoxNzExODQxNjI4fQ.cJOJpnOFOq010t9ACYdHl4l5V_K2XesuGUmw4Y00rdc
+2024-03-30 12:26:51====>获取病人信息:Select A.Id As Id,A.姓名 As Name,'01' As id_no_type,A.身份证号 As id_no,to_char(A.出生日期,'yyyy-mm-dd') As birthday,nvl(B.号码,A.身份证号) As health_card_no,
+                                       A.性别 As gender,A.本人电话 As phone,A.现地址 As address,' ' As main_key
+                                  From 个人信息 A,个人标识号 B
+                                 Where A.Id=B.个人ID(+) and B.类别(+)=2
+                                   and A.Id='7C3071D6-104B-42CC-91F4-F911066C67D2'
+2024-03-30 12:26:51====>获取医生信息:Select A.资源id As Id,A.姓名 As Name,A.身份证号 As idcard,extractValue(附加信息,'root/执业证代码') As practice_number, 
+                               (Select p.名称 From 人员性质 p Where Instr(',' || A.性质 || ',', ',' || p.编码 || ',') > 0 And Rownum=1) As profession 
+                          From 医护人员 A
+                         Where A.资源id='49ff45a7-4212-48f8-ac3c-c0bf8e9805a3'
+2024-03-30 12:26:51====>获取就诊信息:Select B.编码 As visit_departments,B.简称 As visit_departments_name,'1' As visit_type,A.Id As visit_no,'' As ward_code,'' As ward_name,'' As bed_no,nvl(D.保险号,'-') As medical_insurance_number
+                          From 服务活动记录 A,部门 B,保险个人档案 D
+                         Where A.Id='CA5096EF-1BCA-4ED0-ADFE-3105CAFA1E90'
+                           And A.科室id=B.资源id And A.个人id=D.个人id(+)
+                           And A.项目id='F4DA8ED2-5033-47EB-A08F-E442A5E65DAB'
+                        Union All
+                        Select B.编码 As visit_departments,B.简称 As visit_departments_name,'3' As visit_type,A.Id As visit_no,E.编码 As ward_code,E.简称 As ward_name,C.床号 As bed_no,nvl(D.保险号,'-') As medical_insurance_number
+                          From 服务活动记录 A,部门 B,保险个人档案 D,个人当前状态 C,部门 E
+                         Where A.Id='CA5096EF-1BCA-4ED0-ADFE-3105CAFA1E90'
+                           And A.科室id=B.资源id And A.个人id=D.个人id(+) And A.Id=C.就诊id And C.病房id=E.资源id
+                           And A.项目id='EC3E41BF-BACD-46BA-9D3C-E2493D73C1DF'
+2024-03-30 12:26:51====>调用【应用管理系统portal页URL获取接口】入参(未加密)：{"app_key":"1729404945213775872","hospital":{"accredit_id":"125002227094723044","accredit_name":"重庆市綦江区文龙街道社区卫生服务中心","branch_code":"","branch_name":""},"patience":{"id":"7C3071D6-104B-42CC-91F4-F911066C67D2","name":"张敬礼","id_no_type":"01","id_no":"652327194507053812","birthday":"1945-07-05","health_card_no":"652327194507053812","gender":"1","phone":"15276730369","address":"银海新城","main_key":" ","guardian":null},"doctor":{"id":"49ff45a7-4212-48f8-ac3c-c0bf8e9805a3","name":"罗玉龙","idcard":"500222199108088613","practice_number":"110500222000711","profession":"医生"},"visit_order":{"visit_departments":"21030","visit_departments_name":"全科医学科","visit_type":"3","visit_no":"CA5096EF-1BCA-4ED0-ADFE-3105CAFA1E90","ward_code":"21030","ward_name":"全科医学科","bed_no":"15","medical_insurance_number":"66000000000000002000413930","project_list":[]},"extend":{"scene":"1","his_ip":"10.61.28.66","his_mac":"D4:C9:EF:D9:6B:20"}}
+2024-03-30 12:26:51====>调用【应用管理系统portal页URL获取接口】接口URL:http://ds-ucc.cq.hc:443/frontapi/api/v1/mutual/his/geturl
+2024-03-30 12:26:51====>调用【应用管理系统portal页URL获取接口】入参:{"param_encrypt":"dHY5oRYCiJxuVe++soLNbOIVZBBKJVvH6FJXg/MWMpKuhJx0GceTq+qUJy7hWjHS50xZAru2sAjTfiqGG7OybwxkqY+jII6zqOMUJZEQyOiP5t2ZrMVUaNojgOp1MJlPE92Fp3m2DNr7JLzmyV39aHVdHXYsAFovmhRUIY99ocvoMX0M2NRLknqdFNZJMCN5S5o9IQpePIkKRF5HFF7uw9uREmuD4dJOrGwgY/QYoXHy/TFYMthqblHgU957utoZvm7m8D4c1mJpRtI+SbJn2WU/VaE4jqWhJUKVtK0YkqPEP3NEXQaDV+cqSXq/jNCnqenxUrTIraV8KKhRLQkIiFHy2CEDbA1fH+ln72Q5WTLNLLbcnH4Ht4nhn7opNDYmJpmnaTauIQxOi6nW1hiR0Wry60qwgB87xl3K41XDUgIVif+s2AWYGOF0znWZnrva37jO3CS09jFSU83S1TLBP2cUIfcf4jgNn6k5Gy3udjfg8b00GbzOWozjaGJ0luD8R7Mw4MuhlYcluhICyNDPsRpsER+x8ZLBwbzSyvBqzkj0AmDB0726FGUjE9tWSUEk/QaLOdCojN2UolZ5bPn95ErWrC8TVt6R+x4YVN1FwOxdot5cAQeCsLrbRzIObjFP0u8nvBLg254ReLpvLHNp04mjNQvQcyVUFAVhx01ewuvN3gOVoPz1wOzD949MONiLJeM0316TQZLUka2eiEEEODqCCXNW17gcUFp1zIC7djuhCKATYwzyBNiH6qVcHay9Pkk0QXR2g29za37S8+j6Jsd3APg61mhad5kpWLfFnCMDjq6tLhvtH4oP29tBj+Gas/gP42a4V5FDiyLQcK4pY7EyHMHCATWqqdjEiLclNluRycR6mzrOKGFL3iHaf4f5JpIkYaa5caexTUfZ/ucWfyQZ2B6evfcQu9sMz/4ntBJKjSG2tYLrGnQFzQBoxrDTXPPY2e8ldB6IZEADeKAdeFnTQ+fDhsKlV+rdKiV+Hk4GQlJkCsIc5U8Y0BjjrGvQMYydEIn1RwfGl6gBr7InguJ+a7kEIJvLAT2eaovsh6m/LBqbgUIbvwkrg1ReBJmlR4TP2jgvL9MYY8XHHBTJLPUSITYzKFZ8n4wp+Q26Pe+aD1ewUqksRGFs8q91ASpr0Iq34/K7BNQzwFosdhQxvS2Sono7C1MXaD9ZyU8xNgSEKjBykX799FyHlBBIqoDvY7muMo100cArCWG/GwHvZeL9iyGLj8FSCs3rfjFXH0KebxVNiAns5mQKUphGJ86wvs7IByXDLRLKkmq3CBgCVgzRKDfxl/bezuaRpggLuQxSoZSnaRIxNyd6IwCbk0SP","encrypt_method":"aes"}
+2024-03-30 12:26:51====>1
+2024-03-30 12:26:51====>2
+2024-03-30 12:26:51====>3
+2024-03-30 12:26:51====>4
+2024-03-30 12:26:51====>5
+2024-03-30 12:26:51====>6
+2024-03-30 12:26:51====>7
+2024-03-30 12:26:51====>8
+2024-03-30 12:26:51====>9
+2024-03-30 12:26:51====>调用【应用管理系统portal页URL获取接口】出参:{"code":200,"message":"成功","data":{"portal_url":"http://10.185.100.89:443/manager-org-view/#/accredit/index?serial_number_his=54a6c644a6533c9a216854d2a98e1eb9\u0026timestamp=1711772942\u0026sign=bcc4861f345ce70f62c3de68544a0bf54ead91949c23952e37439f026b8c6c82"},"error":{"error_code":0,"error_msg":""},"meta":{"trace":{"trace_id":"3e6e6f55-bee0-429d-9fb8-60bad5ff3306","parent_id":"","span_id":"fb8dc835-5aee-4958-942b-89e91ac67c10","request_id":""}}}
+2024-03-30 12:29:11====>=========================================================================================================
+2024-03-30 12:29:11====>调用Extemenu入参：insureSystem:48;FunctionNo:02;strAdvance:<root><OrgId>4480c78d-c3dd-4873-a0a8-d936963abf75</OrgId><EventId>14C1E6A3-C817-2B62-E064-9CDC71ADEB60</EventId><Pid>13933873-328b-4579-8a76-a73c6791b5be</Pid><DepId>2045fd3b-45ad-4f77-a1d8-a44f526e7888</DepId><DepName>全科医学科</DepName><OperId>49ff45a7-4212-48f8-ac3c-c0bf8e9805a3</OperId><OperName>罗玉龙</OperName><DoctorId>14D88760-7389-33F5-E064-9CDC71ADEB60</DoctorId><No>2404043</No><DocumentNumber>2403178901</DocumentNumber></root>
+2024-03-30 12:29:11====>获取的token：eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7IlVzZXJJZCI6MTcyOTQwNDM2NzcwODA5ODU2MCwiQXBwS2V5IjoiIiwiQWNjb3VudE5hbWUiOiIiLCJBY2NvdW50UmVhbE5hbWUiOiIiLCJTaWduS2V5IjoiNzE5M2NjNGM4MTNhZGRmNGNhOGNhYzMxYjJmZGMxNjkifSwiaXNzIjoiY2VjIiwiZXhwIjoxNzExODQxNjI4fQ.cJOJpnOFOq010t9ACYdHl4l5V_K2XesuGUmw4Y00rdc
+2024-03-30 12:29:11====>获取病人信息:Select A.Id As Id,A.姓名 As Name,'01' As id_no_type,A.身份证号 As id_no,to_char(A.出生日期,'yyyy-mm-dd') As birthday,nvl(B.号码,A.身份证号) As health_card_no,
+                                       A.性别 As gender,A.本人电话 As phone,A.现地址 As address,' ' As main_key
+                                  From 个人信息 A,个人标识号 B
+                                 Where A.Id=B.个人ID(+) and B.类别(+)=2
+                                   and A.Id='13933873-328b-4579-8a76-a73c6791b5be'
+2024-03-30 12:29:11====>获取医生信息:Select A.资源id As Id,A.姓名 As Name,A.身份证号 As idcard,extractValue(附加信息,'root/执业证代码') As practice_number, 
+                               (Select p.名称 From 人员性质 p Where Instr(',' || A.性质 || ',', ',' || p.编码 || ',') > 0 And Rownum=1) As profession 
+                          From 医护人员 A
+                         Where A.资源id='49ff45a7-4212-48f8-ac3c-c0bf8e9805a3'
+2024-03-30 12:29:11====>获取就诊信息:Select B.编码 As visit_departments,B.简称 As visit_departments_name,'1' As visit_type,A.Id As visit_no,'' As ward_code,'' As ward_name,'' As bed_no,nvl(D.保险号,'-') As medical_insurance_number
+                          From 服务活动记录 A,部门 B,保险个人档案 D
+                         Where A.Id='14C1E6A3-C817-2B62-E064-9CDC71ADEB60'
+                           And A.科室id=B.资源id And A.个人id=D.个人id(+)
+                           And A.项目id='F4DA8ED2-5033-47EB-A08F-E442A5E65DAB'
+                        Union All
+                        Select B.编码 As visit_departments,B.简称 As visit_departments_name,'3' As visit_type,A.Id As visit_no,E.编码 As ward_code,E.简称 As ward_name,C.床号 As bed_no,nvl(D.保险号,'-') As medical_insurance_number
+                          From 服务活动记录 A,部门 B,保险个人档案 D,个人当前状态 C,部门 E
+                         Where A.Id='14C1E6A3-C817-2B62-E064-9CDC71ADEB60'
+                           And A.科室id=B.资源id And A.个人id=D.个人id(+) And A.Id=C.就诊id And C.病房id=E.资源id
+                           And A.项目id='EC3E41BF-BACD-46BA-9D3C-E2493D73C1DF'
+2024-03-30 12:29:11====>调用【应用管理系统portal页URL获取接口】入参(未加密)：{"app_key":"1729404945213775872","hospital":{"accredit_id":"125002227094723044","accredit_name":"重庆市綦江区文龙街道社区卫生服务中心","branch_code":"","branch_name":""},"patience":{"id":"13933873-328b-4579-8a76-a73c6791b5be","name":"梅中碧","id_no_type":"01","id_no":"510223194411260741","birthday":"1944-11-26","health_card_no":"510223194411260741","gender":"2","phone":"13368212277","address":"重庆市綦江区通惠街道亭和村5组","main_key":" ","guardian":null},"doctor":{"id":"49ff45a7-4212-48f8-ac3c-c0bf8e9805a3","name":"罗玉龙","idcard":"500222199108088613","practice_number":"110500222000711","profession":"医生"},"visit_order":{"visit_departments":"21030","visit_departments_name":"全科医学科","visit_type":"3","visit_no":"14C1E6A3-C817-2B62-E064-9CDC71ADEB60","ward_code":"21030","ward_name":"全科医学科","bed_no":"41","medical_insurance_number":"B46422639","project_list":[]},"extend":{"scene":"1","his_ip":"10.61.28.66","his_mac":"D4:C9:EF:D9:6B:20"}}
+2024-03-30 12:29:11====>调用【应用管理系统portal页URL获取接口】接口URL:http://ds-ucc.cq.hc:443/frontapi/api/v1/mutual/his/geturl
+2024-03-30 12:29:11====>调用【应用管理系统portal页URL获取接口】入参:{"param_encrypt":"dHY5oRYCiJxuVe++soLNbOIVZBBKJVvH6FJXg/MWMpKuhJx0GceTq+qUJy7hWjHS50xZAru2sAjTfiqGG7OybwxkqY+jII6zqOMUJZEQyOiP5t2ZrMVUaNojgOp1MJlPE92Fp3m2DNr7JLzmyV39aHVdHXYsAFovmhRUIY99ocvoMX0M2NRLknqdFNZJMCN5S5o9IQpePIkKRF5HFF7uw9uREmuD4dJOrGwgY/QYoXHy/TFYMthqblHgU957utoZixy2YgzSXrt8bzViPg84v/bFpoQXuGbKscPlJuIXAmL6NlEB9l2wTI5zfEME0YyTdFxcrY8Ruevo88O1wpmOf3q4BHJpiXPuM3k5ZsUW6r9WxwqSj2+s9pGvvH43S9L/1m8/tmkKruU1zItvLl90zchV3W/XjPripWAfCxuN9JHe0s1qGbLfT9bunS4O92Ty20Tgg5WguFASj6Ihp31MhbeKSm3yGE0LFU9+v6ufcEuM9LURAcEP9KUQ6YXZeBjGM5VHf6YPmC+5tcUegG+4/edzVyicVcVIGyHp8P+Mm+sWWLaryM0EBs6ZVJEiHz1Zyj5dVOF7gPQKeCVzijANomWYbur+kUqMFq4IGAs59g37gvFy2+6h7qx3kU2hMVv0g0AT+Ujb/s71BBXQZaiRoL3eIeKYRKVTeTNO/zkOYu/mnvlc277BlbnSiEymXnLVd0+StouVeQXaocUl1ojikT0pYV38/Ym9PLOGx9laCN54iu1kBml3ftiSpH726P8qdDs7Hso5u1DZsUcXnVWE1ksxmesbKknenoMGppezyO0K9LP183osBxfo276NFaa+th8g0B3tSiqB3gvG6o+45A/YR88ebNW5aYxsTlLEwhmrLM8JCzhLVOYGJ3ICsd4TUgpmNANWeJKyP7Yeoa4yzWUwuVNYpmCYvrqMfztVek8Tr4JwD62id5M4KVyGXDANouC278fCxpNgX0NpoFMdYfQwKsb7Aa+JwtKSqT7YW7nI+hMVOIDMDa71WJEzlj4VJyV1YkcCePxJ7ibXJIEhf9ZJNlfBY8cD8ZPlpfQpCg3oAKg0crJGQMIdiwZD4KWD+sedX+n0MmGNC8HaWyo4eILuyuq0ptaXfTWDNedU583WRdk19pf6t9sXx6NJ3R1th+S+tdhtnvT2fkAAZyRY1unG3ow9oC1D0RQJZnWVuv4dvKTxSrlu12F3yMBc9hgyAgxsRxc+PdGcrfj0QOWm4zOzLzRfWsOFsD+Y0RTZierXRtvuosnxkunKwLRzPnayh/laHMeBBCRAQ86+PUsgcRj+q+Yg2DCf7eksZgl6Nt5fzDxopG2f88ltgNjEQBnsssHaO87rnu3Q3QgWeg4ykQ==","encrypt_method":"aes"}
+2024-03-30 12:29:11====>1
+2024-03-30 12:29:11====>2
+2024-03-30 12:29:11====>3
+2024-03-30 12:29:11====>4
+2024-03-30 12:29:11====>5
+2024-03-30 12:29:11====>6
+2024-03-30 12:29:11====>7
+2024-03-30 12:29:11====>8
+2024-03-30 12:29:11====>9
+2024-03-30 12:29:11====>调用【应用管理系统portal页URL获取接口】出参:{"code":200,"message":"成功","data":{"portal_url":"http://10.185.100.89:443/manager-org-view/#/accredit/index?serial_number_his=406d1534d77e725eaff27d2e89820a82\u0026timestamp=1711773082\u0026sign=74c756e865319980fa42e99d7ec2fc048b7e771ad129b533e4dda55672fdbd6c"},"error":{"error_code":0,"error_msg":""},"meta":{"trace":{"trace_id":"802eb93b-b7bf-4bf0-bf06-cbfb5dcdb8f3","parent_id":"","span_id":"f1b55474-9546-40a5-a9b1-9864c1d82ea3","request_id":""}}}
+2024-03-30 12:29:20====>=========================================================================================================
+2024-03-30 12:29:20====>调用Extemenu入参：insureSystem:48;FunctionNo:02;strAdvance:<root><OrgId>4480c78d-c3dd-4873-a0a8-d936963abf75</OrgId><EventId>B8078181-DD48-47BA-9A30-8475516730E8</EventId><Pid>26b38508-be91-4904-be54-116a7c62e77e</Pid><DepId>2045fd3b-45ad-4f77-a1d8-a44f526e7888</DepId><DepName>全科医学科</DepName><OperId>49ff45a7-4212-48f8-ac3c-c0bf8e9805a3</OperId><OperName>罗玉龙</OperName><DoctorId>14D88760-7389-33F5-E064-9CDC71ADEB60</DoctorId><No>2404092</No><DocumentNumber>2403178901</DocumentNumber></root>
+2024-03-30 12:29:20====>获取的token：eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7IlVzZXJJZCI6MTcyOTQwNDM2NzcwODA5ODU2MCwiQXBwS2V5IjoiIiwiQWNjb3VudE5hbWUiOiIiLCJBY2NvdW50UmVhbE5hbWUiOiIiLCJTaWduS2V5IjoiNzE5M2NjNGM4MTNhZGRmNGNhOGNhYzMxYjJmZGMxNjkifSwiaXNzIjoiY2VjIiwiZXhwIjoxNzExODQxNjI4fQ.cJOJpnOFOq010t9ACYdHl4l5V_K2XesuGUmw4Y00rdc
+2024-03-30 12:29:20====>获取病人信息:Select A.Id As Id,A.姓名 As Name,'01' As id_no_type,A.身份证号 As id_no,to_char(A.出生日期,'yyyy-mm-dd') As birthday,nvl(B.号码,A.身份证号) As health_card_no,
+                                       A.性别 As gender,A.本人电话 As phone,A.现地址 As address,' ' As main_key
+                                  From 个人信息 A,个人标识号 B
+                                 Where A.Id=B.个人ID(+) and B.类别(+)=2
+                                   and A.Id='26b38508-be91-4904-be54-116a7c62e77e'
+2024-03-30 12:29:20====>获取医生信息:Select A.资源id As Id,A.姓名 As Name,A.身份证号 As idcard,extractValue(附加信息,'root/执业证代码') As practice_number, 
+                               (Select p.名称 From 人员性质 p Where Instr(',' || A.性质 || ',', ',' || p.编码 || ',') > 0 And Rownum=1) As profession 
+                          From 医护人员 A
+                         Where A.资源id='49ff45a7-4212-48f8-ac3c-c0bf8e9805a3'
+2024-03-30 12:29:20====>获取就诊信息:Select B.编码 As visit_departments,B.简称 As visit_departments_name,'1' As visit_type,A.Id As visit_no,'' As ward_code,'' As ward_name,'' As bed_no,nvl(D.保险号,'-') As medical_insurance_number
+                          From 服务活动记录 A,部门 B,保险个人档案 D
+                         Where A.Id='B8078181-DD48-47BA-9A30-8475516730E8'
+                           And A.科室id=B.资源id And A.个人id=D.个人id(+)
+                           And A.项目id='F4DA8ED2-5033-47EB-A08F-E442A5E65DAB'
+                        Union All
+                        Select B.编码 As visit_departments,B.简称 As visit_departments_name,'3' As visit_type,A.Id As visit_no,E.编码 As ward_code,E.简称 As ward_name,C.床号 As bed_no,nvl(D.保险号,'-') As medical_insurance_number
+                          From 服务活动记录 A,部门 B,保险个人档案 D,个人当前状态 C,部门 E
+                         Where A.Id='B8078181-DD48-47BA-9A30-8475516730E8'
+                           And A.科室id=B.资源id And A.个人id=D.个人id(+) And A.Id=C.就诊id And C.病房id=E.资源id
+                           And A.项目id='EC3E41BF-BACD-46BA-9D3C-E2493D73C1DF'
+2024-03-30 12:29:20====>调用【应用管理系统portal页URL获取接口】入参(未加密)：{"app_key":"1729404945213775872","hospital":{"accredit_id":"125002227094723044","accredit_name":"重庆市綦江区文龙街道社区卫生服务中心","branch_code":"","branch_name":""},"patience":{"id":"26b38508-be91-4904-be54-116a7c62e77e","name":"李明贵","id_no_type":"01","id_no":"510223194704238134","birthday":"1947-04-23","health_card_no":"510223194704238134","gender":"1","phone":"13098784292","address":"重庆市綦江区赶水镇官田村4组","main_key":" ","guardian":null},"doctor":{"id":"49ff45a7-4212-48f8-ac3c-c0bf8e9805a3","name":"罗玉龙","idcard":"500222199108088613","practice_number":"110500222000711","profession":"医生"},"visit_order":{"visit_departments":"21030","visit_departments_name":"全科医学科","visit_type":"3","visit_no":"B8078181-DD48-47BA-9A30-8475516730E8","ward_code":"21030","ward_name":"全科医学科","bed_no":"01","medical_insurance_number":"A50135918","project_list":[]},"extend":{"scene":"1","his_ip":"10.61.28.66","his_mac":"D4:C9:EF:D9:6B:20"}}
+2024-03-30 12:29:20====>调用【应用管理系统portal页URL获取接口】接口URL:http://ds-ucc.cq.hc:443/frontapi/api/v1/mutual/his/geturl
+2024-03-30 12:29:20====>调用【应用管理系统portal页URL获取接口】入参:{"param_encrypt":"dHY5oRYCiJxuVe++soLNbOIVZBBKJVvH6FJXg/MWMpKuhJx0GceTq+qUJy7hWjHS50xZAru2sAjTfiqGG7OybwxkqY+jII6zqOMUJZEQyOiP5t2ZrMVUaNojgOp1MJlPE92Fp3m2DNr7JLzmyV39aHVdHXYsAFovmhRUIY99ocvoMX0M2NRLknqdFNZJMCN5S5o9IQpePIkKRF5HFF7uw9uREmuD4dJOrGwgY/QYoXHy/TFYMthqblHgU957utoZnnUXut/BZfpO2GSze/bgV7iToitCHA3dydsdKVmmShusi3mqsoB7/X+0OwviMnrW3ZbD+nt7tYbC1CrSmDI2PHcGk9OsIqg+B530spctC2f8/sDdz8JASRDoMS9ak+H7M0vvP/n0bWWvQyppBWXjVfkIorIjTWqgAR5ryjwp/+1VEdhLe0IYz32V8VQBS5VgMBJxChWdCeCmIbOWiYD49jaAZdMigFI5RMNc5JZh8KEjFYWISjsqZ63v5oXhWlHi8VJDd9ms/9vdD2nqttg1W3z3/XWDyjZ93oA21j2LW+I/wQyD+MZkqjX7e4stmVvgNVa7czt/H7lJ5FdOLRJvvK6hxm/NBoDdeGKnfOUlQBnTeN9gRrO7ALCrZwFkue8hAWM9fA3tFXb14jtosL1mRwS0GkhSWLu/8YyZD+ceZXSYgOD4loiCV6FcOBiwc/xo8r3jCkD0vQVg702kyIAMmXV3MZ+gGwvLUBr5aCbcSm25M4d3gL1JDdkgOaly5a7md3YVofw715qGbdKeMuQW4CuSnBD0zDZmKQlFhc3avjB20aEeOKtlR/Q9kgtkY07XVVRN1pNe0sr+F2OSrV3NQWaCtyGB2yt7PGabBymOKcLIB2mMxHN/Cdk/Au9QVFCqjRFlkl9cYbtJnHxRa5p0FTwNS4svw2P1K5QBJ+VGUSkvmEWV6nPqVoMC+oxHXTaf9MjxVg/oCB/8NQM8A+Kba8JqJW1hGutZpeoS2zLMlde5gsSdQ9O8IYGrIMhxakSjk9+x/43Q5IAzO3gmDUF0+ztIblRxIeEjuROiUjRrEk5B3d9Q66d1ENVia4CC5zkkENxq/s23Cj5dcUQ5HNuRZJHnoUSDeMo3SefLJ3msgqzKapyfu5SCZDUtHAikinEM0SNh+8Z8dhp7Bsjlphb+YtmCGOaDhoAP0A0QO7QTNhfFdiKQubNYgCS7yvHuc1laH4zN9cMXcT/meZKe4UHjvzdxoqeYz2eMo3+EEYEtEgdoyuqVxkwhZ5MpbYIDXCEW7AtCHkTtXA1DYG/UDHIpZMT4utIwWoph4V5iEZmjYZco/EisPN977B2ItxZ55cPr","encrypt_method":"aes"}
+2024-03-30 12:29:20====>1
+2024-03-30 12:29:20====>2
+2024-03-30 12:29:20====>3
+2024-03-30 12:29:20====>4
+2024-03-30 12:29:20====>5
+2024-03-30 12:29:20====>6
+2024-03-30 12:29:20====>7
+2024-03-30 12:29:20====>8
+2024-03-30 12:29:20====>9
+2024-03-30 12:29:20====>调用【应用管理系统portal页URL获取接口】出参:{"code":200,"message":"成功","data":{"portal_url":"http://10.185.100.89:443/manager-org-view/#/accredit/result?serial_number_his=6d58e97e03539197a9a7959e6d177df7\u0026timestamp=1711773091\u0026sign=0a285b93e2b22ee8a034846782b7999f18a06c9abb36667f4555c1a210b5207b"},"error":{"error_code":0,"error_msg":""},"meta":{"trace":{"trace_id":"71a79eb3-fce2-424f-b370-3f0d0ea1a6ae","parent_id":"","span_id":"f62f2f7d-da27-4681-9432-0b6b1bd03d01","request_id":""}}}
+2024-03-30 12:29:27====>=========================================================================================================
+2024-03-30 12:29:27====>调用Extemenu入参：insureSystem:48;FunctionNo:02;strAdvance:<root><OrgId>4480c78d-c3dd-4873-a0a8-d936963abf75</OrgId><EventId>63A37794-FF58-4802-AEC3-766C88EF0288</EventId><Pid>7241e07e-f6d6-48c9-981e-7f1fbe14bd15</Pid><DepId>2045fd3b-45ad-4f77-a1d8-a44f526e7888</DepId><DepName>全科医学科</DepName><OperId>49ff45a7-4212-48f8-ac3c-c0bf8e9805a3</OperId><OperName>罗玉龙</OperName><DoctorId>14D88760-7389-33F5-E064-9CDC71ADEB60</DoctorId><No>2404077</No><DocumentNumber>2403178901</DocumentNumber></root>
+2024-03-30 12:29:27====>获取的token：eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7IlVzZXJJZCI6MTcyOTQwNDM2NzcwODA5ODU2MCwiQXBwS2V5IjoiIiwiQWNjb3VudE5hbWUiOiIiLCJBY2NvdW50UmVhbE5hbWUiOiIiLCJTaWduS2V5IjoiNzE5M2NjNGM4MTNhZGRmNGNhOGNhYzMxYjJmZGMxNjkifSwiaXNzIjoiY2VjIiwiZXhwIjoxNzExODQxNjI4fQ.cJOJpnOFOq010t9ACYdHl4l5V_K2XesuGUmw4Y00rdc
+2024-03-30 12:29:27====>获取病人信息:Select A.Id As Id,A.姓名 As Name,'01' As id_no_type,A.身份证号 As id_no,to_char(A.出生日期,'yyyy-mm-dd') As birthday,nvl(B.号码,A.身份证号) As health_card_no,
+                                       A.性别 As gender,A.本人电话 As phone,A.现地址 As address,' ' As main_key
+                                  From 个人信息 A,个人标识号 B
+                                 Where A.Id=B.个人ID(+) and B.类别(+)=2
+                                   and A.Id='7241e07e-f6d6-48c9-981e-7f1fbe14bd15'
+2024-03-30 12:29:27====>获取医生信息:Select A.资源id As Id,A.姓名 As Name,A.身份证号 As idcard,extractValue(附加信息,'root/执业证代码') As practice_number, 
+                               (Select p.名称 From 人员性质 p Where Instr(',' || A.性质 || ',', ',' || p.编码 || ',') > 0 And Rownum=1) As profession 
+                          From 医护人员 A
+                         Where A.资源id='49ff45a7-4212-48f8-ac3c-c0bf8e9805a3'
+2024-03-30 12:29:27====>获取就诊信息:Select B.编码 As visit_departments,B.简称 As visit_departments_name,'1' As visit_type,A.Id As visit_no,'' As ward_code,'' As ward_name,'' As bed_no,nvl(D.保险号,'-') As medical_insurance_number
+                          From 服务活动记录 A,部门 B,保险个人档案 D
+                         Where A.Id='63A37794-FF58-4802-AEC3-766C88EF0288'
+                           And A.科室id=B.资源id And A.个人id=D.个人id(+)
+                           And A.项目id='F4DA8ED2-5033-47EB-A08F-E442A5E65DAB'
+                        Union All
+                        Select B.编码 As visit_departments,B.简称 As visit_departments_name,'3' As visit_type,A.Id As visit_no,E.编码 As ward_code,E.简称 As ward_name,C.床号 As bed_no,nvl(D.保险号,'-') As medical_insurance_number
+                          From 服务活动记录 A,部门 B,保险个人档案 D,个人当前状态 C,部门 E
+                         Where A.Id='63A37794-FF58-4802-AEC3-766C88EF0288'
+                           And A.科室id=B.资源id And A.个人id=D.个人id(+) And A.Id=C.就诊id And C.病房id=E.资源id
+                           And A.项目id='EC3E41BF-BACD-46BA-9D3C-E2493D73C1DF'
+2024-03-30 12:29:27====>调用【应用管理系统portal页URL获取接口】入参(未加密)：{"app_key":"1729404945213775872","hospital":{"accredit_id":"125002227094723044","accredit_name":"重庆市綦江区文龙街道社区卫生服务中心","branch_code":"","branch_name":""},"patience":{"id":"7241e07e-f6d6-48c9-981e-7f1fbe14bd15","name":"刘兴伍","id_no_type":"01","id_no":"510223195902130735","birthday":"1959-02-13","health_card_no":"510223195902130735","gender":"1","phone":"15923220948","address":"重庆市綦江区文龙街道山予城1-14-3","main_key":" ","guardian":null},"doctor":{"id":"49ff45a7-4212-48f8-ac3c-c0bf8e9805a3","name":"罗玉龙","idcard":"500222199108088613","practice_number":"110500222000711","profession":"医生"},"visit_order":{"visit_departments":"21030","visit_departments_name":"全科医学科","visit_type":"3","visit_no":"63A37794-FF58-4802-AEC3-766C88EF0288","ward_code":"21030","ward_name":"全科医学科","bed_no":"19","medical_insurance_number":"B45657364","project_list":[]},"extend":{"scene":"1","his_ip":"10.61.28.66","his_mac":"D4:C9:EF:D9:6B:20"}}
+2024-03-30 12:29:27====>调用【应用管理系统portal页URL获取接口】接口URL:http://ds-ucc.cq.hc:443/frontapi/api/v1/mutual/his/geturl
+2024-03-30 12:29:27====>调用【应用管理系统portal页URL获取接口】入参:{"param_encrypt":"dHY5oRYCiJxuVe++soLNbOIVZBBKJVvH6FJXg/MWMpKuhJx0GceTq+qUJy7hWjHS50xZAru2sAjTfiqGG7OybwxkqY+jII6zqOMUJZEQyOiP5t2ZrMVUaNojgOp1MJlPE92Fp3m2DNr7JLzmyV39aHVdHXYsAFovmhRUIY99ocvoMX0M2NRLknqdFNZJMCN5S5o9IQpePIkKRF5HFF7uw9uREmuD4dJOrGwgY/QYoXHy/TFYMthqblHgU957utoZneJajqYZtFxad2W45DCdm5CTJxnMyCbaUCQNlpB5hYvrjWFOGBBh8+7zlTZcjzRRwcqlHam3jtHVSWdolBtFLZ6KlCFFn7VgHjV//FGPJSuJxBoBkcI1pHSDrzQFaAW7ZcraA3lS2+8LgdBdulMhozZ80QgMQpw/7bU8TQpuBPuGAwo4hhy2Kfjl0B2QfvWMhBEddS+sbWpxopG+Ui/4nrbctp1V5m/21oJ7eZ1OS6MZ68E2abt3AJk1qVirplwocJTwZEWiyfxgzZ7amgDYAL9uAp/fIOLouUtM4ZKkokspTPdEHjU5D3My8aTCqs1NF5hPctgMnDw8nWZDx9TKA5k6AGOIOYngsR0DBAscukaxkeLG+Fxf6PblpKh0/E/I+ZGz1UBxBFTCmXJ1oYA+fxIxwP9pogjBfS4hsV5mBsIUv2JDBkUEJdD9md6la30DIReIE5ZSA/qBs1lqBEsBxrcTEYhYWnx07GHM3+kWYwk472Oq9gDAl+qXCCb8lBt+3kyD624Q998CjR9dsCaHvhU3aZBtFLliU1hFA6DLP0fvBrMOL98U1EEFEVKG2hazaRDOmB2ZPw2aJPYA2xx6nRxkuTbKrPjrSefP1kEdfr7HyNg8HwEcSaRfrimuTETRD+M7kNKiPhUxyVGQJjyad7TWWbatSCtpH4/kKdw3AVTAXDe+9afrWBGdqp+cBg16wr/TOIr7Ugaw3X/LsaU8UPVFA0tcrksSnPLrq2lbRJsWMRIyNTkW8dmDT2vOPLLhOuYfJ9mZyjZ8A2VWtdcalFX4aFN/+k7iEyXYD9vP5A/mXTW1XN7pYXGwKSkUa7JG1aFxGZyhADRKj/tyCdE38g6fj/lftM9SGfvSTaCvI8KLRfujRahVJX6Mh5VDi2el21fZu+iYFpXZrlPS8B2jO0rfp7Jt8EFPQLE/nQlSBcywNk56n3MsuD8NyWSgeiS1Tl9e/lCcWGebec3OQbBOtd4uVs3cnR/PFYPLxANQ+9OcmWEDVd9NXmFQmWucRgSN4d1QK6Jg9ZSMWkXqZTO4KSYHaCygJtmg7AYO4IEP9itStUa4O68+CJNoIHQB9L+BqrdPC1KYbh0P81N9oZpgzQ==","encrypt_method":"aes"}
+2024-03-30 12:29:27====>1
+2024-03-30 12:29:27====>2
+2024-03-30 12:29:27====>3
+2024-03-30 12:29:27====>4
+2024-03-30 12:29:27====>5
+2024-03-30 12:29:27====>6
+2024-03-30 12:29:27====>7
+2024-03-30 12:29:27====>8
+2024-03-30 12:29:27====>9
+2024-03-30 12:29:27====>调用【应用管理系统portal页URL获取接口】出参:{"code":200,"message":"成功","data":{"portal_url":"http://10.185.100.89:443/manager-org-view/#/accredit/result?serial_number_his=c29b5968dc703b291f6cd75c012b1fd8\u0026timestamp=1711773098\u0026sign=47a57757840c26c8f285cf4ffaeaf1fa2a6e98f6d17ec907f7b8e55d62728fca"},"error":{"error_code":0,"error_msg":""},"meta":{"trace":{"trace_id":"8caf216b-561d-4d86-ad6b-12f95c8d22ca","parent_id":"","span_id":"26fee430-3159-40a0-b217-d7421282b8c3","request_id":""}}}
+2024-03-30 12:29:38====>=========================================================================================================
+2024-03-30 12:29:38====>调用Extemenu入参：insureSystem:48;FunctionNo:02;strAdvance:<root><OrgId>4480c78d-c3dd-4873-a0a8-d936963abf75</OrgId><EventId>63A37794-FF58-4802-AEC3-766C88EF0288</EventId><Pid>7241e07e-f6d6-48c9-981e-7f1fbe14bd15</Pid><DepId>2045fd3b-45ad-4f77-a1d8-a44f526e7888</DepId><DepName>全科医学科</DepName><OperId>49ff45a7-4212-48f8-ac3c-c0bf8e9805a3</OperId><OperName>罗玉龙</OperName><DoctorId>14D88760-7389-33F5-E064-9CDC71ADEB60</DoctorId><No>2404077</No><DocumentNumber>2403178901</DocumentNumber></root>
+2024-03-30 12:29:38====>获取的token：eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7IlVzZXJJZCI6MTcyOTQwNDM2NzcwODA5ODU2MCwiQXBwS2V5IjoiIiwiQWNjb3VudE5hbWUiOiIiLCJBY2NvdW50UmVhbE5hbWUiOiIiLCJTaWduS2V5IjoiNzE5M2NjNGM4MTNhZGRmNGNhOGNhYzMxYjJmZGMxNjkifSwiaXNzIjoiY2VjIiwiZXhwIjoxNzExODQxNjI4fQ.cJOJpnOFOq010t9ACYdHl4l5V_K2XesuGUmw4Y00rdc
+2024-03-30 12:29:38====>获取病人信息:Select A.Id As Id,A.姓名 As Name,'01' As id_no_type,A.身份证号 As id_no,to_char(A.出生日期,'yyyy-mm-dd') As birthday,nvl(B.号码,A.身份证号) As health_card_no,
+                                       A.性别 As gender,A.本人电话 As phone,A.现地址 As address,' ' As main_key
+                                  From 个人信息 A,个人标识号 B
+                                 Where A.Id=B.个人ID(+) and B.类别(+)=2
+                                   and A.Id='7241e07e-f6d6-48c9-981e-7f1fbe14bd15'
+2024-03-30 12:29:38====>获取医生信息:Select A.资源id As Id,A.姓名 As Name,A.身份证号 As idcard,extractValue(附加信息,'root/执业证代码') As practice_number, 
+                               (Select p.名称 From 人员性质 p Where Instr(',' || A.性质 || ',', ',' || p.编码 || ',') > 0 And Rownum=1) As profession 
+                          From 医护人员 A
+                         Where A.资源id='49ff45a7-4212-48f8-ac3c-c0bf8e9805a3'
+2024-03-30 12:29:38====>获取就诊信息:Select B.编码 As visit_departments,B.简称 As visit_departments_name,'1' As visit_type,A.Id As visit_no,'' As ward_code,'' As ward_name,'' As bed_no,nvl(D.保险号,'-') As medical_insurance_number
+                          From 服务活动记录 A,部门 B,保险个人档案 D
+                         Where A.Id='63A37794-FF58-4802-AEC3-766C88EF0288'
+                           And A.科室id=B.资源id And A.个人id=D.个人id(+)
+                           And A.项目id='F4DA8ED2-5033-47EB-A08F-E442A5E65DAB'
+                        Union All
+                        Select B.编码 As visit_departments,B.简称 As visit_departments_name,'3' As visit_type,A.Id As visit_no,E.编码 As ward_code,E.简称 As ward_name,C.床号 As bed_no,nvl(D.保险号,'-') As medical_insurance_number
+                          From 服务活动记录 A,部门 B,保险个人档案 D,个人当前状态 C,部门 E
+                         Where A.Id='63A37794-FF58-4802-AEC3-766C88EF0288'
+                           And A.科室id=B.资源id And A.个人id=D.个人id(+) And A.Id=C.就诊id And C.病房id=E.资源id
+                           And A.项目id='EC3E41BF-BACD-46BA-9D3C-E2493D73C1DF'
+2024-03-30 12:29:38====>调用【应用管理系统portal页URL获取接口】入参(未加密)：{"app_key":"1729404945213775872","hospital":{"accredit_id":"125002227094723044","accredit_name":"重庆市綦江区文龙街道社区卫生服务中心","branch_code":"","branch_name":""},"patience":{"id":"7241e07e-f6d6-48c9-981e-7f1fbe14bd15","name":"刘兴伍","id_no_type":"01","id_no":"510223195902130735","birthday":"1959-02-13","health_card_no":"510223195902130735","gender":"1","phone":"15923220948","address":"重庆市綦江区文龙街道山予城1-14-3","main_key":" ","guardian":null},"doctor":{"id":"49ff45a7-4212-48f8-ac3c-c0bf8e9805a3","name":"罗玉龙","idcard":"500222199108088613","practice_number":"110500222000711","profession":"医生"},"visit_order":{"visit_departments":"21030","visit_departments_name":"全科医学科","visit_type":"3","visit_no":"63A37794-FF58-4802-AEC3-766C88EF0288","ward_code":"21030","ward_name":"全科医学科","bed_no":"19","medical_insurance_number":"B45657364","project_list":[]},"extend":{"scene":"1","his_ip":"10.61.28.66","his_mac":"D4:C9:EF:D9:6B:20"}}
+2024-03-30 12:29:38====>调用【应用管理系统portal页URL获取接口】接口URL:http://ds-ucc.cq.hc:443/frontapi/api/v1/mutual/his/geturl
+2024-03-30 12:29:38====>调用【应用管理系统portal页URL获取接口】入参:{"param_encrypt":"dHY5oRYCiJxuVe++soLNbOIVZBBKJVvH6FJXg/MWMpKuhJx0GceTq+qUJy7hWjHS50xZAru2sAjTfiqGG7OybwxkqY+jII6zqOMUJZEQyOiP5t2ZrMVUaNojgOp1MJlPE92Fp3m2DNr7JLzmyV39aHVdHXYsAFovmhRUIY99ocvoMX0M2NRLknqdFNZJMCN5S5o9IQpePIkKRF5HFF7uw9uREmuD4dJOrGwgY/QYoXHy/TFYMthqblHgU957utoZneJajqYZtFxad2W45DCdm5CTJxnMyCbaUCQNlpB5hYvrjWFOGBBh8+7zlTZcjzRRwcqlHam3jtHVSWdolBtFLZ6KlCFFn7VgHjV//FGPJSuJxBoBkcI1pHSDrzQFaAW7ZcraA3lS2+8LgdBdulMhozZ80QgMQpw/7bU8TQpuBPuGAwo4hhy2Kfjl0B2QfvWMhBEddS+sbWpxopG+Ui/4nrbctp1V5m/21oJ7eZ1OS6MZ68E2abt3AJk1qVirplwocJTwZEWiyfxgzZ7amgDYAL9uAp/fIOLouUtM4ZKkokspTPdEHjU5D3My8aTCqs1NF5hPctgMnDw8nWZDx9TKA5k6AGOIOYngsR0DBAscukaxkeLG+Fxf6PblpKh0/E/I+ZGz1UBxBFTCmXJ1oYA+fxIxwP9pogjBfS4hsV5mBsIUv2JDBkUEJdD9md6la30DIReIE5ZSA/qBs1lqBEsBxrcTEYhYWnx07GHM3+kWYwk472Oq9gDAl+qXCCb8lBt+3kyD624Q998CjR9dsCaHvhU3aZBtFLliU1hFA6DLP0fvBrMOL98U1EEFEVKG2hazaRDOmB2ZPw2aJPYA2xx6nRxkuTbKrPjrSefP1kEdfr7HyNg8HwEcSaRfrimuTETRD+M7kNKiPhUxyVGQJjyad7TWWbatSCtpH4/kKdw3AVTAXDe+9afrWBGdqp+cBg16wr/TOIr7Ugaw3X/LsaU8UPVFA0tcrksSnPLrq2lbRJsWMRIyNTkW8dmDT2vOPLLhOuYfJ9mZyjZ8A2VWtdcalFX4aFN/+k7iEyXYD9vP5A/mXTW1XN7pYXGwKSkUa7JG1aFxGZyhADRKj/tyCdE38g6fj/lftM9SGfvSTaCvI8KLRfujRahVJX6Mh5VDi2el21fZu+iYFpXZrlPS8B2jO0rfp7Jt8EFPQLE/nQlSBcywNk56n3MsuD8NyWSgeiS1Tl9e/lCcWGebec3OQbBOtd4uVs3cnR/PFYPLxANQ+9OcmWEDVd9NXmFQmWucRgSN4d1QK6Jg9ZSMWkXqZTO4KSYHaCygJtmg7AYO4IEP9itStUa4O68+CJNoIHQB9L+BqrdPC1KYbh0P81N9oZpgzQ==","encrypt_method":"aes"}
+2024-03-30 12:29:38====>1
+2024-03-30 12:29:38====>2
+2024-03-30 12:29:38====>3
+2024-03-30 12:29:38====>4
+2024-03-30 12:29:38====>5
+2024-03-30 12:29:38====>6
+2024-03-30 12:29:38====>7
+2024-03-30 12:29:38====>8
+2024-03-30 12:29:38====>9
+2024-03-30 12:29:38====>调用【应用管理系统portal页URL获取接口】出参:{"code":200,"message":"成功","data":{"portal_url":"http://10.185.100.89:443/manager-org-view/#/accredit/result?serial_number_his=c29b5968dc703b291f6cd75c012b1fd8\u0026timestamp=1711773109\u0026sign=ae8877a46414b333185fc76b7284a8042bf2f7397b12e8b58da32413aeaf2e85"},"error":{"error_code":0,"error_msg":""},"meta":{"trace":{"trace_id":"620d3086-02d8-466d-9e14-11299c7af96a","parent_id":"","span_id":"205e280f-46b2-4da6-aefa-cd0399594b00","request_id":""}}}
+2024-03-30 12:29:45====>=========================================================================================================
+2024-03-30 12:29:45====>调用Extemenu入参：insureSystem:48;FunctionNo:02;strAdvance:<root><OrgId>4480c78d-c3dd-4873-a0a8-d936963abf75</OrgId><EventId>B8078181-DD48-47BA-9A30-8475516730E8</EventId><Pid>26b38508-be91-4904-be54-116a7c62e77e</Pid><DepId>2045fd3b-45ad-4f77-a1d8-a44f526e7888</DepId><DepName>全科医学科</DepName><OperId>49ff45a7-4212-48f8-ac3c-c0bf8e9805a3</OperId><OperName>罗玉龙</OperName><DoctorId>14D88760-7389-33F5-E064-9CDC71ADEB60</DoctorId><No>2404092</No><DocumentNumber>2403178901</DocumentNumber></root>
+2024-03-30 12:29:45====>获取的token：eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7IlVzZXJJZCI6MTcyOTQwNDM2NzcwODA5ODU2MCwiQXBwS2V5IjoiIiwiQWNjb3VudE5hbWUiOiIiLCJBY2NvdW50UmVhbE5hbWUiOiIiLCJTaWduS2V5IjoiNzE5M2NjNGM4MTNhZGRmNGNhOGNhYzMxYjJmZGMxNjkifSwiaXNzIjoiY2VjIiwiZXhwIjoxNzExODQxNjI4fQ.cJOJpnOFOq010t9ACYdHl4l5V_K2XesuGUmw4Y00rdc
+2024-03-30 12:29:45====>获取病人信息:Select A.Id As Id,A.姓名 As Name,'01' As id_no_type,A.身份证号 As id_no,to_char(A.出生日期,'yyyy-mm-dd') As birthday,nvl(B.号码,A.身份证号) As health_card_no,
+                                       A.性别 As gender,A.本人电话 As phone,A.现地址 As address,' ' As main_key
+                                  From 个人信息 A,个人标识号 B
+                                 Where A.Id=B.个人ID(+) and B.类别(+)=2
+                                   and A.Id='26b38508-be91-4904-be54-116a7c62e77e'
+2024-03-30 12:29:45====>获取医生信息:Select A.资源id As Id,A.姓名 As Name,A.身份证号 As idcard,extractValue(附加信息,'root/执业证代码') As practice_number, 
+                               (Select p.名称 From 人员性质 p Where Instr(',' || A.性质 || ',', ',' || p.编码 || ',') > 0 And Rownum=1) As profession 
+                          From 医护人员 A
+                         Where A.资源id='49ff45a7-4212-48f8-ac3c-c0bf8e9805a3'
+2024-03-30 12:29:45====>获取就诊信息:Select B.编码 As visit_departments,B.简称 As visit_departments_name,'1' As visit_type,A.Id As visit_no,'' As ward_code,'' As ward_name,'' As bed_no,nvl(D.保险号,'-') As medical_insurance_number
+                          From 服务活动记录 A,部门 B,保险个人档案 D
+                         Where A.Id='B8078181-DD48-47BA-9A30-8475516730E8'
+                           And A.科室id=B.资源id And A.个人id=D.个人id(+)
+                           And A.项目id='F4DA8ED2-5033-47EB-A08F-E442A5E65DAB'
+                        Union All
+                        Select B.编码 As visit_departments,B.简称 As visit_departments_name,'3' As visit_type,A.Id As visit_no,E.编码 As ward_code,E.简称 As ward_name,C.床号 As bed_no,nvl(D.保险号,'-') As medical_insurance_number
+                          From 服务活动记录 A,部门 B,保险个人档案 D,个人当前状态 C,部门 E
+                         Where A.Id='B8078181-DD48-47BA-9A30-8475516730E8'
+                           And A.科室id=B.资源id And A.个人id=D.个人id(+) And A.Id=C.就诊id And C.病房id=E.资源id
+                           And A.项目id='EC3E41BF-BACD-46BA-9D3C-E2493D73C1DF'
+2024-03-30 12:29:45====>调用【应用管理系统portal页URL获取接口】入参(未加密)：{"app_key":"1729404945213775872","hospital":{"accredit_id":"125002227094723044","accredit_name":"重庆市綦江区文龙街道社区卫生服务中心","branch_code":"","branch_name":""},"patience":{"id":"26b38508-be91-4904-be54-116a7c62e77e","name":"李明贵","id_no_type":"01","id_no":"510223194704238134","birthday":"1947-04-23","health_card_no":"510223194704238134","gender":"1","phone":"13098784292","address":"重庆市綦江区赶水镇官田村4组","main_key":" ","guardian":null},"doctor":{"id":"49ff45a7-4212-48f8-ac3c-c0bf8e9805a3","name":"罗玉龙","idcard":"500222199108088613","practice_number":"110500222000711","profession":"医生"},"visit_order":{"visit_departments":"21030","visit_departments_name":"全科医学科","visit_type":"3","visit_no":"B8078181-DD48-47BA-9A30-8475516730E8","ward_code":"21030","ward_name":"全科医学科","bed_no":"01","medical_insurance_number":"A50135918","project_list":[]},"extend":{"scene":"1","his_ip":"10.61.28.66","his_mac":"D4:C9:EF:D9:6B:20"}}
+2024-03-30 12:29:45====>调用【应用管理系统portal页URL获取接口】接口URL:http://ds-ucc.cq.hc:443/frontapi/api/v1/mutual/his/geturl
+2024-03-30 12:29:45====>调用【应用管理系统portal页URL获取接口】入参:{"param_encrypt":"dHY5oRYCiJxuVe++soLNbOIVZBBKJVvH6FJXg/MWMpKuhJx0GceTq+qUJy7hWjHS50xZAru2sAjTfiqGG7OybwxkqY+jII6zqOMUJZEQyOiP5t2ZrMVUaNojgOp1MJlPE92Fp3m2DNr7JLzmyV39aHVdHXYsAFovmhRUIY99ocvoMX0M2NRLknqdFNZJMCN5S5o9IQpePIkKRF5HFF7uw9uREmuD4dJOrGwgY/QYoXHy/TFYMthqblHgU957utoZnnUXut/BZfpO2GSze/bgV7iToitCHA3dydsdKVmmShusi3mqsoB7/X+0OwviMnrW3ZbD+nt7tYbC1CrSmDI2PHcGk9OsIqg+B530spctC2f8/sDdz8JASRDoMS9ak+H7M0vvP/n0bWWvQyppBWXjVfkIorIjTWqgAR5ryjwp/+1VEdhLe0IYz32V8VQBS5VgMBJxChWdCeCmIbOWiYD49jaAZdMigFI5RMNc5JZh8KEjFYWISjsqZ63v5oXhWlHi8VJDd9ms/9vdD2nqttg1W3z3/XWDyjZ93oA21j2LW+I/wQyD+MZkqjX7e4stmVvgNVa7czt/H7lJ5FdOLRJvvK6hxm/NBoDdeGKnfOUlQBnTeN9gRrO7ALCrZwFkue8hAWM9fA3tFXb14jtosL1mRwS0GkhSWLu/8YyZD+ceZXSYgOD4loiCV6FcOBiwc/xo8r3jCkD0vQVg702kyIAMmXV3MZ+gGwvLUBr5aCbcSm25M4d3gL1JDdkgOaly5a7md3YVofw715qGbdKeMuQW4CuSnBD0zDZmKQlFhc3avjB20aEeOKtlR/Q9kgtkY07XVVRN1pNe0sr+F2OSrV3NQWaCtyGB2yt7PGabBymOKcLIB2mMxHN/Cdk/Au9QVFCqjRFlkl9cYbtJnHxRa5p0FTwNS4svw2P1K5QBJ+VGUSkvmEWV6nPqVoMC+oxHXTaf9MjxVg/oCB/8NQM8A+Kba8JqJW1hGutZpeoS2zLMlde5gsSdQ9O8IYGrIMhxakSjk9+x/43Q5IAzO3gmDUF0+ztIblRxIeEjuROiUjRrEk5B3d9Q66d1ENVia4CC5zkkENxq/s23Cj5dcUQ5HNuRZJHnoUSDeMo3SefLJ3msgqzKapyfu5SCZDUtHAikinEM0SNh+8Z8dhp7Bsjlphb+YtmCGOaDhoAP0A0QO7QTNhfFdiKQubNYgCS7yvHuc1laH4zN9cMXcT/meZKe4UHjvzdxoqeYz2eMo3+EEYEtEgdoyuqVxkwhZ5MpbYIDXCEW7AtCHkTtXA1DYG/UDHIpZMT4utIwWoph4V5iEZmjYZco/EisPN977B2ItxZ55cPr","encrypt_method":"aes"}
+2024-03-30 12:29:45====>1
+2024-03-30 12:29:45====>2
+2024-03-30 12:29:45====>3
+2024-03-30 12:29:45====>4
+2024-03-30 12:29:45====>5
+2024-03-30 12:29:46====>6
+2024-03-30 12:29:46====>7
+2024-03-30 12:29:46====>8
+2024-03-30 12:29:46====>9
+2024-03-30 12:29:46====>调用【应用管理系统portal页URL获取接口】出参:{"code":200,"message":"成功","data":{"portal_url":"http://10.185.100.89:443/manager-org-view/#/accredit/result?serial_number_his=6d58e97e03539197a9a7959e6d177df7\u0026timestamp=1711773117\u0026sign=821ccd07892d450b0230df45379e7ff1bb7e8578c56cb6a646e955d6d00e9cf3"},"error":{"error_code":0,"error_msg":""},"meta":{"trace":{"trace_id":"8610526a-3f52-43d9-b89b-a67b310bfb9e","parent_id":"","span_id":"c4e60057-798c-4b3c-8ce1-f2ca86ab28c3","request_id":""}}}
+2024-03-30 12:30:04====>=========================================================================================================
+2024-03-30 12:30:04====>调用Extemenu入参：insureSystem:48;FunctionNo:02;strAdvance:<root><OrgId>4480c78d-c3dd-4873-a0a8-d936963abf75</OrgId><EventId>D04C8051-BB1A-478C-893B-07F222842061</EventId><Pid>279bb02d-731a-42bd-8f68-3d8cc3f8a016</Pid><DepId>2045fd3b-45ad-4f77-a1d8-a44f526e7888</DepId><DepName>全科医学科</DepName><OperId>49ff45a7-4212-48f8-ac3c-c0bf8e9805a3</OperId><OperName>罗玉龙</OperName><DoctorId>1472C065-FF9D-2585-E064-9CDC71ADEB60</DoctorId><No>2403901</No><DocumentNumber>2403176400</DocumentNumber></root>
+2024-03-30 12:30:04====>获取的token：eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7IlVzZXJJZCI6MTcyOTQwNDM2NzcwODA5ODU2MCwiQXBwS2V5IjoiIiwiQWNjb3VudE5hbWUiOiIiLCJBY2NvdW50UmVhbE5hbWUiOiIiLCJTaWduS2V5IjoiNzE5M2NjNGM4MTNhZGRmNGNhOGNhYzMxYjJmZGMxNjkifSwiaXNzIjoiY2VjIiwiZXhwIjoxNzExODQxNjI4fQ.cJOJpnOFOq010t9ACYdHl4l5V_K2XesuGUmw4Y00rdc
+2024-03-30 12:30:04====>获取病人信息:Select A.Id As Id,A.姓名 As Name,'01' As id_no_type,A.身份证号 As id_no,to_char(A.出生日期,'yyyy-mm-dd') As birthday,nvl(B.号码,A.身份证号) As health_card_no,
+                                       A.性别 As gender,A.本人电话 As phone,A.现地址 As address,' ' As main_key
+                                  From 个人信息 A,个人标识号 B
+                                 Where A.Id=B.个人ID(+) and B.类别(+)=2
+                                   and A.Id='279bb02d-731a-42bd-8f68-3d8cc3f8a016'
+2024-03-30 12:30:04====>获取医生信息:Select A.资源id As Id,A.姓名 As Name,A.身份证号 As idcard,extractValue(附加信息,'root/执业证代码') As practice_number, 
+                               (Select p.名称 From 人员性质 p Where Instr(',' || A.性质 || ',', ',' || p.编码 || ',') > 0 And Rownum=1) As profession 
+                          From 医护人员 A
+                         Where A.资源id='49ff45a7-4212-48f8-ac3c-c0bf8e9805a3'
+2024-03-30 12:30:04====>获取就诊信息:Select B.编码 As visit_departments,B.简称 As visit_departments_name,'1' As visit_type,A.Id As visit_no,'' As ward_code,'' As ward_name,'' As bed_no,nvl(D.保险号,'-') As medical_insurance_number
+                          From 服务活动记录 A,部门 B,保险个人档案 D
+                         Where A.Id='D04C8051-BB1A-478C-893B-07F222842061'
+                           And A.科室id=B.资源id And A.个人id=D.个人id(+)
+                           And A.项目id='F4DA8ED2-5033-47EB-A08F-E442A5E65DAB'
+                        Union All
+                        Select B.编码 As visit_departments,B.简称 As visit_departments_name,'3' As visit_type,A.Id As visit_no,E.编码 As ward_code,E.简称 As ward_name,C.床号 As bed_no,nvl(D.保险号,'-') As medical_insurance_number
+                          From 服务活动记录 A,部门 B,保险个人档案 D,个人当前状态 C,部门 E
+                         Where A.Id='D04C8051-BB1A-478C-893B-07F222842061'
+                           And A.科室id=B.资源id And A.个人id=D.个人id(+) And A.Id=C.就诊id And C.病房id=E.资源id
+                           And A.项目id='EC3E41BF-BACD-46BA-9D3C-E2493D73C1DF'
+2024-03-30 12:30:04====>调用【应用管理系统portal页URL获取接口】入参(未加密)：{"app_key":"1729404945213775872","hospital":{"accredit_id":"125002227094723044","accredit_name":"重庆市綦江区文龙街道社区卫生服务中心","branch_code":"","branch_name":""},"patience":{"id":"279bb02d-731a-42bd-8f68-3d8cc3f8a016","name":"马泽恩","id_no_type":"01","id_no":"510223194201151010","birthday":"1942-01-15","health_card_no":"510223194201151010","gender":"1","phone":"48666512","address":"重庆市綦江区古南街道桥河尖山7队","main_key":" ","guardian":null},"doctor":{"id":"49ff45a7-4212-48f8-ac3c-c0bf8e9805a3","name":"罗玉龙","idcard":"500222199108088613","practice_number":"110500222000711","profession":"医生"},"visit_order":{"visit_departments":"21030","visit_departments_name":"全科医学科","visit_type":"3","visit_no":"D04C8051-BB1A-478C-893B-07F222842061","ward_code":"21030","ward_name":"全科医学科","bed_no":"16","medical_insurance_number":"B45401705","project_list":[]},"extend":{"scene":"1","his_ip":"10.61.28.66","his_mac":"D4:C9:EF:D9:6B:20"}}
+2024-03-30 12:30:04====>调用【应用管理系统portal页URL获取接口】接口URL:http://ds-ucc.cq.hc:443/frontapi/api/v1/mutual/his/geturl
+2024-03-30 12:30:04====>调用【应用管理系统portal页URL获取接口】入参:{"param_encrypt":"dHY5oRYCiJxuVe++soLNbOIVZBBKJVvH6FJXg/MWMpKuhJx0GceTq+qUJy7hWjHS50xZAru2sAjTfiqGG7OybwxkqY+jII6zqOMUJZEQyOiP5t2ZrMVUaNojgOp1MJlPE92Fp3m2DNr7JLzmyV39aHVdHXYsAFovmhRUIY99ocvoMX0M2NRLknqdFNZJMCN5S5o9IQpePIkKRF5HFF7uw9uREmuD4dJOrGwgY/QYoXHy/TFYMthqblHgU957utoZicGZikUGZbp6foyZsNiQaibTUa0/kO+g3vXtNxTkh2bmkOyG3wa7bi7gGjevdTH+Oioe5G8CcTmyXiyUyDGYGgp1yAJY1XtqL/3++pebsBl9+aSsbE60eK3+3JunExjwDlBXBxb8JRDRAFCYqJ70WrOFC4BcgZaagoHDO115gdETaQR7rZeeYysS21viTn54BEw8LQPG+/zXEilv1InaRLrOo72i8NnRqQoPkTusVeB9W/MHjMQ+pf5zXr3bmf6B1KmySoIcexff4ZE1fwgSo8SxnNm5XkCmTUQffkLBH3JV4IjcHTZLjMvbvJjMgQFlJFQURoFDssWST1q1P0hcnXd/91+WP2KuTNkZ8YA/I+XGmM359fUxZZ9FjkJoEiSBUHDVCUNgE1Y7KjHdA0vA0CjHO6tmui/oJMANwnrQly4Qvh4jP6AHIFeu/1ra6jQbKYLyTw9BRd+e3ZH0eWAnNBe4F6d/jnG51fjKa8JbgNl/ALMfR4Q46NhRiuh7GsA/pQ8GYwtunUSeM9ZFjrLI41cIWDwadTqJld/agG9yZ1IM1/JET9MzxD02af8iawgFfpVGS+55W6we7lX8acTw0Zxli4sJKvsftOs+Uh/zFcAcfMWVAymEHr/aDEpDcWc14KCBZS3osLzgf+TGTjVlQSiPT3yXeEhZs9ZFbfFx1ieBd7JJjAW9zYNyEghTUyDVpyJc8ZGa3bkovwaW9qnBexV5YolOeZA/opJPJ9KZmc1gOOgvHjOxBtXAMDezwphuaMmg7bJeDiwWwy926vUSgElVohmHDyr8tM9HwkdmA6o/7zbuV5xrr5gRyyPzC0r5lH5qbImJ1szjHw/H6g22IYTZLIQ3QtGHVr8R/eJoUPpxBUaANHtPcAVZMwWK1x/gNC1Irv5e4LJhQuwMqpjoL8rFsd0XN7xwPijcmi13OGQ2uaDst6hzIQArG6kfjFyr4q7fL7wUi5Vmfw0DMPnnFmBAZY36AWIXYXER2nALklKtafFQzNot2cdG2JAoOJtzRYWafIDrHZlPkWip134bDihQM7mqdqTCRpzJ8ZBvgxszBBo6hgmZBZZHFwgup/2JYnLmrvsrSJP4CeuRg06heg==","encrypt_method":"aes"}
+2024-03-30 12:30:04====>1
+2024-03-30 12:30:04====>2
+2024-03-30 12:30:04====>3
+2024-03-30 12:30:04====>4
+2024-03-30 12:30:04====>5
+2024-03-30 12:30:04====>6
+2024-03-30 12:30:04====>7
+2024-03-30 12:30:04====>8
+2024-03-30 12:30:04====>9
+2024-03-30 12:30:04====>调用【应用管理系统portal页URL获取接口】出参:{"code":200,"message":"成功","data":{"portal_url":"http://10.185.100.89:443/manager-org-view/#/accredit/index?serial_number_his=48b85ee0d3dc5c554860b248fbeaf365\u0026timestamp=1711773135\u0026sign=81be86fc1cec383d534649f832d493091f1158c2cd3f88a5cf552bfea77db0eb"},"error":{"error_code":0,"error_msg":""},"meta":{"trace":{"trace_id":"d4086ac7-3aa2-458e-8d6b-02723466a3a7","parent_id":"","span_id":"65c6e2ee-0a34-46b3-bcee-e32cfdb74e23","request_id":""}}}
+2024-03-30 12:30:28====>=========================================================================================================
+2024-03-30 12:30:28====>调用Extemenu入参：insureSystem:48;FunctionNo:02;strAdvance:<root><OrgId>4480c78d-c3dd-4873-a0a8-d936963abf75</OrgId><EventId>D04C8051-BB1A-478C-893B-07F222842061</EventId><Pid>279bb02d-731a-42bd-8f68-3d8cc3f8a016</Pid><DepId>2045fd3b-45ad-4f77-a1d8-a44f526e7888</DepId><DepName>全科医学科</DepName><OperId>49ff45a7-4212-48f8-ac3c-c0bf8e9805a3</OperId><OperName>罗玉龙</OperName><DoctorId>1472C492-1AB9-1A9E-E064-9CDC71ADEEF6</DoctorId><No>2403901</No><DocumentNumber>2403149472</DocumentNumber></root>
+2024-03-30 12:30:28====>获取的token：eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7IlVzZXJJZCI6MTcyOTQwNDM2NzcwODA5ODU2MCwiQXBwS2V5IjoiIiwiQWNjb3VudE5hbWUiOiIiLCJBY2NvdW50UmVhbE5hbWUiOiIiLCJTaWduS2V5IjoiNzE5M2NjNGM4MTNhZGRmNGNhOGNhYzMxYjJmZGMxNjkifSwiaXNzIjoiY2VjIiwiZXhwIjoxNzExODQxNjI4fQ.cJOJpnOFOq010t9ACYdHl4l5V_K2XesuGUmw4Y00rdc
+2024-03-30 12:30:28====>获取病人信息:Select A.Id As Id,A.姓名 As Name,'01' As id_no_type,A.身份证号 As id_no,to_char(A.出生日期,'yyyy-mm-dd') As birthday,nvl(B.号码,A.身份证号) As health_card_no,
+                                       A.性别 As gender,A.本人电话 As phone,A.现地址 As address,' ' As main_key
+                                  From 个人信息 A,个人标识号 B
+                                 Where A.Id=B.个人ID(+) and B.类别(+)=2
+                                   and A.Id='279bb02d-731a-42bd-8f68-3d8cc3f8a016'
+2024-03-30 12:30:28====>获取医生信息:Select A.资源id As Id,A.姓名 As Name,A.身份证号 As idcard,extractValue(附加信息,'root/执业证代码') As practice_number, 
+                               (Select p.名称 From 人员性质 p Where Instr(',' || A.性质 || ',', ',' || p.编码 || ',') > 0 And Rownum=1) As profession 
+                          From 医护人员 A
+                         Where A.资源id='49ff45a7-4212-48f8-ac3c-c0bf8e9805a3'
+2024-03-30 12:30:28====>获取就诊信息:Select B.编码 As visit_departments,B.简称 As visit_departments_name,'1' As visit_type,A.Id As visit_no,'' As ward_code,'' As ward_name,'' As bed_no,nvl(D.保险号,'-') As medical_insurance_number
+                          From 服务活动记录 A,部门 B,保险个人档案 D
+                         Where A.Id='D04C8051-BB1A-478C-893B-07F222842061'
+                           And A.科室id=B.资源id And A.个人id=D.个人id(+)
+                           And A.项目id='F4DA8ED2-5033-47EB-A08F-E442A5E65DAB'
+                        Union All
+                        Select B.编码 As visit_departments,B.简称 As visit_departments_name,'3' As visit_type,A.Id As visit_no,E.编码 As ward_code,E.简称 As ward_name,C.床号 As bed_no,nvl(D.保险号,'-') As medical_insurance_number
+                          From 服务活动记录 A,部门 B,保险个人档案 D,个人当前状态 C,部门 E
+                         Where A.Id='D04C8051-BB1A-478C-893B-07F222842061'
+                           And A.科室id=B.资源id And A.个人id=D.个人id(+) And A.Id=C.就诊id And C.病房id=E.资源id
+                           And A.项目id='EC3E41BF-BACD-46BA-9D3C-E2493D73C1DF'
+2024-03-30 12:30:28====>调用【应用管理系统portal页URL获取接口】入参(未加密)：{"app_key":"1729404945213775872","hospital":{"accredit_id":"125002227094723044","accredit_name":"重庆市綦江区文龙街道社区卫生服务中心","branch_code":"","branch_name":""},"patience":{"id":"279bb02d-731a-42bd-8f68-3d8cc3f8a016","name":"马泽恩","id_no_type":"01","id_no":"510223194201151010","birthday":"1942-01-15","health_card_no":"510223194201151010","gender":"1","phone":"48666512","address":"重庆市綦江区古南街道桥河尖山7队","main_key":" ","guardian":null},"doctor":{"id":"49ff45a7-4212-48f8-ac3c-c0bf8e9805a3","name":"罗玉龙","idcard":"500222199108088613","practice_number":"110500222000711","profession":"医生"},"visit_order":{"visit_departments":"21030","visit_departments_name":"全科医学科","visit_type":"3","visit_no":"D04C8051-BB1A-478C-893B-07F222842061","ward_code":"21030","ward_name":"全科医学科","bed_no":"16","medical_insurance_number":"B45401705","project_list":[]},"extend":{"scene":"1","his_ip":"10.61.28.66","his_mac":"D4:C9:EF:D9:6B:20"}}
+2024-03-30 12:30:28====>调用【应用管理系统portal页URL获取接口】接口URL:http://ds-ucc.cq.hc:443/frontapi/api/v1/mutual/his/geturl
+2024-03-30 12:30:28====>调用【应用管理系统portal页URL获取接口】入参:{"param_encrypt":"dHY5oRYCiJxuVe++soLNbOIVZBBKJVvH6FJXg/MWMpKuhJx0GceTq+qUJy7hWjHS50xZAru2sAjTfiqGG7OybwxkqY+jII6zqOMUJZEQyOiP5t2ZrMVUaNojgOp1MJlPE92Fp3m2DNr7JLzmyV39aHVdHXYsAFovmhRUIY99ocvoMX0M2NRLknqdFNZJMCN5S5o9IQpePIkKRF5HFF7uw9uREmuD4dJOrGwgY/QYoXHy/TFYMthqblHgU957utoZicGZikUGZbp6foyZsNiQaibTUa0/kO+g3vXtNxTkh2bmkOyG3wa7bi7gGjevdTH+Oioe5G8CcTmyXiyUyDGYGgp1yAJY1XtqL/3++pebsBl9+aSsbE60eK3+3JunExjwDlBXBxb8JRDRAFCYqJ70WrOFC4BcgZaagoHDO115gdETaQR7rZeeYysS21viTn54BEw8LQPG+/zXEilv1InaRLrOo72i8NnRqQoPkTusVeB9W/MHjMQ+pf5zXr3bmf6B1KmySoIcexff4ZE1fwgSo8SxnNm5XkCmTUQffkLBH3JV4IjcHTZLjMvbvJjMgQFlJFQURoFDssWST1q1P0hcnXd/91+WP2KuTNkZ8YA/I+XGmM359fUxZZ9FjkJoEiSBUHDVCUNgE1Y7KjHdA0vA0CjHO6tmui/oJMANwnrQly4Qvh4jP6AHIFeu/1ra6jQbKYLyTw9BRd+e3ZH0eWAnNBe4F6d/jnG51fjKa8JbgNl/ALMfR4Q46NhRiuh7GsA/pQ8GYwtunUSeM9ZFjrLI41cIWDwadTqJld/agG9yZ1IM1/JET9MzxD02af8iawgFfpVGS+55W6we7lX8acTw0Zxli4sJKvsftOs+Uh/zFcAcfMWVAymEHr/aDEpDcWc14KCBZS3osLzgf+TGTjVlQSiPT3yXeEhZs9ZFbfFx1ieBd7JJjAW9zYNyEghTUyDVpyJc8ZGa3bkovwaW9qnBexV5YolOeZA/opJPJ9KZmc1gOOgvHjOxBtXAMDezwphuaMmg7bJeDiwWwy926vUSgElVohmHDyr8tM9HwkdmA6o/7zbuV5xrr5gRyyPzC0r5lH5qbImJ1szjHw/H6g22IYTZLIQ3QtGHVr8R/eJoUPpxBUaANHtPcAVZMwWK1x/gNC1Irv5e4LJhQuwMqpjoL8rFsd0XN7xwPijcmi13OGQ2uaDst6hzIQArG6kfjFyr4q7fL7wUi5Vmfw0DMPnnFmBAZY36AWIXYXER2nALklKtafFQzNot2cdG2JAoOJtzRYWafIDrHZlPkWip134bDihQM7mqdqTCRpzJ8ZBvgxszBBo6hgmZBZZHFwgup/2JYnLmrvsrSJP4CeuRg06heg==","encrypt_method":"aes"}
+2024-03-30 12:30:28====>1
+2024-03-30 12:30:28====>2
+2024-03-30 12:30:28====>3
+2024-03-30 12:30:28====>4
+2024-03-30 12:30:28====>5
+2024-03-30 12:30:28====>6
+2024-03-30 12:30:28====>7
+2024-03-30 12:30:28====>8
+2024-03-30 12:30:28====>9
+2024-03-30 12:30:28====>调用【应用管理系统portal页URL获取接口】出参:{"code":200,"message":"成功","data":{"portal_url":"http://10.185.100.89:443/manager-org-view/#/accredit/index?serial_number_his=48b85ee0d3dc5c554860b248fbeaf365\u0026timestamp=1711773159\u0026sign=09012a05d88d5695aa64e381e948a3479d7442d5da8b37a4066de40eba088c0e"},"error":{"error_code":0,"error_msg":""},"meta":{"trace":{"trace_id":"4db97563-8e01-4620-8b91-a4424e41b648","parent_id":"","span_id":"8f8640de-9c24-457b-838c-5e15304ef8da","request_id":""}}}
+2024-03-30 12:31:01====>=========================================================================================================
+2024-03-30 12:31:01====>调用Extemenu入参：insureSystem:48;FunctionNo:02;strAdvance:<root><OrgId>4480c78d-c3dd-4873-a0a8-d936963abf75</OrgId><EventId>D04C8051-BB1A-478C-893B-07F222842061</EventId><Pid>279bb02d-731a-42bd-8f68-3d8cc3f8a016</Pid><DepId>2045fd3b-45ad-4f77-a1d8-a44f526e7888</DepId><DepName>全科医学科</DepName><OperId>49ff45a7-4212-48f8-ac3c-c0bf8e9805a3</OperId><OperName>罗玉龙</OperName><DoctorId>1472E7AD-86D3-1C4C-E064-9CDC71ADEEF6</DoctorId><No>2403901</No><DocumentNumber>2403149417</DocumentNumber></root>
+2024-03-30 12:31:01====>获取的token：eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7IlVzZXJJZCI6MTcyOTQwNDM2NzcwODA5ODU2MCwiQXBwS2V5IjoiIiwiQWNjb3VudE5hbWUiOiIiLCJBY2NvdW50UmVhbE5hbWUiOiIiLCJTaWduS2V5IjoiNzE5M2NjNGM4MTNhZGRmNGNhOGNhYzMxYjJmZGMxNjkifSwiaXNzIjoiY2VjIiwiZXhwIjoxNzExODQxNjI4fQ.cJOJpnOFOq010t9ACYdHl4l5V_K2XesuGUmw4Y00rdc
+2024-03-30 12:31:01====>获取病人信息:Select A.Id As Id,A.姓名 As Name,'01' As id_no_type,A.身份证号 As id_no,to_char(A.出生日期,'yyyy-mm-dd') As birthday,nvl(B.号码,A.身份证号) As health_card_no,
+                                       A.性别 As gender,A.本人电话 As phone,A.现地址 As address,' ' As main_key
+                                  From 个人信息 A,个人标识号 B
+                                 Where A.Id=B.个人ID(+) and B.类别(+)=2
+                                   and A.Id='279bb02d-731a-42bd-8f68-3d8cc3f8a016'
+2024-03-30 12:31:01====>获取医生信息:Select A.资源id As Id,A.姓名 As Name,A.身份证号 As idcard,extractValue(附加信息,'root/执业证代码') As practice_number, 
+                               (Select p.名称 From 人员性质 p Where Instr(',' || A.性质 || ',', ',' || p.编码 || ',') > 0 And Rownum=1) As profession 
+                          From 医护人员 A
+                         Where A.资源id='49ff45a7-4212-48f8-ac3c-c0bf8e9805a3'
+2024-03-30 12:31:01====>获取就诊信息:Select B.编码 As visit_departments,B.简称 As visit_departments_name,'1' As visit_type,A.Id As visit_no,'' As ward_code,'' As ward_name,'' As bed_no,nvl(D.保险号,'-') As medical_insurance_number
+                          From 服务活动记录 A,部门 B,保险个人档案 D
+                         Where A.Id='D04C8051-BB1A-478C-893B-07F222842061'
+                           And A.科室id=B.资源id And A.个人id=D.个人id(+)
+                           And A.项目id='F4DA8ED2-5033-47EB-A08F-E442A5E65DAB'
+                        Union All
+                        Select B.编码 As visit_departments,B.简称 As visit_departments_name,'3' As visit_type,A.Id As visit_no,E.编码 As ward_code,E.简称 As ward_name,C.床号 As bed_no,nvl(D.保险号,'-') As medical_insurance_number
+                          From 服务活动记录 A,部门 B,保险个人档案 D,个人当前状态 C,部门 E
+                         Where A.Id='D04C8051-BB1A-478C-893B-07F222842061'
+                           And A.科室id=B.资源id And A.个人id=D.个人id(+) And A.Id=C.就诊id And C.病房id=E.资源id
+                           And A.项目id='EC3E41BF-BACD-46BA-9D3C-E2493D73C1DF'
+2024-03-30 12:31:01====>调用【应用管理系统portal页URL获取接口】入参(未加密)：{"app_key":"1729404945213775872","hospital":{"accredit_id":"125002227094723044","accredit_name":"重庆市綦江区文龙街道社区卫生服务中心","branch_code":"","branch_name":""},"patience":{"id":"279bb02d-731a-42bd-8f68-3d8cc3f8a016","name":"马泽恩","id_no_type":"01","id_no":"510223194201151010","birthday":"1942-01-15","health_card_no":"510223194201151010","gender":"1","phone":"48666512","address":"重庆市綦江区古南街道桥河尖山7队","main_key":" ","guardian":null},"doctor":{"id":"49ff45a7-4212-48f8-ac3c-c0bf8e9805a3","name":"罗玉龙","idcard":"500222199108088613","practice_number":"110500222000711","profession":"医生"},"visit_order":{"visit_departments":"21030","visit_departments_name":"全科医学科","visit_type":"3","visit_no":"D04C8051-BB1A-478C-893B-07F222842061","ward_code":"21030","ward_name":"全科医学科","bed_no":"16","medical_insurance_number":"B45401705","project_list":[]},"extend":{"scene":"1","his_ip":"10.61.28.66","his_mac":"D4:C9:EF:D9:6B:20"}}
+2024-03-30 12:31:01====>调用【应用管理系统portal页URL获取接口】接口URL:http://ds-ucc.cq.hc:443/frontapi/api/v1/mutual/his/geturl
+2024-03-30 12:31:01====>调用【应用管理系统portal页URL获取接口】入参:{"param_encrypt":"dHY5oRYCiJxuVe++soLNbOIVZBBKJVvH6FJXg/MWMpKuhJx0GceTq+qUJy7hWjHS50xZAru2sAjTfiqGG7OybwxkqY+jII6zqOMUJZEQyOiP5t2ZrMVUaNojgOp1MJlPE92Fp3m2DNr7JLzmyV39aHVdHXYsAFovmhRUIY99ocvoMX0M2NRLknqdFNZJMCN5S5o9IQpePIkKRF5HFF7uw9uREmuD4dJOrGwgY/QYoXHy/TFYMthqblHgU957utoZicGZikUGZbp6foyZsNiQaibTUa0/kO+g3vXtNxTkh2bmkOyG3wa7bi7gGjevdTH+Oioe5G8CcTmyXiyUyDGYGgp1yAJY1XtqL/3++pebsBl9+aSsbE60eK3+3JunExjwDlBXBxb8JRDRAFCYqJ70WrOFC4BcgZaagoHDO115gdETaQR7rZeeYysS21viTn54BEw8LQPG+/zXEilv1InaRLrOo72i8NnRqQoPkTusVeB9W/MHjMQ+pf5zXr3bmf6B1KmySoIcexff4ZE1fwgSo8SxnNm5XkCmTUQffkLBH3JV4IjcHTZLjMvbvJjMgQFlJFQURoFDssWST1q1P0hcnXd/91+WP2KuTNkZ8YA/I+XGmM359fUxZZ9FjkJoEiSBUHDVCUNgE1Y7KjHdA0vA0CjHO6tmui/oJMANwnrQly4Qvh4jP6AHIFeu/1ra6jQbKYLyTw9BRd+e3ZH0eWAnNBe4F6d/jnG51fjKa8JbgNl/ALMfR4Q46NhRiuh7GsA/pQ8GYwtunUSeM9ZFjrLI41cIWDwadTqJld/agG9yZ1IM1/JET9MzxD02af8iawgFfpVGS+55W6we7lX8acTw0Zxli4sJKvsftOs+Uh/zFcAcfMWVAymEHr/aDEpDcWc14KCBZS3osLzgf+TGTjVlQSiPT3yXeEhZs9ZFbfFx1ieBd7JJjAW9zYNyEghTUyDVpyJc8ZGa3bkovwaW9qnBexV5YolOeZA/opJPJ9KZmc1gOOgvHjOxBtXAMDezwphuaMmg7bJeDiwWwy926vUSgElVohmHDyr8tM9HwkdmA6o/7zbuV5xrr5gRyyPzC0r5lH5qbImJ1szjHw/H6g22IYTZLIQ3QtGHVr8R/eJoUPpxBUaANHtPcAVZMwWK1x/gNC1Irv5e4LJhQuwMqpjoL8rFsd0XN7xwPijcmi13OGQ2uaDst6hzIQArG6kfjFyr4q7fL7wUi5Vmfw0DMPnnFmBAZY36AWIXYXER2nALklKtafFQzNot2cdG2JAoOJtzRYWafIDrHZlPkWip134bDihQM7mqdqTCRpzJ8ZBvgxszBBo6hgmZBZZHFwgup/2JYnLmrvsrSJP4CeuRg06heg==","encrypt_method":"aes"}
+2024-03-30 12:31:01====>1
+2024-03-30 12:31:01====>2
+2024-03-30 12:31:01====>3
+2024-03-30 12:31:01====>4
+2024-03-30 12:31:01====>5
+2024-03-30 12:31:01====>6
+2024-03-30 12:31:01====>7
+2024-03-30 12:31:01====>8
+2024-03-30 12:31:01====>9
+2024-03-30 12:31:01====>调用【应用管理系统portal页URL获取接口】出参:{"code":200,"message":"成功","data":{"portal_url":"http://10.185.100.89:443/manager-org-view/#/accredit/index?serial_number_his=48b85ee0d3dc5c554860b248fbeaf365\u0026timestamp=1711773192\u0026sign=773d8b787fe6185c208fb57fa5fd65a8037b3e252438bbed1004dd980e462e71"},"error":{"error_code":0,"error_msg":""},"meta":{"trace":{"trace_id":"49041646-0e0e-44e4-9453-5a2f46f18e4c","parent_id":"","span_id":"b50c76a8-3d76-4532-bc36-d1ce86c8618f","request_id":""}}}
+2024-03-30 12:31:41====>=========================================================================================================
+2024-03-30 12:31:41====>调用Extemenu入参：insureSystem:48;FunctionNo:02;strAdvance:<root><OrgId>4480c78d-c3dd-4873-a0a8-d936963abf75</OrgId><EventId>5B093D25-B292-483E-97A6-470699D5B900</EventId><Pid>BDA242DA-45A5-13A2-E054-9CDC71ADEEF6</Pid><DepId>2045fd3b-45ad-4f77-a1d8-a44f526e7888</DepId><DepName>全科医学科</DepName><OperId>49ff45a7-4212-48f8-ac3c-c0bf8e9805a3</OperId><OperName>罗玉龙</OperName><DoctorId>1485E025-256E-4D38-E064-9CDC71ADEB60</DoctorId><No>2403938</No><DocumentNumber>2403171730</DocumentNumber></root>
+2024-03-30 12:31:41====>获取的token：eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7IlVzZXJJZCI6MTcyOTQwNDM2NzcwODA5ODU2MCwiQXBwS2V5IjoiIiwiQWNjb3VudE5hbWUiOiIiLCJBY2NvdW50UmVhbE5hbWUiOiIiLCJTaWduS2V5IjoiNzE5M2NjNGM4MTNhZGRmNGNhOGNhYzMxYjJmZGMxNjkifSwiaXNzIjoiY2VjIiwiZXhwIjoxNzExODQxNjI4fQ.cJOJpnOFOq010t9ACYdHl4l5V_K2XesuGUmw4Y00rdc
+2024-03-30 12:31:41====>获取病人信息:Select A.Id As Id,A.姓名 As Name,'01' As id_no_type,A.身份证号 As id_no,to_char(A.出生日期,'yyyy-mm-dd') As birthday,nvl(B.号码,A.身份证号) As health_card_no,
+                                       A.性别 As gender,A.本人电话 As phone,A.现地址 As address,' ' As main_key
+                                  From 个人信息 A,个人标识号 B
+                                 Where A.Id=B.个人ID(+) and B.类别(+)=2
+                                   and A.Id='BDA242DA-45A5-13A2-E054-9CDC71ADEEF6'
+2024-03-30 12:31:41====>获取医生信息:Select A.资源id As Id,A.姓名 As Name,A.身份证号 As idcard,extractValue(附加信息,'root/执业证代码') As practice_number, 
+                               (Select p.名称 From 人员性质 p Where Instr(',' || A.性质 || ',', ',' || p.编码 || ',') > 0 And Rownum=1) As profession 
+                          From 医护人员 A
+                         Where A.资源id='49ff45a7-4212-48f8-ac3c-c0bf8e9805a3'
+2024-03-30 12:31:41====>获取就诊信息:Select B.编码 As visit_departments,B.简称 As visit_departments_name,'1' As visit_type,A.Id As visit_no,'' As ward_code,'' As ward_name,'' As bed_no,nvl(D.保险号,'-') As medical_insurance_number
+                          From 服务活动记录 A,部门 B,保险个人档案 D
+                         Where A.Id='5B093D25-B292-483E-97A6-470699D5B900'
+                           And A.科室id=B.资源id And A.个人id=D.个人id(+)
+                           And A.项目id='F4DA8ED2-5033-47EB-A08F-E442A5E65DAB'
+                        Union All
+                        Select B.编码 As visit_departments,B.简称 As visit_departments_name,'3' As visit_type,A.Id As visit_no,E.编码 As ward_code,E.简称 As ward_name,C.床号 As bed_no,nvl(D.保险号,'-') As medical_insurance_number
+                          From 服务活动记录 A,部门 B,保险个人档案 D,个人当前状态 C,部门 E
+                         Where A.Id='5B093D25-B292-483E-97A6-470699D5B900'
+                           And A.科室id=B.资源id And A.个人id=D.个人id(+) And A.Id=C.就诊id And C.病房id=E.资源id
+                           And A.项目id='EC3E41BF-BACD-46BA-9D3C-E2493D73C1DF'
+2024-03-30 12:31:41====>调用【应用管理系统portal页URL获取接口】入参(未加密)：{"app_key":"1729404945213775872","hospital":{"accredit_id":"125002227094723044","accredit_name":"重庆市綦江区文龙街道社区卫生服务中心","branch_code":"","branch_name":""},"patience":{"id":"BDA242DA-45A5-13A2-E054-9CDC71ADEEF6","name":"李尊书","id_no_type":"01","id_no":"510223194701094921","birthday":"1947-01-09","health_card_no":"510223194701094921","gender":"2","phone":"15803034691","address":"重庆市綦江区篆塘镇民丰村10社","main_key":" ","guardian":null},"doctor":{"id":"49ff45a7-4212-48f8-ac3c-c0bf8e9805a3","name":"罗玉龙","idcard":"500222199108088613","practice_number":"110500222000711","profession":"医生"},"visit_order":{"visit_departments":"21030","visit_departments_name":"全科医学科","visit_type":"3","visit_no":"5B093D25-B292-483E-97A6-470699D5B900","ward_code":"21030","ward_name":"全科医学科","bed_no":"01","medical_insurance_number":"JM2038119265","project_list":[]},"extend":{"scene":"1","his_ip":"10.61.28.66","his_mac":"D4:C9:EF:D9:6B:20"}}
+2024-03-30 12:31:41====>调用【应用管理系统portal页URL获取接口】接口URL:http://ds-ucc.cq.hc:443/frontapi/api/v1/mutual/his/geturl
+2024-03-30 12:31:41====>调用【应用管理系统portal页URL获取接口】入参:{"param_encrypt":"dHY5oRYCiJxuVe++soLNbOIVZBBKJVvH6FJXg/MWMpKuhJx0GceTq+qUJy7hWjHS50xZAru2sAjTfiqGG7OybwxkqY+jII6zqOMUJZEQyOiP5t2ZrMVUaNojgOp1MJlPE92Fp3m2DNr7JLzmyV39aHVdHXYsAFovmhRUIY99ocvoMX0M2NRLknqdFNZJMCN5S5o9IQpePIkKRF5HFF7uw9uREmuD4dJOrGwgY/QYoXHy/TFYMthqblHgU957utoZKr4PrDV7fn54MRjbv8ZEI3Me1ZOBQv29qZ2PAvmcsOZnuoUwExD/rlfQXjgMZmLNCYlQv61RD0lxg90+qhKJAhZpsNZPQycy0t2yhccCK3axRuqUM59vOqfQ7KsKtUGgmsvTt3i4Qb3bFceLL2UQVEPAN4QaiZ/pq3F9U+b2z7RrwJP0bUYrU3vzcqStgqXGAku5Ojsljn7UY6qjgsO7GF1KSHq/o14/YDH1IZffhGPmiX1kfDvvmRL0HjkYHUAoLBMAdIG/OKcUdwlUgRnfSa8D2GJ9W79Ej1RUErwNBXbwFRQdsUxV7gJjyfBrqnFyOxa3F4zh2Qzt0lyymvquM1vBV7nt8MLAfviMUihaadKN/OfLaGqFvHTr8+0TNHFgHxjUYAGrSw787ywo9bXTTstKFWxQW7F6wXdsL6KLGK4jBZ8Epr9nq9xpmq3EvyKPr4dIt/4gyWEeAzCnwqih7tf1YaKIMz1/DQ3xe2G22U/urrosvuL1Un/ED0YZq0rHyXm4aMwdndw1ZxqgeQ47eapW4XpDF8hGEvfUTRg6u/QbwGdGMSy0XRz0wffmHSteDBV4rW5XMcQP0H7YVksevIX6Ma8wI98eDAPhs4fx56GwKEHCxXI+1zsFnauwkQ1/9zXT70oyNkDUcTtPNPsJxqv/wjR9HoJbGPaWspahUsbq4H2KzafL6nCPxx2AUAg+hYC+wLZ4hDRHqCqFs6x/k/gUiH7zA36hw48bwP1sE1EqRrETuBrzoDwqDiH+4TiHxNLjFPlySu+LyB4BDuaVETSbN1kTtAKNEID0Lw4i21LO9wj/qP3mYtNUH8q3EbENpD2NQuEjeY0AolWwNt/bEsSOlkQdYi/+o4PE+OkN40i7Bgz0nPELz+D+UPZh9ad6SGlkA2JLYHk6AzSO6nY0uuYYv4UMADWCwhGX03/EqI6YjAZSrokLTdnMr0ZlpMMFTko7DHf7kUMKHituMpHobS3MeB7AOmWGk512FIDNRkxVx7j8OoFSsKFpCFCwUWh1NaJsvWAggxx2J9hdUyC09+PoSAaldZEv618vJDByNfWf3JlryYdJRQsUzB7vtUSf/QOnJr8QBUJMIIcVye7SCA==","encrypt_method":"aes"}
+2024-03-30 12:31:41====>1
+2024-03-30 12:31:41====>2
+2024-03-30 12:31:41====>3
+2024-03-30 12:31:41====>4
+2024-03-30 12:31:41====>5
+2024-03-30 12:31:41====>6
+2024-03-30 12:31:41====>7
+2024-03-30 12:31:41====>8
+2024-03-30 12:31:41====>9
+2024-03-30 12:31:41====>调用【应用管理系统portal页URL获取接口】出参:{"code":200,"message":"成功","data":{"portal_url":"http://10.185.100.89:443/manager-org-view/#/accredit/index?serial_number_his=accfc76f809f2d6f8a6af4addb4ae723\u0026timestamp=1711773232\u0026sign=d31d2781c7ce2e8a65e6467567a3587d0e71f8643289f4be804575b8f03c8874"},"error":{"error_code":0,"error_msg":""},"meta":{"trace":{"trace_id":"4fa804f5-8e2f-415d-a6f1-c3a8f9699410","parent_id":"","span_id":"17bcb0b0-6be7-4430-8005-81df14ec2946","request_id":""}}}
+2024-03-30 12:31:49====>=========================================================================================================
+2024-03-30 12:31:49====>调用Extemenu入参：insureSystem:48;FunctionNo:02;strAdvance:<root><OrgId>4480c78d-c3dd-4873-a0a8-d936963abf75</OrgId><EventId>5B093D25-B292-483E-97A6-470699D5B900</EventId><Pid>BDA242DA-45A5-13A2-E054-9CDC71ADEEF6</Pid><DepId>2045fd3b-45ad-4f77-a1d8-a44f526e7888</DepId><DepName>全科医学科</DepName><OperId>49ff45a7-4212-48f8-ac3c-c0bf8e9805a3</OperId><OperName>罗玉龙</OperName><DoctorId>1485E025-256E-4D38-E064-9CDC71ADEB60</DoctorId><No>2403938</No><DocumentNumber>2403171730</DocumentNumber></root>
+2024-03-30 12:31:49====>获取的token：eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7IlVzZXJJZCI6MTcyOTQwNDM2NzcwODA5ODU2MCwiQXBwS2V5IjoiIiwiQWNjb3VudE5hbWUiOiIiLCJBY2NvdW50UmVhbE5hbWUiOiIiLCJTaWduS2V5IjoiNzE5M2NjNGM4MTNhZGRmNGNhOGNhYzMxYjJmZGMxNjkifSwiaXNzIjoiY2VjIiwiZXhwIjoxNzExODQxNjI4fQ.cJOJpnOFOq010t9ACYdHl4l5V_K2XesuGUmw4Y00rdc
+2024-03-30 12:31:49====>获取病人信息:Select A.Id As Id,A.姓名 As Name,'01' As id_no_type,A.身份证号 As id_no,to_char(A.出生日期,'yyyy-mm-dd') As birthday,nvl(B.号码,A.身份证号) As health_card_no,
+                                       A.性别 As gender,A.本人电话 As phone,A.现地址 As address,' ' As main_key
+                                  From 个人信息 A,个人标识号 B
+                                 Where A.Id=B.个人ID(+) and B.类别(+)=2
+                                   and A.Id='BDA242DA-45A5-13A2-E054-9CDC71ADEEF6'
+2024-03-30 12:31:49====>获取医生信息:Select A.资源id As Id,A.姓名 As Name,A.身份证号 As idcard,extractValue(附加信息,'root/执业证代码') As practice_number, 
+                               (Select p.名称 From 人员性质 p Where Instr(',' || A.性质 || ',', ',' || p.编码 || ',') > 0 And Rownum=1) As profession 
+                          From 医护人员 A
+                         Where A.资源id='49ff45a7-4212-48f8-ac3c-c0bf8e9805a3'
+2024-03-30 12:31:49====>获取就诊信息:Select B.编码 As visit_departments,B.简称 As visit_departments_name,'1' As visit_type,A.Id As visit_no,'' As ward_code,'' As ward_name,'' As bed_no,nvl(D.保险号,'-') As medical_insurance_number
+                          From 服务活动记录 A,部门 B,保险个人档案 D
+                         Where A.Id='5B093D25-B292-483E-97A6-470699D5B900'
+                           And A.科室id=B.资源id And A.个人id=D.个人id(+)
+                           And A.项目id='F4DA8ED2-5033-47EB-A08F-E442A5E65DAB'
+                        Union All
+                        Select B.编码 As visit_departments,B.简称 As visit_departments_name,'3' As visit_type,A.Id As visit_no,E.编码 As ward_code,E.简称 As ward_name,C.床号 As bed_no,nvl(D.保险号,'-') As medical_insurance_number
+                          From 服务活动记录 A,部门 B,保险个人档案 D,个人当前状态 C,部门 E
+                         Where A.Id='5B093D25-B292-483E-97A6-470699D5B900'
+                           And A.科室id=B.资源id And A.个人id=D.个人id(+) And A.Id=C.就诊id And C.病房id=E.资源id
+                           And A.项目id='EC3E41BF-BACD-46BA-9D3C-E2493D73C1DF'
+2024-03-30 12:31:49====>调用【应用管理系统portal页URL获取接口】入参(未加密)：{"app_key":"1729404945213775872","hospital":{"accredit_id":"125002227094723044","accredit_name":"重庆市綦江区文龙街道社区卫生服务中心","branch_code":"","branch_name":""},"patience":{"id":"BDA242DA-45A5-13A2-E054-9CDC71ADEEF6","name":"李尊书","id_no_type":"01","id_no":"510223194701094921","birthday":"1947-01-09","health_card_no":"510223194701094921","gender":"2","phone":"15803034691","address":"重庆市綦江区篆塘镇民丰村10社","main_key":" ","guardian":null},"doctor":{"id":"49ff45a7-4212-48f8-ac3c-c0bf8e9805a3","name":"罗玉龙","idcard":"500222199108088613","practice_number":"110500222000711","profession":"医生"},"visit_order":{"visit_departments":"21030","visit_departments_name":"全科医学科","visit_type":"3","visit_no":"5B093D25-B292-483E-97A6-470699D5B900","ward_code":"21030","ward_name":"全科医学科","bed_no":"01","medical_insurance_number":"JM2038119265","project_list":[]},"extend":{"scene":"1","his_ip":"10.61.28.66","his_mac":"D4:C9:EF:D9:6B:20"}}
+2024-03-30 12:31:49====>调用【应用管理系统portal页URL获取接口】接口URL:http://ds-ucc.cq.hc:443/frontapi/api/v1/mutual/his/geturl
+2024-03-30 12:31:49====>调用【应用管理系统portal页URL获取接口】入参:{"param_encrypt":"dHY5oRYCiJxuVe++soLNbOIVZBBKJVvH6FJXg/MWMpKuhJx0GceTq+qUJy7hWjHS50xZAru2sAjTfiqGG7OybwxkqY+jII6zqOMUJZEQyOiP5t2ZrMVUaNojgOp1MJlPE92Fp3m2DNr7JLzmyV39aHVdHXYsAFovmhRUIY99ocvoMX0M2NRLknqdFNZJMCN5S5o9IQpePIkKRF5HFF7uw9uREmuD4dJOrGwgY/QYoXHy/TFYMthqblHgU957utoZKr4PrDV7fn54MRjbv8ZEI3Me1ZOBQv29qZ2PAvmcsOZnuoUwExD/rlfQXjgMZmLNCYlQv61RD0lxg90+qhKJAhZpsNZPQycy0t2yhccCK3axRuqUM59vOqfQ7KsKtUGgmsvTt3i4Qb3bFceLL2UQVEPAN4QaiZ/pq3F9U+b2z7RrwJP0bUYrU3vzcqStgqXGAku5Ojsljn7UY6qjgsO7GF1KSHq/o14/YDH1IZffhGPmiX1kfDvvmRL0HjkYHUAoLBMAdIG/OKcUdwlUgRnfSa8D2GJ9W79Ej1RUErwNBXbwFRQdsUxV7gJjyfBrqnFyOxa3F4zh2Qzt0lyymvquM1vBV7nt8MLAfviMUihaadKN/OfLaGqFvHTr8+0TNHFgHxjUYAGrSw787ywo9bXTTstKFWxQW7F6wXdsL6KLGK4jBZ8Epr9nq9xpmq3EvyKPr4dIt/4gyWEeAzCnwqih7tf1YaKIMz1/DQ3xe2G22U/urrosvuL1Un/ED0YZq0rHyXm4aMwdndw1ZxqgeQ47eapW4XpDF8hGEvfUTRg6u/QbwGdGMSy0XRz0wffmHSteDBV4rW5XMcQP0H7YVksevIX6Ma8wI98eDAPhs4fx56GwKEHCxXI+1zsFnauwkQ1/9zXT70oyNkDUcTtPNPsJxqv/wjR9HoJbGPaWspahUsbq4H2KzafL6nCPxx2AUAg+hYC+wLZ4hDRHqCqFs6x/k/gUiH7zA36hw48bwP1sE1EqRrETuBrzoDwqDiH+4TiHxNLjFPlySu+LyB4BDuaVETSbN1kTtAKNEID0Lw4i21LO9wj/qP3mYtNUH8q3EbENpD2NQuEjeY0AolWwNt/bEsSOlkQdYi/+o4PE+OkN40i7Bgz0nPELz+D+UPZh9ad6SGlkA2JLYHk6AzSO6nY0uuYYv4UMADWCwhGX03/EqI6YjAZSrokLTdnMr0ZlpMMFTko7DHf7kUMKHituMpHobS3MeB7AOmWGk512FIDNRkxVx7j8OoFSsKFpCFCwUWh1NaJsvWAggxx2J9hdUyC09+PoSAaldZEv618vJDByNfWf3JlryYdJRQsUzB7vtUSf/QOnJr8QBUJMIIcVye7SCA==","encrypt_method":"aes"}
+2024-03-30 12:31:49====>1
+2024-03-30 12:31:49====>2
+2024-03-30 12:31:49====>3
+2024-03-30 12:31:49====>4
+2024-03-30 12:31:49====>5
+2024-03-30 12:31:49====>6
+2024-03-30 12:31:49====>7
+2024-03-30 12:31:49====>8
+2024-03-30 12:31:49====>9
+2024-03-30 12:31:49====>调用【应用管理系统portal页URL获取接口】出参:{"code":200,"message":"成功","data":{"portal_url":"http://10.185.100.89:443/manager-org-view/#/accredit/index?serial_number_his=accfc76f809f2d6f8a6af4addb4ae723\u0026timestamp=1711773241\u0026sign=ac26e7b49c9506e11cf442e431e4d0ccc5ac84b2e53ebaad5cf0a0bfa09f36dd"},"error":{"error_code":0,"error_msg":""},"meta":{"trace":{"trace_id":"c105ac6a-1664-4b42-959d-12deb627f84b","parent_id":"","span_id":"b59188af-1e20-4c87-bc79-9981e12cf5c4","request_id":""}}}
+2024-03-30 12:32:49====>=========================================================================================================
+2024-03-30 12:32:49====>调用Extemenu入参：insureSystem:48;FunctionNo:02;strAdvance:<root><OrgId>4480c78d-c3dd-4873-a0a8-d936963abf75</OrgId><EventId>5B093D25-B292-483E-97A6-470699D5B900</EventId><Pid>BDA242DA-45A5-13A2-E054-9CDC71ADEEF6</Pid><DepId>2045fd3b-45ad-4f77-a1d8-a44f526e7888</DepId><DepName>全科医学科</DepName><OperId>49ff45a7-4212-48f8-ac3c-c0bf8e9805a3</OperId><OperName>罗玉龙</OperName><DoctorId>1485E025-2575-4D38-E064-9CDC71ADEB60</DoctorId><No>2403938</No><DocumentNumber>2403154643</DocumentNumber></root>
+2024-03-30 12:32:49====>获取的token：eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7IlVzZXJJZCI6MTcyOTQwNDM2NzcwODA5ODU2MCwiQXBwS2V5IjoiIiwiQWNjb3VudE5hbWUiOiIiLCJBY2NvdW50UmVhbE5hbWUiOiIiLCJTaWduS2V5IjoiNzE5M2NjNGM4MTNhZGRmNGNhOGNhYzMxYjJmZGMxNjkifSwiaXNzIjoiY2VjIiwiZXhwIjoxNzExODQxNjI4fQ.cJOJpnOFOq010t9ACYdHl4l5V_K2XesuGUmw4Y00rdc
+2024-03-30 12:32:49====>获取病人信息:Select A.Id As Id,A.姓名 As Name,'01' As id_no_type,A.身份证号 As id_no,to_char(A.出生日期,'yyyy-mm-dd') As birthday,nvl(B.号码,A.身份证号) As health_card_no,
+                                       A.性别 As gender,A.本人电话 As phone,A.现地址 As address,' ' As main_key
+                                  From 个人信息 A,个人标识号 B
+                                 Where A.Id=B.个人ID(+) and B.类别(+)=2
+                                   and A.Id='BDA242DA-45A5-13A2-E054-9CDC71ADEEF6'
+2024-03-30 12:32:49====>获取医生信息:Select A.资源id As Id,A.姓名 As Name,A.身份证号 As idcard,extractValue(附加信息,'root/执业证代码') As practice_number, 
+                               (Select p.名称 From 人员性质 p Where Instr(',' || A.性质 || ',', ',' || p.编码 || ',') > 0 And Rownum=1) As profession 
+                          From 医护人员 A
+                         Where A.资源id='49ff45a7-4212-48f8-ac3c-c0bf8e9805a3'
+2024-03-30 12:32:49====>获取就诊信息:Select B.编码 As visit_departments,B.简称 As visit_departments_name,'1' As visit_type,A.Id As visit_no,'' As ward_code,'' As ward_name,'' As bed_no,nvl(D.保险号,'-') As medical_insurance_number
+                          From 服务活动记录 A,部门 B,保险个人档案 D
+                         Where A.Id='5B093D25-B292-483E-97A6-470699D5B900'
+                           And A.科室id=B.资源id And A.个人id=D.个人id(+)
+                           And A.项目id='F4DA8ED2-5033-47EB-A08F-E442A5E65DAB'
+                        Union All
+                        Select B.编码 As visit_departments,B.简称 As visit_departments_name,'3' As visit_type,A.Id As visit_no,E.编码 As ward_code,E.简称 As ward_name,C.床号 As bed_no,nvl(D.保险号,'-') As medical_insurance_number
+                          From 服务活动记录 A,部门 B,保险个人档案 D,个人当前状态 C,部门 E
+                         Where A.Id='5B093D25-B292-483E-97A6-470699D5B900'
+                           And A.科室id=B.资源id And A.个人id=D.个人id(+) And A.Id=C.就诊id And C.病房id=E.资源id
+                           And A.项目id='EC3E41BF-BACD-46BA-9D3C-E2493D73C1DF'
+2024-03-30 12:32:49====>调用【应用管理系统portal页URL获取接口】入参(未加密)：{"app_key":"1729404945213775872","hospital":{"accredit_id":"125002227094723044","accredit_name":"重庆市綦江区文龙街道社区卫生服务中心","branch_code":"","branch_name":""},"patience":{"id":"BDA242DA-45A5-13A2-E054-9CDC71ADEEF6","name":"李尊书","id_no_type":"01","id_no":"510223194701094921","birthday":"1947-01-09","health_card_no":"510223194701094921","gender":"2","phone":"15803034691","address":"重庆市綦江区篆塘镇民丰村10社","main_key":" ","guardian":null},"doctor":{"id":"49ff45a7-4212-48f8-ac3c-c0bf8e9805a3","name":"罗玉龙","idcard":"500222199108088613","practice_number":"110500222000711","profession":"医生"},"visit_order":{"visit_departments":"21030","visit_departments_name":"全科医学科","visit_type":"3","visit_no":"5B093D25-B292-483E-97A6-470699D5B900","ward_code":"21030","ward_name":"全科医学科","bed_no":"01","medical_insurance_number":"JM2038119265","project_list":[]},"extend":{"scene":"1","his_ip":"10.61.28.66","his_mac":"D4:C9:EF:D9:6B:20"}}
+2024-03-30 12:32:49====>调用【应用管理系统portal页URL获取接口】接口URL:http://ds-ucc.cq.hc:443/frontapi/api/v1/mutual/his/geturl
+2024-03-30 12:32:49====>调用【应用管理系统portal页URL获取接口】入参:{"param_encrypt":"dHY5oRYCiJxuVe++soLNbOIVZBBKJVvH6FJXg/MWMpKuhJx0GceTq+qUJy7hWjHS50xZAru2sAjTfiqGG7OybwxkqY+jII6zqOMUJZEQyOiP5t2ZrMVUaNojgOp1MJlPE92Fp3m2DNr7JLzmyV39aHVdHXYsAFovmhRUIY99ocvoMX0M2NRLknqdFNZJMCN5S5o9IQpePIkKRF5HFF7uw9uREmuD4dJOrGwgY/QYoXHy/TFYMthqblHgU957utoZKr4PrDV7fn54MRjbv8ZEI3Me1ZOBQv29qZ2PAvmcsOZnuoUwExD/rlfQXjgMZmLNCYlQv61RD0lxg90+qhKJAhZpsNZPQycy0t2yhccCK3axRuqUM59vOqfQ7KsKtUGgmsvTt3i4Qb3bFceLL2UQVEPAN4QaiZ/pq3F9U+b2z7RrwJP0bUYrU3vzcqStgqXGAku5Ojsljn7UY6qjgsO7GF1KSHq/o14/YDH1IZffhGPmiX1kfDvvmRL0HjkYHUAoLBMAdIG/OKcUdwlUgRnfSa8D2GJ9W79Ej1RUErwNBXbwFRQdsUxV7gJjyfBrqnFyOxa3F4zh2Qzt0lyymvquM1vBV7nt8MLAfviMUihaadKN/OfLaGqFvHTr8+0TNHFgHxjUYAGrSw787ywo9bXTTstKFWxQW7F6wXdsL6KLGK4jBZ8Epr9nq9xpmq3EvyKPr4dIt/4gyWEeAzCnwqih7tf1YaKIMz1/DQ3xe2G22U/urrosvuL1Un/ED0YZq0rHyXm4aMwdndw1ZxqgeQ47eapW4XpDF8hGEvfUTRg6u/QbwGdGMSy0XRz0wffmHSteDBV4rW5XMcQP0H7YVksevIX6Ma8wI98eDAPhs4fx56GwKEHCxXI+1zsFnauwkQ1/9zXT70oyNkDUcTtPNPsJxqv/wjR9HoJbGPaWspahUsbq4H2KzafL6nCPxx2AUAg+hYC+wLZ4hDRHqCqFs6x/k/gUiH7zA36hw48bwP1sE1EqRrETuBrzoDwqDiH+4TiHxNLjFPlySu+LyB4BDuaVETSbN1kTtAKNEID0Lw4i21LO9wj/qP3mYtNUH8q3EbENpD2NQuEjeY0AolWwNt/bEsSOlkQdYi/+o4PE+OkN40i7Bgz0nPELz+D+UPZh9ad6SGlkA2JLYHk6AzSO6nY0uuYYv4UMADWCwhGX03/EqI6YjAZSrokLTdnMr0ZlpMMFTko7DHf7kUMKHituMpHobS3MeB7AOmWGk512FIDNRkxVx7j8OoFSsKFpCFCwUWh1NaJsvWAggxx2J9hdUyC09+PoSAaldZEv618vJDByNfWf3JlryYdJRQsUzB7vtUSf/QOnJr8QBUJMIIcVye7SCA==","encrypt_method":"aes"}
+2024-03-30 12:32:49====>1
+2024-03-30 12:32:49====>2
+2024-03-30 12:32:49====>3
+2024-03-30 12:32:49====>4
+2024-03-30 12:32:49====>5
+2024-03-30 12:32:49====>6
+2024-03-30 12:32:49====>7
+2024-03-30 12:32:49====>8
+2024-03-30 12:32:49====>9
+2024-03-30 12:32:49====>调用【应用管理系统portal页URL获取接口】出参:{"code":200,"message":"成功","data":{"portal_url":"http://10.185.100.89:443/manager-org-view/#/accredit/index?serial_number_his=accfc76f809f2d6f8a6af4addb4ae723\u0026timestamp=1711773300\u0026sign=baf2806399b30d2a27e1562308f13a5dfe7113514a35ad20e4c737e331ec2854"},"error":{"error_code":0,"error_msg":""},"meta":{"trace":{"trace_id":"2ed37b71-f253-4e52-ad01-0022f0409662","parent_id":"","span_id":"e118954c-617a-45cc-9720-935bd37a99da","request_id":""}}}
+2024-03-30 12:33:37====>=========================================================================================================
+2024-03-30 12:33:37====>调用Extemenu入参：insureSystem:48;FunctionNo:02;strAdvance:<root><OrgId>4480c78d-c3dd-4873-a0a8-d936963abf75</OrgId><EventId>14AB276D-4436-40DC-919A-1276FC6575FB</EventId><Pid>3203fb60-6fef-4348-919c-b3b9a4c87f75</Pid><DepId>2045fd3b-45ad-4f77-a1d8-a44f526e7888</DepId><DepName>全科医学科</DepName><OperId>49ff45a7-4212-48f8-ac3c-c0bf8e9805a3</OperId><OperName>罗玉龙</OperName><DoctorId>1488E38C-6285-279B-E064-9CDC71ADEB60</DoctorId><No>2403965</No><DocumentNumber>2403176476</DocumentNumber></root>
+2024-03-30 12:33:37====>获取的token：eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7IlVzZXJJZCI6MTcyOTQwNDM2NzcwODA5ODU2MCwiQXBwS2V5IjoiIiwiQWNjb3VudE5hbWUiOiIiLCJBY2NvdW50UmVhbE5hbWUiOiIiLCJTaWduS2V5IjoiNzE5M2NjNGM4MTNhZGRmNGNhOGNhYzMxYjJmZGMxNjkifSwiaXNzIjoiY2VjIiwiZXhwIjoxNzExODQxNjI4fQ.cJOJpnOFOq010t9ACYdHl4l5V_K2XesuGUmw4Y00rdc
+2024-03-30 12:33:37====>获取病人信息:Select A.Id As Id,A.姓名 As Name,'01' As id_no_type,A.身份证号 As id_no,to_char(A.出生日期,'yyyy-mm-dd') As birthday,nvl(B.号码,A.身份证号) As health_card_no,
+                                       A.性别 As gender,A.本人电话 As phone,A.现地址 As address,' ' As main_key
+                                  From 个人信息 A,个人标识号 B
+                                 Where A.Id=B.个人ID(+) and B.类别(+)=2
+                                   and A.Id='3203fb60-6fef-4348-919c-b3b9a4c87f75'
+2024-03-30 12:33:38====>获取医生信息:Select A.资源id As Id,A.姓名 As Name,A.身份证号 As idcard,extractValue(附加信息,'root/执业证代码') As practice_number, 
+                               (Select p.名称 From 人员性质 p Where Instr(',' || A.性质 || ',', ',' || p.编码 || ',') > 0 And Rownum=1) As profession 
+                          From 医护人员 A
+                         Where A.资源id='49ff45a7-4212-48f8-ac3c-c0bf8e9805a3'
+2024-03-30 12:33:38====>获取就诊信息:Select B.编码 As visit_departments,B.简称 As visit_departments_name,'1' As visit_type,A.Id As visit_no,'' As ward_code,'' As ward_name,'' As bed_no,nvl(D.保险号,'-') As medical_insurance_number
+                          From 服务活动记录 A,部门 B,保险个人档案 D
+                         Where A.Id='14AB276D-4436-40DC-919A-1276FC6575FB'
+                           And A.科室id=B.资源id And A.个人id=D.个人id(+)
+                           And A.项目id='F4DA8ED2-5033-47EB-A08F-E442A5E65DAB'
+                        Union All
+                        Select B.编码 As visit_departments,B.简称 As visit_departments_name,'3' As visit_type,A.Id As visit_no,E.编码 As ward_code,E.简称 As ward_name,C.床号 As bed_no,nvl(D.保险号,'-') As medical_insurance_number
+                          From 服务活动记录 A,部门 B,保险个人档案 D,个人当前状态 C,部门 E
+                         Where A.Id='14AB276D-4436-40DC-919A-1276FC6575FB'
+                           And A.科室id=B.资源id And A.个人id=D.个人id(+) And A.Id=C.就诊id And C.病房id=E.资源id
+                           And A.项目id='EC3E41BF-BACD-46BA-9D3C-E2493D73C1DF'
+2024-03-30 12:33:38====>调用【应用管理系统portal页URL获取接口】入参(未加密)：{"app_key":"1729404945213775872","hospital":{"accredit_id":"125002227094723044","accredit_name":"重庆市綦江区文龙街道社区卫生服务中心","branch_code":"","branch_name":""},"patience":{"id":"3203fb60-6fef-4348-919c-b3b9a4c87f75","name":"张云琴","id_no_type":"01","id_no":"510223197302041420","birthday":"1973-02-04","health_card_no":"510223197302041420","gender":"2","phone":"18324107483","address":"重庆市綦江区文龙街道白庙村01社2号","main_key":" ","guardian":null},"doctor":{"id":"49ff45a7-4212-48f8-ac3c-c0bf8e9805a3","name":"罗玉龙","idcard":"500222199108088613","practice_number":"110500222000711","profession":"医生"},"visit_order":{"visit_departments":"21030","visit_departments_name":"全科医学科","visit_type":"3","visit_no":"14AB276D-4436-40DC-919A-1276FC6575FB","ward_code":"21030","ward_name":"全科医学科","bed_no":"04","medical_insurance_number":"D05902104","project_list":[]},"extend":{"scene":"1","his_ip":"10.61.28.66","his_mac":"D4:C9:EF:D9:6B:20"}}
+2024-03-30 12:33:38====>调用【应用管理系统portal页URL获取接口】接口URL:http://ds-ucc.cq.hc:443/frontapi/api/v1/mutual/his/geturl
+2024-03-30 12:33:38====>调用【应用管理系统portal页URL获取接口】入参:{"param_encrypt":"dHY5oRYCiJxuVe++soLNbOIVZBBKJVvH6FJXg/MWMpKuhJx0GceTq+qUJy7hWjHS50xZAru2sAjTfiqGG7OybwxkqY+jII6zqOMUJZEQyOiP5t2ZrMVUaNojgOp1MJlPE92Fp3m2DNr7JLzmyV39aHVdHXYsAFovmhRUIY99ocvoMX0M2NRLknqdFNZJMCN5S5o9IQpePIkKRF5HFF7uw9uREmuD4dJOrGwgY/QYoXHy/TFYMthqblHgU957utoZPZV7HA/dwa2/xI2D6AqP4ThKnuL+E679blcq9QX+QWU6zI/n3PLRWSJJA9j9DxbA8icPjX/GtXIM9lwqbvcOVYKCS/6NygeBAT41B0qFKUtXTH01PWQxSsTgcK9fIQC+Gqj7tmrTGlLPEZSizqsT8Ps5FlSzNoftwbf3kN1lclgpQlWirfURVqzcj9sv28g/rS5L/YO2bXrKvN5dvoUJ++jsrMZlKNhu2qqx9PoJqalK1oReW4oV6CGAnk7L3wuNhEi9P4u1nmMwYmfVfbcWGsVZsWE5NbMFIQbxBghQVZw7VTVXb/bj79WscQOpIUl+0UuaFcwsC3l7aEdOpmd/9V7GsNRYpb5npv10q7qI3MCAZXROPFfItWsp/gLv+GWXfy6rOxbmL4akVLohtYwdIYDlYwYN4obla6me66vknKIaiDS1Evn5/G1g1seHCe0BCtqYYoIx+9bN9klE+ZFvJc9iSFzohcdM6MugGmWdigq0CTBBoUcoYXIzu6fM359dvcsgwjyCNHOiu+c6mU2wH5nzDIrPLp9A/uWxNEt0qQR5ifgk984GD4E3gQsAgputkFuZw7vst8zLxAZtucdtb0097kXzoWY1cSt19Qc3prl3yR5KC1vLf0rfoVbidJgWNs07wj0A3PbCtLHnbDFsD2xeKzRCVN4weHst192b7cFEsxxmH12KuzEi3N5wItg7hj9EWpUIlChcp4ErKingFvbVI1gW6rc/htJclpGrBnXbfeBnBiaugqCW4YS0POIkquXHcAux8KweNnUVhsoh9MP5slUxFgBKSk5pVYrJ2K0l7pPnHw/I+k1xupWTSqHx4Wax9i7ylUPAtQ5AaQ7ZICFxk/wdRyoxZ1oYlzL6UjfcrPPmkZ2+qRVH4fIHIak7sBEeEJDsONKvpyRh5L70m8J3acS13SQj7oCl+EhhtoV0MEpjRVzMmmoXcMawyZy5/vIpmk6adYEdUyUH3qJQHB7CeRslDrTpJh/U1vTiA9LglGfi+VLi1knRqDrkyWjqy3OlbGGtUoKn1K9O3Vt16Wvfl7wCrGC4nDpp+ksfT5Ki6vq3JsPzJlpH7f9q+9wHWfSlwkXY5NuY2ku3WCqlaQ==","encrypt_method":"aes"}
+2024-03-30 12:33:38====>1
+2024-03-30 12:33:38====>2
+2024-03-30 12:33:38====>3
+2024-03-30 12:33:38====>4
+2024-03-30 12:33:38====>5
+2024-03-30 12:33:38====>6
+2024-03-30 12:33:38====>7
+2024-03-30 12:33:38====>8
+2024-03-30 12:33:38====>9
+2024-03-30 12:33:38====>调用【应用管理系统portal页URL获取接口】出参:{"code":200,"message":"成功","data":{"portal_url":"http://10.185.100.89:443/manager-org-view/#/accredit/index?serial_number_his=6ccb23f1524e43b4cf05325f1e9eaec9\u0026timestamp=1711773349\u0026sign=01ee2a2c2bad41b6c796b670f6c0c3e1c7026b880362dc7cfe2d0d1674d5a8da"},"error":{"error_code":0,"error_msg":""},"meta":{"trace":{"trace_id":"64747517-f1c1-486b-a9f8-5f756fa9198c","parent_id":"","span_id":"20c6a708-d37e-40f8-ad41-5cefcd6a1ba1","request_id":""}}}
+2024-03-30 12:34:37====>=========================================================================================================
+2024-03-30 12:34:37====>调用Extemenu入参：insureSystem:48;FunctionNo:02;strAdvance:<root><OrgId>4480c78d-c3dd-4873-a0a8-d936963abf75</OrgId><EventId>14AB276D-4436-40DC-919A-1276FC6575FB</EventId><Pid>3203fb60-6fef-4348-919c-b3b9a4c87f75</Pid><DepId>2045fd3b-45ad-4f77-a1d8-a44f526e7888</DepId><DepName>全科医学科</DepName><OperId>49ff45a7-4212-48f8-ac3c-c0bf8e9805a3</OperId><OperName>罗玉龙</OperName><DoctorId>1488E38C-6285-279B-E064-9CDC71ADEB60</DoctorId><No>2403965</No><DocumentNumber>2403176476</DocumentNumber></root>
+2024-03-30 12:34:37====>获取的token：eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7IlVzZXJJZCI6MTcyOTQwNDM2NzcwODA5ODU2MCwiQXBwS2V5IjoiIiwiQWNjb3VudE5hbWUiOiIiLCJBY2NvdW50UmVhbE5hbWUiOiIiLCJTaWduS2V5IjoiNzE5M2NjNGM4MTNhZGRmNGNhOGNhYzMxYjJmZGMxNjkifSwiaXNzIjoiY2VjIiwiZXhwIjoxNzExODQxNjI4fQ.cJOJpnOFOq010t9ACYdHl4l5V_K2XesuGUmw4Y00rdc
+2024-03-30 12:34:37====>获取病人信息:Select A.Id As Id,A.姓名 As Name,'01' As id_no_type,A.身份证号 As id_no,to_char(A.出生日期,'yyyy-mm-dd') As birthday,nvl(B.号码,A.身份证号) As health_card_no,
+                                       A.性别 As gender,A.本人电话 As phone,A.现地址 As address,' ' As main_key
+                                  From 个人信息 A,个人标识号 B
+                                 Where A.Id=B.个人ID(+) and B.类别(+)=2
+                                   and A.Id='3203fb60-6fef-4348-919c-b3b9a4c87f75'
+2024-03-30 12:34:37====>获取医生信息:Select A.资源id As Id,A.姓名 As Name,A.身份证号 As idcard,extractValue(附加信息,'root/执业证代码') As practice_number, 
+                               (Select p.名称 From 人员性质 p Where Instr(',' || A.性质 || ',', ',' || p.编码 || ',') > 0 And Rownum=1) As profession 
+                          From 医护人员 A
+                         Where A.资源id='49ff45a7-4212-48f8-ac3c-c0bf8e9805a3'
+2024-03-30 12:34:37====>获取就诊信息:Select B.编码 As visit_departments,B.简称 As visit_departments_name,'1' As visit_type,A.Id As visit_no,'' As ward_code,'' As ward_name,'' As bed_no,nvl(D.保险号,'-') As medical_insurance_number
+                          From 服务活动记录 A,部门 B,保险个人档案 D
+                         Where A.Id='14AB276D-4436-40DC-919A-1276FC6575FB'
+                           And A.科室id=B.资源id And A.个人id=D.个人id(+)
+                           And A.项目id='F4DA8ED2-5033-47EB-A08F-E442A5E65DAB'
+                        Union All
+                        Select B.编码 As visit_departments,B.简称 As visit_departments_name,'3' As visit_type,A.Id As visit_no,E.编码 As ward_code,E.简称 As ward_name,C.床号 As bed_no,nvl(D.保险号,'-') As medical_insurance_number
+                          From 服务活动记录 A,部门 B,保险个人档案 D,个人当前状态 C,部门 E
+                         Where A.Id='14AB276D-4436-40DC-919A-1276FC6575FB'
+                           And A.科室id=B.资源id And A.个人id=D.个人id(+) And A.Id=C.就诊id And C.病房id=E.资源id
+                           And A.项目id='EC3E41BF-BACD-46BA-9D3C-E2493D73C1DF'
+2024-03-30 12:34:37====>调用【应用管理系统portal页URL获取接口】入参(未加密)：{"app_key":"1729404945213775872","hospital":{"accredit_id":"125002227094723044","accredit_name":"重庆市綦江区文龙街道社区卫生服务中心","branch_code":"","branch_name":""},"patience":{"id":"3203fb60-6fef-4348-919c-b3b9a4c87f75","name":"张云琴","id_no_type":"01","id_no":"510223197302041420","birthday":"1973-02-04","health_card_no":"510223197302041420","gender":"2","phone":"18324107483","address":"重庆市綦江区文龙街道白庙村01社2号","main_key":" ","guardian":null},"doctor":{"id":"49ff45a7-4212-48f8-ac3c-c0bf8e9805a3","name":"罗玉龙","idcard":"500222199108088613","practice_number":"110500222000711","profession":"医生"},"visit_order":{"visit_departments":"21030","visit_departments_name":"全科医学科","visit_type":"3","visit_no":"14AB276D-4436-40DC-919A-1276FC6575FB","ward_code":"21030","ward_name":"全科医学科","bed_no":"04","medical_insurance_number":"D05902104","project_list":[]},"extend":{"scene":"1","his_ip":"10.61.28.66","his_mac":"D4:C9:EF:D9:6B:20"}}
+2024-03-30 12:34:37====>调用【应用管理系统portal页URL获取接口】接口URL:http://ds-ucc.cq.hc:443/frontapi/api/v1/mutual/his/geturl
+2024-03-30 12:34:37====>调用【应用管理系统portal页URL获取接口】入参:{"param_encrypt":"dHY5oRYCiJxuVe++soLNbOIVZBBKJVvH6FJXg/MWMpKuhJx0GceTq+qUJy7hWjHS50xZAru2sAjTfiqGG7OybwxkqY+jII6zqOMUJZEQyOiP5t2ZrMVUaNojgOp1MJlPE92Fp3m2DNr7JLzmyV39aHVdHXYsAFovmhRUIY99ocvoMX0M2NRLknqdFNZJMCN5S5o9IQpePIkKRF5HFF7uw9uREmuD4dJOrGwgY/QYoXHy/TFYMthqblHgU957utoZPZV7HA/dwa2/xI2D6AqP4ThKnuL+E679blcq9QX+QWU6zI/n3PLRWSJJA9j9DxbA8icPjX/GtXIM9lwqbvcOVYKCS/6NygeBAT41B0qFKUtXTH01PWQxSsTgcK9fIQC+Gqj7tmrTGlLPEZSizqsT8Ps5FlSzNoftwbf3kN1lclgpQlWirfURVqzcj9sv28g/rS5L/YO2bXrKvN5dvoUJ++jsrMZlKNhu2qqx9PoJqalK1oReW4oV6CGAnk7L3wuNhEi9P4u1nmMwYmfVfbcWGsVZsWE5NbMFIQbxBghQVZw7VTVXb/bj79WscQOpIUl+0UuaFcwsC3l7aEdOpmd/9V7GsNRYpb5npv10q7qI3MCAZXROPFfItWsp/gLv+GWXfy6rOxbmL4akVLohtYwdIYDlYwYN4obla6me66vknKIaiDS1Evn5/G1g1seHCe0BCtqYYoIx+9bN9klE+ZFvJc9iSFzohcdM6MugGmWdigq0CTBBoUcoYXIzu6fM359dvcsgwjyCNHOiu+c6mU2wH5nzDIrPLp9A/uWxNEt0qQR5ifgk984GD4E3gQsAgputkFuZw7vst8zLxAZtucdtb0097kXzoWY1cSt19Qc3prl3yR5KC1vLf0rfoVbidJgWNs07wj0A3PbCtLHnbDFsD2xeKzRCVN4weHst192b7cFEsxxmH12KuzEi3N5wItg7hj9EWpUIlChcp4ErKingFvbVI1gW6rc/htJclpGrBnXbfeBnBiaugqCW4YS0POIkquXHcAux8KweNnUVhsoh9MP5slUxFgBKSk5pVYrJ2K0l7pPnHw/I+k1xupWTSqHx4Wax9i7ylUPAtQ5AaQ7ZICFxk/wdRyoxZ1oYlzL6UjfcrPPmkZ2+qRVH4fIHIak7sBEeEJDsONKvpyRh5L70m8J3acS13SQj7oCl+EhhtoV0MEpjRVzMmmoXcMawyZy5/vIpmk6adYEdUyUH3qJQHB7CeRslDrTpJh/U1vTiA9LglGfi+VLi1knRqDrkyWjqy3OlbGGtUoKn1K9O3Vt16Wvfl7wCrGC4nDpp+ksfT5Ki6vq3JsPzJlpH7f9q+9wHWfSlwkXY5NuY2ku3WCqlaQ==","encrypt_method":"aes"}
+2024-03-30 12:34:37====>1
+2024-03-30 12:34:37====>2
+2024-03-30 12:34:37====>3
+2024-03-30 12:34:37====>4
+2024-03-30 12:34:37====>5
+2024-03-30 12:34:37====>6
+2024-03-30 12:34:37====>7
+2024-03-30 12:34:37====>8
+2024-03-30 12:34:37====>9
+2024-03-30 12:34:37====>调用【应用管理系统portal页URL获取接口】出参:{"code":200,"message":"成功","data":{"portal_url":"http://10.185.100.89:443/manager-org-view/#/accredit/result?serial_number_his=6ccb23f1524e43b4cf05325f1e9eaec9\u0026timestamp=1711773408\u0026sign=e6b7deecd88c2c6c614233758d3863fc19479fa4f7769d01ba4eed0b4150ecdb"},"error":{"error_code":0,"error_msg":""},"meta":{"trace":{"trace_id":"e4f35ea9-d6d7-41d2-83c3-b731aa421468","parent_id":"","span_id":"854ea473-8bbf-4976-b01e-fd5ad9ecb98f","request_id":""}}}
+2024-03-30 12:34:51====>=========================================================================================================
+2024-03-30 12:34:51====>调用Extemenu入参：insureSystem:48;FunctionNo:02;strAdvance:<root><OrgId>4480c78d-c3dd-4873-a0a8-d936963abf75</OrgId><EventId>5B093D25-B292-483E-97A6-470699D5B900</EventId><Pid>BDA242DA-45A5-13A2-E054-9CDC71ADEEF6</Pid><DepId>2045fd3b-45ad-4f77-a1d8-a44f526e7888</DepId><DepName>全科医学科</DepName><OperId>49ff45a7-4212-48f8-ac3c-c0bf8e9805a3</OperId><OperName>罗玉龙</OperName><DoctorId>1485E025-2575-4D38-E064-9CDC71ADEB60</DoctorId><No>2403938</No><DocumentNumber>2403154643</DocumentNumber></root>
+2024-03-30 12:34:51====>获取的token：eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7IlVzZXJJZCI6MTcyOTQwNDM2NzcwODA5ODU2MCwiQXBwS2V5IjoiIiwiQWNjb3VudE5hbWUiOiIiLCJBY2NvdW50UmVhbE5hbWUiOiIiLCJTaWduS2V5IjoiNzE5M2NjNGM4MTNhZGRmNGNhOGNhYzMxYjJmZGMxNjkifSwiaXNzIjoiY2VjIiwiZXhwIjoxNzExODQxNjI4fQ.cJOJpnOFOq010t9ACYdHl4l5V_K2XesuGUmw4Y00rdc
+2024-03-30 12:34:51====>获取病人信息:Select A.Id As Id,A.姓名 As Name,'01' As id_no_type,A.身份证号 As id_no,to_char(A.出生日期,'yyyy-mm-dd') As birthday,nvl(B.号码,A.身份证号) As health_card_no,
+                                       A.性别 As gender,A.本人电话 As phone,A.现地址 As address,' ' As main_key
+                                  From 个人信息 A,个人标识号 B
+                                 Where A.Id=B.个人ID(+) and B.类别(+)=2
+                                   and A.Id='BDA242DA-45A5-13A2-E054-9CDC71ADEEF6'
+2024-03-30 12:34:51====>获取医生信息:Select A.资源id As Id,A.姓名 As Name,A.身份证号 As idcard,extractValue(附加信息,'root/执业证代码') As practice_number, 
+                               (Select p.名称 From 人员性质 p Where Instr(',' || A.性质 || ',', ',' || p.编码 || ',') > 0 And Rownum=1) As profession 
+                          From 医护人员 A
+                         Where A.资源id='49ff45a7-4212-48f8-ac3c-c0bf8e9805a3'
+2024-03-30 12:34:51====>获取就诊信息:Select B.编码 As visit_departments,B.简称 As visit_departments_name,'1' As visit_type,A.Id As visit_no,'' As ward_code,'' As ward_name,'' As bed_no,nvl(D.保险号,'-') As medical_insurance_number
+                          From 服务活动记录 A,部门 B,保险个人档案 D
+                         Where A.Id='5B093D25-B292-483E-97A6-470699D5B900'
+                           And A.科室id=B.资源id And A.个人id=D.个人id(+)
+                           And A.项目id='F4DA8ED2-5033-47EB-A08F-E442A5E65DAB'
+                        Union All
+                        Select B.编码 As visit_departments,B.简称 As visit_departments_name,'3' As visit_type,A.Id As visit_no,E.编码 As ward_code,E.简称 As ward_name,C.床号 As bed_no,nvl(D.保险号,'-') As medical_insurance_number
+                          From 服务活动记录 A,部门 B,保险个人档案 D,个人当前状态 C,部门 E
+                         Where A.Id='5B093D25-B292-483E-97A6-470699D5B900'
+                           And A.科室id=B.资源id And A.个人id=D.个人id(+) And A.Id=C.就诊id And C.病房id=E.资源id
+                           And A.项目id='EC3E41BF-BACD-46BA-9D3C-E2493D73C1DF'
+2024-03-30 12:34:51====>调用【应用管理系统portal页URL获取接口】入参(未加密)：{"app_key":"1729404945213775872","hospital":{"accredit_id":"125002227094723044","accredit_name":"重庆市綦江区文龙街道社区卫生服务中心","branch_code":"","branch_name":""},"patience":{"id":"BDA242DA-45A5-13A2-E054-9CDC71ADEEF6","name":"李尊书","id_no_type":"01","id_no":"510223194701094921","birthday":"1947-01-09","health_card_no":"510223194701094921","gender":"2","phone":"15803034691","address":"重庆市綦江区篆塘镇民丰村10社","main_key":" ","guardian":null},"doctor":{"id":"49ff45a7-4212-48f8-ac3c-c0bf8e9805a3","name":"罗玉龙","idcard":"500222199108088613","practice_number":"110500222000711","profession":"医生"},"visit_order":{"visit_departments":"21030","visit_departments_name":"全科医学科","visit_type":"3","visit_no":"5B093D25-B292-483E-97A6-470699D5B900","ward_code":"21030","ward_name":"全科医学科","bed_no":"01","medical_insurance_number":"JM2038119265","project_list":[]},"extend":{"scene":"1","his_ip":"10.61.28.66","his_mac":"D4:C9:EF:D9:6B:20"}}
+2024-03-30 12:34:51====>调用【应用管理系统portal页URL获取接口】接口URL:http://ds-ucc.cq.hc:443/frontapi/api/v1/mutual/his/geturl
+2024-03-30 12:34:51====>调用【应用管理系统portal页URL获取接口】入参:{"param_encrypt":"dHY5oRYCiJxuVe++soLNbOIVZBBKJVvH6FJXg/MWMpKuhJx0GceTq+qUJy7hWjHS50xZAru2sAjTfiqGG7OybwxkqY+jII6zqOMUJZEQyOiP5t2ZrMVUaNojgOp1MJlPE92Fp3m2DNr7JLzmyV39aHVdHXYsAFovmhRUIY99ocvoMX0M2NRLknqdFNZJMCN5S5o9IQpePIkKRF5HFF7uw9uREmuD4dJOrGwgY/QYoXHy/TFYMthqblHgU957utoZKr4PrDV7fn54MRjbv8ZEI3Me1ZOBQv29qZ2PAvmcsOZnuoUwExD/rlfQXjgMZmLNCYlQv61RD0lxg90+qhKJAhZpsNZPQycy0t2yhccCK3axRuqUM59vOqfQ7KsKtUGgmsvTt3i4Qb3bFceLL2UQVEPAN4QaiZ/pq3F9U+b2z7RrwJP0bUYrU3vzcqStgqXGAku5Ojsljn7UY6qjgsO7GF1KSHq/o14/YDH1IZffhGPmiX1kfDvvmRL0HjkYHUAoLBMAdIG/OKcUdwlUgRnfSa8D2GJ9W79Ej1RUErwNBXbwFRQdsUxV7gJjyfBrqnFyOxa3F4zh2Qzt0lyymvquM1vBV7nt8MLAfviMUihaadKN/OfLaGqFvHTr8+0TNHFgHxjUYAGrSw787ywo9bXTTstKFWxQW7F6wXdsL6KLGK4jBZ8Epr9nq9xpmq3EvyKPr4dIt/4gyWEeAzCnwqih7tf1YaKIMz1/DQ3xe2G22U/urrosvuL1Un/ED0YZq0rHyXm4aMwdndw1ZxqgeQ47eapW4XpDF8hGEvfUTRg6u/QbwGdGMSy0XRz0wffmHSteDBV4rW5XMcQP0H7YVksevIX6Ma8wI98eDAPhs4fx56GwKEHCxXI+1zsFnauwkQ1/9zXT70oyNkDUcTtPNPsJxqv/wjR9HoJbGPaWspahUsbq4H2KzafL6nCPxx2AUAg+hYC+wLZ4hDRHqCqFs6x/k/gUiH7zA36hw48bwP1sE1EqRrETuBrzoDwqDiH+4TiHxNLjFPlySu+LyB4BDuaVETSbN1kTtAKNEID0Lw4i21LO9wj/qP3mYtNUH8q3EbENpD2NQuEjeY0AolWwNt/bEsSOlkQdYi/+o4PE+OkN40i7Bgz0nPELz+D+UPZh9ad6SGlkA2JLYHk6AzSO6nY0uuYYv4UMADWCwhGX03/EqI6YjAZSrokLTdnMr0ZlpMMFTko7DHf7kUMKHituMpHobS3MeB7AOmWGk512FIDNRkxVx7j8OoFSsKFpCFCwUWh1NaJsvWAggxx2J9hdUyC09+PoSAaldZEv618vJDByNfWf3JlryYdJRQsUzB7vtUSf/QOnJr8QBUJMIIcVye7SCA==","encrypt_method":"aes"}
+2024-03-30 12:34:51====>1
+2024-03-30 12:34:51====>2
+2024-03-30 12:34:51====>3
+2024-03-30 12:34:51====>4
+2024-03-30 12:34:51====>5
+2024-03-30 12:34:51====>6
+2024-03-30 12:34:51====>7
+2024-03-30 12:34:51====>8
+2024-03-30 12:34:51====>9
+2024-03-30 12:34:51====>调用【应用管理系统portal页URL获取接口】出参:{"code":200,"message":"成功","data":{"portal_url":"http://10.185.100.89:443/manager-org-view/#/accredit/result?serial_number_his=accfc76f809f2d6f8a6af4addb4ae723\u0026timestamp=1711773422\u0026sign=69bd40465b2ec0bdbadaf62686299f756ce61081aeb22be2a58891394fca836a"},"error":{"error_code":0,"error_msg":""},"meta":{"trace":{"trace_id":"6fab8b74-8889-4f11-9a1b-fa179100ee8c","parent_id":"","span_id":"4e6ed1c5-4979-4c54-8b40-9ecdf289312d","request_id":""}}}
+2024-03-30 12:35:18====>=========================================================================================================
+2024-03-30 12:35:18====>调用Extemenu入参：insureSystem:48;FunctionNo:02;strAdvance:<root><OrgId>4480c78d-c3dd-4873-a0a8-d936963abf75</OrgId><EventId>4E81A449-AB03-4CDD-84EB-CB61FB055838</EventId><Pid>BDA242D4-1C84-13A2-E054-9CDC71ADEEF6</Pid><DepId>2045fd3b-45ad-4f77-a1d8-a44f526e7888</DepId><DepName>全科医学科</DepName><OperId>49ff45a7-4212-48f8-ac3c-c0bf8e9805a3</OperId><OperName>罗玉龙</OperName><DoctorId>1422543D-2239-3308-E064-9CDC71ADEEF6</DoctorId><No>2403714</No><DocumentNumber>2403129038</DocumentNumber></root>
+2024-03-30 12:35:18====>获取的token：eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7IlVzZXJJZCI6MTcyOTQwNDM2NzcwODA5ODU2MCwiQXBwS2V5IjoiIiwiQWNjb3VudE5hbWUiOiIiLCJBY2NvdW50UmVhbE5hbWUiOiIiLCJTaWduS2V5IjoiNzE5M2NjNGM4MTNhZGRmNGNhOGNhYzMxYjJmZGMxNjkifSwiaXNzIjoiY2VjIiwiZXhwIjoxNzExODQxNjI4fQ.cJOJpnOFOq010t9ACYdHl4l5V_K2XesuGUmw4Y00rdc
+2024-03-30 12:35:18====>获取病人信息:Select A.Id As Id,A.姓名 As Name,'01' As id_no_type,A.身份证号 As id_no,to_char(A.出生日期,'yyyy-mm-dd') As birthday,nvl(B.号码,A.身份证号) As health_card_no,
+                                       A.性别 As gender,A.本人电话 As phone,A.现地址 As address,' ' As main_key
+                                  From 个人信息 A,个人标识号 B
+                                 Where A.Id=B.个人ID(+) and B.类别(+)=2
+                                   and A.Id='BDA242D4-1C84-13A2-E054-9CDC71ADEEF6'
+2024-03-30 12:35:18====>获取医生信息:Select A.资源id As Id,A.姓名 As Name,A.身份证号 As idcard,extractValue(附加信息,'root/执业证代码') As practice_number, 
+                               (Select p.名称 From 人员性质 p Where Instr(',' || A.性质 || ',', ',' || p.编码 || ',') > 0 And Rownum=1) As profession 
+                          From 医护人员 A
+                         Where A.资源id='49ff45a7-4212-48f8-ac3c-c0bf8e9805a3'
+2024-03-30 12:35:18====>获取就诊信息:Select B.编码 As visit_departments,B.简称 As visit_departments_name,'1' As visit_type,A.Id As visit_no,'' As ward_code,'' As ward_name,'' As bed_no,nvl(D.保险号,'-') As medical_insurance_number
+                          From 服务活动记录 A,部门 B,保险个人档案 D
+                         Where A.Id='4E81A449-AB03-4CDD-84EB-CB61FB055838'
+                           And A.科室id=B.资源id And A.个人id=D.个人id(+)
+                           And A.项目id='F4DA8ED2-5033-47EB-A08F-E442A5E65DAB'
+                        Union All
+                        Select B.编码 As visit_departments,B.简称 As visit_departments_name,'3' As visit_type,A.Id As visit_no,E.编码 As ward_code,E.简称 As ward_name,C.床号 As bed_no,nvl(D.保险号,'-') As medical_insurance_number
+                          From 服务活动记录 A,部门 B,保险个人档案 D,个人当前状态 C,部门 E
+                         Where A.Id='4E81A449-AB03-4CDD-84EB-CB61FB055838'
+                           And A.科室id=B.资源id And A.个人id=D.个人id(+) And A.Id=C.就诊id And C.病房id=E.资源id
+                           And A.项目id='EC3E41BF-BACD-46BA-9D3C-E2493D73C1DF'
+2024-03-30 12:35:18====>调用【应用管理系统portal页URL获取接口】入参(未加密)：{"app_key":"1729404945213775872","hospital":{"accredit_id":"125002227094723044","accredit_name":"重庆市綦江区文龙街道社区卫生服务中心","branch_code":"","branch_name":""},"patience":{"id":"BDA242D4-1C84-13A2-E054-9CDC71ADEEF6","name":"王来","id_no_type":"01","id_no":"500222198503171412","birthday":"1985-03-17","health_card_no":"500222198503171412","gender":"1","phone":"15123096889","address":"重庆市綦江区文龙街道春灯村7社33号","main_key":" ","guardian":null},"doctor":{"id":"49ff45a7-4212-48f8-ac3c-c0bf8e9805a3","name":"罗玉龙","idcard":"500222199108088613","practice_number":"110500222000711","profession":"医生"},"visit_order":{"visit_departments":"21030","visit_departments_name":"全科医学科","visit_type":"3","visit_no":"4E81A449-AB03-4CDD-84EB-CB61FB055838","ward_code":"21030","ward_name":"全科医学科","bed_no":"23","medical_insurance_number":"JM2043798751","project_list":[]},"extend":{"scene":"1","his_ip":"10.61.28.66","his_mac":"D4:C9:EF:D9:6B:20"}}
+2024-03-30 12:35:18====>调用【应用管理系统portal页URL获取接口】接口URL:http://ds-ucc.cq.hc:443/frontapi/api/v1/mutual/his/geturl
+2024-03-30 12:35:18====>调用【应用管理系统portal页URL获取接口】入参:{"param_encrypt":"dHY5oRYCiJxuVe++soLNbOIVZBBKJVvH6FJXg/MWMpKuhJx0GceTq+qUJy7hWjHS50xZAru2sAjTfiqGG7OybwxkqY+jII6zqOMUJZEQyOiP5t2ZrMVUaNojgOp1MJlPE92Fp3m2DNr7JLzmyV39aHVdHXYsAFovmhRUIY99ocvoMX0M2NRLknqdFNZJMCN5S5o9IQpePIkKRF5HFF7uw9uREmuD4dJOrGwgY/QYoXHy/TFYMthqblHgU957utoZKr4PrDV7fn54MRjbv8ZEI4R9lST3ugo3ueYXzxcU2QVT754xfglYAfUozgD9PdKYpyTWz/D/EXxVD9tfjDGgQfz/Zjp2Vmusb+yzcRynKreYXb/eJYZq9xyiaI3Gg5OjfTwZmgfPmWVPkMrwckeIM7chfHRQJgyzquTReHGPeqjbzVfo3Kz0osiowH7LHMZokHuGclIOgo8xr/sVg50Oa3pMQ2ixbko+6J9vgIcSmDfsNQzuo0oaxu9btDBzIPEKe+NIhwQtqW9LMLI77FLTF1xcjtb5353+d7DOMBhh1gRR8gXikOhHPC+1yTsxQriNm4Z4dGQR5maRzqVKoZdm8iUMXITN02MDRjS+FHsCcFVGum/XxcgMkuI+XxWjnsEcZY2YjHHKV5q+lkr1eeP7XGYrc9mT3+gXlbjzrh7TNfYtefV/atpA5FlWdds9QMxuTknvyRJ4l//uyZlhdAqZcRRgb3GUQPXtKb2cg+fMVMAdmdnt3May069f2mOnmnM3iyO37iOLZYzlIK9Y1E3bA3uyUgxIa52tPtPNxC9sDNNqhQ4ppPGDU23MiJwKldHm2TNR3a4bocX7JSuQwPOafJQNLw2vP3WixtzDpykaoYhy2VCsCLLKYahVP4x9xhBxvOnt8Xbbv09ltXwG/Zv8IhZ3KxlZszLtGQco5hQcc2FtFhjemyNCFUryJzWZ2VOMxUqanXIOa3+kbOqw16gfFF6P9R8Ko+cwLDG3tAP64M/oclZRPZVUcOXEn5Nw6mCIJ0qV/+wkcUgkR8ysech48aY/gP+IPw9BubO6crVyXb8OD7zGyZZsCyJFk2XYTIKt5qM6AVybXSJzx6Z98NoEk470RvXh5uwZHoqZzVCCjMeq2jYoYFh4aJLmi3cs4K7MU+4BthfSfXDvc4irW+Gd5tc6NjNuT3WC/cZN4p5lrFB3+dVaRlxG2Oirk2PGmEZYwswFKdenQnC4jmsIYqBw61Qh+1PcAStstqY8lsCZ5c1T5k6ltpe7C4opaNKu8orcChR8YvoeBLLelLTb8ZpdD2qr18Nuy20oeJyECTaX9bFD6jvG9DPCkBKNbJTXrxtMyt1/49XzeAf7wD/NyILcDg==","encrypt_method":"aes"}
+2024-03-30 12:35:18====>1
+2024-03-30 12:35:18====>2
+2024-03-30 12:35:18====>3
+2024-03-30 12:35:18====>4
+2024-03-30 12:35:18====>5
+2024-03-30 12:35:18====>6
+2024-03-30 12:35:18====>7
+2024-03-30 12:35:18====>8
+2024-03-30 12:35:18====>9
+2024-03-30 12:35:18====>调用【应用管理系统portal页URL获取接口】出参:{"code":200,"message":"成功","data":{"portal_url":"http://10.185.100.89:443/manager-org-view/#/accredit/index?serial_number_his=b333ad245518ebf88940bcd3a5ef2962\u0026timestamp=1711773449\u0026sign=726fa315e983c69d60bede386624760057a464f5621287dbe6fd486e71c2ee86"},"error":{"error_code":0,"error_msg":""},"meta":{"trace":{"trace_id":"aca6beae-e10b-4e70-878d-135157688f3f","parent_id":"","span_id":"4e231b30-acbb-4ac7-a0f8-64d14fa03687","request_id":""}}}
+2024-03-30 12:35:28====>=========================================================================================================
+2024-03-30 12:35:28====>调用Extemenu入参：insureSystem:48;FunctionNo:02;strAdvance:<root><OrgId>4480c78d-c3dd-4873-a0a8-d936963abf75</OrgId><EventId>46975AC4-7E90-4EE6-ADE6-9FCC6EDAA963</EventId><Pid>C806FE46-8759-4693-96AE-1624B05083C8</Pid><DepId>2045fd3b-45ad-4f77-a1d8-a44f526e7888</DepId><DepName>全科医学科</DepName><OperId>49ff45a7-4212-48f8-ac3c-c0bf8e9805a3</OperId><OperName>罗玉龙</OperName><DoctorId>148BCF1C-1E74-602A-E064-9CDC71ADEEF6</DoctorId><No>2403971</No><DocumentNumber>2403171691</DocumentNumber></root>
+2024-03-30 12:35:28====>获取的token：eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7IlVzZXJJZCI6MTcyOTQwNDM2NzcwODA5ODU2MCwiQXBwS2V5IjoiIiwiQWNjb3VudE5hbWUiOiIiLCJBY2NvdW50UmVhbE5hbWUiOiIiLCJTaWduS2V5IjoiNzE5M2NjNGM4MTNhZGRmNGNhOGNhYzMxYjJmZGMxNjkifSwiaXNzIjoiY2VjIiwiZXhwIjoxNzExODQxNjI4fQ.cJOJpnOFOq010t9ACYdHl4l5V_K2XesuGUmw4Y00rdc
+2024-03-30 12:35:28====>获取病人信息:Select A.Id As Id,A.姓名 As Name,'01' As id_no_type,A.身份证号 As id_no,to_char(A.出生日期,'yyyy-mm-dd') As birthday,nvl(B.号码,A.身份证号) As health_card_no,
+                                       A.性别 As gender,A.本人电话 As phone,A.现地址 As address,' ' As main_key
+                                  From 个人信息 A,个人标识号 B
+                                 Where A.Id=B.个人ID(+) and B.类别(+)=2
+                                   and A.Id='C806FE46-8759-4693-96AE-1624B05083C8'
+2024-03-30 12:35:28====>获取医生信息:Select A.资源id As Id,A.姓名 As Name,A.身份证号 As idcard,extractValue(附加信息,'root/执业证代码') As practice_number, 
+                               (Select p.名称 From 人员性质 p Where Instr(',' || A.性质 || ',', ',' || p.编码 || ',') > 0 And Rownum=1) As profession 
+                          From 医护人员 A
+                         Where A.资源id='49ff45a7-4212-48f8-ac3c-c0bf8e9805a3'
+2024-03-30 12:35:28====>获取就诊信息:Select B.编码 As visit_departments,B.简称 As visit_departments_name,'1' As visit_type,A.Id As visit_no,'' As ward_code,'' As ward_name,'' As bed_no,nvl(D.保险号,'-') As medical_insurance_number
+                          From 服务活动记录 A,部门 B,保险个人档案 D
+                         Where A.Id='46975AC4-7E90-4EE6-ADE6-9FCC6EDAA963'
+                           And A.科室id=B.资源id And A.个人id=D.个人id(+)
+                           And A.项目id='F4DA8ED2-5033-47EB-A08F-E442A5E65DAB'
+                        Union All
+                        Select B.编码 As visit_departments,B.简称 As visit_departments_name,'3' As visit_type,A.Id As visit_no,E.编码 As ward_code,E.简称 As ward_name,C.床号 As bed_no,nvl(D.保险号,'-') As medical_insurance_number
+                          From 服务活动记录 A,部门 B,保险个人档案 D,个人当前状态 C,部门 E
+                         Where A.Id='46975AC4-7E90-4EE6-ADE6-9FCC6EDAA963'
+                           And A.科室id=B.资源id And A.个人id=D.个人id(+) And A.Id=C.就诊id And C.病房id=E.资源id
+                           And A.项目id='EC3E41BF-BACD-46BA-9D3C-E2493D73C1DF'
+2024-03-30 12:35:29====>调用【应用管理系统portal页URL获取接口】入参(未加密)：{"app_key":"1729404945213775872","hospital":{"accredit_id":"125002227094723044","accredit_name":"重庆市綦江区文龙街道社区卫生服务中心","branch_code":"","branch_name":""},"patience":{"id":"C806FE46-8759-4693-96AE-1624B05083C8","name":"陈金焱","id_no_type":"01","id_no":"510223194901253317","birthday":"1949-01-25","health_card_no":"510223194901253317","gender":"1","phone":"15703454209","address":"重庆市綦江区永城大桥村鱼塘坎","main_key":" ","guardian":null},"doctor":{"id":"49ff45a7-4212-48f8-ac3c-c0bf8e9805a3","name":"罗玉龙","idcard":"500222199108088613","practice_number":"110500222000711","profession":"医生"},"visit_order":{"visit_departments":"21030","visit_departments_name":"全科医学科","visit_type":"3","visit_no":"46975AC4-7E90-4EE6-ADE6-9FCC6EDAA963","ward_code":"21030","ward_name":"全科医学科","bed_no":"26","medical_insurance_number":"E89161821","project_list":[]},"extend":{"scene":"1","his_ip":"10.61.28.66","his_mac":"D4:C9:EF:D9:6B:20"}}
+2024-03-30 12:35:29====>调用【应用管理系统portal页URL获取接口】接口URL:http://ds-ucc.cq.hc:443/frontapi/api/v1/mutual/his/geturl
+2024-03-30 12:35:29====>调用【应用管理系统portal页URL获取接口】入参:{"param_encrypt":"dHY5oRYCiJxuVe++soLNbOIVZBBKJVvH6FJXg/MWMpKuhJx0GceTq+qUJy7hWjHS50xZAru2sAjTfiqGG7OybwxkqY+jII6zqOMUJZEQyOiP5t2ZrMVUaNojgOp1MJlPE92Fp3m2DNr7JLzmyV39aHVdHXYsAFovmhRUIY99ocvoMX0M2NRLknqdFNZJMCN5S5o9IQpePIkKRF5HFF7uw9uREmuD4dJOrGwgY/QYoXHy/TFYMthqblHgU957utoZvZ9+QbG3KnpLCTFt9X5AwUlRAmJI+HHUs8SfqR223V2MG9NmgZxOQIz2eAPLYcGK6EGeFPD4nBUBR16RX3p2FqmU+LIeexhJBkhmz872bMCnF4xcOml1W5LM3p2UvR+h0zGilulHSYtwB8SgOezFCOntza9RXnMnDqRjbhOJneVJgzBw+cLVHOI/1KxyzN28cmduF0w3c2pseZqbpCycAYfr3i5VfTqfKQ+/ijpXycCfoI2xGT/kpyH2Lj8npqMm2Kr3zgf0ZLIQXvmHxcpYXCyrcJ9WRRgZslFQ0CqqEbwUawrGQ1WMFN1Sdv10WvlHfis1VmFcU0nYIP70c3zlSl78en7sNy5ERtbrFe/+46qRzgMNZe5QSmIyge6SyVPvJupls1Xmu4RHR3JCDPkhCbK8oZUqPQ2rEw7z6lEXsLUKCHTDTsAFUrOuEXBdpdwMGkNpJ6sSmYzNn8nGUBLvI2KO66eB18QESAFL8XD45zPn8lvRY5oji93xr9XjC/06A2JjqtfQTdh49oZCX7DwHq86JPtfKEcRNr6IFxEZhvPMlnqXPQ3w3OoMB8Kz4V5uxfNwgyR0y+zxv4pYwDNxQ4P+jiVCc3/Hk3fi6b+he8Gsa/r4X/qzwQ4n3kHZrG5Rx7v3Bz72sVX71Hk2r5BCIYF3yOjE0RjVnuxVcMiMefxxjJzvR4LN1TsDtSgOy1CliYj0rJa5kowbUwNJfH+1YbdFOkuAvvhTAAW927fWfhkQtfF75X+VoDBtIsQLAM0xfo1mpuGjpFKqLu2JzqNKoc1oIoZJDKB+hh3eoedB5RNQE3kHtVIXGo2F1LVzA0F3ctPGf2SIJBDZ2mkydoEXGT0rRqn5//Ox3AgiJSHZJvpL5UMDF11kV+AQjGmwjM1uqye2E1urQ9q0AZAZxcQ4GPes+7JMJw7wEocGyCww4Vt0/WMDu1EQOZB5iRbZ8MUXOpiMmZHcL8Hufvx0TXXIxrY/+6sJ+2f+sLWHAa/lwzM8OriOch2uBMPllpY1JtTP7j5giAcXi+KvgYbokg3gOXe6e7klbvwZxcg3jU9G048ewb5rz62dBXGG8aZ+RfDP","encrypt_method":"aes"}
+2024-03-30 12:35:29====>1
+2024-03-30 12:35:29====>2
+2024-03-30 12:35:29====>3
+2024-03-30 12:35:29====>4
+2024-03-30 12:35:29====>5
+2024-03-30 12:35:29====>6
+2024-03-30 12:35:29====>7
+2024-03-30 12:35:29====>8
+2024-03-30 12:35:29====>9
+2024-03-30 12:35:29====>调用【应用管理系统portal页URL获取接口】出参:{"code":200,"message":"成功","data":{"portal_url":"http://10.185.100.89:443/manager-org-view/#/accredit/index?serial_number_his=348efd84e0615ce4f26752ad7d1163eb\u0026timestamp=1711773460\u0026sign=3758aa6912e161670f8ffaffad92eae88f97eed4ad3b09c09fa4fda0570fb219"},"error":{"error_code":0,"error_msg":""},"meta":{"trace":{"trace_id":"38f66cb2-a8ff-45b4-9f46-a96119dad3df","parent_id":"","span_id":"49b51ae6-b9ca-497b-9a45-19dfa927f69f","request_id":""}}}
+2024-03-30 12:44:14====>=========================================================================================================
+2024-03-30 12:44:14====>调用Exteinterf入参：insureSystem:48;FunctionNo:357;strAdvance:<root><OrgId>4480c78d-c3dd-4873-a0a8-d936963abf75</OrgId><EventId>B8078181-DD48-47BA-9A30-8475516730E8</EventId><GroupNo>20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39</GroupNo><Pid>26b38508-be91-4904-be54-116a7c62e77e</Pid><DepId>2045fd3b-45ad-4f77-a1d8-a44f526e7888</DepId><DepName>全科医学科</DepName><OperId>49ff45a7-4212-48f8-ac3c-c0bf8e9805a3</OperId><OperName>罗玉龙</OperName></root>
+2024-03-30 12:44:14====>是否有检查检验项目：Select *
+                                From 个人医嘱记录 a
+                                Where a.机构id = '4480c78d-c3dd-4873-a0a8-d936963abf75'
+                                And a.事件id = 'B8078181-DD48-47BA-9A30-8475516730E8'
+                                And a.组序号 in (20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39)
+                                And a.诊疗类别 In ('C','D')
+2024-03-30 12:47:12====>=========================================================================================================
+2024-03-30 12:47:12====>调用Exteinterf入参：insureSystem:48;FunctionNo:357;strAdvance:<root><OrgId>4480c78d-c3dd-4873-a0a8-d936963abf75</OrgId><EventId>63A37794-FF58-4802-AEC3-766C88EF0288</EventId><GroupNo>22</GroupNo><Pid>7241e07e-f6d6-48c9-981e-7f1fbe14bd15</Pid><DepId>2045fd3b-45ad-4f77-a1d8-a44f526e7888</DepId><DepName>全科医学科</DepName><OperId>49ff45a7-4212-48f8-ac3c-c0bf8e9805a3</OperId><OperName>罗玉龙</OperName></root>
+2024-03-30 12:47:12====>是否有检查检验项目：Select *
+                                From 个人医嘱记录 a
+                                Where a.机构id = '4480c78d-c3dd-4873-a0a8-d936963abf75'
+                                And a.事件id = '63A37794-FF58-4802-AEC3-766C88EF0288'
+                                And a.组序号 in (22)
+                                And a.诊疗类别 In ('C','D')

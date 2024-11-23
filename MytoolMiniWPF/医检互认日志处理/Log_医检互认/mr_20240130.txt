@@ -1,0 +1,590 @@
+2024-01-30 08:34:19====>=========================================================================================================
+2024-01-30 08:34:19====>调用Exteinterf入参：insureSystem:48;FunctionNo:357;strAdvance:<root><OrgId>4480c78d-c3dd-4873-a0a8-d936963abf75</OrgId><EventId>5FA9A6EA-79B1-4F7A-AB26-404CD10F88FF</EventId><GroupNo>25,26,27,28</GroupNo><Pid>A35C1CDD-FA95-40A4-9218-49795785162C</Pid><DepId>2045fd3b-45ad-4f77-a1d8-a44f526e7888</DepId><DepName>普内科</DepName><OperId>49ff45a7-4212-48f8-ac3c-c0bf8e9805a3</OperId><OperName>罗玉龙</OperName></root>
+2024-01-30 08:34:19====>是否有检查检验项目：Select *
+                                From 个人医嘱记录 a
+                                Where a.机构id = '4480c78d-c3dd-4873-a0a8-d936963abf75'
+                                And a.事件id = '5FA9A6EA-79B1-4F7A-AB26-404CD10F88FF'
+                                And a.组序号 in (25,26,27,28)
+                                And a.诊疗类别 In ('C','D')
+2024-01-30 08:48:17====>=========================================================================================================
+2024-01-30 08:48:17====>调用Exteinterf入参：insureSystem:48;FunctionNo:357;strAdvance:<root><OrgId>4480c78d-c3dd-4873-a0a8-d936963abf75</OrgId><EventId>101EB996-E074-3ED1-E064-9CDC71ADEEF6</EventId><GroupNo>1,2,3,4,5,6,7,8,9,10,11,12,13</GroupNo><Pid>27ddb37b-d272-43de-9804-13c4f682008e</Pid><DepId>2045fd3b-45ad-4f77-a1d8-a44f526e7888</DepId><DepName>普内科</DepName><OperId>49ff45a7-4212-48f8-ac3c-c0bf8e9805a3</OperId><OperName>罗玉龙</OperName></root>
+2024-01-30 08:48:17====>是否有检查检验项目：Select *
+                                From 个人医嘱记录 a
+                                Where a.机构id = '4480c78d-c3dd-4873-a0a8-d936963abf75'
+                                And a.事件id = '101EB996-E074-3ED1-E064-9CDC71ADEEF6'
+                                And a.组序号 in (1,2,3,4,5,6,7,8,9,10,11,12,13)
+                                And a.诊疗类别 In ('C','D')
+2024-01-30 08:48:17====>获取的token：eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7IlVzZXJJZCI6MTcyOTQwNDM2NzcwODA5ODU2MCwiQXBwS2V5IjoiIiwiQWNjb3VudE5hbWUiOiIiLCJBY2NvdW50UmVhbE5hbWUiOiIiLCJTaWduS2V5IjoiNzE5M2NjNGM4MTNhZGRmNGNhOGNhYzMxYjJmZGMxNjkifSwiaXNzIjoiY2VjIiwiZXhwIjoxNzA2NjU5MDUwfQ.6BFKbEjYO72jOIzApxKcuoFU_8wj36NGYWFcb4RxSKc
+2024-01-30 08:48:17====>获取病人信息:Select A.Id As patientId,'01' As identityTypeCode,nvl(A.身份证号,'-') As identityNo,A.姓名 As personalName,A.性别 As sexCode,to_char(A.出生日期,'yyyymmdd') As birthDate,nvl(B.保险号,A.身份证号) As medicalCardNumber
+                              From 个人信息 A,保险个人档案 B
+                             Where A.Id=B.个人id(+) And B.系统(+)=100
+                               And A.Id='27ddb37b-d272-43de-9804-13c4f682008e'
+2024-01-30 08:48:17====>获取就诊信息:Select Decode(B.急诊,1,'2','1') As visitTypeCode,A.ID As visitNo,to_char(A.开始时间,'yyyymmdd') As visitDate,
+                                   C.编码 As deptCode,C.简称 As deptName,'' As wardCode,'' As wardName,'' As bedNo,
+                                   D.编码 As doctorId,D.姓名 As doctorName,D.身份证号 As doctorIdentityNo
+                              From 服务活动记录 A,个人挂号记录 B,部门 C,医护人员 D
+                             Where A.Id=B.记录id And A.科室id=C.资源id And A.服务人id=D.资源id
+                               And A.id='101EB996-E074-3ED1-E064-9CDC71ADEEF6'
+                            Union All
+                            Select '3' As visitTypeCode,A.ID As visitNo,to_char(A.开始时间,'yyyymmdd') As visitDate,
+                                   C.编码 As deptCode,C.简称 As deptName,E.编码 As wardCode,E.简称 As wardName,B.床号 As bedNo,
+                                   D.编码 As doctorId,D.姓名 As doctorName,D.身份证号 As doctorIdentityNo
+                              From 服务活动记录 A,个人入院记录 B,部门 C,医护人员 D,部门 E
+                             Where A.Id=B.事件id And A.科室id=C.资源id And A.服务人id=D.资源id And B.病房id=E.资源id(+)
+                               And A.id='101EB996-E074-3ED1-E064-9CDC71ADEEF6'
+2024-01-30 08:48:17====>获取诊断信息:Select B.主诉 As chiefCompliant,C.问题名称 As diagName,C.问题编码 As diagCode
+                              From 服务活动记录 A,个人挂号记录 B,个人问题列表 C
+                             Where A.Id=B.记录id And A.Id=C.服务记录id(+)
+                               And A.id='101EB996-E074-3ED1-E064-9CDC71ADEEF6'
+                               And Rownum<2
+                            Union All
+                            Select Distinct '' As chiefCompliant,C.问题名称 As diagName,C.问题编码 As diagCode
+                              From 服务活动记录 A,个人入院记录 B,个人问题列表 C
+                             Where A.Id=B.事件id  And A.Id=C.服务记录id(+) And C.记录性质=2 
+                               And A.id='101EB996-E074-3ED1-E064-9CDC71ADEEF6'
+                               And Rownum<2
+2024-01-30 08:48:17====>获取检验项目编码:Select D.编码 As labItemCode,D.名称 As labItemName
+                              From 个人医嘱记录 A,诊疗项目目录 D
+                             Where A.诊疗项目id=D.id
+                               And A.事件ID='101EB996-E074-3ED1-E064-9CDC71ADEEF6'
+                               And A.机构id='4480c78d-c3dd-4873-a0a8-d936963abf75'
+                               And A.组序号 in (1,2,3,4,5,6,7,8,9,10,11,12,13)
+                               And A.诊疗类别='C'
+                               And (D.撤档时间 Is Null Or D.撤档时间>Sysdate)
+2024-01-30 08:48:17====>调用【检验结果互认提醒】接口URL:http://ds-ucc.cq.hc:443/frontapi/api/v3/reportUrl/recogRemind
+2024-01-30 08:48:17====>调用【检验结果互认提醒】入参:{"messages":{"EVN":{"eventTypeCode":"02","eventTypeName":"检验结果互认提醒"},"PID":{"patientId":"27ddb37b-d272-43de-9804-13c4f682008e","identityTypeCode":"01","identityNo":"51022319781128202X","visitCardTypeCode":"","visitCardNo":"","personalName":"罗军","birthDate":"19781128","sexCode":"2","medicalCardNumber":"ZG1004146767"},"PV1":{"visitTypeCode":"3","visitNo":"101EB996-E074-3ED1-E064-9CDC71ADEEF6","visitDate":"20240130","orgCode":"125002227094723044","orgName":"重庆市綦江区文龙街道社区卫生服务中心","branchCode":"","branchName":"","deptCode":"21030","deptName":"普内科","wardCode":"21030","wardName":"普内科","bedNo":"48","doctorId":"696","doctorName":"罗玉龙","doctorIdentityNo":"500222199108088613","computerMac":"D4:C9:EF:D9:6B:20","computerIp":"10.61.28.66"},"DG1":{"chiefCompliant":"","diagCode":"J18.900","diagName":"肺炎？"},"OBR":{"lab":[{"labItemCode":"100329","labItemName":"大便隐血试验","labRecognCode":"","labRecognName":""},{"labItemCode":"42201800101035478426","labItemName":"粪便常规","labRecognCode":"","labRecognName":""},{"labItemCode":"xq201800101035481630","labItemName":"尿液分析","labRecognCode":"","labRecognName":""},{"labItemCode":"xq201800101035481632","labItemName":"尿液分析(同时加做尿微量白蛋白加收)","labRecognCode":"","labRecognName":""},{"labItemCode":"100323","labItemName":"（住院）血细胞分析（五分类）","labRecognCode":"","labRecognName":""},{"labItemCode":"422018101035480176","labItemName":"C反应蛋白（CRP）","labRecognCode":"","labRecognName":""},{"labItemCode":"100338","labItemName":"糖化血红蛋白测定","labRecognCode":"","labRecognName":""},{"labItemCode":"100304","labItemName":"电解质测定","labRecognCode":"","labRecognName":""},{"labItemCode":"100316","labItemName":"凝血酶测定","labRecognCode":"","labRecognName":""},{"labItemCode":"100340","labItemName":"血浆D-二聚体(D-Dimer)测定(仪器法)","labRecognCode":"","labRecognName":""},{"labItemCode":"42201800101035479437","labItemName":"肝功1","labRecognCode":"","labRecognName":""},{"labItemCode":"100317","labItemName":"空腹血糖","labRecognCode":"","labRecognName":""},{"labItemCode":"100318","labItemName":"肾功","labRecognCode":"","labRecognName":""},{"labItemCode":"100319","labItemName":"心肌酶谱","labRecognCode":"","labRecognName":""},{"labItemCode":"100335","labItemName":"血脂2号(六项)","labRecognCode":"","labRecognName":""}]}}}
+2024-01-30 08:48:17====>1
+2024-01-30 08:48:17====>2
+2024-01-30 08:48:17====>3
+2024-01-30 08:48:17====>4
+2024-01-30 08:48:17====>5
+2024-01-30 08:48:17====>6
+2024-01-30 08:48:17====>7
+2024-01-30 08:48:17====>8
+2024-01-30 08:48:17====>9
+2024-01-30 08:48:17====>调用【检验结果互认提醒】出参:{"code":"1000","message":"操作失败","data":{"EVN":{"eventTypeCode":"02","eventTypeName":"检验结果互认提醒"},"QAK":{"queryResponseStatus":"0","url":null,"reminder":null,"brief":null}}}
+2024-01-30 08:49:45====>=========================================================================================================
+2024-01-30 08:49:45====>调用Exteinterf入参：insureSystem:48;FunctionNo:357;strAdvance:<root><OrgId>4480c78d-c3dd-4873-a0a8-d936963abf75</OrgId><EventId>101EB996-E074-3ED1-E064-9CDC71ADEEF6</EventId><GroupNo>14</GroupNo><Pid>27ddb37b-d272-43de-9804-13c4f682008e</Pid><DepId>2045fd3b-45ad-4f77-a1d8-a44f526e7888</DepId><DepName>普内科</DepName><OperId>49ff45a7-4212-48f8-ac3c-c0bf8e9805a3</OperId><OperName>罗玉龙</OperName></root>
+2024-01-30 08:49:45====>是否有检查检验项目：Select *
+                                From 个人医嘱记录 a
+                                Where a.机构id = '4480c78d-c3dd-4873-a0a8-d936963abf75'
+                                And a.事件id = '101EB996-E074-3ED1-E064-9CDC71ADEEF6'
+                                And a.组序号 in (14)
+                                And a.诊疗类别 In ('C','D')
+2024-01-30 08:49:45====>获取的token：eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7IlVzZXJJZCI6MTcyOTQwNDM2NzcwODA5ODU2MCwiQXBwS2V5IjoiIiwiQWNjb3VudE5hbWUiOiIiLCJBY2NvdW50UmVhbE5hbWUiOiIiLCJTaWduS2V5IjoiNzE5M2NjNGM4MTNhZGRmNGNhOGNhYzMxYjJmZGMxNjkifSwiaXNzIjoiY2VjIiwiZXhwIjoxNzA2NjU5MDUwfQ.6BFKbEjYO72jOIzApxKcuoFU_8wj36NGYWFcb4RxSKc
+2024-01-30 08:49:45====>获取病人信息:Select A.Id As Id,A.姓名 As Name,'01' As id_no_type,A.身份证号 As id_no,to_char(A.出生日期,'yyyy-mm-dd') As birthday,nvl(B.号码,A.身份证号) As health_card_no,
+                                       A.性别 As gender,A.本人电话 As phone,A.现地址 As address,' ' As main_key
+                                  From 个人信息 A,个人标识号 B
+                                 Where A.Id=B.个人ID(+) and B.类别(+)=2
+                                   and A.Id='27ddb37b-d272-43de-9804-13c4f682008e'
+2024-01-30 08:49:45====>获取医生信息:Select A.资源id As Id,A.姓名 As Name,A.身份证号 As idcard,extractValue(附加信息,'root/执业证代码') As practice_number, 
+                               (Select p.名称 From 人员性质 p Where Instr(',' || A.性质 || ',', ',' || p.编码 || ',') > 0 And Rownum=1) As profession 
+                          From 医护人员 A
+                         Where A.资源id='49ff45a7-4212-48f8-ac3c-c0bf8e9805a3'
+2024-01-30 08:49:45====>获取就诊信息:Select B.编码 As visit_departments,B.简称 As visit_departments_name,'1' As visit_type,A.Id As visit_no,'' As ward_code,'' As ward_name,'' As bed_no,nvl(D.保险号,'-') As medical_insurance_number
+                          From 服务活动记录 A,部门 B,保险个人档案 D
+                         Where A.Id='101EB996-E074-3ED1-E064-9CDC71ADEEF6'
+                           And A.科室id=B.资源id And A.个人id=D.个人id(+)
+                           And A.项目id='F4DA8ED2-5033-47EB-A08F-E442A5E65DAB'
+                        Union All
+                        Select B.编码 As visit_departments,B.简称 As visit_departments_name,'3' As visit_type,A.Id As visit_no,E.编码 As ward_code,E.简称 As ward_name,C.床号 As bed_no,nvl(D.保险号,'-') As medical_insurance_number
+                          From 服务活动记录 A,部门 B,保险个人档案 D,个人当前状态 C,部门 E
+                         Where A.Id='101EB996-E074-3ED1-E064-9CDC71ADEEF6'
+                           And A.科室id=B.资源id And A.个人id=D.个人id(+) And A.Id=C.就诊id And C.病房id=E.资源id
+                           And A.项目id='EC3E41BF-BACD-46BA-9D3C-E2493D73C1DF'
+2024-01-30 08:49:45====>获取project_list:select project_name,study_body_part,modality,min(project_charge_code) as project_charge_code,study_project_code,sum(project_price) as project_price from 
+                         (Select distinct c.名称     As project_name,
+                               nvl(a.标本部位,'-') As study_body_part,
+                               a.操作类型 As modality,
+                               nvl(f.国家代码,'-') As project_charge_code,
+                               c.id||c.部位编码 As study_project_code,
+                               Decode(d.是否变价,1,
+                                 Case
+                                   When a.诊疗类别 In ('4', '5', '6', '7') Then
+                                     f_获取收费项目单价(b.收费项目id,0,0,a.执行科室id,1,4,0)
+                                   When d.类别 In ('4', '5', '6', '7') Then
+                                     f_获取时价分批药品的单价(b.收费项目id, a.执行科室id, b.收费数量, 4, 0)
+                                   Else
+                                     Round(e.现价, 4)
+                                 End,
+                                 Round(e.现价,4)) As project_price
+                            From 个人医嘱记录 a,收费项目目录 d
+                                ,诊疗收费关系  b,
+                                收费价目 e,
+                                保险项目对应 f,
+                                (select C.id,C.名称,h.编码 as 部位编码,h.名称 as 部位
+                                  from 诊疗项目目录 C,诊疗项目部位 g,诊疗检查部位 h
+                                 where c.id=g.项目id(+) and g.类型=h.类型(+) and g.部位=h.名称(+)) c
+                            Where a.机构id = '4480c78d-c3dd-4873-a0a8-d936963abf75'
+                            And a.个人id = '27ddb37b-d272-43de-9804-13c4f682008e'
+                            And a.事件id = '101EB996-E074-3ED1-E064-9CDC71ADEEF6'
+                            And a.组序号 in (14)
+                            And b.诊疗项目id=c.id
+                            And a.诊疗项目id = c.Id
+                            And (a.标本部位=c.部位 or c.部位 is null)
+                            And a.诊疗类别 in ('D')
+                            and a.诊疗项目id=b.诊疗项目id
+                            And b.收费项目id = d.id
+                            And d.id = e.收费项目id
+                           And d.Id=f.收费id(+) And f.系统(+)=100
+                           And (e.终止日期 Is Null Or e.终止日期>Sysdate))
+                        group by project_name,study_body_part,modality,study_project_code
+2024-01-30 08:49:45====>调用【近期检查项目查询接口】接口URL:http://ds-ucc.cq.hc:443/frontapi/api/v3/cqkydy/api/v2/study/shorttime/list/total
+2024-01-30 08:49:45====>调用【近期检查项目查询接口】入参:{"app_key":"1729404945213775872","hospital":{"accredit_id":"125002227094723044","accredit_name":"重庆市綦江区文龙街道社区卫生服务中心","branch_code":"","branch_name":""},"patience":{"id":"27ddb37b-d272-43de-9804-13c4f682008e","name":"罗军","id_no_type":"01","id_no":"51022319781128202X","birthday":"1978-11-28","health_card_no":"51022319781128202X","gender":"2","phone":"13368217231","address":"重庆市綦江区德龙花园B区3单元6-2","main_key":" ","guardian":null},"doctor":{"id":"49ff45a7-4212-48f8-ac3c-c0bf8e9805a3","name":"罗玉龙","idcard":"500222199108088613","practice_number":"110500222000711","profession":"医生"},"visit_order":{"visit_departments":"21030","visit_departments_name":"普内科","visit_type":"3","visit_no":"101EB996-E074-3ED1-E064-9CDC71ADEEF6","ward_code":"21030","ward_name":"普内科","bed_no":"48","medical_insurance_number":"A78739246","project_list":[{"project_name":"CT","study_body_part":"胸部","modality":"CT","project_charge_code":"002103000000003-2103.03","study_project_code":"31C295EE-AC69-491F-BA2E-F5F5127826F50301","project_price":2905.50},{"project_name":"CT","study_body_part":"加收","modality":"CT","project_charge_code":"002103000000003-2103.03","study_project_code":"31C295EE-AC69-491F-BA2E-F5F5127826F50711","project_price":2905.50}]},"extend":{"scene":"2","his_ip":"10.61.28.66","his_mac":"D4:C9:EF:D9:6B:20"}}
+2024-01-30 08:49:45====>1
+2024-01-30 08:49:45====>2
+2024-01-30 08:49:45====>3
+2024-01-30 08:49:45====>4
+2024-01-30 08:49:45====>5
+2024-01-30 08:49:45====>6
+2024-01-30 08:49:45====>7
+2024-01-30 08:49:45====>8
+2024-01-30 08:49:45====>9
+2024-01-30 08:49:45====>调用【近期检查项目查询接口】出参:{"code":200,"message":"成功","data":{"total_num":0},"error":{"error_code":0},"meta":{"trace":{"trace_id":"7626c789-4124-4437-9b38-807865002f46","parent_id":"","span_id":"34463141-7264-4c28-9cc9-57bad99359ab","request_id":""}}}
+2024-01-30 09:14:35====>=========================================================================================================
+2024-01-30 09:14:35====>调用Exteinterf入参：insureSystem:48;FunctionNo:357;strAdvance:<root><OrgId>4480c78d-c3dd-4873-a0a8-d936963abf75</OrgId><EventId>101EB996-E074-3ED1-E064-9CDC71ADEEF6</EventId><GroupNo>15,16,17,18,19</GroupNo><Pid>27ddb37b-d272-43de-9804-13c4f682008e</Pid><DepId>2045fd3b-45ad-4f77-a1d8-a44f526e7888</DepId><DepName>普内科</DepName><OperId>49ff45a7-4212-48f8-ac3c-c0bf8e9805a3</OperId><OperName>罗玉龙</OperName></root>
+2024-01-30 09:14:35====>是否有检查检验项目：Select *
+                                From 个人医嘱记录 a
+                                Where a.机构id = '4480c78d-c3dd-4873-a0a8-d936963abf75'
+                                And a.事件id = '101EB996-E074-3ED1-E064-9CDC71ADEEF6'
+                                And a.组序号 in (15,16,17,18,19)
+                                And a.诊疗类别 In ('C','D')
+2024-01-30 09:15:47====>=========================================================================================================
+2024-01-30 09:15:47====>调用Exteinterf入参：insureSystem:48;FunctionNo:357;strAdvance:<root><OrgId>4480c78d-c3dd-4873-a0a8-d936963abf75</OrgId><EventId>7926F56C-2908-467F-84D2-AE30807422D1</EventId><GroupNo>30,31,32</GroupNo><Pid>BDA242DB-3BE9-13A2-E054-9CDC71ADEEF6</Pid><DepId>2045fd3b-45ad-4f77-a1d8-a44f526e7888</DepId><DepName>普内科</DepName><OperId>49ff45a7-4212-48f8-ac3c-c0bf8e9805a3</OperId><OperName>罗玉龙</OperName></root>
+2024-01-30 09:15:47====>是否有检查检验项目：Select *
+                                From 个人医嘱记录 a
+                                Where a.机构id = '4480c78d-c3dd-4873-a0a8-d936963abf75'
+                                And a.事件id = '7926F56C-2908-467F-84D2-AE30807422D1'
+                                And a.组序号 in (30,31,32)
+                                And a.诊疗类别 In ('C','D')
+2024-01-30 09:29:10====>=========================================================================================================
+2024-01-30 09:29:10====>调用Exteinterf入参：insureSystem:48;FunctionNo:357;strAdvance:<root><OrgId>4480c78d-c3dd-4873-a0a8-d936963abf75</OrgId><EventId>101EB996-E074-3ED1-E064-9CDC71ADEEF6</EventId><GroupNo>20,21,22,23,24,25,26,27,28,29,30</GroupNo><Pid>27ddb37b-d272-43de-9804-13c4f682008e</Pid><DepId>2045fd3b-45ad-4f77-a1d8-a44f526e7888</DepId><DepName>普内科</DepName><OperId>49ff45a7-4212-48f8-ac3c-c0bf8e9805a3</OperId><OperName>罗玉龙</OperName></root>
+2024-01-30 09:29:10====>是否有检查检验项目：Select *
+                                From 个人医嘱记录 a
+                                Where a.机构id = '4480c78d-c3dd-4873-a0a8-d936963abf75'
+                                And a.事件id = '101EB996-E074-3ED1-E064-9CDC71ADEEF6'
+                                And a.组序号 in (20,21,22,23,24,25,26,27,28,29,30)
+                                And a.诊疗类别 In ('C','D')
+2024-01-30 09:30:05====>=========================================================================================================
+2024-01-30 09:30:05====>调用Exteinterf入参：insureSystem:48;FunctionNo:357;strAdvance:<root><OrgId>4480c78d-c3dd-4873-a0a8-d936963abf75</OrgId><EventId>101EB996-E074-3ED1-E064-9CDC71ADEEF6</EventId><GroupNo>29,31</GroupNo><Pid>27ddb37b-d272-43de-9804-13c4f682008e</Pid><DepId>2045fd3b-45ad-4f77-a1d8-a44f526e7888</DepId><DepName>普内科</DepName><OperId>49ff45a7-4212-48f8-ac3c-c0bf8e9805a3</OperId><OperName>罗玉龙</OperName></root>
+2024-01-30 09:30:05====>是否有检查检验项目：Select *
+                                From 个人医嘱记录 a
+                                Where a.机构id = '4480c78d-c3dd-4873-a0a8-d936963abf75'
+                                And a.事件id = '101EB996-E074-3ED1-E064-9CDC71ADEEF6'
+                                And a.组序号 in (29,31)
+                                And a.诊疗类别 In ('C','D')
+2024-01-30 10:23:09====>=========================================================================================================
+2024-01-30 10:23:09====>调用Exteinterf入参：insureSystem:48;FunctionNo:357;strAdvance:<root><OrgId>4480c78d-c3dd-4873-a0a8-d936963abf75</OrgId><EventId>7DAE2FD0-16C6-4E11-8B20-2023C8610BB3</EventId><GroupNo>1,2,3,4,5,6,7,8,9,10,11,12,13</GroupNo><Pid>2cbb8b94-64c0-4505-9bbb-da86dad18ba6</Pid><DepId>2045fd3b-45ad-4f77-a1d8-a44f526e7888</DepId><DepName>普内科</DepName><OperId>49ff45a7-4212-48f8-ac3c-c0bf8e9805a3</OperId><OperName>罗玉龙</OperName></root>
+2024-01-30 10:23:09====>是否有检查检验项目：Select *
+                                From 个人医嘱记录 a
+                                Where a.机构id = '4480c78d-c3dd-4873-a0a8-d936963abf75'
+                                And a.事件id = '7DAE2FD0-16C6-4E11-8B20-2023C8610BB3'
+                                And a.组序号 in (1,2,3,4,5,6,7,8,9,10,11,12,13)
+                                And a.诊疗类别 In ('C','D')
+2024-01-30 10:23:10====>获取的token：eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7IlVzZXJJZCI6MTcyOTQwNDM2NzcwODA5ODU2MCwiQXBwS2V5IjoiIiwiQWNjb3VudE5hbWUiOiIiLCJBY2NvdW50UmVhbE5hbWUiOiIiLCJTaWduS2V5IjoiNzE5M2NjNGM4MTNhZGRmNGNhOGNhYzMxYjJmZGMxNjkifSwiaXNzIjoiY2VjIiwiZXhwIjoxNzA2NjU5MDUwfQ.6BFKbEjYO72jOIzApxKcuoFU_8wj36NGYWFcb4RxSKc
+2024-01-30 10:23:10====>获取病人信息:Select A.Id As patientId,'01' As identityTypeCode,nvl(A.身份证号,'-') As identityNo,A.姓名 As personalName,A.性别 As sexCode,to_char(A.出生日期,'yyyymmdd') As birthDate,nvl(B.保险号,A.身份证号) As medicalCardNumber
+                              From 个人信息 A,保险个人档案 B
+                             Where A.Id=B.个人id(+) And B.系统(+)=100
+                               And A.Id='2cbb8b94-64c0-4505-9bbb-da86dad18ba6'
+2024-01-30 10:23:10====>获取就诊信息:Select Decode(B.急诊,1,'2','1') As visitTypeCode,A.ID As visitNo,to_char(A.开始时间,'yyyymmdd') As visitDate,
+                                   C.编码 As deptCode,C.简称 As deptName,'' As wardCode,'' As wardName,'' As bedNo,
+                                   D.编码 As doctorId,D.姓名 As doctorName,D.身份证号 As doctorIdentityNo
+                              From 服务活动记录 A,个人挂号记录 B,部门 C,医护人员 D
+                             Where A.Id=B.记录id And A.科室id=C.资源id And A.服务人id=D.资源id
+                               And A.id='7DAE2FD0-16C6-4E11-8B20-2023C8610BB3'
+                            Union All
+                            Select '3' As visitTypeCode,A.ID As visitNo,to_char(A.开始时间,'yyyymmdd') As visitDate,
+                                   C.编码 As deptCode,C.简称 As deptName,E.编码 As wardCode,E.简称 As wardName,B.床号 As bedNo,
+                                   D.编码 As doctorId,D.姓名 As doctorName,D.身份证号 As doctorIdentityNo
+                              From 服务活动记录 A,个人入院记录 B,部门 C,医护人员 D,部门 E
+                             Where A.Id=B.事件id And A.科室id=C.资源id And A.服务人id=D.资源id And B.病房id=E.资源id(+)
+                               And A.id='7DAE2FD0-16C6-4E11-8B20-2023C8610BB3'
+2024-01-30 10:23:10====>获取诊断信息:Select B.主诉 As chiefCompliant,C.问题名称 As diagName,C.问题编码 As diagCode
+                              From 服务活动记录 A,个人挂号记录 B,个人问题列表 C
+                             Where A.Id=B.记录id And A.Id=C.服务记录id(+)
+                               And A.id='7DAE2FD0-16C6-4E11-8B20-2023C8610BB3'
+                               And Rownum<2
+                            Union All
+                            Select Distinct '' As chiefCompliant,C.问题名称 As diagName,C.问题编码 As diagCode
+                              From 服务活动记录 A,个人入院记录 B,个人问题列表 C
+                             Where A.Id=B.事件id  And A.Id=C.服务记录id(+) And C.记录性质=2 
+                               And A.id='7DAE2FD0-16C6-4E11-8B20-2023C8610BB3'
+                               And Rownum<2
+2024-01-30 10:23:10====>获取检验项目编码:Select D.编码 As labItemCode,D.名称 As labItemName
+                              From 个人医嘱记录 A,诊疗项目目录 D
+                             Where A.诊疗项目id=D.id
+                               And A.事件ID='7DAE2FD0-16C6-4E11-8B20-2023C8610BB3'
+                               And A.机构id='4480c78d-c3dd-4873-a0a8-d936963abf75'
+                               And A.组序号 in (1,2,3,4,5,6,7,8,9,10,11,12,13)
+                               And A.诊疗类别='C'
+                               And (D.撤档时间 Is Null Or D.撤档时间>Sysdate)
+2024-01-30 10:23:10====>调用【检验结果互认提醒】接口URL:http://ds-ucc.cq.hc:443/frontapi/api/v3/reportUrl/recogRemind
+2024-01-30 10:23:10====>调用【检验结果互认提醒】入参:{"messages":{"EVN":{"eventTypeCode":"02","eventTypeName":"检验结果互认提醒"},"PID":{"patientId":"2cbb8b94-64c0-4505-9bbb-da86dad18ba6","identityTypeCode":"01","identityNo":"510223196607202446","visitCardTypeCode":"","visitCardNo":"","personalName":"刘兆容","birthDate":"19660720","sexCode":"2","medicalCardNumber":"ZG1008790933"},"PV1":{"visitTypeCode":"3","visitNo":"7DAE2FD0-16C6-4E11-8B20-2023C8610BB3","visitDate":"20240130","orgCode":"125002227094723044","orgName":"重庆市綦江区文龙街道社区卫生服务中心","branchCode":"","branchName":"","deptCode":"21030","deptName":"普内科","wardCode":"21030","wardName":"普内科","bedNo":"42","doctorId":"696","doctorName":"罗玉龙","doctorIdentityNo":"500222199108088613","computerMac":"D4:C9:EF:D9:6B:20","computerIp":"10.61.28.66"},"DG1":{"chiefCompliant":"","diagCode":"K31.703","diagName":"胃息肉"},"OBR":{"lab":[{"labItemCode":"100329","labItemName":"大便隐血试验","labRecognCode":"","labRecognName":""},{"labItemCode":"42201800101035478426","labItemName":"粪便常规","labRecognCode":"","labRecognName":""},{"labItemCode":"xq201800101035481630","labItemName":"尿液分析","labRecognCode":"","labRecognName":""},{"labItemCode":"xq201800101035481632","labItemName":"尿液分析(同时加做尿微量白蛋白加收)","labRecognCode":"","labRecognName":""},{"labItemCode":"100323","labItemName":"（住院）血细胞分析（五分类）","labRecognCode":"","labRecognName":""},{"labItemCode":"422018101035480176","labItemName":"C反应蛋白（CRP）","labRecognCode":"","labRecognName":""},{"labItemCode":"100304","labItemName":"电解质测定","labRecognCode":"","labRecognName":""},{"labItemCode":"xq201800101035481657","labItemName":"丙型肝炎抗体测定(Anti-HCV)(公卫免)","labRecognCode":"","labRecognName":""},{"labItemCode":"42201800101035478230","labItemName":"甲型肝炎抗体测定(IgM)","labRecognCode":"","labRecognName":""},{"labItemCode":"100301","labItemName":"HIV测定","labRecognCode":"","labRecognName":""},{"labItemCode":"100311","labItemName":"梅毒螺旋体特异抗体测定","labRecognCode":"","labRecognName":""},{"labItemCode":"100316","labItemName":"凝血酶测定","labRecognCode":"","labRecognName":""},{"labItemCode":"42201800101035478231","labItemName":"戊型肝炎抗体测定(IgM)","labRecognCode":"","labRecognName":""},{"labItemCode":"100340","labItemName":"血浆D-二聚体(D-Dimer)测定(仪器法)","labRecognCode":"","labRecognName":""},{"labItemCode":"422018101035480177","labItemName":"乙肝表面抗原","labRecognCode":"","labRecognName":""},{"labItemCode":"422018101035480174","labItemName":"餐后2H血糖","labRecognCode":"","labRecognName":""},{"labItemCode":"42201800101035479437","labItemName":"肝功1","labRecognCode":"","labRecognName":""},{"labItemCode":"100318","labItemName":"肾功","labRecognCode":"","labRecognName":""},{"labItemCode":"100319","labItemName":"心肌酶谱","labRecognCode":"","labRecognName":""},{"labItemCode":"100321","labItemName":"血淀粉酶测定(速率法)","labRecognCode":"","labRecognName":""},{"labItemCode":"100335","labItemName":"血脂2号(六项)","labRecognCode":"","labRecognName":""}]}}}
+2024-01-30 10:23:10====>1
+2024-01-30 10:23:10====>2
+2024-01-30 10:23:10====>3
+2024-01-30 10:23:10====>4
+2024-01-30 10:23:10====>5
+2024-01-30 10:23:10====>6
+2024-01-30 10:23:10====>7
+2024-01-30 10:23:10====>8
+2024-01-30 10:23:10====>9
+2024-01-30 10:23:10====>调用【检验结果互认提醒】出参:{"code":"1000","message":"操作失败","data":{"EVN":{"eventTypeCode":"02","eventTypeName":"检验结果互认提醒"},"QAK":{"queryResponseStatus":"0","url":null,"reminder":null,"brief":null}}}
+2024-01-30 10:45:16====>=========================================================================================================
+2024-01-30 10:45:16====>调用Exteinterf入参：insureSystem:48;FunctionNo:357;strAdvance:<root><OrgId>4480c78d-c3dd-4873-a0a8-d936963abf75</OrgId><EventId>102016D0-1F2F-568A-E064-9CDC71ADEEF6</EventId><GroupNo>1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16</GroupNo><Pid>2245c989-e6ef-41fc-ad6e-fe7addbefa4a</Pid><DepId>2045fd3b-45ad-4f77-a1d8-a44f526e7888</DepId><DepName>普内科</DepName><OperId>49ff45a7-4212-48f8-ac3c-c0bf8e9805a3</OperId><OperName>罗玉龙</OperName></root>
+2024-01-30 10:45:16====>是否有检查检验项目：Select *
+                                From 个人医嘱记录 a
+                                Where a.机构id = '4480c78d-c3dd-4873-a0a8-d936963abf75'
+                                And a.事件id = '102016D0-1F2F-568A-E064-9CDC71ADEEF6'
+                                And a.组序号 in (1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16)
+                                And a.诊疗类别 In ('C','D')
+2024-01-30 10:45:16====>获取的token：eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7IlVzZXJJZCI6MTcyOTQwNDM2NzcwODA5ODU2MCwiQXBwS2V5IjoiIiwiQWNjb3VudE5hbWUiOiIiLCJBY2NvdW50UmVhbE5hbWUiOiIiLCJTaWduS2V5IjoiNzE5M2NjNGM4MTNhZGRmNGNhOGNhYzMxYjJmZGMxNjkifSwiaXNzIjoiY2VjIiwiZXhwIjoxNzA2NjU5MDUwfQ.6BFKbEjYO72jOIzApxKcuoFU_8wj36NGYWFcb4RxSKc
+2024-01-30 10:45:16====>获取病人信息:Select A.Id As patientId,'01' As identityTypeCode,nvl(A.身份证号,'-') As identityNo,A.姓名 As personalName,A.性别 As sexCode,to_char(A.出生日期,'yyyymmdd') As birthDate,nvl(B.保险号,A.身份证号) As medicalCardNumber
+                              From 个人信息 A,保险个人档案 B
+                             Where A.Id=B.个人id(+) And B.系统(+)=100
+                               And A.Id='2245c989-e6ef-41fc-ad6e-fe7addbefa4a'
+2024-01-30 10:45:16====>获取就诊信息:Select Decode(B.急诊,1,'2','1') As visitTypeCode,A.ID As visitNo,to_char(A.开始时间,'yyyymmdd') As visitDate,
+                                   C.编码 As deptCode,C.简称 As deptName,'' As wardCode,'' As wardName,'' As bedNo,
+                                   D.编码 As doctorId,D.姓名 As doctorName,D.身份证号 As doctorIdentityNo
+                              From 服务活动记录 A,个人挂号记录 B,部门 C,医护人员 D
+                             Where A.Id=B.记录id And A.科室id=C.资源id And A.服务人id=D.资源id
+                               And A.id='102016D0-1F2F-568A-E064-9CDC71ADEEF6'
+                            Union All
+                            Select '3' As visitTypeCode,A.ID As visitNo,to_char(A.开始时间,'yyyymmdd') As visitDate,
+                                   C.编码 As deptCode,C.简称 As deptName,E.编码 As wardCode,E.简称 As wardName,B.床号 As bedNo,
+                                   D.编码 As doctorId,D.姓名 As doctorName,D.身份证号 As doctorIdentityNo
+                              From 服务活动记录 A,个人入院记录 B,部门 C,医护人员 D,部门 E
+                             Where A.Id=B.事件id And A.科室id=C.资源id And A.服务人id=D.资源id And B.病房id=E.资源id(+)
+                               And A.id='102016D0-1F2F-568A-E064-9CDC71ADEEF6'
+2024-01-30 10:45:16====>获取诊断信息:Select B.主诉 As chiefCompliant,C.问题名称 As diagName,C.问题编码 As diagCode
+                              From 服务活动记录 A,个人挂号记录 B,个人问题列表 C
+                             Where A.Id=B.记录id And A.Id=C.服务记录id(+)
+                               And A.id='102016D0-1F2F-568A-E064-9CDC71ADEEF6'
+                               And Rownum<2
+                            Union All
+                            Select Distinct '' As chiefCompliant,C.问题名称 As diagName,C.问题编码 As diagCode
+                              From 服务活动记录 A,个人入院记录 B,个人问题列表 C
+                             Where A.Id=B.事件id  And A.Id=C.服务记录id(+) And C.记录性质=2 
+                               And A.id='102016D0-1F2F-568A-E064-9CDC71ADEEF6'
+                               And Rownum<2
+2024-01-30 10:45:16====>获取检验项目编码:Select D.编码 As labItemCode,D.名称 As labItemName
+                              From 个人医嘱记录 A,诊疗项目目录 D
+                             Where A.诊疗项目id=D.id
+                               And A.事件ID='102016D0-1F2F-568A-E064-9CDC71ADEEF6'
+                               And A.机构id='4480c78d-c3dd-4873-a0a8-d936963abf75'
+                               And A.组序号 in (1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16)
+                               And A.诊疗类别='C'
+                               And (D.撤档时间 Is Null Or D.撤档时间>Sysdate)
+2024-01-30 10:45:16====>调用【检验结果互认提醒】接口URL:http://ds-ucc.cq.hc:443/frontapi/api/v3/reportUrl/recogRemind
+2024-01-30 10:45:16====>调用【检验结果互认提醒】入参:{"messages":{"EVN":{"eventTypeCode":"02","eventTypeName":"检验结果互认提醒"},"PID":{"patientId":"2245c989-e6ef-41fc-ad6e-fe7addbefa4a","identityTypeCode":"01","identityNo":"510223194507061421","visitCardTypeCode":"","visitCardNo":"","personalName":"龚尧先","birthDate":"19450706","sexCode":"2","medicalCardNumber":"JM2038066556"},"PV1":{"visitTypeCode":"3","visitNo":"102016D0-1F2F-568A-E064-9CDC71ADEEF6","visitDate":"20240130","orgCode":"125002227094723044","orgName":"重庆市綦江区文龙街道社区卫生服务中心","branchCode":"","branchName":"","deptCode":"21030","deptName":"普内科","wardCode":"21030","wardName":"普内科","bedNo":"43","doctorId":"696","doctorName":"罗玉龙","doctorIdentityNo":"500222199108088613","computerMac":"D4:C9:EF:D9:6B:20","computerIp":"10.61.28.66"},"DG1":{"chiefCompliant":"","diagCode":"J44.100","diagName":"慢性阻塞性肺病伴有急性加重"},"OBR":{"lab":[{"labItemCode":"xq201800101035481630","labItemName":"尿液分析","labRecognCode":"","labRecognName":""},{"labItemCode":"xq201800101035481632","labItemName":"尿液分析(同时加做尿微量白蛋白加收)","labRecognCode":"","labRecognName":""},{"labItemCode":"100329","labItemName":"大便隐血试验","labRecognCode":"","labRecognName":""},{"labItemCode":"42201800101035478426","labItemName":"粪便常规","labRecognCode":"","labRecognName":""},{"labItemCode":"100323","labItemName":"（住院）血细胞分析（五分类）","labRecognCode":"","labRecognName":""},{"labItemCode":"422018101035480176","labItemName":"C反应蛋白（CRP）","labRecognCode":"","labRecognName":""},{"labItemCode":"100304","labItemName":"电解质测定","labRecognCode":"","labRecognName":""},{"labItemCode":"100346","labItemName":"血清肌钙蛋白Ⅰ测定(干免疫法)","labRecognCode":"","labRecognName":""},{"labItemCode":"100316","labItemName":"凝血酶测定","labRecognCode":"","labRecognName":""},{"labItemCode":"100340","labItemName":"血浆D-二聚体(D-Dimer)测定(仪器法)","labRecognCode":"","labRecognName":""},{"labItemCode":"42201800101035479437","labItemName":"肝功1","labRecognCode":"","labRecognName":""},{"labItemCode":"100317","labItemName":"空腹血糖","labRecognCode":"","labRecognName":""},{"labItemCode":"100318","labItemName":"肾功","labRecognCode":"","labRecognName":""},{"labItemCode":"100319","labItemName":"心肌酶谱","labRecognCode":"","labRecognName":""},{"labItemCode":"100335","labItemName":"血脂2号(六项)","labRecognCode":"","labRecognName":""}]}}}
+2024-01-30 10:45:16====>1
+2024-01-30 10:45:16====>2
+2024-01-30 10:45:16====>3
+2024-01-30 10:45:16====>4
+2024-01-30 10:45:16====>5
+2024-01-30 10:45:17====>6
+2024-01-30 10:45:17====>7
+2024-01-30 10:45:17====>8
+2024-01-30 10:45:17====>9
+2024-01-30 10:45:17====>调用【检验结果互认提醒】出参:{"code":"1000","message":"操作失败","data":{"EVN":{"eventTypeCode":"02","eventTypeName":"检验结果互认提醒"},"QAK":{"queryResponseStatus":"0","url":null,"reminder":null,"brief":null}}}
+2024-01-30 10:48:06====>=========================================================================================================
+2024-01-30 10:48:06====>调用Exteinterf入参：insureSystem:48;FunctionNo:357;strAdvance:<root><OrgId>4480c78d-c3dd-4873-a0a8-d936963abf75</OrgId><EventId>102016D0-1F2F-568A-E064-9CDC71ADEEF6</EventId><GroupNo>11</GroupNo><Pid>2245c989-e6ef-41fc-ad6e-fe7addbefa4a</Pid><DepId>2045fd3b-45ad-4f77-a1d8-a44f526e7888</DepId><DepName>普内科</DepName><OperId>49ff45a7-4212-48f8-ac3c-c0bf8e9805a3</OperId><OperName>罗玉龙</OperName></root>
+2024-01-30 10:48:06====>是否有检查检验项目：Select *
+                                From 个人医嘱记录 a
+                                Where a.机构id = '4480c78d-c3dd-4873-a0a8-d936963abf75'
+                                And a.事件id = '102016D0-1F2F-568A-E064-9CDC71ADEEF6'
+                                And a.组序号 in (11)
+                                And a.诊疗类别 In ('C','D')
+2024-01-30 10:48:06====>获取的token：eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7IlVzZXJJZCI6MTcyOTQwNDM2NzcwODA5ODU2MCwiQXBwS2V5IjoiIiwiQWNjb3VudE5hbWUiOiIiLCJBY2NvdW50UmVhbE5hbWUiOiIiLCJTaWduS2V5IjoiNzE5M2NjNGM4MTNhZGRmNGNhOGNhYzMxYjJmZGMxNjkifSwiaXNzIjoiY2VjIiwiZXhwIjoxNzA2NjU5MDUwfQ.6BFKbEjYO72jOIzApxKcuoFU_8wj36NGYWFcb4RxSKc
+2024-01-30 10:48:06====>获取病人信息:Select A.Id As patientId,'01' As identityTypeCode,nvl(A.身份证号,'-') As identityNo,A.姓名 As personalName,A.性别 As sexCode,to_char(A.出生日期,'yyyymmdd') As birthDate,nvl(B.保险号,A.身份证号) As medicalCardNumber
+                              From 个人信息 A,保险个人档案 B
+                             Where A.Id=B.个人id(+) And B.系统(+)=100
+                               And A.Id='2245c989-e6ef-41fc-ad6e-fe7addbefa4a'
+2024-01-30 10:48:06====>获取就诊信息:Select Decode(B.急诊,1,'2','1') As visitTypeCode,A.ID As visitNo,to_char(A.开始时间,'yyyymmdd') As visitDate,
+                                   C.编码 As deptCode,C.简称 As deptName,'' As wardCode,'' As wardName,'' As bedNo,
+                                   D.编码 As doctorId,D.姓名 As doctorName,D.身份证号 As doctorIdentityNo
+                              From 服务活动记录 A,个人挂号记录 B,部门 C,医护人员 D
+                             Where A.Id=B.记录id And A.科室id=C.资源id And A.服务人id=D.资源id
+                               And A.id='102016D0-1F2F-568A-E064-9CDC71ADEEF6'
+                            Union All
+                            Select '3' As visitTypeCode,A.ID As visitNo,to_char(A.开始时间,'yyyymmdd') As visitDate,
+                                   C.编码 As deptCode,C.简称 As deptName,E.编码 As wardCode,E.简称 As wardName,B.床号 As bedNo,
+                                   D.编码 As doctorId,D.姓名 As doctorName,D.身份证号 As doctorIdentityNo
+                              From 服务活动记录 A,个人入院记录 B,部门 C,医护人员 D,部门 E
+                             Where A.Id=B.事件id And A.科室id=C.资源id And A.服务人id=D.资源id And B.病房id=E.资源id(+)
+                               And A.id='102016D0-1F2F-568A-E064-9CDC71ADEEF6'
+2024-01-30 10:48:06====>获取诊断信息:Select B.主诉 As chiefCompliant,C.问题名称 As diagName,C.问题编码 As diagCode
+                              From 服务活动记录 A,个人挂号记录 B,个人问题列表 C
+                             Where A.Id=B.记录id And A.Id=C.服务记录id(+)
+                               And A.id='102016D0-1F2F-568A-E064-9CDC71ADEEF6'
+                               And Rownum<2
+                            Union All
+                            Select Distinct '' As chiefCompliant,C.问题名称 As diagName,C.问题编码 As diagCode
+                              From 服务活动记录 A,个人入院记录 B,个人问题列表 C
+                             Where A.Id=B.事件id  And A.Id=C.服务记录id(+) And C.记录性质=2 
+                               And A.id='102016D0-1F2F-568A-E064-9CDC71ADEEF6'
+                               And Rownum<2
+2024-01-30 10:48:07====>获取检验项目编码:Select D.编码 As labItemCode,D.名称 As labItemName
+                              From 个人医嘱记录 A,诊疗项目目录 D
+                             Where A.诊疗项目id=D.id
+                               And A.事件ID='102016D0-1F2F-568A-E064-9CDC71ADEEF6'
+                               And A.机构id='4480c78d-c3dd-4873-a0a8-d936963abf75'
+                               And A.组序号 in (11)
+                               And A.诊疗类别='C'
+                               And (D.撤档时间 Is Null Or D.撤档时间>Sysdate)
+2024-01-30 10:48:07====>调用【检验结果互认提醒】接口URL:http://ds-ucc.cq.hc:443/frontapi/api/v3/reportUrl/recogRemind
+2024-01-30 10:48:07====>调用【检验结果互认提醒】入参:{"messages":{"EVN":{"eventTypeCode":"02","eventTypeName":"检验结果互认提醒"},"PID":{"patientId":"2245c989-e6ef-41fc-ad6e-fe7addbefa4a","identityTypeCode":"01","identityNo":"510223194507061421","visitCardTypeCode":"","visitCardNo":"","personalName":"龚尧先","birthDate":"19450706","sexCode":"2","medicalCardNumber":"JM2038066556"},"PV1":{"visitTypeCode":"3","visitNo":"102016D0-1F2F-568A-E064-9CDC71ADEEF6","visitDate":"20240130","orgCode":"125002227094723044","orgName":"重庆市綦江区文龙街道社区卫生服务中心","branchCode":"","branchName":"","deptCode":"21030","deptName":"普内科","wardCode":"21030","wardName":"普内科","bedNo":"43","doctorId":"696","doctorName":"罗玉龙","doctorIdentityNo":"500222199108088613","computerMac":"D4:C9:EF:D9:6B:20","computerIp":"10.61.28.66"},"DG1":{"chiefCompliant":"","diagCode":"J44.100","diagName":"慢性阻塞性肺病伴有急性加重"},"OBR":{"lab":[{"labItemCode":"WLNNT01","labItemName":"N-末端脑钠肽前体","labRecognCode":"","labRecognName":""},{"labItemCode":"100304","labItemName":"电解质测定","labRecognCode":"","labRecognName":""},{"labItemCode":"100346","labItemName":"血清肌钙蛋白Ⅰ测定(干免疫法)","labRecognCode":"","labRecognName":""}]}}}
+2024-01-30 10:48:07====>1
+2024-01-30 10:48:07====>2
+2024-01-30 10:48:07====>3
+2024-01-30 10:48:07====>4
+2024-01-30 10:48:07====>5
+2024-01-30 10:48:08====>6
+2024-01-30 10:48:08====>7
+2024-01-30 10:48:08====>8
+2024-01-30 10:48:08====>9
+2024-01-30 10:48:08====>调用【检验结果互认提醒】出参:{"code":"1000","message":"操作失败","data":{"EVN":{"eventTypeCode":"02","eventTypeName":"检验结果互认提醒"},"QAK":{"queryResponseStatus":"0","url":null,"reminder":null,"brief":null}}}
+2024-01-30 11:04:50====>=========================================================================================================
+2024-01-30 11:04:50====>调用Exteinterf入参：insureSystem:48;FunctionNo:357;strAdvance:<root><OrgId>4480c78d-c3dd-4873-a0a8-d936963abf75</OrgId><EventId>174F34D6-A0BD-48D9-BA13-CDD1F1080853</EventId><GroupNo>1,2,3,4,5,6,7,8,9,10,11,12,13,14,15</GroupNo><Pid>DDE5071B-0FF3-4255-B8FB-D41D0A9FC8EA</Pid><DepId>2045fd3b-45ad-4f77-a1d8-a44f526e7888</DepId><DepName>普内科</DepName><OperId>49ff45a7-4212-48f8-ac3c-c0bf8e9805a3</OperId><OperName>罗玉龙</OperName></root>
+2024-01-30 11:04:50====>是否有检查检验项目：Select *
+                                From 个人医嘱记录 a
+                                Where a.机构id = '4480c78d-c3dd-4873-a0a8-d936963abf75'
+                                And a.事件id = '174F34D6-A0BD-48D9-BA13-CDD1F1080853'
+                                And a.组序号 in (1,2,3,4,5,6,7,8,9,10,11,12,13,14,15)
+                                And a.诊疗类别 In ('C','D')
+2024-01-30 11:04:50====>获取的token：eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7IlVzZXJJZCI6MTcyOTQwNDM2NzcwODA5ODU2MCwiQXBwS2V5IjoiIiwiQWNjb3VudE5hbWUiOiIiLCJBY2NvdW50UmVhbE5hbWUiOiIiLCJTaWduS2V5IjoiNzE5M2NjNGM4MTNhZGRmNGNhOGNhYzMxYjJmZGMxNjkifSwiaXNzIjoiY2VjIiwiZXhwIjoxNzA2NjU5MDUwfQ.6BFKbEjYO72jOIzApxKcuoFU_8wj36NGYWFcb4RxSKc
+2024-01-30 11:04:50====>获取病人信息:Select A.Id As patientId,'01' As identityTypeCode,nvl(A.身份证号,'-') As identityNo,A.姓名 As personalName,A.性别 As sexCode,to_char(A.出生日期,'yyyymmdd') As birthDate,nvl(B.保险号,A.身份证号) As medicalCardNumber
+                              From 个人信息 A,保险个人档案 B
+                             Where A.Id=B.个人id(+) And B.系统(+)=100
+                               And A.Id='DDE5071B-0FF3-4255-B8FB-D41D0A9FC8EA'
+2024-01-30 11:04:50====>获取就诊信息:Select Decode(B.急诊,1,'2','1') As visitTypeCode,A.ID As visitNo,to_char(A.开始时间,'yyyymmdd') As visitDate,
+                                   C.编码 As deptCode,C.简称 As deptName,'' As wardCode,'' As wardName,'' As bedNo,
+                                   D.编码 As doctorId,D.姓名 As doctorName,D.身份证号 As doctorIdentityNo
+                              From 服务活动记录 A,个人挂号记录 B,部门 C,医护人员 D
+                             Where A.Id=B.记录id And A.科室id=C.资源id And A.服务人id=D.资源id
+                               And A.id='174F34D6-A0BD-48D9-BA13-CDD1F1080853'
+                            Union All
+                            Select '3' As visitTypeCode,A.ID As visitNo,to_char(A.开始时间,'yyyymmdd') As visitDate,
+                                   C.编码 As deptCode,C.简称 As deptName,E.编码 As wardCode,E.简称 As wardName,B.床号 As bedNo,
+                                   D.编码 As doctorId,D.姓名 As doctorName,D.身份证号 As doctorIdentityNo
+                              From 服务活动记录 A,个人入院记录 B,部门 C,医护人员 D,部门 E
+                             Where A.Id=B.事件id And A.科室id=C.资源id And A.服务人id=D.资源id And B.病房id=E.资源id(+)
+                               And A.id='174F34D6-A0BD-48D9-BA13-CDD1F1080853'
+2024-01-30 11:04:50====>获取诊断信息:Select B.主诉 As chiefCompliant,C.问题名称 As diagName,C.问题编码 As diagCode
+                              From 服务活动记录 A,个人挂号记录 B,个人问题列表 C
+                             Where A.Id=B.记录id And A.Id=C.服务记录id(+)
+                               And A.id='174F34D6-A0BD-48D9-BA13-CDD1F1080853'
+                               And Rownum<2
+                            Union All
+                            Select Distinct '' As chiefCompliant,C.问题名称 As diagName,C.问题编码 As diagCode
+                              From 服务活动记录 A,个人入院记录 B,个人问题列表 C
+                             Where A.Id=B.事件id  And A.Id=C.服务记录id(+) And C.记录性质=2 
+                               And A.id='174F34D6-A0BD-48D9-BA13-CDD1F1080853'
+                               And Rownum<2
+2024-01-30 11:04:50====>获取检验项目编码:Select D.编码 As labItemCode,D.名称 As labItemName
+                              From 个人医嘱记录 A,诊疗项目目录 D
+                             Where A.诊疗项目id=D.id
+                               And A.事件ID='174F34D6-A0BD-48D9-BA13-CDD1F1080853'
+                               And A.机构id='4480c78d-c3dd-4873-a0a8-d936963abf75'
+                               And A.组序号 in (1,2,3,4,5,6,7,8,9,10,11,12,13,14,15)
+                               And A.诊疗类别='C'
+                               And (D.撤档时间 Is Null Or D.撤档时间>Sysdate)
+2024-01-30 11:04:50====>调用【检验结果互认提醒】接口URL:http://ds-ucc.cq.hc:443/frontapi/api/v3/reportUrl/recogRemind
+2024-01-30 11:04:50====>调用【检验结果互认提醒】入参:{"messages":{"EVN":{"eventTypeCode":"02","eventTypeName":"检验结果互认提醒"},"PID":{"patientId":"DDE5071B-0FF3-4255-B8FB-D41D0A9FC8EA","identityTypeCode":"01","identityNo":"510223194211285119","visitCardTypeCode":"","visitCardNo":"","personalName":"任昭其","birthDate":"19421128","sexCode":"1","medicalCardNumber":"JM2038137993"},"PV1":{"visitTypeCode":"3","visitNo":"174F34D6-A0BD-48D9-BA13-CDD1F1080853","visitDate":"20240130","orgCode":"125002227094723044","orgName":"重庆市綦江区文龙街道社区卫生服务中心","branchCode":"","branchName":"","deptCode":"21030","deptName":"普内科","wardCode":"21030","wardName":"普内科","bedNo":"57","doctorId":"696","doctorName":"罗玉龙","doctorIdentityNo":"500222199108088613","computerMac":"D4:C9:EF:D9:6B:20","computerIp":"10.61.28.66"},"DG1":{"chiefCompliant":"","diagCode":"K58.900x003","diagName":"肠易激综合征"},"OBR":{"lab":[{"labItemCode":"100329","labItemName":"大便隐血试验","labRecognCode":"","labRecognName":""},{"labItemCode":"42201800101035478426","labItemName":"粪便常规","labRecognCode":"","labRecognName":""},{"labItemCode":"xq201800101035481630","labItemName":"尿液分析","labRecognCode":"","labRecognName":""},{"labItemCode":"xq201800101035481632","labItemName":"尿液分析(同时加做尿微量白蛋白加收)","labRecognCode":"","labRecognName":""},{"labItemCode":"100323","labItemName":"（住院）血细胞分析（五分类）","labRecognCode":"","labRecognName":""},{"labItemCode":"422018101035480176","labItemName":"C反应蛋白（CRP）","labRecognCode":"","labRecognName":""},{"labItemCode":"100304","labItemName":"电解质测定","labRecognCode":"","labRecognName":""},{"labItemCode":"100346","labItemName":"血清肌钙蛋白Ⅰ测定(干免疫法)","labRecognCode":"","labRecognName":""},{"labItemCode":"100316","labItemName":"凝血酶测定","labRecognCode":"","labRecognName":""},{"labItemCode":"100340","labItemName":"血浆D-二聚体(D-Dimer)测定(仪器法)","labRecognCode":"","labRecognName":""},{"labItemCode":"422018101035480174","labItemName":"餐后2H血糖","labRecognCode":"","labRecognName":""},{"labItemCode":"42201800101035479437","labItemName":"肝功1","labRecognCode":"","labRecognName":""},{"labItemCode":"100318","labItemName":"肾功","labRecognCode":"","labRecognName":""},{"labItemCode":"100319","labItemName":"心肌酶谱","labRecognCode":"","labRecognName":""},{"labItemCode":"100321","labItemName":"血淀粉酶测定(速率法)","labRecognCode":"","labRecognName":""},{"labItemCode":"100335","labItemName":"血脂2号(六项)","labRecognCode":"","labRecognName":""}]}}}
+2024-01-30 11:04:50====>1
+2024-01-30 11:04:50====>2
+2024-01-30 11:04:50====>3
+2024-01-30 11:04:50====>4
+2024-01-30 11:04:50====>5
+2024-01-30 11:04:50====>6
+2024-01-30 11:04:50====>7
+2024-01-30 11:04:50====>8
+2024-01-30 11:04:50====>9
+2024-01-30 11:04:50====>调用【检验结果互认提醒】出参:{"code":"1000","message":"操作失败","data":{"EVN":{"eventTypeCode":"02","eventTypeName":"检验结果互认提醒"},"QAK":{"queryResponseStatus":"0","url":null,"reminder":null,"brief":null}}}
+2024-01-30 11:39:00====>=========================================================================================================
+2024-01-30 11:39:00====>调用Exteinterf入参：insureSystem:48;FunctionNo:357;strAdvance:<root><OrgId>4480c78d-c3dd-4873-a0a8-d936963abf75</OrgId><EventId>E2620CB3-2D49-412E-A3FF-5B614E604CF7</EventId><GroupNo>1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16</GroupNo><Pid>BDA242D3-538A-13A2-E054-9CDC71ADEEF6</Pid><DepId>2045fd3b-45ad-4f77-a1d8-a44f526e7888</DepId><DepName>普内科</DepName><OperId>49ff45a7-4212-48f8-ac3c-c0bf8e9805a3</OperId><OperName>罗玉龙</OperName></root>
+2024-01-30 11:39:00====>是否有检查检验项目：Select *
+                                From 个人医嘱记录 a
+                                Where a.机构id = '4480c78d-c3dd-4873-a0a8-d936963abf75'
+                                And a.事件id = 'E2620CB3-2D49-412E-A3FF-5B614E604CF7'
+                                And a.组序号 in (1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16)
+                                And a.诊疗类别 In ('C','D')
+2024-01-30 11:39:01====>获取的token：eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7IlVzZXJJZCI6MTcyOTQwNDM2NzcwODA5ODU2MCwiQXBwS2V5IjoiIiwiQWNjb3VudE5hbWUiOiIiLCJBY2NvdW50UmVhbE5hbWUiOiIiLCJTaWduS2V5IjoiNzE5M2NjNGM4MTNhZGRmNGNhOGNhYzMxYjJmZGMxNjkifSwiaXNzIjoiY2VjIiwiZXhwIjoxNzA2NjU5MDUwfQ.6BFKbEjYO72jOIzApxKcuoFU_8wj36NGYWFcb4RxSKc
+2024-01-30 11:39:01====>获取病人信息:Select A.Id As patientId,'01' As identityTypeCode,nvl(A.身份证号,'-') As identityNo,A.姓名 As personalName,A.性别 As sexCode,to_char(A.出生日期,'yyyymmdd') As birthDate,nvl(B.保险号,A.身份证号) As medicalCardNumber
+                              From 个人信息 A,保险个人档案 B
+                             Where A.Id=B.个人id(+) And B.系统(+)=100
+                               And A.Id='BDA242D3-538A-13A2-E054-9CDC71ADEEF6'
+2024-01-30 11:39:01====>获取就诊信息:Select Decode(B.急诊,1,'2','1') As visitTypeCode,A.ID As visitNo,to_char(A.开始时间,'yyyymmdd') As visitDate,
+                                   C.编码 As deptCode,C.简称 As deptName,'' As wardCode,'' As wardName,'' As bedNo,
+                                   D.编码 As doctorId,D.姓名 As doctorName,D.身份证号 As doctorIdentityNo
+                              From 服务活动记录 A,个人挂号记录 B,部门 C,医护人员 D
+                             Where A.Id=B.记录id And A.科室id=C.资源id And A.服务人id=D.资源id
+                               And A.id='E2620CB3-2D49-412E-A3FF-5B614E604CF7'
+                            Union All
+                            Select '3' As visitTypeCode,A.ID As visitNo,to_char(A.开始时间,'yyyymmdd') As visitDate,
+                                   C.编码 As deptCode,C.简称 As deptName,E.编码 As wardCode,E.简称 As wardName,B.床号 As bedNo,
+                                   D.编码 As doctorId,D.姓名 As doctorName,D.身份证号 As doctorIdentityNo
+                              From 服务活动记录 A,个人入院记录 B,部门 C,医护人员 D,部门 E
+                             Where A.Id=B.事件id And A.科室id=C.资源id And A.服务人id=D.资源id And B.病房id=E.资源id(+)
+                               And A.id='E2620CB3-2D49-412E-A3FF-5B614E604CF7'
+2024-01-30 11:39:01====>获取诊断信息:Select B.主诉 As chiefCompliant,C.问题名称 As diagName,C.问题编码 As diagCode
+                              From 服务活动记录 A,个人挂号记录 B,个人问题列表 C
+                             Where A.Id=B.记录id And A.Id=C.服务记录id(+)
+                               And A.id='E2620CB3-2D49-412E-A3FF-5B614E604CF7'
+                               And Rownum<2
+                            Union All
+                            Select Distinct '' As chiefCompliant,C.问题名称 As diagName,C.问题编码 As diagCode
+                              From 服务活动记录 A,个人入院记录 B,个人问题列表 C
+                             Where A.Id=B.事件id  And A.Id=C.服务记录id(+) And C.记录性质=2 
+                               And A.id='E2620CB3-2D49-412E-A3FF-5B614E604CF7'
+                               And Rownum<2
+2024-01-30 11:39:01====>获取检验项目编码:Select D.编码 As labItemCode,D.名称 As labItemName
+                              From 个人医嘱记录 A,诊疗项目目录 D
+                             Where A.诊疗项目id=D.id
+                               And A.事件ID='E2620CB3-2D49-412E-A3FF-5B614E604CF7'
+                               And A.机构id='4480c78d-c3dd-4873-a0a8-d936963abf75'
+                               And A.组序号 in (1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16)
+                               And A.诊疗类别='C'
+                               And (D.撤档时间 Is Null Or D.撤档时间>Sysdate)
+2024-01-30 11:39:01====>调用【检验结果互认提醒】接口URL:http://ds-ucc.cq.hc:443/frontapi/api/v3/reportUrl/recogRemind
+2024-01-30 11:39:01====>调用【检验结果互认提醒】入参:{"messages":{"EVN":{"eventTypeCode":"02","eventTypeName":"检验结果互认提醒"},"PID":{"patientId":"BDA242D3-538A-13A2-E054-9CDC71ADEEF6","identityTypeCode":"01","identityNo":"510223194708142711","visitCardTypeCode":"","visitCardNo":"","personalName":"廖代如","birthDate":"19470814","sexCode":"1","medicalCardNumber":"JM2038146359"},"PV1":{"visitTypeCode":"3","visitNo":"E2620CB3-2D49-412E-A3FF-5B614E604CF7","visitDate":"20240130","orgCode":"125002227094723044","orgName":"重庆市綦江区文龙街道社区卫生服务中心","branchCode":"","branchName":"","deptCode":"21030","deptName":"普内科","wardCode":"21030","wardName":"普内科","bedNo":"16","doctorId":"696","doctorName":"罗玉龙","doctorIdentityNo":"500222199108088613","computerMac":"D4:C9:EF:D9:6B:20","computerIp":"10.61.28.66"},"DG1":{"chiefCompliant":"","diagCode":"I25.103","diagName":"冠状动脉粥样硬化性心脏病"},"OBR":{"lab":[{"labItemCode":"42201800101035480227","labItemName":"电脑血糖监测","labRecognCode":"","labRecognName":""},{"labItemCode":"xq201800101035481630","labItemName":"尿液分析","labRecognCode":"","labRecognName":""},{"labItemCode":"xq201800101035481632","labItemName":"尿液分析(同时加做尿微量白蛋白加收)","labRecognCode":"","labRecognName":""},{"labItemCode":"100329","labItemName":"大便隐血试验","labRecognCode":"","labRecognName":""},{"labItemCode":"42201800101035478426","labItemName":"粪便常规","labRecognCode":"","labRecognName":""},{"labItemCode":"422018101035480176","labItemName":"C反应蛋白（CRP）","labRecognCode":"","labRecognName":""},{"labItemCode":"100323","labItemName":"（住院）血细胞分析（五分类）","labRecognCode":"","labRecognName":""},{"labItemCode":"WLNNT01","labItemName":"N-末端脑钠肽前体","labRecognCode":"","labRecognName":""},{"labItemCode":"100304","labItemName":"电解质测定","labRecognCode":"","labRecognName":""},{"labItemCode":"100346","labItemName":"血清肌钙蛋白Ⅰ测定(干免疫法)","labRecognCode":"","labRecognName":""},{"labItemCode":"100316","labItemName":"凝血酶测定","labRecognCode":"","labRecognName":""},{"labItemCode":"100340","labItemName":"血浆D-二聚体(D-Dimer)测定(仪器法)","labRecognCode":"","labRecognName":""},{"labItemCode":"100319","labItemName":"心肌酶谱","labRecognCode":"","labRecognName":""},{"labItemCode":"100335","labItemName":"血脂2号(六项)","labRecognCode":"","labRecognName":""},{"labItemCode":"422018101035480174","labItemName":"餐后2H血糖","labRecognCode":"","labRecognName":""},{"labItemCode":"42201800101035479437","labItemName":"肝功1","labRecognCode":"","labRecognName":""},{"labItemCode":"100318","labItemName":"肾功","labRecognCode":"","labRecognName":""}]}}}
+2024-01-30 11:39:01====>1
+2024-01-30 11:39:01====>2
+2024-01-30 11:39:01====>3
+2024-01-30 11:39:01====>4
+2024-01-30 11:39:01====>5
+2024-01-30 11:39:01====>6
+2024-01-30 11:39:01====>7
+2024-01-30 11:39:01====>8
+2024-01-30 11:39:01====>9
+2024-01-30 11:39:01====>调用【检验结果互认提醒】出参:{"code":"1000","message":"操作失败","data":{"EVN":{"eventTypeCode":"02","eventTypeName":"检验结果互认提醒"},"QAK":{"queryResponseStatus":"0","url":null,"reminder":null,"brief":null}}}
+2024-01-30 12:24:17====>=========================================================================================================
+2024-01-30 12:24:17====>调用Exteinterf入参：insureSystem:48;FunctionNo:357;strAdvance:<root><OrgId>4480c78d-c3dd-4873-a0a8-d936963abf75</OrgId><EventId>7DAE2FD0-16C6-4E11-8B20-2023C8610BB3</EventId><GroupNo>14,15,16,17,18,19</GroupNo><Pid>2cbb8b94-64c0-4505-9bbb-da86dad18ba6</Pid><DepId>2045fd3b-45ad-4f77-a1d8-a44f526e7888</DepId><DepName>普内科</DepName><OperId>49ff45a7-4212-48f8-ac3c-c0bf8e9805a3</OperId><OperName>罗玉龙</OperName></root>
+2024-01-30 12:24:17====>是否有检查检验项目：Select *
+                                From 个人医嘱记录 a
+                                Where a.机构id = '4480c78d-c3dd-4873-a0a8-d936963abf75'
+                                And a.事件id = '7DAE2FD0-16C6-4E11-8B20-2023C8610BB3'
+                                And a.组序号 in (14,15,16,17,18,19)
+                                And a.诊疗类别 In ('C','D')
+2024-01-30 12:24:41====>=========================================================================================================
+2024-01-30 12:24:41====>调用Exteinterf入参：insureSystem:48;FunctionNo:357;strAdvance:<root><OrgId>4480c78d-c3dd-4873-a0a8-d936963abf75</OrgId><EventId>7DAE2FD0-16C6-4E11-8B20-2023C8610BB3</EventId><GroupNo>20</GroupNo><Pid>2cbb8b94-64c0-4505-9bbb-da86dad18ba6</Pid><DepId>2045fd3b-45ad-4f77-a1d8-a44f526e7888</DepId><DepName>普内科</DepName><OperId>49ff45a7-4212-48f8-ac3c-c0bf8e9805a3</OperId><OperName>罗玉龙</OperName></root>
+2024-01-30 12:24:41====>是否有检查检验项目：Select *
+                                From 个人医嘱记录 a
+                                Where a.机构id = '4480c78d-c3dd-4873-a0a8-d936963abf75'
+                                And a.事件id = '7DAE2FD0-16C6-4E11-8B20-2023C8610BB3'
+                                And a.组序号 in (20)
+                                And a.诊疗类别 In ('C','D')
+2024-01-30 12:24:41====>获取的token：eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7IlVzZXJJZCI6MTcyOTQwNDM2NzcwODA5ODU2MCwiQXBwS2V5IjoiIiwiQWNjb3VudE5hbWUiOiIiLCJBY2NvdW50UmVhbE5hbWUiOiIiLCJTaWduS2V5IjoiNzE5M2NjNGM4MTNhZGRmNGNhOGNhYzMxYjJmZGMxNjkifSwiaXNzIjoiY2VjIiwiZXhwIjoxNzA2NjU5MDUwfQ.6BFKbEjYO72jOIzApxKcuoFU_8wj36NGYWFcb4RxSKc
+2024-01-30 12:24:41====>获取病人信息:Select A.Id As Id,A.姓名 As Name,'01' As id_no_type,A.身份证号 As id_no,to_char(A.出生日期,'yyyy-mm-dd') As birthday,nvl(B.号码,A.身份证号) As health_card_no,
+                                       A.性别 As gender,A.本人电话 As phone,A.现地址 As address,' ' As main_key
+                                  From 个人信息 A,个人标识号 B
+                                 Where A.Id=B.个人ID(+) and B.类别(+)=2
+                                   and A.Id='2cbb8b94-64c0-4505-9bbb-da86dad18ba6'
+2024-01-30 12:24:41====>获取医生信息:Select A.资源id As Id,A.姓名 As Name,A.身份证号 As idcard,extractValue(附加信息,'root/执业证代码') As practice_number, 
+                               (Select p.名称 From 人员性质 p Where Instr(',' || A.性质 || ',', ',' || p.编码 || ',') > 0 And Rownum=1) As profession 
+                          From 医护人员 A
+                         Where A.资源id='49ff45a7-4212-48f8-ac3c-c0bf8e9805a3'
+2024-01-30 12:24:41====>获取就诊信息:Select B.编码 As visit_departments,B.简称 As visit_departments_name,'1' As visit_type,A.Id As visit_no,'' As ward_code,'' As ward_name,'' As bed_no,nvl(D.保险号,'-') As medical_insurance_number
+                          From 服务活动记录 A,部门 B,保险个人档案 D
+                         Where A.Id='7DAE2FD0-16C6-4E11-8B20-2023C8610BB3'
+                           And A.科室id=B.资源id And A.个人id=D.个人id(+)
+                           And A.项目id='F4DA8ED2-5033-47EB-A08F-E442A5E65DAB'
+                        Union All
+                        Select B.编码 As visit_departments,B.简称 As visit_departments_name,'3' As visit_type,A.Id As visit_no,E.编码 As ward_code,E.简称 As ward_name,C.床号 As bed_no,nvl(D.保险号,'-') As medical_insurance_number
+                          From 服务活动记录 A,部门 B,保险个人档案 D,个人当前状态 C,部门 E
+                         Where A.Id='7DAE2FD0-16C6-4E11-8B20-2023C8610BB3'
+                           And A.科室id=B.资源id And A.个人id=D.个人id(+) And A.Id=C.就诊id And C.病房id=E.资源id
+                           And A.项目id='EC3E41BF-BACD-46BA-9D3C-E2493D73C1DF'
+2024-01-30 12:24:41====>获取project_list:select project_name,study_body_part,modality,min(project_charge_code) as project_charge_code,study_project_code,sum(project_price) as project_price from 
+                         (Select distinct c.名称     As project_name,
+                               nvl(a.标本部位,'-') As study_body_part,
+                               a.操作类型 As modality,
+                               nvl(f.国家代码,'-') As project_charge_code,
+                               c.id||c.部位编码 As study_project_code,
+                               Decode(d.是否变价,1,
+                                 Case
+                                   When a.诊疗类别 In ('4', '5', '6', '7') Then
+                                     f_获取收费项目单价(b.收费项目id,0,0,a.执行科室id,1,4,0)
+                                   When d.类别 In ('4', '5', '6', '7') Then
+                                     f_获取时价分批药品的单价(b.收费项目id, a.执行科室id, b.收费数量, 4, 0)
+                                   Else
+                                     Round(e.现价, 4)
+                                 End,
+                                 Round(e.现价,4)) As project_price
+                            From 个人医嘱记录 a,收费项目目录 d
+                                ,诊疗收费关系  b,
+                                收费价目 e,
+                                保险项目对应 f,
+                                (select C.id,C.名称,h.编码 as 部位编码,h.名称 as 部位
+                                  from 诊疗项目目录 C,诊疗项目部位 g,诊疗检查部位 h
+                                 where c.id=g.项目id(+) and g.类型=h.类型(+) and g.部位=h.名称(+)) c
+                            Where a.机构id = '4480c78d-c3dd-4873-a0a8-d936963abf75'
+                            And a.个人id = '2cbb8b94-64c0-4505-9bbb-da86dad18ba6'
+                            And a.事件id = '7DAE2FD0-16C6-4E11-8B20-2023C8610BB3'
+                            And a.组序号 in (20)
+                            And b.诊疗项目id=c.id
+                            And a.诊疗项目id = c.Id
+                            And (a.标本部位=c.部位 or c.部位 is null)
+                            And a.诊疗类别 in ('D')
+                            and a.诊疗项目id=b.诊疗项目id
+                            And b.收费项目id = d.id
+                            And d.id = e.收费项目id
+                           And d.Id=f.收费id(+) And f.系统(+)=100
+                           And (e.终止日期 Is Null Or e.终止日期>Sysdate))
+                        group by project_name,study_body_part,modality,study_project_code
+2024-01-30 12:24:41====>调用【近期检查项目查询接口】接口URL:http://ds-ucc.cq.hc:443/frontapi/api/v3/cqkydy/api/v2/study/shorttime/list/total
+2024-01-30 12:24:41====>调用【近期检查项目查询接口】入参:{"app_key":"1729404945213775872","hospital":{"accredit_id":"125002227094723044","accredit_name":"重庆市綦江区文龙街道社区卫生服务中心","branch_code":"","branch_name":""},"patience":{"id":"2cbb8b94-64c0-4505-9bbb-da86dad18ba6","name":"刘兆容","id_no_type":"01","id_no":"510223196607202446","birthday":"1966-07-20","health_card_no":"510223196607202446","gender":"2","phone":"17830815475","address":"重庆市綦江区三角镇徐家村柿子坪组","main_key":" ","guardian":null},"doctor":{"id":"49ff45a7-4212-48f8-ac3c-c0bf8e9805a3","name":"罗玉龙","idcard":"500222199108088613","practice_number":"110500222000711","profession":"医生"},"visit_order":{"visit_departments":"21030","visit_departments_name":"普内科","visit_type":"3","visit_no":"7DAE2FD0-16C6-4E11-8B20-2023C8610BB3","ward_code":"21030","ward_name":"普内科","bed_no":"42","medical_insurance_number":"B44465408","project_list":[{"project_name":"电子胃镜（普通）","study_body_part":"-","modality":"内窥镜","project_charge_code":"002208000080000-220800008.10","study_project_code":"3B92AF61-984A-4675-AD56-E6F8B4146EBA","project_price":172.10}]},"extend":{"scene":"2","his_ip":"10.61.28.66","his_mac":"D4:C9:EF:D9:6B:20"}}
+2024-01-30 12:24:41====>1
+2024-01-30 12:24:41====>2
+2024-01-30 12:24:41====>3
+2024-01-30 12:24:41====>4
+2024-01-30 12:24:41====>5
+2024-01-30 12:24:41====>6
+2024-01-30 12:24:41====>7
+2024-01-30 12:24:41====>8
+2024-01-30 12:24:41====>9
+2024-01-30 12:24:41====>调用【近期检查项目查询接口】出参:{"code":200,"message":"成功","data":{"total_num":1},"error":{"error_code":0},"meta":{"trace":{"trace_id":"343c6729-5293-4507-a8a8-185650353176","parent_id":"","span_id":"49cb5337-50af-4302-9631-ee57344b98d5","request_id":""}}}
+2024-01-30 12:24:41====>调用【患者近期相似检查项目查询接口】接口URL:http://ds-ucc.cq.hc:443/frontapi/api/v3/cqkydy/api/v2/mutual/project/notice
+2024-01-30 12:24:41====>调用【患者近期相似检查项目查询接口】入参:{"app_key":"1729404945213775872","hospital":{"accredit_id":"125002227094723044","accredit_name":"重庆市綦江区文龙街道社区卫生服务中心","branch_code":"","branch_name":""},"patience":{"id":"2cbb8b94-64c0-4505-9bbb-da86dad18ba6","name":"刘兆容","id_no_type":"01","id_no":"510223196607202446","birthday":"1966-07-20","health_card_no":"510223196607202446","gender":"2","phone":"17830815475","address":"重庆市綦江区三角镇徐家村柿子坪组","main_key":" ","guardian":null},"doctor":{"id":"49ff45a7-4212-48f8-ac3c-c0bf8e9805a3","name":"罗玉龙","idcard":"500222199108088613","practice_number":"110500222000711","profession":"医生"},"visit_order":{"visit_departments":"21030","visit_departments_name":"普内科","visit_type":"3","visit_no":"7DAE2FD0-16C6-4E11-8B20-2023C8610BB3","ward_code":"21030","ward_name":"普内科","bed_no":"42","medical_insurance_number":"B44465408","project_list":[{"project_name":"电子胃镜（普通）","study_body_part":"-","modality":"内窥镜","project_charge_code":"002208000080000-220800008.10","study_project_code":"3B92AF61-984A-4675-AD56-E6F8B4146EBA","project_price":172.10}]},"extend":{"scene":"2","his_ip":"10.61.28.66","his_mac":"D4:C9:EF:D9:6B:20"}}
+2024-01-30 12:24:41====>1
+2024-01-30 12:24:41====>2
+2024-01-30 12:24:41====>3
+2024-01-30 12:24:41====>4
+2024-01-30 12:24:41====>5
+2024-01-30 12:24:41====>6
+2024-01-30 12:24:41====>7
+2024-01-30 12:24:41====>8
+2024-01-30 12:24:41====>9
+2024-01-30 12:24:41====>调用【患者近期相似检查项目查询接口】出参:{"code":200,"message":"成功","data":null,"error":{"error_code":0},"meta":{"trace":{"trace_id":"662d62ba-e17f-48e1-b047-4769ca1734b1","parent_id":"","span_id":"95711558-ae70-41e3-850a-1326d118a1d2","request_id":""}}}
+2024-01-30 12:31:09====>=========================================================================================================
+2024-01-30 12:31:09====>调用Exteinterf入参：insureSystem:48;FunctionNo:357;strAdvance:<root><OrgId>4480c78d-c3dd-4873-a0a8-d936963abf75</OrgId><EventId>102016D0-1F2F-568A-E064-9CDC71ADEEF6</EventId><GroupNo>17,18,19,20,21,22,23,24,25,26,27,28</GroupNo><Pid>2245c989-e6ef-41fc-ad6e-fe7addbefa4a</Pid><DepId>2045fd3b-45ad-4f77-a1d8-a44f526e7888</DepId><DepName>普内科</DepName><OperId>49ff45a7-4212-48f8-ac3c-c0bf8e9805a3</OperId><OperName>罗玉龙</OperName></root>
+2024-01-30 12:31:09====>是否有检查检验项目：Select *
+                                From 个人医嘱记录 a
+                                Where a.机构id = '4480c78d-c3dd-4873-a0a8-d936963abf75'
+                                And a.事件id = '102016D0-1F2F-568A-E064-9CDC71ADEEF6'
+                                And a.组序号 in (17,18,19,20,21,22,23,24,25,26,27,28)
+                                And a.诊疗类别 In ('C','D')
+2024-01-30 12:34:43====>=========================================================================================================
+2024-01-30 12:34:43====>调用Exteinterf入参：insureSystem:48;FunctionNo:357;strAdvance:<root><OrgId>4480c78d-c3dd-4873-a0a8-d936963abf75</OrgId><EventId>174F34D6-A0BD-48D9-BA13-CDD1F1080853</EventId><GroupNo>16,17,18,19,20,21</GroupNo><Pid>DDE5071B-0FF3-4255-B8FB-D41D0A9FC8EA</Pid><DepId>2045fd3b-45ad-4f77-a1d8-a44f526e7888</DepId><DepName>普内科</DepName><OperId>49ff45a7-4212-48f8-ac3c-c0bf8e9805a3</OperId><OperName>罗玉龙</OperName></root>
+2024-01-30 12:34:43====>是否有检查检验项目：Select *
+                                From 个人医嘱记录 a
+                                Where a.机构id = '4480c78d-c3dd-4873-a0a8-d936963abf75'
+                                And a.事件id = '174F34D6-A0BD-48D9-BA13-CDD1F1080853'
+                                And a.组序号 in (16,17,18,19,20,21)
+                                And a.诊疗类别 In ('C','D')
+2024-01-30 12:38:13====>=========================================================================================================
+2024-01-30 12:38:13====>调用Exteinterf入参：insureSystem:48;FunctionNo:357;strAdvance:<root><OrgId>4480c78d-c3dd-4873-a0a8-d936963abf75</OrgId><EventId>E2620CB3-2D49-412E-A3FF-5B614E604CF7</EventId><GroupNo>15,16,17,18,19,20,21,22,23,24</GroupNo><Pid>BDA242D3-538A-13A2-E054-9CDC71ADEEF6</Pid><DepId>2045fd3b-45ad-4f77-a1d8-a44f526e7888</DepId><DepName>普内科</DepName><OperId>49ff45a7-4212-48f8-ac3c-c0bf8e9805a3</OperId><OperName>罗玉龙</OperName></root>
+2024-01-30 12:38:13====>是否有检查检验项目：Select *
+                                From 个人医嘱记录 a
+                                Where a.机构id = '4480c78d-c3dd-4873-a0a8-d936963abf75'
+                                And a.事件id = 'E2620CB3-2D49-412E-A3FF-5B614E604CF7'
+                                And a.组序号 in (15,16,17,18,19,20,21,22,23,24)
+                                And a.诊疗类别 In ('C','D')
+2024-01-30 12:41:32====>=========================================================================================================
+2024-01-30 12:41:32====>调用Exteinterf入参：insureSystem:48;FunctionNo:357;strAdvance:<root><OrgId>4480c78d-c3dd-4873-a0a8-d936963abf75</OrgId><EventId>7DAE2FD0-16C6-4E11-8B20-2023C8610BB3</EventId><GroupNo>21</GroupNo><Pid>2cbb8b94-64c0-4505-9bbb-da86dad18ba6</Pid><DepId>2045fd3b-45ad-4f77-a1d8-a44f526e7888</DepId><DepName>普内科</DepName><OperId>49ff45a7-4212-48f8-ac3c-c0bf8e9805a3</OperId><OperName>罗玉龙</OperName></root>
+2024-01-30 12:41:32====>是否有检查检验项目：Select *
+                                From 个人医嘱记录 a
+                                Where a.机构id = '4480c78d-c3dd-4873-a0a8-d936963abf75'
+                                And a.事件id = '7DAE2FD0-16C6-4E11-8B20-2023C8610BB3'
+                                And a.组序号 in (21)
+                                And a.诊疗类别 In ('C','D')

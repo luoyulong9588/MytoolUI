@@ -1,0 +1,809 @@
+﻿<Window x:Class="MytoolMiniWPF.views.TumorReportWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MytoolMiniWPF.views"
+        xmlns:wd="https://github.com/WPFDevelopersOrg/WPFDevelopers"
+        mc:Ignorable="d"
+        MouseLeftButtonDown ="Window_MouseLeftButtonDown"
+        AllowDrop="True"
+    AllowsTransparency="True"
+    Background="#A0f6f3f7"
+        Opacity="0.95"
+    OpacityMask="White"
+    ResizeMode="NoResize"
+    WindowStartupLocation="CenterScreen"
+    WindowStyle="None"
+        Title="肿瘤报卡" 
+        Height="795" Width="1000">
+    <Window.Template>
+        <ControlTemplate TargetType="Window">
+            <Border Padding="64" Background="Transparent">
+                <Border Background="White" CornerRadius="10">
+                    <Border.Effect>
+                        <DropShadowEffect BlurRadius="24" Opacity="0.5" />
+                    </Border.Effect>
+                    <ContentPresenter ClipToBounds="True" />
+                </Border>
+            </Border>
+        </ControlTemplate>
+
+    </Window.Template>
+    <Window.Resources>
+        <SolidColorBrush x:Key="Requird" Color="Black" />
+        <SolidColorBrush x:Key="NotRequird" Color="DarkCyan" />
+    </Window.Resources>
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid
+            x:Name="title"
+            Grid.Row="0"
+            Margin="0,0,2,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="42" />
+                <ColumnDefinition Width="42" />
+            </Grid.ColumnDefinitions>
+
+            <TextBlock
+                Grid.Column="0"
+                Margin="0,0,300,0"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                FontSize="18"
+                FontWeight="UltraBold"
+                Text="肿 瘤 报 卡" />
+
+
+            <Button
+                x:Name="min"
+                Grid.Column="1"
+                Width="40"
+                Height="34"
+                Click="min_Click"
+                Content="-"
+                FontSize="25"
+                ToolTip="最小化">
+
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Width" Value="70" />
+                        <Setter Property="Height" Value="25" />
+                        <Setter Property="Foreground" Value="Black" />
+                        <Setter Property="BorderThickness" Value="0" />
+                        <Setter Property="Background" Value="WhiteSmoke" />
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="Button">
+                                    <Border
+                                        x:Name="border"
+                                        Background="{TemplateBinding Background}"
+                                        BorderBrush="{TemplateBinding BorderBrush}"
+                                        BorderThickness="{TemplateBinding BorderThickness}"
+                                        CornerRadius="3"
+                                        SnapsToDevicePixels="True">
+                                        <TextBlock
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"
+                                            Foreground="{TemplateBinding Foreground}"
+                                            Text="{TemplateBinding Content}" />
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter TargetName="border" Property="Background" Value="gray" />
+                                            <Setter Property="Foreground" Value="WhiteSmoke" />
+                                        </Trigger>
+                                        <Trigger Property="IsPressed" Value="True">
+                                            <Setter TargetName="border" Property="Background" Value="DarkRed" />
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Button.Style>
+            </Button>
+            <!--<TextBlock Text="&#xf2df;" FontSize="16" FontFamily="pack://application:,,,/resources/font/#iconfont"/>-->
+
+
+            <Grid Grid.Column="2">
+                <Button
+                    x:Name="close"
+                    Width="40"
+                    Height="34"
+                    Click="close_Click"
+                    Content="×"
+                    FontSize="25"
+                    ToolTip="关闭">
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Width" Value="70" />
+                            <Setter Property="Height" Value="25" />
+                            <Setter Property="Foreground" Value="Black" />
+                            <Setter Property="BorderThickness" Value="0" />
+                            <Setter Property="Background" Value="WhiteSmoke" />
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border
+                                            x:Name="border"
+                                            Background="{TemplateBinding Background}"
+                                            BorderBrush="{TemplateBinding BorderBrush}"
+                                            BorderThickness="{TemplateBinding BorderThickness}"
+                                            CornerRadius="3 10 3 3"
+                                            SnapsToDevicePixels="True">
+                                            <TextBlock
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center"
+                                                Foreground="{TemplateBinding Foreground}"
+                                                Text="{TemplateBinding Content}" />
+                                        </Border>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter TargetName="border" Property="Background" Value="red" />
+                                                <Setter Property="Foreground" Value="WhiteSmoke" />
+                                            </Trigger>
+                                            <Trigger Property="IsPressed" Value="True">
+                                                <Setter TargetName="border" Property="Background" Value="DarkRed" />
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </Button.Style>
+                </Button>
+
+
+            </Grid>
+
+        </Grid>
+        <Grid x:Name="panelGrid" Grid.Row="1" Margin="10 5 10 5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="110"/>
+                <RowDefinition Height="250"/>
+                <RowDefinition Height="250"/>
+            </Grid.RowDefinitions>
+            <Border
+            Grid.Row="0"
+            Margin="10,5,10,5"
+            Background="WhiteSmoke"
+            CornerRadius="10">
+                <Grid x:Name="cardInfoGrid">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Text="报告卡信息" FontSize="14" FontFamily="微软雅黑" FontWeight="Heavy" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20 0 0 0"></TextBlock>
+                    <Line X1="20" Y1="30" X2="100" Y2="30" Stroke="Gray" StrokeThickness="1"/>
+                    <Grid Grid.Row="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="35"/>
+                            <RowDefinition Height="35"/>
+                        </Grid.RowDefinitions>
+              
+                        <StackPanel Margin="20 0 0 0" Grid.Column="0" Grid.Row="0" Orientation="Horizontal">
+                            <TextBlock Grid.Row="0" Text="是否本院诊断?" VerticalAlignment="Center" />
+                            <RadioButton x:Name="radiobtnLocalHospital" Margin="5 0 0 0" Content="是 " IsChecked="True"/>
+                            <RadioButton x:Name="radiobtnNotLocalHospital" Margin="0 0 0 0" Content="否" />
+                            <TextBlock Text="诊断医院："  Margin="30 0 5 0" VerticalAlignment="Center" />
+                            <TextBox x:Name="textBoxDiagnosisHospitalName" VerticalAlignment="Center"  Width="185" Text="文龙街道社区卫生服务中心"/>
+
+                            <TextBlock  VerticalAlignment="Center" Text="治疗情况：" Margin="30 0 0 0"/>
+                            <ComboBox x:Name="comboboxCure" 
+                                      Margin="0 0 0 0"
+                                      Width="70"
+                                  materialDesign:HintAssist.Hint="治疗情况"
+                                      
+
+                                       
+                                 >
+                                <ComboBoxItem Content="未治疗"/>
+                                <ComboBoxItem Content="治疗"/>
+                                <ComboBoxItem Content="不明"/>
+                            </ComboBox>
+                            <TextBlock  VerticalAlignment="Center" Text="治疗项目：" Margin="30 0 0 0"  Foreground="{StaticResource NotRequird}"/>
+
+                            <ComboBox x:Name="comboboxCureItem"
+                                      Margin=" 0 0 0 0"
+                                      Width="105">
+                                <ComboBoxItem Content="手术治疗"/>
+                                <ComboBoxItem Content="放射治疗"/>
+                                <ComboBoxItem Content="化学治疗"/>
+                                <ComboBoxItem Content="内分泌治疗"/>
+                                <ComboBoxItem Content="靶向治疗"/>
+                                <ComboBoxItem Content="免疫治疗"/>
+                            </ComboBox>
+                            
+                        </StackPanel>
+                        <StackPanel Grid.Row="1" 
+                                    Margin=" 20 0 0 0"
+                                    Orientation="Horizontal">
+                            <ComboBox x:Name="comboboxInorout" Width="81" 
+                              Margin="0 0 0 0"
+                              materialDesign:HintAssist.Hint="门诊/住院号">
+                                                            <ComboBoxItem Content="门诊号"/>
+                                                            <ComboBoxItem Content="住院号"/>
+                                                        </ComboBox>
+                            <TextBox x:Name="textBoxHospitalId" Margin="10 0 0 0" Width="63" VerticalAlignment="Center" TextChanged="textBoxHospitalId_TextChanged"/>
+                            <TextBlock Text="报卡单位："  
+                                   Margin="30 0 0 0"
+                                   VerticalAlignment="Center"/>
+                            <TextBox x:Name="textBoxReportHospitalName" Margin="5 0 0 0" Width="185" VerticalAlignment="Center" Text="文龙街道社区卫生服务中心" />
+                            <TextBlock Text="报卡医师：" VerticalAlignment="Center" Margin="30 0 0 0"  />
+                            <TextBox x:Name="textBoxReportDoctorName" Margin="0 0 0 0" Width="70" VerticalAlignment="Center"/>
+
+                            <TextBlock Text="报卡日期：" VerticalAlignment="Center" 
+                                       Margin="30 0 0 0"/>
+                            <DatePicker
+                                x:Name="datapickerReportDate"
+                                Width="100"
+                                Margin="5 0 0 5"/>
+
+                        </StackPanel>   
+                  
+                        
+                    </Grid>
+                    
+                </Grid>
+            </Border>
+            <Border
+            Grid.Row="1"
+            Margin="10,5,10,5"
+            Background="WhiteSmoke"
+            CornerRadius="10">
+
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Text="病人信息" FontSize="14" FontFamily="微软雅黑"  FontWeight="Heavy" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20 0 0 0"></TextBlock>
+                    <Line X1="20" Y1="30" X2="100" Y2="30" Stroke="Gray" StrokeThickness="1"/>
+                    <Grid Grid.Row="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="0" Margin="20 0 0 0" Orientation="Horizontal">
+                            <TextBlock Text="患者姓名：" VerticalAlignment="Center"/>
+                            <TextBox x:Name="textBoxPatientName" VerticalAlignment="Center" Width="70"/>
+                            <TextBlock Text="性别：" VerticalAlignment="Center" Margin="30 0 0 0"/>
+
+                            <ComboBox x:Name="comboboxPatientGender"
+                                       materialDesign:HintAssist.Hint="性别"
+                                      Margin="0 0 0 0"
+                                      Width="60"
+                                      >
+                                <ComboBoxItem Content="男"/>
+                                <ComboBoxItem Content="女"/>
+                            </ComboBox>
+                            <TextBlock Text="出生日期："  Margin="30 0 0 0"  VerticalAlignment="Center"/>
+
+                            <DatePicker Width="130" Margin="0 0 0 5"
+                                        Name="datepickerBornDate"
+                                        >
+                            </DatePicker>
+                            <TextBlock Text="文化程度："  Margin="30 0 0 0"  VerticalAlignment="Center"/>
+
+                            <ComboBox x:Name="comboboxEducation" Margin="0 0 0 0"
+                                      Width="85"
+                                    >
+                                <ComboBoxItem Content="不详"/>
+                                <ComboBoxItem Content="文盲"/>
+                                <ComboBoxItem Content="学龄前儿童"/>
+                                <ComboBoxItem Content="小学"/>
+                                <ComboBoxItem Content="初中"/>
+                                <ComboBoxItem Content="高中"/>
+                                <ComboBoxItem Content="大学专科"/>
+                                <ComboBoxItem Content="大学本科"/>
+                                <ComboBoxItem Content="研究生"/>
+                            </ComboBox>
+                            <TextBlock Text="年龄：" Margin="30 0 0 0 " VerticalAlignment="Center"/>
+                            <TextBox x:Name="textBoxPatientAge" Width="50" VerticalAlignment="Center"/>
+                            <TextBlock Text="岁" Margin="5 0 0 0 " VerticalAlignment="Center"/>
+                            
+                            
+                        </StackPanel>
+                        <StackPanel Grid.Row="1" Margin="20 0 0 0 " Orientation="Horizontal">
+                            
+                            <TextBlock Text="婚姻状况：" Margin="0 0 0 0 " VerticalAlignment="Center"/>
+                            <ComboBox Margin="0 0 0 0" x:Name="comboboxMarriage" Width="70"
+                                      materialDesign:HintAssist.Hint="婚姻状况"
+                                       Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+                                      >
+                                <ComboBoxItem Content="未婚"/>
+                                <ComboBoxItem Content="已婚"/>
+                                <ComboBoxItem Content="同居"/>
+                                <ComboBoxItem Content="离婚"/>
+                                <ComboBoxItem Content="丧偶"/>
+                                <ComboBoxItem Content="不详"/>
+                            </ComboBox>
+                            <TextBlock Text="民族：" Margin="30 0 0 0 " VerticalAlignment="Center"/>
+                            <TextBox x:Name="textBoxPatientNation" Width="60" VerticalAlignment="Center"/>
+
+                            <TextBlock Text="职业：" VerticalAlignment="Center" Margin="30 0 0 0"/>
+                            <ComboBox x:Name="comboboxVocation"
+                                  materialDesign:HintAssist.Hint="职业"
+                                       Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+                                  Width="183"
+                                      Margin="5 0 0 0"
+                                  >
+                                <ComboBoxItem Content="业技人员"/>
+                                <ComboBoxItem Content="办事人员和有关人员"/>
+                                <ComboBoxItem Content="商业、服务业人员"/>
+                                <ComboBoxItem Content="农、林、牧、渔、水利业生产人员"/>
+                                <ComboBoxItem Content="生产、运输设备操作人员及有关人员"/>
+                                <ComboBoxItem Content="婴幼儿、学龄前儿童"/>
+                                <ComboBoxItem Content="学生"/>
+                                <ComboBoxItem Content="家务"/>
+                                <ComboBoxItem Content="无业"/>
+                                <ComboBoxItem Content="军人"/>
+                                <ComboBoxItem Content="不便分类的其它从业人员"/>
+                            </ComboBox>
+                            <TextBlock Text="具体工种：" VerticalAlignment="Center" Margin="30 0 0 0"/>
+
+                            <ComboBox x:Name="comboboxWorkType"
+                              Margin=" 5 0 0 0"
+                              Width="184"
+                              materialDesign:HintAssist.Hint="具体工种"
+                              Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+                              >
+                                                    <ComboBoxItem Content="1.专业技术人员"/>
+                                <ComboBoxItem Content="2.行政办公人员"/>
+                                <ComboBoxItem Content="3.安全保卫和消防人员"/>
+                                <ComboBoxItem Content="4.邮政和电信业务人员"/>
+                                <ComboBoxItem Content="5.其他办事人员和有关人员"/>
+                                <ComboBoxItem Content="6.购销人员"/>
+                                <ComboBoxItem Content="7.仓储人员"/>
+                                <ComboBoxItem Content="8.餐饮服务人员"/>
+                                <ComboBoxItem Content="9.饭店、旅游及健身娱乐场所服务人员"/>
+                                <ComboBoxItem Content="10.运输服务人员"/>
+                                <ComboBoxItem Content="11.医疗卫生辅助服务人员"/>
+                                <ComboBoxItem Content="12.社会服务和居民生活服务人员"/>
+                                <ComboBoxItem Content="13.其他商业、服务业人员 "/>
+                                <ComboBoxItem Content="14.种植业生产人员"/>
+                                <ComboBoxItem Content="15.林业生产及野生动植物保护人员"/>
+                                <ComboBoxItem Content="16.畜牧业生产人员"/>
+                                <ComboBoxItem Content="17.渔业生产人员"/>
+                                <ComboBoxItem Content="18.水利设施管理养护人员"/>
+                                <ComboBoxItem Content="19.其他农、林、牧、渔、水利业生产人员"/>
+                                <ComboBoxItem Content="20.勘探及矿物开采人员"/>
+                                <ComboBoxItem Content="21.金属冶炼、轧制人员"/>
+                                <ComboBoxItem Content="23.化工产品生产人员"/>
+                                <ComboBoxItem Content="24.机械制造加工人员"/>
+                                <ComboBoxItem Content="25.机电产品装配人员"/>
+                                <ComboBoxItem Content="26.机械设备修理人员"/>
+                                <ComboBoxItem Content="27.电力设备安装、运行、检修及供点人员 "/>
+                                <ComboBoxItem Content="28.电子元器件与设备制造、装配、调试及维修人员"/>
+                                <ComboBoxItem Content="29.橡胶和塑料制品生产人员 30 纺织、针织、印染人员 "/>
+                                <ComboBoxItem Content="31.裁剪、缝纫和皮革、毛皮制品加工制作人员"/>
+                                <ComboBoxItem Content="32.粮油、食品、饮料生产加工及饲料生产加工人员"/>
+                                <ComboBoxItem Content="33.烟草及其制品加工人员 "/>
+                                <ComboBoxItem Content="34.药品生产人员 "/>
+                                <ComboBoxItem Content="35.木材加工、人造板生产、木制品制作及制浆、造纸和纸制品生产加工人员建筑材料生产、加工人员"/>
+                                <ComboBoxItem Content="36.玻璃、陶瓷、搪瓷及其制品生产加工人员"/>
+                                <ComboBoxItem Content="37.广播影视制品制作、播放及文物保护作业人员印刷人员 "/>
+                                <ComboBoxItem Content="38.工艺、美术品制作人员 "/>
+                                <ComboBoxItem Content="39.文化教育、体育用品制作人员 "/>
+                                <ComboBoxItem Content="40.工程施工人员 "/>
+                                <ComboBoxItem Content="41.运输设备操作人员及有关人员环境监测与废物处理人员"/>
+                                <ComboBoxItem Content="42.检验、计量人员 "/>
+                                <ComboBoxItem Content="43.其他生产、运输设备操作人员及有关人员"/>
+                                <ComboBoxItem Content="44.婴幼儿、学龄前儿童"/>
+                                <ComboBoxItem Content="45.学生 "/>
+                                <ComboBoxItem Content="46.家务 "/>
+                                <ComboBoxItem Content="47.无业"/>
+                                <ComboBoxItem Content="48.军人 "/>
+                                <ComboBoxItem Content="49.不便分类的其他从业人员"/>
+
+                            </ComboBox>
+                            
+                        </StackPanel>
+
+                        <StackPanel Grid.Row="2" Margin="20 0 0 0 " Orientation="Horizontal">
+                            <TextBlock Text="身份证号码：" VerticalAlignment="Center"/>
+                            <TextBox x:Name="textboxIdcardNumber" VerticalAlignment="Center" Width="337"/>
+
+                            <TextBlock Text="现住址：" VerticalAlignment="Center" Margin="42 0 0 0"/>
+                            <TextBox x:Name="textBoxCurrentAddress" VerticalAlignment="Center" Width="290"/>
+
+
+                        </StackPanel>
+                        <StackPanel Margin="20 0 0 0" Orientation="Horizontal" Grid.Row="3">
+                            <TextBlock Text="联系人1：" VerticalAlignment="Center"/>
+                            <TextBox x:Name="textBoxFirstContact" VerticalAlignment="Center" Width="50"  />
+                            <TextBlock Text="电话1："  Margin="22 0 0 0" VerticalAlignment="Center"/>
+                            <TextBox x:Name="textBoxFirstContactPhone" VerticalAlignment="Center" Width="100" />
+                            <TextBlock Text="关系："  Margin="22 0 0 0" VerticalAlignment="Center"/>
+                            <ComboBox x:Name="comboboxFirstContactRelation"
+                                      Margin="5 0 0 0 "
+                                       materialDesign:HintAssist.Hint="与患者关系">
+                                <ComboBoxItem Content="本人"/>
+                                <ComboBoxItem Content="家属"/>
+                                <ComboBoxItem Content="朋友"/>
+                                <ComboBoxItem Content="工作单位"/>
+                                <ComboBoxItem Content="不详"/>
+                            </ComboBox>
+
+                            <TextBlock Text="户籍地址：" VerticalAlignment="Center" Margin="30 0 0 0"/>
+                            <TextBox x:Name="textBoxHouseholdRegistrationAddress" VerticalAlignment="Center" Width="290"/>
+
+
+                        </StackPanel>
+                        <StackPanel Margin="20 0 0 0 " Orientation="Horizontal" Grid.Row="4">
+                            <TextBlock Text="联系人2：" Margin="00 0 0 0" VerticalAlignment="Center"/>
+                            <TextBox x:Name="textBoxSecondContact" VerticalAlignment="Center" Width="50"  />
+                            <TextBlock Text="电话2："  Margin="22 0 0 0" VerticalAlignment="Center"/>
+                            <TextBox x:Name="textBoxSecondContactPhone" VerticalAlignment="Center" Width="100" />
+                            <TextBlock Text="关系："  Margin="22 0 0 0" VerticalAlignment="Center"/>
+
+                            <ComboBox x:Name="comboboxSecondContactRelation"
+                                Margin="5 0 0 0 "
+                                 materialDesign:HintAssist.Hint="与患者关系">
+                                <ComboBoxItem Content="本人"/>
+                                <ComboBoxItem Content="家属"/>
+                                <ComboBoxItem Content="朋友"/>
+                                <ComboBoxItem Content="工作单位"/>
+                                <ComboBoxItem Content="不详"/>
+                            </ComboBox>
+
+                            <TextBlock Text="工作单位：" VerticalAlignment="Center" Margin="30 0 0 0"/>
+                            <TextBox x:Name="textBoxWorkAddress" VerticalAlignment="Center" Width="290"/>
+
+
+
+
+
+
+                        </StackPanel>
+                        <StackPanel Grid.Row="6" Margin="20 0 0 0 " Orientation="Horizontal">
+                            <TextBlock Text="病人是否知情？" VerticalAlignment="Center" Margin=" 0 0 0 0"/>
+                            <RadioButton x:Name="radiobtnKnown" Content="是"/>
+                            <RadioButton x:Name="radiobtnUnknown" Margin="5 0 0 0" Content="否"/>
+                            <ComboBox x:Name="comboboxSurvivalStatus"
+                                    Margin="30 0 0 0"  
+                                    BorderThickness="0"
+                                    materialDesign:HintAssist.Hint="生存状态"
+           Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+                                      MouseLeave="comboboxSurvivalStatus_MouseLeave"
+          >
+                                <ComboBoxItem Content="存活"/>
+                                <ComboBoxItem Content="死亡"/>
+                                <ComboBoxItem Content="失访"/>
+                                <ComboBoxItem Content="拒访"/>
+                            </ComboBox>
+                            <DatePicker Width="80" Margin="30 0 0 0"
+                                            materialDesign:HintAssist.Hint="死亡时间"
+                                            Name="datePickerDeathTime"
+                                            BorderThickness="0"
+                                            IsEnabled="False"
+                                            Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
+                                             Foreground="{StaticResource NotRequird}"
+            >
+                            </DatePicker>
+                            <TextBox x:Name="textBoxDeathReason" Width="80" VerticalAlignment="Center" IsEnabled="False" 
+                                     Margin="30 0 0 0"
+                                     materialDesign:HintAssist.Hint="死亡原因"
+                                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+                                                        <TextBox x:Name="textBoxDeathIcd" Width="100" VerticalAlignment="Center" IsEnabled="False"
+                                     Margin="30 0 0 0"
+                                     materialDesign:HintAssist.Hint="死亡ICD10编码"
+                                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                     />
+                                                        <TextBox x:Name="textBoxDeathIcdName" Width="100" VerticalAlignment="Center" IsEnabled="False"
+                                         Margin="30 0 0 0"
+                                         materialDesign:HintAssist.Hint="死亡ICD名称"
+                                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                         />
+                        </StackPanel>
+                    
+                    </Grid>
+                
+                </Grid>
+            </Border>
+            <Border
+            Grid.Row="2"
+            Margin="10,5,10,5"
+            Background="WhiteSmoke"
+            CornerRadius="10">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Text="诊断信息" FontSize="14" FontFamily="微软雅黑"  FontWeight="Heavy" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20 0 0 0"></TextBlock>
+                    <Line X1="20" Y1="30" X2="100" Y2="30" Stroke="Gray" StrokeThickness="1"/>
+                    <Grid Grid.Row="1" Cursor="">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="35"/>
+                            <RowDefinition Height="35"/>
+                            <RowDefinition Height="35"/>
+                            <RowDefinition Height="35"/>
+                            <RowDefinition Height="35"/>
+                            <RowDefinition Height="35"/>
+                      
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="0" Margin="20 0 0 0" Orientation="Horizontal">
+                            <TextBlock Text="是否多发肿瘤?" VerticalAlignment="Center"/>
+                            <StackPanel Orientation="Horizontal">
+                                <RadioButton x:Name="radioBtnMultTumors" Content="多发"/>
+                                <RadioButton x:Name="radioBtnSingleTumors" Content="单一" Margin="5 0 0 0"/>
+                            </StackPanel>
+                            <TextBlock Text="发病日期：" VerticalAlignment="Center" Margin="30 0 0 0"  Foreground="{StaticResource Requird}"/>
+                            <DatePicker Name="datepickerOnsetDate" Width="100" Margin="5 0 0 5"
+                                        >
+                            </DatePicker>
+                            <TextBlock Text="发病年龄：" VerticalAlignment="Center" Margin="30 0 0 0"  Foreground="{StaticResource NotRequird}"/>
+                            <ComboBox x:Name="comboBoxOnsetAge" IsEditable="True" Width="55" DisplayMemberPath="Age" BorderBrush="DarkCyan"  Foreground="{StaticResource NotRequird}"/>
+
+                            <TextBlock Text="岁" VerticalAlignment="Center" Margin="5 0 0 0"  Foreground="{StaticResource NotRequird}"/>
+                            
+                            <TextBlock Text="主要诊断：" VerticalAlignment="Center" Margin="30 0 0 0"  Foreground="{StaticResource Requird}"/>
+                            <ComboBox x:Name="comboboxDiagnoseName" Width="167" 
+                                      VerticalAlignment="Center" DisplayMemberPath="DisplayValue"  
+                                      materialDesign:HintAssist.Hint="此项可根据拼音/汉字检索"
+                                      KeyUp="comboboxDiagnoseName_KeyUpAsync" IsEditable="True"/>
+                            
+                        </StackPanel>
+                        <StackPanel Grid.Row="1"  Margin="20 0 0 0" Orientation="Horizontal">
+                          <TextBlock Text="IARC标准：" VerticalAlignment="Center" Margin="0 0 0 0"/>
+
+                            <wd:MultiSelectComboBox  MinWidth="180" Background="WhiteSmoke"
+                                                    MaxWidth="180"
+                                                     BorderThickness="0 0 0 1"
+BorderBrush="Gray"
+                                                    Name="multiSelectComboboxDiagnosticIARC"
+                                                    HorizontalAlignment="Center"
+                                                    VerticalContentAlignment="Center"
+                                                    Delimiter="^"
+                                                    IsSelectAllActive="True"
+                                                    Margin="5 0 0 5">
+                                <wd:MultiSelectComboBoxItem Content="[1] 仅有死亡证明"/>
+                                <wd:MultiSelectComboBoxItem Content="[2] 临床"/>
+                                <wd:MultiSelectComboBoxItem Content="[3] X线、CT、超声波、内窥镜等"/>
+                                <wd:MultiSelectComboBoxItem Content="[4] 生化、免疫、肿瘤标记物"/>
+                                <wd:MultiSelectComboBoxItem Content="[5] 病理(原发)"/>
+                                <wd:MultiSelectComboBoxItem Content="[6] 不详"/>
+                            </wd:MultiSelectComboBox>
+                            <TextBlock Text="行业标准：" VerticalAlignment="Center" Margin="30 0 0 0"/>
+                            <wd:MultiSelectComboBox  MinWidth="180"  Background="WhiteSmoke"
+                                                     BorderThickness="0 0 0 1"
+BorderBrush="Gray"
+                         MaxWidth="180"
+                         Name="multiSelectComboboxDiagnosticIndustryStandard"
+                         HorizontalAlignment="Center"
+                         VerticalContentAlignment="Center"
+                         Delimiter="^"
+                         IsSelectAllActive="True"
+                         Margin="5 0 0 5">
+                                <wd:MultiSelectComboBoxItem Content="[1] 临床"/>
+                                <wd:MultiSelectComboBoxItem Content="[2] X线"/>
+                                <wd:MultiSelectComboBoxItem Content="[3] CT"/>
+                                <wd:MultiSelectComboBoxItem Content="[4] 超声波"/>
+                                <wd:MultiSelectComboBoxItem Content="[5] 内窥镜"/>
+                                <wd:MultiSelectComboBoxItem Content="[6] 核磁共振"/>
+                                <wd:MultiSelectComboBoxItem Content="[7] 手术（无病理）"/>
+                                <wd:MultiSelectComboBoxItem Content="[8] 细胞学、血片"/>
+                                <wd:MultiSelectComboBoxItem Content="[9] 病理(继发)"/>
+                                <wd:MultiSelectComboBoxItem Content="[10] 病理(原发)"/>
+                                <wd:MultiSelectComboBoxItem Content="[11] 尸检(有病理)"/>
+                            </wd:MultiSelectComboBox>
+                            <TextBlock Text="病理诊断：" VerticalAlignment="Center" Margin="37 0 0 0"  Foreground="{StaticResource Requird}"
+                                       
+                                      
+                                       />
+                            <ComboBox x:Name="comboboxPathologyDiagnoseName" Width="167" VerticalAlignment="Center" DisplayMemberPath="DisplayValue" KeyUp="comboboxPathologyDiagnoseName_KeyUp" IsEditable="True"
+                                      materialDesign:HintAssist.Hint="此项可根据拼音/汉字检索"/>
+
+                        </StackPanel>
+                        <Button
+                            x:Name="btnStart"
+                            Click="btnStart_Click"
+                              Margin="8,0,15,10"
+                                Grid.Row="4"
+                             Grid.RowSpan="2"
+                            HorizontalAlignment="Right"
+                              materialDesign:ButtonProgressAssist.IsIndicatorVisible="{Binding IsSaving}"
+                              materialDesign:ButtonProgressAssist.Value="{Binding SaveProgress}"
+                              Command="{Binding SaveCommand}"
+                              IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                              Style="{StaticResource MaterialDesignFloatingActionLightButton}">
+                            <!-- simple example of toggling/animating pack icon with a data trigger -->
+                            <materialDesign:PackIcon
+                                    Width="24"
+                                    Height="24">
+                                <materialDesign:PackIcon.Style>
+                                    <Style
+                        TargetType="materialDesign:PackIcon"
+                        BasedOn="{StaticResource {x:Type materialDesign:PackIcon}}">
+                                        <Setter
+                                              Property="Kind"
+                                              Value="ArrowDecisionAuto" />
+                                        <Style.Triggers>
+                                            <DataTrigger
+                                            Binding="{Binding IsSaveComplete}"
+                                            Value="True">
+                                                <Setter
+                                          Property="Kind"
+                                          Value="Check" />
+                                                <DataTrigger.EnterActions>
+                                                    <BeginStoryboard>
+                                                        <Storyboard>
+                                                            <DoubleAnimation
+                                                Storyboard.TargetProperty="Opacity"
+                                                From="0"
+                                                To="1"
+                                                Duration="0:0:0.8" />
+                                                        </Storyboard>
+                                                    </BeginStoryboard>
+                                                </DataTrigger.EnterActions>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </materialDesign:PackIcon.Style>
+                            </materialDesign:PackIcon>
+                        </Button>
+                        <StackPanel Grid.Row="2"  Margin="20 0 0 0" Orientation="Horizontal">
+                            <TextBlock VerticalAlignment="Center" Text="病理学部位："  Foreground="{StaticResource Requird}"/>
+                            <TextBox VerticalAlignment="Center" Width="120" Margin="5 0 0 0"  Name="textboxPathologicalSite"/>
+                            <TextBlock VerticalAlignment="Center" Text="解剖学部位(ICD-O-3)：" Margin=" 30 0 0 0"  Foreground="{StaticResource Requird}"/>
+                            <TextBox VerticalAlignment="Center" Width="120" Margin="5 0 0 0" Name="textboxAnatomicalSite"/>
+                            <TextBlock VerticalAlignment="Center" Text="ICD-10 诊断名称：" Margin="30 0 0 0"/>
+                            <ComboBox VerticalAlignment="Center" Width="170" Margin="5 0 0 0"
+                                      Name="comboboxICD10" 
+                                      DisplayMemberPath="DisplayValue" 
+                                      IsEditable="True"
+                                      KeyUp="comboboxICD10_KeyUp"
+                                      materialDesign:HintAssist.Hint="此项支持全文模糊混合检索"
+                                      />
+                        </StackPanel >
+                        <StackPanel Grid.Row="3"  Margin="20 0 0 0" Orientation="Horizontal">
+                            <TextBlock VerticalAlignment="Center" Text="形态学：" Margin=" 0 0 0 0"  Foreground="{StaticResource Requird}"/>
+                            <TextBox VerticalAlignment="Center" Width="150" Margin="5 0 0 0" Name="textboxMorphology" Cursor=""/>
+                            <TextBlock VerticalAlignment="Center" Text="最高诊断单位：" Margin=" 30 0 0 0"  Foreground="{StaticResource Requird}"/>
+                            <TextBox VerticalAlignment="Center" Width="300" Margin="5 0 0 0" Name="textboxToplevelDiagnosticUnit"/>
+                        </StackPanel>
+                        <TextBlock Grid.Row="3" Grid.RowSpan="2" VerticalAlignment="Center" Margin="600 0 0 0" Width="85" TextWrapping="WrapWithOverflow" Text="标注为深绿色的项目为非必须项" Foreground="DarkCyan"/>
+
+                        <StackPanel Grid.Row="4"  Margin="20 0 0 0" Orientation="Horizontal">
+                            <TextBlock VerticalAlignment="Center" Text="病理分期：" Margin="0 0 0 0" Foreground="{StaticResource NotRequird}"/>
+                            <TextBlock VerticalAlignment="Center" Text="T" Margin="5 0 0 0" Foreground="{StaticResource NotRequird}"/>
+                            <ComboBox Width="40" HorizontalAlignment="Center"
+                              Margin="5 0 0 0"
+                              Name="comboboxPathologicalstageT"
+                                      Foreground="{StaticResource NotRequird}"
+                                      BorderBrush="DarkCyan"
+                                      >
+                                <ComboBoxItem Content="x"/>
+                                <ComboBoxItem Content="0"/>
+                                <ComboBoxItem Content="is"/>
+                                <ComboBoxItem Content="1"/>
+                                <ComboBoxItem Content="2"/>
+                                <ComboBoxItem Content="3"/>
+                                <ComboBoxItem Content="4"/>
+                            </ComboBox>
+                            <TextBlock VerticalAlignment="Center" Text="N" Margin="5 0 0 0" Foreground="{StaticResource NotRequird}"/>
+                            <ComboBox Width="40" HorizontalAlignment="Center"
+          Margin="5 0 0 0"
+                                      BorderBrush="DarkCyan"
+                                      Foreground="{StaticResource NotRequird}"
+          Name="comboboxPathologicalstageN">
+                                <ComboBoxItem Content="x"/>
+                                <ComboBoxItem Content="0"/>
+                                <ComboBoxItem Content="1"/>
+                                <ComboBoxItem Content="2"/>
+                                <ComboBoxItem Content="3"/>
+                            </ComboBox>
+                            <TextBlock VerticalAlignment="Center" Text="M" Margin="5 0 0 0" Foreground="{StaticResource NotRequird}"/>
+                            <ComboBox Width="40" HorizontalAlignment="Center"
+                                Margin="5 0 0 0"
+                                      BorderBrush="DarkCyan"
+                                      Foreground="{StaticResource NotRequird}"
+                                             Name="comboboxPathologicalstageM">
+                                <ComboBoxItem Content="x"/>
+                                <ComboBoxItem Content="0"/>
+                                <ComboBoxItem Content="1"/>
+                            </ComboBox>
+                            
+                            
+                            <TextBlock VerticalAlignment="Center" Text="分级：" Margin="30 0 0 0"/>
+                            <ComboBox  MinWidth="188" Background="WhiteSmoke"
+                                Width="120"
+                                Name="comboboxTumorLevel"
+                                HorizontalAlignment="Center"
+                                VerticalContentAlignment="Center"
+                                Margin="5 0 0 0">
+                                <ComboBoxItem Content="1-1级高分化/已分化NOS"/>
+                                <ComboBoxItem Content="2-Ⅱ级/中分化/已中等分化"/>
+                                <ComboBoxItem Content="3-Ⅲ级/低分化"/>
+                                <ComboBoxItem Content="4-Ⅳ级/未分化/间变"/>
+                                <ComboBoxItem Content="5-T细胞"/>
+                                <ComboBoxItem Content="6-B细胞/前B/B前体细胞"/>
+                                <ComboBoxItem Content="7-无标记淋巴细胞/非T非B"/>
+                                <ComboBoxItem Content="8-NK（自然杀伤）细胞"/>
+                                <ComboBoxItem Content="9-未确定,未指出或不适用"/>
+                            </ComboBox>
+                            <TextBlock VerticalAlignment="Center" Text="侧位：" Margin="30 0 0 0"/>
+                            <ComboBox Name="comboboxTumorSide" Width="60"
+                                      >
+                                <ComboBoxItem Content="左侧"/>
+                                <ComboBoxItem Content="右侧"/>
+                                <ComboBoxItem Content="双侧"/>
+                                <ComboBoxItem Content="不详"/>
+                            </ComboBox>
+                            <!-- floating action button with progress -->
+                            <!-- floating action button with progress -->
+                           
+                            
+
+                        </StackPanel>
+                        <StackPanel Grid.Row="5"  Margin="20 0 0 0" Orientation="Horizontal">
+                            <TextBlock VerticalAlignment="Center" Text="临床分期：" Margin="0 0 0 0" Foreground="{StaticResource NotRequird}"/>
+                            <TextBlock VerticalAlignment="Center" Text="T" Margin="5 0 0 0" Foreground="{StaticResource NotRequird}"/>
+                            <ComboBox Width="40" HorizontalAlignment="Center"
+                                      BorderBrush="DarkCyan"
+                                      Foreground="{StaticResource NotRequird}"
+                                                          Margin="5 0 0 0"
+                                                          Name="comboboxClinicalstageT">                            
+                                <ComboBoxItem Content="x"/>
+                                <ComboBoxItem Content="0"/>
+                                <ComboBoxItem Content="is"/>
+                                <ComboBoxItem Content="1"/>
+                                <ComboBoxItem Content="2"/>
+                                <ComboBoxItem Content="3"/>
+                                <ComboBoxItem Content="4"/>
+                            </ComboBox>
+                            <TextBlock VerticalAlignment="Center" Text="N" Margin="5 0 0 0" Foreground="{StaticResource NotRequird}"/>
+                            <ComboBox Width="40" HorizontalAlignment="Center"
+          Margin="5 0 0 0"
+                                      BorderBrush="DarkCyan"
+                                      Foreground="{StaticResource NotRequird}"
+          Name="comboboxClinicalstageN">
+                                <ComboBoxItem Content="x"/>
+                                <ComboBoxItem Content="0"/>
+                                <ComboBoxItem Content="1"/>
+                                <ComboBoxItem Content="2"/>
+                                <ComboBoxItem Content="3"/>
+                            </ComboBox>
+                            <TextBlock VerticalAlignment="Center" Text="M" Margin="5 0 0 0" Foreground="{StaticResource NotRequird}"/>
+                            <ComboBox Width="40" HorizontalAlignment="Center"
+          Margin="5 0 0 0"
+                                      BorderBrush="DarkCyan"
+                                      Foreground="{StaticResource NotRequird}"
+          Name="comboboxClinicalstageM">
+                                <ComboBoxItem Content="x"/>
+                                <ComboBoxItem Content="0"/>
+                                <ComboBoxItem Content="1"/>
+                            </ComboBox>
+                            <TextBlock VerticalAlignment="Center" Text="原诊断：" Margin="30 0 0 0" Foreground="{StaticResource NotRequird}"/>
+                            <TextBox VerticalAlignment="Center" Width="80" BorderBrush="DarkCyan" Margin="5 0 0 0" Name="textboxOriginalDiagnosis"/>
+                            <TextBlock VerticalAlignment="Center" Text="原诊断病理：" Margin="30 0 0 0" Foreground="{StaticResource NotRequird}"/>
+                            <TextBox VerticalAlignment="Center" Width="80" BorderBrush="DarkCyan" Margin="5 0 0 0" Name="textboxOriginalPathologicalDiagnosis"/>
+                           
+                            <DatePicker Width="100" Margin="30 0 0 0"
+                                        BorderThickness="0"
+                                        Foreground="{StaticResource NotRequird}"
+                                            materialDesign:HintAssist.Hint="原诊断日期" 
+                                            materialDesign:TextFieldAssist.HasClearButton="True"
+                                             Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
+                                        Name="datepickerOriginalDiagnosisDate"
+                                            >           
+                            </DatePicker>
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+            </Border>
+        </Grid>  
+    </Grid>
+</Window>

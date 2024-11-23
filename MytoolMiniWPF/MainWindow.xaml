@@ -1,0 +1,208 @@
+﻿<Window
+    x:Class="MytoolMiniWPF.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:MytoolMiniWPF"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:xf="clr-namespace:XamlFlair;assembly=XamlFlair.WPF"
+    Title="MytoolUI"
+    Width="310"
+    Height="40"
+    AllowDrop="True"
+    AllowsTransparency="True"
+    Icon="pack://application:,,,/resources/ico/mainluncher.ico"
+    MouseDown="Window_MouseDown"
+    Opacity="1"
+    LocationChanged="Window_LocationChanged"
+    MouseLeave="Window_MouseLeave"
+    MouseEnter="Window_MouseEnter"
+    ResizeMode="NoResize"
+    ShowInTaskbar="False"
+    Topmost="True"
+    WindowStyle="None"
+    mc:Ignorable="d">
+
+    <Window.Style>
+        <Style TargetType="Window">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Window">
+                        <Border
+                            Background="red"
+                            CornerRadius="10"
+                            Opacity="0.8">
+                            <ContentPresenter />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+
+    </Window.Style>
+
+    <Window.Template>
+        <ControlTemplate TargetType="Window">
+            <Border Padding="5 5 5 5" Background="Transparent">
+                <Border Background="WhiteSmoke" CornerRadius="5">
+                    <Border.Effect>
+                        <DropShadowEffect
+                            BlurRadius="10"
+                            Opacity="0.5"
+                            ShadowDepth="0"
+                            Color="Gray" />
+
+                    </Border.Effect>
+
+                    <ContentPresenter ClipToBounds="True" />
+                </Border>
+            </Border>
+        </ControlTemplate>
+    </Window.Template>
+
+
+    <Window.Resources>
+        <Style x:Key="IconFont">
+            <Setter Property="TextElement.FontFamily" Value="pack://application:,,,/resources/font/#iconfont" />
+            <Setter Property="TextElement.FontSize" Value="16" />
+            <Setter Property="TextElement.FontWeight" Value="UltraBold" />
+            <Setter Property="TextElement.Foreground" Value="#FF673AB7" />
+
+        </Style>
+
+        <Style x:Key="MainButton" TargetType="Button">
+
+            <!--  Set background property here  -->
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Width" Value="30" />
+            <Setter Property="Height" Value="30" />
+            <Setter Property="BorderBrush" Value="Red" />
+            <Setter Property="Margin" Value="2" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="10">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#FFD5C4F4" />
+
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+
+    
+        <Grid Name="mainGrid">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Button
+                x:Name="BtnRecoginition"
+                Click="BtnRecoginition_Click"
+                Cursor="Hand"
+                MouseLeftButtonDown="Window_MouseDown"
+                Style="{StaticResource MainButton}"
+                ToolTip="医检互认，点击可查看更多选项"
+   
+                >
+            <TextBlock Style="{StaticResource IconFont}" Text="&#xe62b;" FontSize="20" FontWeight="Bold"/>
+            </Button>
+            
+            <Button
+                x:Name="BtnMainPageFillBlank"
+                Grid.Column="1"
+                Click="BtnMainPageFillBlank_Click"
+                Cursor="Hand"
+                Style="{StaticResource MainButton}"
+                ToolTip="首页基本信息填充">
+
+                <TextBlock Style="{StaticResource IconFont}" Text="&#xe60a;" />
+            </Button>
+
+            <Button
+                x:Name="BtnMainBloodGas"
+                Grid.Column="2"
+                Click="BtnMainBloodGas_Click"
+                Style="{StaticResource MainButton}"
+                ToolTip="血气分析" Cursor="Hand">
+            <TextBlock Style="{StaticResource IconFont}" Text="&#xe8d7;" FontSize="18" />
+            </Button>
+            <Button
+                x:Name="BtnChronicDisease"
+                Grid.Column="3"
+                Click="BtnChronicDisease_Click"
+                Style="{StaticResource MainButton}"
+                ToolTip="慢病报卡（慢性肺病、心脑血管卒中事件）">
+                <TextBlock Style="{StaticResource IconFont}" Text="&#xe619;" />
+            </Button>
+            <Button
+                x:Name="BtnFollowUp"
+                Grid.Column="4"
+                Click="BtnFollowUp_Click"
+                Style="{StaticResource MainButton}"
+                ToolTip="出院随访格式化">
+                <TextBlock Style="{StaticResource IconFont}" Text="&#xe725;" />
+            </Button>
+        <Button
+                x:Name="BtnTumorReport"
+                Grid.Column="5"
+                Click="BtnTumorReport_Click"
+                Style="{StaticResource MainButton}"
+                ToolTip="肿瘤报卡"> 
+            <TextBlock Style="{StaticResource IconFont}" Text="&#xe618;" FontSize="18"/>
+        </Button>
+        <Button
+                x:Name="BtnCertificate"
+                Grid.Column="6"
+                Click="BtnCertificate_Click"
+                Style="{StaticResource MainButton}"
+                ToolTip="住院证快速打印" Cursor="Hand">
+            <TextBlock Style="{StaticResource IconFont}" Text="&#xe602;" FontSize="18" Cursor=""/>
+            </Button>
+            <Button
+                x:Name="BtnNote"
+                Grid.Column="7"
+                Click="BtnNote_Click"
+                Style="{StaticResource MainButton}"
+                ToolTip="记事小本" Cursor="Hand">
+            <TextBlock Style="{StaticResource IconFont}" Text="&#xe71a;" />
+            </Button>
+            <Button
+                x:Name="BtnSetting"
+                Grid.Column="8"
+                Click="BtnSetting_Click"
+                Style="{StaticResource MainButton}"
+                ToolTip="设置">
+                <TextBlock Style="{StaticResource IconFont}" Text="&#xe711;" />
+            </Button>
+            <Button
+                x:Name="BtnClose"
+                Grid.Column="9"
+                Click="BtnClose_Click"
+                Cursor="Hand"
+                Style="{StaticResource MainButton}"
+                ToolTip="退出程序">
+                <TextBlock Style="{StaticResource IconFont}" Text="&#xe650;" />
+            </Button>
+        </Grid>
+    
+</Window>

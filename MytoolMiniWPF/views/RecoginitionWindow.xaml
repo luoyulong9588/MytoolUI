@@ -1,0 +1,358 @@
+﻿<Window x:Class="MytoolMiniWPF.views.RecoginitionWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MytoolMiniWPF.views"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:xf="clr-namespace:XamlFlair;assembly=XamlFlair.WPF"
+        Title="医检互认"
+        MouseLeftButtonDown ="Window_MouseLeftButtonDown" 
+        Width="900"
+        Height="680"
+        AllowDrop="True"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Icon="pack://application:,,,/resources/ico/together.ico"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+        mc:Ignorable="d"        >
+        <Window.Template>
+            <ControlTemplate TargetType="Window">
+                <Border Padding="64" Background="Transparent">
+                    <Border Background="White" CornerRadius="10">
+                        <Border.Effect>
+                            <DropShadowEffect BlurRadius="24" Opacity="0.5" />
+                        </Border.Effect>
+                        <ContentPresenter ClipToBounds="True" />
+                    </Border>
+                </Border>
+            </ControlTemplate>
+
+        </Window.Template>
+    <Window.Resources>
+        <!-- 自定义滚动条样式 -->
+        <Style TargetType="ScrollBar">
+            <Setter Property="Background" Value="Transparent"/>
+            <Style.Triggers>
+                <!-- 鼠标悬停时改变背景色 -->
+                <DataTrigger Binding="{Binding IsMouseOver, RelativeSource={RelativeSource Self}}" Value="True">
+                    <Setter Property="Background" Value="WhiteSmoke"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <!-- 自定义 ScrollViewer 样式 -->
+        <Style TargetType="ScrollViewer">
+            <Setter Property="HorizontalScrollBarVisibility" Value="Auto"/>
+            <Setter Property="VerticalScrollBarVisibility" Value="Auto"/>
+            <!-- 设置默认的Padding和Margin为0，确保滚动条能够充满区域 -->
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="Margin" Value="0"/>
+        </Style>
+    </Window.Resources>
+    <Grid  xf:Animations.Primary="{xf:Animate BasedOn={StaticResource FadeIn}, Duration=800}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40" />
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition />
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="42" />
+            </Grid.ColumnDefinitions>
+            <Label
+        HorizontalContentAlignment="Center"
+        VerticalContentAlignment="Center"
+        FontFamily="微软雅黑"
+        FontSize="16"
+        FontWeight="Bold">
+                医 检 互 认
+            </Label>
+            <Button
+        x:Name="btnClose"
+        Grid.Column="1"
+        Margin="0,0,3,0"
+        Click="btnClose_Click"
+        Content="×"
+        ToolTip="关闭">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Width" Value="40" />
+                        <Setter Property="Height" Value="34" />
+                        <Setter Property="FontSize" Value="25" />
+                        <Setter Property="Foreground" Value="Black" />
+                        <Setter Property="BorderThickness" Value="0" />
+                        <Setter Property="Background" Value="WhiteSmoke" />
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="Button">
+                                    <Border
+                                x:Name="border"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="3 10 3 3"
+                                SnapsToDevicePixels="True">
+                                        <TextBlock
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Foreground="{TemplateBinding Foreground}"
+                                    Text="{TemplateBinding Content}" />
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter TargetName="border" Property="Background" Value="red" />
+                                            <Setter Property="Foreground" Value="WhiteSmoke" />
+                                        </Trigger>
+                                        <Trigger Property="IsPressed" Value="True">
+                                            <Setter TargetName="border" Property="Background" Value="DarkRed" />
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Button.Style>
+            </Button>
+        </Grid>
+        <Grid Grid.Row="1" Margin="30,0,30,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="120" />
+                <ColumnDefinition />
+                <ColumnDefinition Width="75" />
+            </Grid.ColumnDefinitions>
+            <Label
+        Margin="0,0,5,0"
+        HorizontalContentAlignment="Right"
+        VerticalContentAlignment="Center"
+        FontFamily="微软雅黑"
+        Content="ZLBH Directory:"
+        FontSize="14">
+
+            </Label>
+            <TextBox
+        materialDesign:HintAssist.Hint="1.初次使用，选择ZLBH.exe所在文件夹" 
+        materialDesign:HintAssist.HelperText="可以从ZLBH快捷方式->右键->打开文件位置找到路径"
+        materialDesign:HintAssist.HelperTextFontSize="12"
+        AllowDrop="True"
+        x:Name="textBoxDir"
+        
+        Grid.Column="1"
+        Height="35"
+        Margin="5,0,10,0"
+        HorizontalContentAlignment="Left"
+        VerticalContentAlignment="Center"
+        FontFamily="微软雅黑"
+      
+        FontSize="14" Cursor="" />
+            <Button
+                Width="75"
+        x:Name="btnBrowse"
+        Grid.Column="2"
+        Content="Browse"
+        Click="btnBrowse_Click"
+        FontSize="14"
+        ToolTip="选择文件" >
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Width" Value="60" />
+                        <Setter Property="Height" Value="30" />
+                        <Setter Property="Foreground" Value="Black" />
+                        <Setter Property="BorderThickness" Value="0.5" />
+                        <Setter Property="Background" Value="WhiteSmoke" />
+                        <Setter Property="Cursor" Value="Arrow" />
+
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="Button">
+                                    <Border
+                                    x:Name="border"
+                                    Background="{TemplateBinding Background}"
+                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                    CornerRadius="3"
+                                    SnapsToDevicePixels="True">
+                                        <TextBlock
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        Foreground="{TemplateBinding Foreground}"
+                                        Text="{TemplateBinding Content}" />
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter TargetName="border" Property="Background" Value="#FF673AB7" />
+
+                                            <Setter Property="Foreground" Value="WhiteSmoke" />
+                                        </Trigger>
+                                        <Trigger Property="IsPressed" Value="True">
+                                            <Setter TargetName="border" Property="Background" Value="Gray" />
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Cursor" Value="Hand" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+        </Grid>
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="10 0 10 0" Cursor="">
+            <TextBlock VerticalAlignment="Center" Text="Start Date:" Margin="5" FontSize="14" Cursor=""/>
+            <DatePicker Name="StartDatePicker" Width="120" Margin="5" FontSize="13" Cursor=""/>
+            <TextBlock VerticalAlignment="Center" Text="End Date:" Margin="5" FontSize="14"/>
+
+            <DatePicker Name="EndDatePicker" Width="120" Margin="5" FontSize="13"/>
+            <TextBlock VerticalAlignment="Center" Text="Doctor:" Margin="5" FontSize="14"/>
+            <ComboBox
+                Name="selectUserComboBox"
+                Grid.Column="1"
+                Margin="5,0,5,0"
+                materialDesign:HintAssist.Hint="Choose"
+                Width="70"
+                FontSize="14">
+                <ComboBoxItem Content="罗玉龙" />
+                <ComboBoxItem Content="刘益宏" />
+                <ComboBoxItem Content="彭育欢" />
+                <ComboBoxItem Content="朱庆霞" />
+                <ComboBoxItem Content="李小琴" />
+                <ComboBoxItem Content="王雪玲" />
+                <ComboBoxItem Content="张李" />
+                <ComboBoxItem Content="付饶" />
+            </ComboBox>
+            <Button 
+                Content="Filter"
+                Width="75" 
+                Margin="5" 
+                Height="30"
+                FontSize="14"
+                x:Name="buttonFilter"
+                Click="buttonFilter_Click"
+                >
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Width" Value="60" />
+                        <Setter Property="Height" Value="30" />
+                        <Setter Property="Foreground" Value="Black" />
+                        <Setter Property="BorderThickness" Value="0.5" />
+                        <Setter Property="Background" Value="WhiteSmoke" />
+                        <Setter Property="Cursor" Value="Arrow" />
+
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="Button">
+                                    <Border
+                    x:Name="border"
+                    Background="{TemplateBinding Background}"
+                    BorderBrush="{TemplateBinding BorderBrush}"
+                    BorderThickness="{TemplateBinding BorderThickness}"
+                    CornerRadius="3"
+                    SnapsToDevicePixels="True">
+                                        <TextBlock
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Foreground="{TemplateBinding Foreground}"
+                        Text="{TemplateBinding Content}" />
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter TargetName="border" Property="Background" Value="#FF673AB7" />
+
+                                            <Setter Property="Foreground" Value="WhiteSmoke" />
+                                        </Trigger>
+                                        <Trigger Property="IsPressed" Value="True">
+                                            <Setter TargetName="border" Property="Background" Value="Gray" />
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Cursor" Value="Hand" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+            <Button 
+                Content="Build"
+                Width="75" 
+                Margin="5" 
+                Height="30"
+                FontSize="14"
+                x:Name="buttonBuild" Cursor="Hand"
+                Click="buttonBuild_Click"
+                materialDesign:ButtonProgressAssist.IsIndicatorVisible="True"
+                materialDesign:ButtonProgressAssist.Value="-1"
+                materialDesign:ButtonProgressAssist.IsIndeterminate="False"
+                
+                 >
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Width" Value="60" />
+                        <Setter Property="Height" Value="30" />
+                        <Setter Property="Foreground" Value="Black" />
+                        <Setter Property="BorderThickness" Value="0.5" />
+                        <Setter Property="Background" Value="WhiteSmoke" />
+                        <Setter Property="Cursor" Value="Arrow" />
+
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="Button">
+                                    <Border
+                    x:Name="border"
+                    Background="{TemplateBinding Background}"
+                    BorderBrush="{TemplateBinding BorderBrush}"
+                    BorderThickness="{TemplateBinding BorderThickness}"
+                    CornerRadius="3"
+                    SnapsToDevicePixels="True">
+                                        <TextBlock
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Foreground="{TemplateBinding Foreground}"
+                        Text="{TemplateBinding Content}" />
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter TargetName="border" Property="Background" Value="#FF673AB7" />
+
+                                            <Setter Property="Foreground" Value="WhiteSmoke" />
+                                        </Trigger>
+                                        <Trigger Property="IsPressed" Value="True">
+                                            <Setter TargetName="border" Property="Background" Value="Gray" />
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Cursor" Value="Hand" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+        </StackPanel>
+        <DataGrid Grid.Row="3" x:Name="myDataGrid" AutoGenerateColumns="True" HorizontalAlignment="Stretch"  VerticalAlignment="Stretch"  Margin="28 10 28 10" Background="Transparent" Cursor="">
+
+          
+        </DataGrid>
+
+        <StackPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Center">
+            <TextBlock x:Name="texblockShowCount" Text="统计:共计0条数据" Margin="0 0 30 0"/>
+            <TextBlock x:Name="currentStatueTextblock" Text="当前时间区间:未筛选"  Margin="0 0 0 0" HorizontalAlignment="Center"/>
+            <TextBlock x:Name="texBlockShowDoctor" Text="当前医生:未筛选"  Margin="30 0 25 0" HorizontalAlignment="Right" />
+
+        </StackPanel>
+
+    </Grid>
+</Window>

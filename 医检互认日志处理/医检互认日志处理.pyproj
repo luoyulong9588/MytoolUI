@@ -1,0 +1,304 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>e8643329-79f6-46a1-8f91-055a412110bd</ProjectGuid>
+    <ProjectHome>.</ProjectHome>
+    <StartupFile>医检互认日志处理.py</StartupFile>
+    <SearchPath>
+    </SearchPath>
+    <WorkingDirectory>.</WorkingDirectory>
+    <OutputPath>.</OutputPath>
+    <Name>医检互认日志处理</Name>
+    <RootNamespace>医检互认日志处理</RootNamespace>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DebugSymbols>true</DebugSymbols>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DebugSymbols>true</DebugSymbols>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="analysis_log_files.py" />
+    <Compile Include="query_from_local_db.py" />
+    <Compile Include="search_file.py" />
+    <Compile Include="unit.py" />
+    <Compile Include="update_recognition_db.py" />
+    <Compile Include="医检互认日志处理.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Log_医检互认\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="analysis_log_files.spec" />
+    <Content Include="Log_医检互认\mr_20231228.txt" />
+    <Content Include="Log_医检互认\mr_20231229.txt" />
+    <Content Include="Log_医检互认\mr_20231230.txt" />
+    <Content Include="Log_医检互认\mr_20231231.txt" />
+    <Content Include="Log_医检互认\mr_20240104.txt" />
+    <Content Include="Log_医检互认\mr_20240105.txt" />
+    <Content Include="Log_医检互认\mr_20240106.txt" />
+    <Content Include="Log_医检互认\mr_20240107.txt" />
+    <Content Include="Log_医检互认\mr_20240108.txt" />
+    <Content Include="Log_医检互认\mr_20240109.txt" />
+    <Content Include="Log_医检互认\mr_20240110.txt" />
+    <Content Include="Log_医检互认\mr_20240111.txt" />
+    <Content Include="Log_医检互认\mr_20240112.txt" />
+    <Content Include="Log_医检互认\mr_20240113.txt" />
+    <Content Include="Log_医检互认\mr_20240114.txt" />
+    <Content Include="Log_医检互认\mr_20240115.txt" />
+    <Content Include="Log_医检互认\mr_20240116.txt" />
+    <Content Include="Log_医检互认\mr_20240117.txt" />
+    <Content Include="Log_医检互认\mr_20240118.txt" />
+    <Content Include="Log_医检互认\mr_20240119.txt" />
+    <Content Include="Log_医检互认\mr_20240120.txt" />
+    <Content Include="Log_医检互认\mr_20240121.txt" />
+    <Content Include="Log_医检互认\mr_20240122.txt" />
+    <Content Include="Log_医检互认\mr_20240123.txt" />
+    <Content Include="Log_医检互认\mr_20240125.txt" />
+    <Content Include="Log_医检互认\mr_20240126.txt" />
+    <Content Include="Log_医检互认\mr_20240127.txt" />
+    <Content Include="Log_医检互认\mr_20240129.txt" />
+    <Content Include="Log_医检互认\mr_20240130.txt" />
+    <Content Include="Log_医检互认\mr_20240131.txt" />
+    <Content Include="Log_医检互认\mr_20240201.txt" />
+    <Content Include="Log_医检互认\mr_20240202.txt" />
+    <Content Include="Log_医检互认\mr_20240203.txt" />
+    <Content Include="Log_医检互认\mr_20240204.txt" />
+    <Content Include="Log_医检互认\mr_20240205.txt" />
+    <Content Include="Log_医检互认\mr_20240206.txt" />
+    <Content Include="Log_医检互认\mr_20240208.txt" />
+    <Content Include="Log_医检互认\mr_20240210.txt" />
+    <Content Include="Log_医检互认\mr_20240211.txt" />
+    <Content Include="Log_医检互认\mr_20240215.txt" />
+    <Content Include="Log_医检互认\mr_20240216.txt" />
+    <Content Include="Log_医检互认\mr_20240217.txt" />
+    <Content Include="Log_医检互认\mr_20240219.txt" />
+    <Content Include="Log_医检互认\mr_20240220.txt" />
+    <Content Include="Log_医检互认\mr_20240221.txt" />
+    <Content Include="Log_医检互认\mr_20240222.txt" />
+    <Content Include="Log_医检互认\mr_20240224.txt" />
+    <Content Include="Log_医检互认\mr_20240225.txt" />
+    <Content Include="Log_医检互认\mr_20240226.txt" />
+    <Content Include="Log_医检互认\mr_20240227.txt" />
+    <Content Include="Log_医检互认\mr_20240229.txt" />
+    <Content Include="Log_医检互认\mr_20240301.txt" />
+    <Content Include="Log_医检互认\mr_20240302.txt" />
+    <Content Include="Log_医检互认\mr_20240303.txt" />
+    <Content Include="Log_医检互认\mr_20240305.txt" />
+    <Content Include="Log_医检互认\mr_20240306.txt" />
+    <Content Include="Log_医检互认\mr_20240307.txt" />
+    <Content Include="Log_医检互认\mr_20240308.txt" />
+    <Content Include="Log_医检互认\mr_20240310.txt" />
+    <Content Include="Log_医检互认\mr_20240311.txt" />
+    <Content Include="Log_医检互认\mr_20240312.txt" />
+    <Content Include="Log_医检互认\mr_20240313.txt" />
+    <Content Include="Log_医检互认\mr_20240315.txt" />
+    <Content Include="Log_医检互认\mr_20240316.txt" />
+    <Content Include="Log_医检互认\mr_20240317.txt" />
+    <Content Include="Log_医检互认\mr_20240318.txt" />
+    <Content Include="Log_医检互认\mr_20240319.txt" />
+    <Content Include="Log_医检互认\mr_20240320.txt" />
+    <Content Include="Log_医检互认\mr_20240321.txt" />
+    <Content Include="Log_医检互认\mr_20240322.txt" />
+    <Content Include="Log_医检互认\mr_20240323.txt" />
+    <Content Include="Log_医检互认\mr_20240325.txt" />
+    <Content Include="Log_医检互认\mr_20240326.txt" />
+    <Content Include="Log_医检互认\mr_20240327.txt" />
+    <Content Include="Log_医检互认\mr_20240328.txt" />
+    <Content Include="Log_医检互认\mr_20240330.txt" />
+    <Content Include="Log_医检互认\mr_20240331.txt" />
+    <Content Include="Log_医检互认\mr_20240401.txt" />
+    <Content Include="Log_医检互认\mr_20240403.txt" />
+    <Content Include="Log_医检互认\mr_20240404.txt" />
+    <Content Include="Log_医检互认\mr_20240405.txt" />
+    <Content Include="Log_医检互认\mr_20240406.txt" />
+    <Content Include="Log_医检互认\mr_20240407.txt" />
+    <Content Include="Log_医检互认\mr_20240409.txt" />
+    <Content Include="Log_医检互认\mr_20240410.txt" />
+    <Content Include="Log_医检互认\mr_20240411.txt" />
+    <Content Include="Log_医检互认\mr_20240412.txt" />
+    <Content Include="Log_医检互认\mr_20240414.txt" />
+    <Content Include="Log_医检互认\mr_20240415.txt" />
+    <Content Include="Log_医检互认\mr_20240416.txt" />
+    <Content Include="Log_医检互认\mr_20240417.txt" />
+    <Content Include="Log_医检互认\mr_20240418.txt" />
+    <Content Include="Log_医检互认\mr_20240419.txt" />
+    <Content Include="Log_医检互认\mr_20240420.txt" />
+    <Content Include="Log_医检互认\mr_20240421.txt" />
+    <Content Include="Log_医检互认\mr_20240422.txt" />
+    <Content Include="Log_医检互认\mr_20240424.txt" />
+    <Content Include="Log_医检互认\mr_20240425.txt" />
+    <Content Include="Log_医检互认\mr_20240426.txt" />
+    <Content Include="Log_医检互认\mr_20240429.txt" />
+    <Content Include="Log_医检互认\mr_20240430.txt" />
+    <Content Include="Log_医检互认\mr_20240501.txt" />
+    <Content Include="Log_医检互认\mr_20240504.txt" />
+    <Content Include="Log_医检互认\mr_20240505.txt" />
+    <Content Include="Log_医检互认\mr_20240506.txt" />
+    <Content Include="Log_医检互认\mr_20240507.txt" />
+    <Content Include="Log_医检互认\mr_20240509.txt" />
+    <Content Include="Log_医检互认\mr_20240510.txt" />
+    <Content Include="Log_医检互认\mr_20240511.txt" />
+    <Content Include="Log_医检互认\mr_20240512.txt" />
+    <Content Include="Log_医检互认\mr_20240514.txt" />
+    <Content Include="Log_医检互认\mr_20240515.txt" />
+    <Content Include="Log_医检互认\mr_20240516.txt" />
+    <Content Include="Log_医检互认\mr_20240517.txt" />
+    <Content Include="Log_医检互认\mr_20240519.txt" />
+    <Content Include="Log_医检互认\mr_20240520.txt" />
+    <Content Include="Log_医检互认\mr_20240521.txt" />
+    <Content Include="Log_医检互认\mr_20240522.txt" />
+    <Content Include="Log_医检互认\mr_20240523.txt" />
+    <Content Include="Log_医检互认\mr_20240525.txt" />
+    <Content Include="Log_医检互认\mr_20240526.txt" />
+    <Content Include="Log_医检互认\mr_20240527.txt" />
+    <Content Include="Log_医检互认\mr_20240529.txt" />
+    <Content Include="Log_医检互认\mr_20240530.txt" />
+    <Content Include="Log_医检互认\mr_20240531.txt" />
+    <Content Include="Log_医检互认\mr_20240602.txt" />
+    <Content Include="Log_医检互认\mr_20240603.txt" />
+    <Content Include="Log_医检互认\mr_20240604.txt" />
+    <Content Include="Log_医检互认\mr_20240606.txt" />
+    <Content Include="Log_医检互认\mr_20240607.txt" />
+    <Content Include="Log_医检互认\mr_20240608.txt" />
+    <Content Include="Log_医检互认\mr_20240610.txt" />
+    <Content Include="Log_医检互认\mr_20240611.txt" />
+    <Content Include="Log_医检互认\mr_20240612.txt" />
+    <Content Include="Log_医检互认\mr_20240613.txt" />
+    <Content Include="Log_医检互认\mr_20240614.txt" />
+    <Content Include="Log_医检互认\mr_20240615.txt" />
+    <Content Include="Log_医检互认\mr_20240616.txt" />
+    <Content Include="Log_医检互认\mr_20240617.txt" />
+    <Content Include="Log_医检互认\mr_20240618.txt" />
+    <Content Include="Log_医检互认\mr_20240619.txt" />
+    <Content Include="Log_医检互认\mr_20240621.txt" />
+    <Content Include="Log_医检互认\mr_20240622.txt" />
+    <Content Include="Log_医检互认\mr_20240623.txt" />
+    <Content Include="Log_医检互认\mr_20240625.txt" />
+    <Content Include="Log_医检互认\mr_20240626.txt" />
+    <Content Include="Log_医检互认\mr_20240627.txt" />
+    <Content Include="Log_医检互认\mr_20240629.txt" />
+    <Content Include="Log_医检互认\mr_20240630.txt" />
+    <Content Include="Log_医检互认\mr_20240701.txt" />
+    <Content Include="Log_医检互认\mr_20240704.txt" />
+    <Content Include="Log_医检互认\mr_20240705.txt" />
+    <Content Include="Log_医检互认\mr_20240706.txt" />
+    <Content Include="Log_医检互认\mr_20240707.txt" />
+    <Content Include="Log_医检互认\mr_20240708.txt" />
+    <Content Include="Log_医检互认\mr_20240710.txt" />
+    <Content Include="Log_医检互认\mr_20240711.txt" />
+    <Content Include="Log_医检互认\mr_20240712.txt" />
+    <Content Include="Log_医检互认\mr_20240713.txt" />
+    <Content Include="Log_医检互认\mr_20240715.txt" />
+    <Content Include="Log_医检互认\mr_20240716.txt" />
+    <Content Include="Log_医检互认\mr_20240717.txt" />
+    <Content Include="Log_医检互认\mr_20240719.txt" />
+    <Content Include="Log_医检互认\mr_20240720.txt" />
+    <Content Include="Log_医检互认\mr_20240721.txt" />
+    <Content Include="Log_医检互认\mr_20240723.txt" />
+    <Content Include="Log_医检互认\mr_20240724.txt" />
+    <Content Include="Log_医检互认\mr_20240725.txt" />
+    <Content Include="Log_医检互认\mr_20240727.txt" />
+    <Content Include="Log_医检互认\mr_20240728.txt" />
+    <Content Include="Log_医检互认\mr_20240729.txt" />
+    <Content Include="Log_医检互认\mr_20240731.txt" />
+    <Content Include="Log_医检互认\mr_20240801.txt" />
+    <Content Include="Log_医检互认\mr_20240802.txt" />
+    <Content Include="Log_医检互认\mr_20240804.txt" />
+    <Content Include="Log_医检互认\mr_20240805.txt" />
+    <Content Include="Log_医检互认\mr_20240806.txt" />
+    <Content Include="Log_医检互认\mr_20240808.txt" />
+    <Content Include="Log_医检互认\mr_20240809.txt" />
+    <Content Include="Log_医检互认\mr_20240810.txt" />
+    <Content Include="Log_医检互认\mr_20240820.txt" />
+    <Content Include="Log_医检互认\mr_20240825.txt" />
+    <Content Include="Log_医检互认\mr_20240826.txt" />
+    <Content Include="Log_医检互认\mr_20240827.txt" />
+    <Content Include="Log_医检互认\mr_20240828.txt" />
+    <Content Include="Log_医检互认\mr_20240829.txt" />
+    <Content Include="Log_医检互认\mr_20240830.txt" />
+    <Content Include="Log_医检互认\mr_20240831.txt" />
+    <Content Include="Log_医检互认\mr_20240901.txt" />
+    <Content Include="Log_医检互认\mr_20240902.txt" />
+    <Content Include="Log_医检互认\mr_20240904.txt" />
+    <Content Include="Log_医检互认\mr_20240905.txt" />
+    <Content Include="Log_医检互认\mr_20240906.txt" />
+    <Content Include="Log_医检互认\mr_20240908.txt" />
+    <Content Include="Log_医检互认\mr_20240909.txt" />
+    <Content Include="Log_医检互认\mr_20240910.txt" />
+    <Content Include="Log_医检互认\mr_20240911.txt" />
+    <Content Include="Log_医检互认\mr_20240912.txt" />
+    <Content Include="Log_医检互认\mr_20240913.txt" />
+    <Content Include="Log_医检互认\mr_20240914.txt" />
+    <Content Include="Log_医检互认\mr_20240915.txt" />
+    <Content Include="Log_医检互认\mr_20240917.txt" />
+    <Content Include="Log_医检互认\mr_20240918.txt" />
+    <Content Include="Log_医检互认\mr_20240919.txt" />
+    <Content Include="Log_医检互认\mr_20240920.txt" />
+    <Content Include="Log_医检互认\mr_20240921.txt" />
+    <Content Include="Log_医检互认\mr_20240922.txt" />
+    <Content Include="Log_医检互认\mr_20240923.txt" />
+    <Content Include="Log_医检互认\mr_20240924.txt" />
+    <Content Include="Log_医检互认\mr_20240925.txt" />
+    <Content Include="Log_医检互认\mr_20240926.txt" />
+    <Content Include="Log_医检互认\mr_20240927.txt" />
+    <Content Include="Log_医检互认\mr_20240928.txt" />
+    <Content Include="Log_医检互认\mr_20240929.txt" />
+    <Content Include="Log_医检互认\mr_20240930.txt" />
+    <Content Include="Log_医检互认\mr_20241002.txt" />
+    <Content Include="Log_医检互认\mr_20241003.txt" />
+    <Content Include="Log_医检互认\mr_20241004.txt" />
+    <Content Include="Log_医检互认\mr_20241006.txt" />
+    <Content Include="Log_医检互认\mr_20241007.txt" />
+    <Content Include="Log_医检互认\mr_20241008.txt" />
+    <Content Include="Log_医检互认\mr_20241010.txt" />
+    <Content Include="Log_医检互认\mr_20241011.txt" />
+    <Content Include="Log_医检互认\mr_20241012.txt" />
+    <Content Include="Log_医检互认\mr_20241014.txt" />
+    <Content Include="Log_医检互认\mr_20241015.txt" />
+    <Content Include="Log_医检互认\mr_20241016.txt" />
+    <Content Include="Log_医检互认\mr_20241018.txt" />
+    <Content Include="Log_医检互认\mr_20241019.txt" />
+    <Content Include="Log_医检互认\mr_20241020.txt" />
+    <Content Include="Log_医检互认\mr_20241022.txt" />
+    <Content Include="Log_医检互认\mr_20241023.txt" />
+    <Content Include="Log_医检互认\mr_20241024.txt" />
+    <Content Include="Log_医检互认\mr_20241026.txt" />
+    <Content Include="Log_医检互认\mr_20241027.txt" />
+    <Content Include="Log_医检互认\mr_20241028.txt" />
+    <Content Include="Log_医检互认\mr_20241030.txt" />
+    <Content Include="Log_医检互认\mr_20241031.txt" />
+    <Content Include="Log_医检互认\mr_20241101.txt" />
+    <Content Include="Log_医检互认\mr_20241103.txt" />
+    <Content Include="Log_医检互认\mr_20241104.txt" />
+    <Content Include="Log_医检互认\mr_20241105.txt" />
+    <Content Include="Log_医检互认\mr_20241107.txt" />
+    <Content Include="Log_医检互认\mr_20241108.txt" />
+    <Content Include="Log_医检互认\mr_20241109.txt" />
+    <Content Include="Log_医检互认\mr_20241111.txt" />
+    <Content Include="Log_医检互认\mr_20241112.txt" />
+    <Content Include="Log_医检互认\mr_20241113.txt" />
+    <Content Include="Log_医检互认\mr_20241115.txt" />
+    <Content Include="Log_医检互认\mr_20241116.txt" />
+    <Content Include="Log_医检互认\mr_20241117.txt" />
+    <Content Include="Log_医检互认\mr_20241119.txt" />
+    <Content Include="Log_医检互认\mr_20241120.txt" />
+    <Content Include="Log_医检互认\mr_20241121.txt" />
+    <Content Include="README.MD" />
+    <Content Include="recognition_data.db" />
+    <Content Include="test.json" />
+    <Content Include="update_recognition_db.spec" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
+  <!-- Uncomment the CoreCompile target to enable the Build command in
+       Visual Studio and specify your pre- and post-build commands in
+       the BeforeBuild and AfterBuild targets below. -->
+  <!--<Target Name="CoreCompile" />-->
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+</Project>

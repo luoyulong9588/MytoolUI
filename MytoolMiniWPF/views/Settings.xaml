@@ -1,0 +1,1416 @@
+﻿<Window
+    x:Class="MytoolMiniWPF.views.Settings"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:MytoolMiniWPF.views"
+    xmlns:uc="clr-namespace:MytoolMiniWPF.customControls"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:xf="clr-namespace:XamlFlair;assembly=XamlFlair.WPF"
+    Title="系统设置"
+    Width="820"
+    Height="520"
+    AllowDrop="True"
+    AllowsTransparency="True"
+    Background="Transparent"
+    Icon="pack://application:,,,/resources/ico/Setting.ico"
+    MouseLeftButtonDown="Window_MouseLeftButtonDown"
+    Opacity="0.95"
+    ResizeMode="NoResize"
+    WindowStartupLocation="CenterScreen"
+    WindowStyle="None"
+    mc:Ignorable="d">
+    <Window.Resources>
+        <Style TargetType="Button" x:Key="btnStyle">
+            <Setter Property="Margin" Value="0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="LightBlue" CornerRadius="5" x:Name="back">
+                            <TextBlock Text="{TemplateBinding Content}" Foreground="{TemplateBinding  Foreground}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="Orange" TargetName="back"/>
+                                <Setter Property="Foreground" Value="White"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+
+
+        </Style>
+        <Style x:Key="IconFont">
+            <Setter Property="TextElement.FontFamily" Value="pack://application:,,,/resources/font/#iconfont" />
+            <Setter Property="TextElement.FontSize" Value="80" />
+            <Setter Property="TextElement.FontWeight" Value="UltraBold" />
+            <Setter Property="TextElement.Foreground" Value="PowderBlue" />
+
+        </Style>
+        <Style x:Key="factoryLabel" TargetType="Label">
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="HorizontalAlignment" Value="Right" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Margin" Value="0,0,5,0" />
+            <Setter Property="Foreground" Value="DarkCyan" />
+        </Style>
+        <Style x:Key="factoryTextBlock" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Margin" Value="5,0,10,0" />
+            <Setter Property="Foreground" Value="DarkGray" />
+        </Style>
+        <Style x:Key="BtnSetting" TargetType="Button">
+            <Setter Property="Width" Value="42" />
+            <Setter Property="Height" Value="30" />
+            <Setter Property="Foreground" Value="Black" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Background" Value="WhiteSmoke" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border
+                            x:Name="border"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="3"
+                            SnapsToDevicePixels="True">
+                            <TextBlock
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Foreground="{TemplateBinding Foreground}"
+                                Text="{TemplateBinding Content}" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="red" />
+                                <Setter Property="Foreground" Value="WhiteSmoke" />
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="DarkRed" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="BtnTemplate" TargetType="Button">
+            <Setter Property="Width" Value="70" />
+            <Setter Property="Height" Value="25" />
+            <Setter Property="Foreground" Value="Black" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Background" Value="WhiteSmoke" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border
+                            x:Name="border"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="5"
+                            SnapsToDevicePixels="True">
+                            <TextBlock
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Foreground="{TemplateBinding Foreground}"
+                                Text="{TemplateBinding Content}" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="gray" />
+                                <Setter Property="Foreground" Value="WhiteSmoke" />
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="DarkRed" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="textBlockPath" TargetType="TextBlock">
+            <Setter Property="Cursor" Value="Arrow" />
+            <Setter Property="FontWeight" Value="Normal" />
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Cursor" Value="Hand" />
+                    <Setter Property="FontWeight" Value="Bold" />
+                    <Setter Property="Foreground" Value="MediumSlateBlue" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="textBlockPathBrowse" TargetType="TextBlock">
+            <Setter Property="Cursor" Value="Arrow" />
+            <Setter Property="FontWeight" Value="Normal" />
+
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Cursor" Value="Hand" />
+                    <Setter Property="FontWeight" Value="Bold" />
+                    <Setter Property="Foreground" Value="DarkOrange" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+
+
+    <Window.Template>
+        <ControlTemplate TargetType="Window">
+            <Border Padding="64" Background="Transparent">
+                <Border Background="White" CornerRadius="10">
+                    <Border.Effect>
+                        <DropShadowEffect
+                            BlurRadius="24"
+                            Opacity="0.5"
+                            ShadowDepth="1" />
+
+                    </Border.Effect>
+
+                    <ContentPresenter ClipToBounds="True" />
+                </Border>
+            </Border>
+        </ControlTemplate>
+    </Window.Template>
+
+    <Grid Name="settingMainGrid" xf:Animations.Primary="{xf:Animate BasedOn={StaticResource FadeIn}, Duration=1000}">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="34" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Cursor="">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="50" />
+                <ColumnDefinition Width="42" />
+                <ColumnDefinition Width="42" />
+                <ColumnDefinition Width="2" />
+            </Grid.ColumnDefinitions>
+
+
+            <TextBlock
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
+                Margin="0,0,0,0"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                FontSize="18"
+                FontWeight="UltraBold"
+                Text="系  统  设  置" />
+
+            <Button
+                x:Name="mini"
+                Grid.Column="2"
+                Width="40"
+                Height="30"
+                Content="-"
+                Cursor="Hand"
+                FontSize="25"
+                Style="{StaticResource BtnSetting}" />
+
+
+            <Button
+                x:Name="close"
+                Grid.Column="3"
+                Width="40"
+                Height="30"
+                Click="Close_Click"
+                Content="×"
+                FontSize="25">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Width" Value="70" />
+                        <Setter Property="Height" Value="25" />
+                        <Setter Property="Foreground" Value="Black" />
+                        <Setter Property="BorderThickness" Value="0" />
+                        <Setter Property="Background" Value="WhiteSmoke" />
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="Button">
+                                    <Border
+                                        x:Name="border"
+                                        Background="{TemplateBinding Background}"
+                                        BorderBrush="{TemplateBinding BorderBrush}"
+                                        BorderThickness="{TemplateBinding BorderThickness}"
+                                        CornerRadius="3 10 3 3"
+                                        SnapsToDevicePixels="True">
+                                        <TextBlock
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"
+                                            Foreground="{TemplateBinding Foreground}"
+                                            Text="{TemplateBinding Content}" />
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter TargetName="border" Property="Background" Value="red" />
+                                            <Setter Property="Foreground" Value="WhiteSmoke" />
+                                        </Trigger>
+                                        <Trigger Property="IsPressed" Value="True">
+                                            <Setter TargetName="border" Property="Background" Value="DarkRed" />
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+
+
+                    </Style>
+                </Button.Style>
+            </Button>
+
+        </Grid>
+
+        <TabControl
+            Grid.Row="1"
+            Margin="5"
+            materialDesign:ColorZoneAssist.Foreground="DarkCyan"
+            materialDesign:ColorZoneAssist.Mode="Custom"
+            TabStripPlacement="Left">
+            <TabItem Name="personalSetting" Header="个人信息">
+                <Border
+                    BorderBrush="Gray"
+                    BorderThickness="0,0,0,0"
+                    CornerRadius="0">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="30*" />
+                            <RowDefinition Height="100" />
+                            <RowDefinition Height="50*" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock
+                            x:Name="logo"
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            Margin="0,0,20,0"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Foreground="LightSeaGreen"
+                            Style="{StaticResource IconFont}"
+                            Text="&#xe6c1;" />
+                        <Grid
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            Margin="0,0,0,20"
+                            VerticalAlignment="Bottom">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock
+                                x:Name="textBlockuserName"
+                                Grid.Column="0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                FontFamily="微软雅黑"
+                                FontSize="16"
+                                FontWeight="Bold"
+                                Text="当前用户:"
+                                TextElement.Foreground="DarkCyan" />
+                            <TextBox
+                                x:Name="textBoxUserName"
+                                Grid.Column="1"
+                                Width="65"
+                                Margin="10,0,0,0"
+                                HorizontalAlignment="Stretch"
+                                HorizontalContentAlignment="Center"
+                                VerticalContentAlignment="Bottom"
+                                FontFamily="微软雅黑"
+                                FontSize="16"
+                                FontWeight="Bold"
+                                IsReadOnly="True"
+                                Text="罗玉龙"
+                                TextElement.Foreground="DarkCyan" />
+                        </Grid>
+                        <Button
+                            x:Name="btnEditUser"
+                            Grid.Row="1"
+                            Grid.Column="2"
+                            Width="100"
+                            Height="40"
+                            Margin="20,0,0,15"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Bottom"
+                            Click="BtnEditUser_Click"
+                            Style="{StaticResource MaterialDesignPaperButton}">
+                            <TextBlock
+                                x:Name="textBlocxEditUser"
+                                FontFamily="微软雅黑"
+                                FontSize="18"
+                                FontWeight="Bold"
+                                Text="修 改"
+                                TextElement.Foreground="Black" />
+                        </Button>
+                        <TextBlock x:Name="TextBlockverSion" Foreground="Gray"
+                                   VerticalAlignment="Bottom" HorizontalAlignment="Right"
+                                   Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Margin="20 30 80 5"/>
+                    </Grid>
+
+                </Border>
+            </TabItem>
+            <TabItem Name="seedSetting" Header="种子设置">
+                <TreeView
+                    x:Name="seedTreeView"
+                    Background="WhiteSmoke"
+                    ContextMenuOpening="seedTreeView_ContextMenuOpening" />
+            </TabItem>
+            <TabItem Name="templateSetting" Header="模板设置">
+                <Grid Margin="5,10,5,10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="45" />
+                        <ColumnDefinition Width="80" />
+                        <ColumnDefinition Width="80" />
+                    </Grid.ColumnDefinitions>
+                    <Label
+                        Name="labelDbPath"
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Content="SqlieDb:"
+                        Style="{StaticResource factoryLabel}" />
+                    <Label
+                        Name="labelCopd"
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        Content="慢性阻塞性肺病:"
+                        Style="{StaticResource factoryLabel}" />
+                    <Label
+                        Name="labelChronicBronchitis"
+                        Grid.Row="2"
+                        Grid.Column="0"
+                        Content="慢性支气管炎:"
+                        Style="{StaticResource factoryLabel}" />
+                    <Label
+                        Name="labelAsthma"
+                        Grid.Row="3"
+                        Grid.Column="0"
+                        Content="哮喘:"
+                        Style="{StaticResource factoryLabel}" />
+                    <Label
+                        Name="labelEmphysema"
+                        Grid.Row="4"
+                        Grid.Column="0"
+                        Content="肺气肿:"
+                        Style="{StaticResource factoryLabel}" />
+                    <Label
+                        Name="labelAcuteBronchitis"
+                        Grid.Row="5"
+                        Grid.Column="0"
+                        Content="急性支气管炎:"
+                        Style="{StaticResource factoryLabel}" />
+                    <Label
+                        Name="labelApoplexy"
+                        Grid.Row="6"
+                        Grid.Column="0"
+                        Content="心脑血管卒中:"
+                        Style="{StaticResource factoryLabel}" />
+                    <Label
+                        Name="labelAdmissionCertificate"
+                        Grid.Row="7"
+                        Grid.Column="0"
+                        Content="住院证:"
+                        Style="{StaticResource factoryLabel}" />
+                    <Label
+                        Name="labelTumor"
+                        Grid.Row="8"
+                        Grid.Column="0"
+                        Content="肿瘤报卡:"
+                        Style="{StaticResource factoryLabel}" />
+
+                    <Border
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        Margin="5,6,5,6"
+                        BorderBrush="#FFCECECE"
+                        BorderThickness="0,0,0,1"
+                        CornerRadius="0">
+                        <TextBlock
+                            x:Name="textBlockDbPath"
+                            Style="{StaticResource factoryTextBlock}"
+                            Text="config\\data.db" />
+                    </Border>
+
+
+                    <Border
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        Margin="5,6,5,6"
+                        BorderBrush="#FFCECECE"
+                        BorderThickness="0,0,0,1"
+                        CornerRadius="0">
+                        <TextBlock x:Name="textBlockCopd" Style="{StaticResource factoryTextBlock}" />
+                    </Border>
+                    <Border
+                        Grid.Row="2"
+                        Grid.Column="1"
+                        Margin="5,6,5,6"
+                        BorderBrush="#FFCECECE"
+                        BorderThickness="0,0,0,1"
+                        CornerRadius="0">
+                        <TextBlock x:Name="textBlockChronicBronchitis" Style="{StaticResource factoryTextBlock}" />
+                    </Border>
+                    <Border
+                        Grid.Row="3"
+                        Grid.Column="1"
+                        Margin="5,6,5,6"
+                        BorderBrush="#FFCECECE"
+                        BorderThickness="0,0,0,1"
+                        CornerRadius="0">
+                        <TextBlock x:Name="textBlockAsthma" Style="{StaticResource factoryTextBlock}" />
+                    </Border>
+                    <Border
+                        Grid.Row="4"
+                        Grid.Column="1"
+                        Margin="5,6,5,6"
+                        BorderBrush="#FFCECECE"
+                        BorderThickness="0,0,0,1"
+                        CornerRadius="0">
+                        <TextBlock x:Name="textBlockEmphysema" Style="{StaticResource factoryTextBlock}" />
+                    </Border>
+                    <Border
+                        Grid.Row="5"
+                        Grid.Column="1"
+                        Margin="5,6,5,6"
+                        BorderBrush="#FFCECECE"
+                        BorderThickness="0,0,0,1"
+                        CornerRadius="0">
+                        <TextBlock x:Name="textBlockAcuteBronchitis" Style="{StaticResource factoryTextBlock}" />
+                    </Border>
+                    <Border
+                        Grid.Row="6"
+                        Grid.Column="1"
+                        Margin="5,6,5,6"
+                        BorderBrush="#FFCECECE"
+                        BorderThickness="0,0,0,1"
+                        CornerRadius="0">
+                        <TextBlock x:Name="textBlockApoplexy" Style="{StaticResource factoryTextBlock}" />
+                    </Border>
+                    <Border
+                        Grid.Row="7"
+                        Grid.Column="1"
+                        Margin="5,6,5,6"
+                        BorderBrush="#FFCECECE"
+                        BorderThickness="0,0,0,1"
+                        CornerRadius="0">
+                        <TextBlock x:Name="textBlockAdmissionCertificate" Style="{StaticResource factoryTextBlock}" />
+                    </Border>
+                    <Border
+                        Grid.Row="8"
+                        Grid.Column="1"
+                        Margin="5,6,5,6"
+                        BorderBrush="#FFCECECE"
+                        BorderThickness="0,0,0,1"
+                        CornerRadius="0">
+                        <TextBlock x:Name="textBlockTumor" Style="{StaticResource factoryTextBlock}" />
+                    </Border>
+
+                    <Button
+                        x:Name="btnBrowseDb"
+                        Grid.Row="0"
+                        Grid.Column="2"
+                        Width="45"
+                        Height="30"
+                        Margin="0,2,0,2"
+                        Click="btnBrowseDb_Click"
+                        Content="..."
+                        FontSize="14"
+                        FontWeight="Bold"
+                        Style="{StaticResource BtnTemplate}" />
+
+
+                    <Button
+                        x:Name="btnBrowseCopd"
+                        Grid.Row="1"
+                        Grid.Column="2"
+                        Width="45"
+                        Height="30"
+                        Margin="0,2,0,2"
+                        Click="btnBrowseCopd_Click"
+                        Content="..."
+                        FontSize="14"
+                        FontWeight="Bold"
+                        Style="{StaticResource BtnTemplate}" />
+
+
+                    <Button
+                        x:Name="btnBrowseChronicBronchitis"
+                        Grid.Row="2"
+                        Grid.Column="2"
+                        Width="45"
+                        Height="30"
+                        Margin="0,2,0,2"
+                        Click="btnBrowseChronicBronchitis_Click"
+                        Content="..."
+                        FontSize="14"
+                        FontWeight="Bold"
+                        Style="{StaticResource BtnTemplate}" />
+
+
+                    <Button
+                        x:Name="btnBrowseAsthma"
+                        Grid.Row="3"
+                        Grid.Column="2"
+                        Width="45"
+                        Height="30"
+                        Margin="0,2,0,2"
+                        Click="btnBrowseAsthma_Click"
+                        Content="..."
+                        FontSize="14"
+                        FontWeight="Bold"
+                        Style="{StaticResource BtnTemplate}" />
+
+
+                    <Button
+                        x:Name="btnBrowseEmphysema"
+                        Grid.Row="4"
+                        Grid.Column="2"
+                        Width="45"
+                        Height="30"
+                        Margin="0,2,0,2"
+                        Click="btnBrowseEmphysema_Click"
+                        Content="..."
+                        FontSize="14"
+                        FontWeight="Bold"
+                        Style="{StaticResource BtnTemplate}" />
+
+
+                    <Button
+                        x:Name="btnBrowseAcuteBronchitis"
+                        Grid.Row="5"
+                        Grid.Column="2"
+                        Width="45"
+                        Height="30"
+                        Margin="0,2,0,2"
+                        Click="btnBrowseAcuteBronchitis_Click"
+                        Content="..."
+                        FontSize="14"
+                        FontWeight="Bold"
+                        Style="{StaticResource BtnTemplate}" />
+
+
+                    <Button
+                        x:Name="btnBrowseApoplexy"
+                        Grid.Row="6"
+                        Grid.Column="2"
+                        Width="45"
+                        Height="30"
+                        Margin="0,2,0,2"
+                        Click="btnBrowseApoplexy_Click"
+                        Content="..."
+                        FontSize="14"
+                        FontWeight="Bold"
+                        Style="{StaticResource BtnTemplate}" />
+
+
+                    <Button
+                        x:Name="btnBrowseAdmissionCertificate"
+                        Grid.Row="7"
+                        Grid.Column="2"
+                        Width="45"
+                        Height="30"
+                        Margin="0,2,0,2"
+                        Click="btnBrowseAdmissionCertificate_Click"
+                        Content="..."
+                        FontSize="14"
+                        FontWeight="Bold"
+                        Style="{StaticResource BtnTemplate}" />
+
+
+                    <Button
+                        x:Name="btnBrowseTumor"
+                        Grid.Row="8"
+                        Grid.Column="2"
+                        Width="45"
+                        Height="30"
+                        Margin="0,2,0,2"
+                        Click="btnBrowseTumor_Click"
+                        Content="..."
+                        FontSize="14"
+                        FontWeight="Bold"
+                        Style="{StaticResource BtnTemplate}" />
+
+
+                    <Button
+                        x:Name="btnReadCopd"
+                        Grid.Row="1"
+                        Grid.Column="3"
+                        Height="30"
+                        Margin="5,2,5,2"
+                        Click="btnReadCopd_Click"
+                        Content="Read"
+                        Style="{StaticResource BtnTemplate}" />
+
+
+                    <Button
+                        x:Name="btnReadChronicBronchitis"
+                        Grid.Row="2"
+                        Grid.Column="3"
+                        Height="30"
+                        Margin="5,2,5,2"
+                        Click="btnReadChronicBronchitis_Click"
+                        Content="Read"
+                        Style="{StaticResource BtnTemplate}" />
+
+
+                    <Button
+                        x:Name="btnReadAsthma"
+                        Grid.Row="3"
+                        Grid.Column="3"
+                        Height="30"
+                        Margin="5,2,5,2"
+                        Click="btnReadAsthma_Click"
+                        Content="Read"
+                        Style="{StaticResource BtnTemplate}" />
+
+
+                    <Button
+                        x:Name="btnReadEmphysema"
+                        Grid.Row="4"
+                        Grid.Column="3"
+                        Height="30"
+                        Margin="5,2,5,2"
+                        Click="btnReadEmphysema_Click"
+                        Content="Read"
+                        Style="{StaticResource BtnTemplate}" />
+
+
+                    <Button
+                        x:Name="btnReadAcuteBronchitis"
+                        Grid.Row="5"
+                        Grid.Column="3"
+                        Height="30"
+                        Margin="5,2,5,2"
+                        Click="btnReadAcuteBronchitis_Click"
+                        Content="Read"
+                        Style="{StaticResource BtnTemplate}" />
+
+                    <Button
+                        x:Name="btnReadApoplexy"
+                        Grid.Row="6"
+                        Grid.Column="3"
+                        Height="30"
+                        Margin="5,2,5,2"
+                        Click="btnReadApoplexy_Click"
+                        Content="Read"
+                        Style="{StaticResource BtnTemplate}" />
+
+                    <Button
+                        x:Name="btnReadAdmissionCertificate"
+                        Grid.Row="7"
+                        Grid.Column="3"
+                        Height="30"
+                        Margin="5,2,5,2"
+                        Click="btnReadAdmissionCertificate_Click"
+                        Content="Read"
+                        Style="{StaticResource BtnTemplate}" />
+
+                    <Button
+                        x:Name="btnReadTumor"
+                        Grid.Row="8"
+                        Grid.Column="3"
+                        Height="30"
+                        Margin="5,2,5,2"
+                        Click="btnReadTumor_Click"
+                        Content="Read"
+                        Style="{StaticResource BtnTemplate}" />
+
+
+                    <Button
+                        x:Name="btnSaveCopd"
+                        Grid.Row="1"
+                        Grid.Column="4"
+                        Height="30"
+                        Margin="5,2,5,2"
+                        Click="btnSaveCopd_Click"
+                        Content="Save"
+                        Style="{StaticResource BtnTemplate}" />
+
+
+                    <Button
+                        x:Name="btnSaveChronicBronchitis"
+                        Grid.Row="2"
+                        Grid.Column="4"
+                        Height="30"
+                        Margin="5,2,5,2"
+                        Click="btnSaveChronicBronchitis_Click"
+                        Content="Save"
+                        Style="{StaticResource BtnTemplate}" />
+
+
+                    <Button
+                        x:Name="btnSaveAsthma"
+                        Grid.Row="3"
+                        Grid.Column="4"
+                        Height="30"
+                        Margin="5,2,5,2"
+                        Click="btnSaveAsthma_Click"
+                        Content="Save"
+                        Style="{StaticResource BtnTemplate}" />
+
+
+                    <Button
+                        x:Name="btnSaveEmphysema"
+                        Grid.Row="4"
+                        Grid.Column="4"
+                        Height="30"
+                        Margin="5,2,5,2"
+                        Click="btnSaveEmphysema_Click"
+                        Content="Save"
+                        Style="{StaticResource BtnTemplate}" />
+
+
+                    <Button
+                        x:Name="btnSaveAcuteBronchitis"
+                        Grid.Row="5"
+                        Grid.Column="4"
+                        Height="30"
+                        Margin="5,2,5,2"
+                        Click="btnSaveAcuteBronchitis_Click"
+                        Content="Save"
+                        Style="{StaticResource BtnTemplate}" />
+
+
+                    <Button
+                        x:Name="btnSaveApoplexy"
+                        Grid.Row="6"
+                        Grid.Column="4"
+                        Height="30"
+                        Margin="5,2,5,2"
+                        Click="btnSaveApoplexy_Click"
+                        Content="Save"
+                        Style="{StaticResource BtnTemplate}" />
+
+
+                    <Button
+                        x:Name="btnSaveAdmissionCertificate"
+                        Grid.Row="7"
+                        Grid.Column="4"
+                        Height="30"
+                        Margin="5,2,5,2"
+                        Click="btnSaveAdmissionCertificate_Click"
+                        Content="Save"
+                        Style="{StaticResource BtnTemplate}" />
+
+
+                    <Button
+                        x:Name="btnSaveTumor"
+                        Grid.Row="8"
+                        Grid.Column="4"
+                        Height="30"
+                        Margin="5,2,5,2"
+                        Click="btnSaveTumor_Click"
+                        Content="Save"
+                        Style="{StaticResource BtnTemplate}" />
+
+
+                </Grid>
+            </TabItem>
+            <TabItem Name="directorySetting" Header="目录设置">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+
+                    </Grid.RowDefinitions>
+                    <Border
+                        Margin="15,5,15,10"
+                        Background="WhiteSmoke"
+                        CornerRadius="10">
+                        <Grid Grid.Row="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock
+                                x:Name="textBlockChronicPathBrowse"
+                                Margin="10"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                FontSize="16"
+                                PreviewMouseLeftButtonDown="textBlockChronicPathBrowse_PreviewMouseLeftButtonDown"
+                                Style="{StaticResource textBlockPathBrowse}"
+                                Text="慢病报卡目录(慢性肺病、卒中事件、肿瘤)"
+                                ToolTip="单击打开路径" />
+
+                            <Border
+                                Grid.Row="1"
+                                Margin="10"
+                                BorderBrush="Gray"
+                                BorderThickness="0,0,0,1">
+                                <TextBlock
+                                    x:Name="textBlockChronicPath"
+                                    Grid.Row="1"
+                                    Grid.Column="0"
+                                    HorizontalAlignment="Stretch"
+                                    VerticalAlignment="Bottom"
+                                    FontSize="14"
+                                    PreviewMouseLeftButtonDown="textBlockChronicPath_PreviewMouseLeftButtonDown"
+                                    Style="{StaticResource textBlockPath}"
+                                    ToolTip="点击浏览并修改目录" />
+                            </Border>
+
+                        </Grid>
+                    </Border>
+                    <Border
+                        Grid.Row="1"
+                        Margin="15,5,15,10"
+                        Background="WhiteSmoke"
+                        CornerRadius="10">
+                        <Grid Grid.Row="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock
+                                x:Name="textBlockAdmissionCertificatePathBrowse"
+                                Margin="10"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                FontSize="16"
+                                PreviewMouseLeftButtonDown="textBlockAdmissionCertificatePathBrowse_PreviewMouseLeftButtonDown"
+                                Style="{StaticResource textBlockPathBrowse}"
+                                Text="住院证生成目录"
+                                ToolTip="单击打开路径" />
+
+                            <Border
+                                Grid.Row="1"
+                                Margin="10"
+                                BorderBrush="Gray"
+                                BorderThickness="0,0,0,1">
+                                <TextBlock
+                                    x:Name="textBlockAdmissionCertificatePath"
+                                    Grid.Row="1"
+                                    Grid.Column="0"
+                                    HorizontalAlignment="Stretch"
+                                    VerticalAlignment="Bottom"
+                                    FontSize="14"
+                                    PreviewMouseLeftButtonDown="textBlockAdmissionCertificatePath_PreviewMouseLeftButtonDown"
+                                    Style="{StaticResource textBlockPath}"
+                                    ToolTip="点击浏览并修改目录" />
+                            </Border>
+
+                        </Grid>
+                    </Border>
+                    <Border
+                        Grid.Row="2"
+                        Margin="15,5,15,10"
+                        Background="WhiteSmoke"
+                        CornerRadius="10">
+                        <Grid Grid.Row="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock
+                                x:Name="textBlockFollowUpPathBrowse"
+                                Margin="10"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                FontSize="16"
+                                PreviewMouseLeftButtonDown="textBlockFollowUpPathBrowse_PreviewMouseLeftButtonDown"
+                                Style="{StaticResource textBlockPathBrowse}"
+                                Text="住院证生成目录"
+                                ToolTip="单击打开路径" />
+                            <Border
+                                Grid.Row="1"
+                                Margin="10"
+                                BorderBrush="Gray"
+                                BorderThickness="0,0,0,1">
+                                <TextBlock
+                                    x:Name="textBlockFollowUpPath"
+                                    Grid.Row="1"
+                                    Grid.Column="0"
+                                    HorizontalAlignment="Stretch"
+                                    VerticalAlignment="Bottom"
+                                    FontSize="14"
+                                    PreviewMouseLeftButtonDown="textBlockFollowUpPath_PreviewMouseLeftButtonDown"
+                                    Style="{StaticResource textBlockPath}"
+                                    ToolTip="点击浏览并修改目录" />
+                            </Border>
+                        </Grid>
+                    </Border>
+                </Grid>
+            </TabItem>
+            <TabItem Name="outPatientSetting" Header="门诊日志">
+                <Grid Margin="5,10,5,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="90" />
+                        <RowDefinition Height="20" />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <StackPanel
+                        Grid.Row="0"
+                        Margin="20,20,0,0"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Center">
+                        <TextBlock VerticalAlignment="Center" FontSize="14">1.从这里导入门诊日志文件，从日志文件获取患者基本信息</TextBlock>
+                        <TextBlock VerticalAlignment="Center" FontSize="14">2.自动完成血压、身份证和地址补全</TextBlock>
+                        <TextBlock VerticalAlignment="Center" FontSize="14" />
+
+                    </StackPanel>
+
+                    <Grid Grid.Row="2" Margin="20,0,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition Width="100" />
+                        </Grid.ColumnDefinitions>
+                        <TextBox
+                            x:Name="textBoxOutPatient"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Center"
+                            materialDesign:HintAssist.HelperText="文件支持*.xlsx和*.xls"
+                            materialDesign:HintAssist.HelperTextFontSize="12"
+                            materialDesign:HintAssist.Hint="拖放文件至此处"
+                            AllowDrop="True"
+                            FontSize="14"
+                            PreviewDragOver="TextBox_PreviewDragOver"
+                            PreviewDrop="TextBox_PreviewDrop" />
+                        <Button
+                            x:Name="btnBrowseOutPatient"
+                            Grid.Column="1"
+                            Click="BtnBrowseOutPatient_Click"
+                            Content="..">
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Setter Property="Width" Value="70" />
+                                    <Setter Property="Height" Value="35" />
+                                    <Setter Property="Foreground" Value="Black" />
+                                    <Setter Property="BorderThickness" Value="0" />
+                                    <Setter Property="Background" Value="WhiteSmoke" />
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="Button">
+                                                <Border
+                                                    x:Name="border"
+                                                    Background="{TemplateBinding Background}"
+                                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                                    CornerRadius="3 3 3 3"
+                                                    SnapsToDevicePixels="True">
+                                                    <TextBlock
+                                                        HorizontalAlignment="Center"
+                                                        VerticalAlignment="Center"
+                                                        Foreground="{TemplateBinding Foreground}"
+                                                        Text="{TemplateBinding Content}" />
+                                                </Border>
+                                                <ControlTemplate.Triggers>
+                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                        <Setter TargetName="border" Property="Background" Value="gray" />
+                                                        <Setter Property="Foreground" Value="WhiteSmoke" />
+                                                    </Trigger>
+                                                    <Trigger Property="IsPressed" Value="True">
+                                                        <Setter TargetName="border" Property="Background" Value="DarkRed" />
+                                                    </Trigger>
+                                                </ControlTemplate.Triggers>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+                    </Grid>
+                </Grid>
+            </TabItem>
+            <TabItem Name="otherSetting" Header="其他功能">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Border
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Margin="20,20,10,10"
+                        Padding="50,10,0,20"
+                        BorderBrush="WhiteSmoke"
+                        BorderThickness="3"
+                        CornerRadius="5">
+                        <Border.Effect>
+                            <DropShadowEffect
+                                BlurRadius="5"
+                                Opacity="1"
+                                ShadowDepth="0"
+                                Color="WhiteSmoke" />
+
+                        </Border.Effect>
+
+                        <Border.Style>
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="Background" Value="Transparent" />
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="WhiteSmoke" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Border.Style>
+
+                        <Grid Background="Transparent">
+                            <Grid.RowDefinitions>
+
+                                <RowDefinition />
+                                <RowDefinition />
+
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition Width="95" />
+                            </Grid.ColumnDefinitions>
+                            <CheckBox
+                                Name="checkBoxScreenCapture"
+                                Grid.Row="0"
+                                Margin="0,0,0,0"
+                                HorizontalAlignment="Left"
+                                Background="DarkCyan"
+                                Content="启用屏幕截图"
+                                FontFamily="微软雅黑"
+                                FontSize="14"
+                                IsChecked="True" />
+
+                            <TextBox
+                                x:Name="CommentTextBox"
+                                Grid.Row="1"
+                                Width="110"
+                                Margin="2,0,0,0"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                materialDesign:HintAssist.HelperText="截图热键"
+                                materialDesign:HintAssist.HelperTextFontSize="12"
+                                materialDesign:HintAssist.Hint="按键以键入"
+                                IsEnabled="False"
+                                Text="Ctrl + Shift + A" />
+                            <Button
+                                x:Name="btnStartCapture"
+                                Grid.Column="1"
+                                Margin="5,0,0,0"
+                                HorizontalAlignment="Left"
+                                Click="btnStartCapture_Click"
+                                Content="启动"
+                                FontSize="10">
+                                <Button.Style>
+                                    <Style TargetType="Button">
+                                        <Setter Property="Width" Value="35" />
+                                        <Setter Property="Height" Value="25" />
+                                        <Setter Property="Foreground" Value="WhiteSmoke" />
+                                        <Setter Property="BorderThickness" Value="0" />
+                                        <Setter Property="Background" Value="DarkCyan" />
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="Button">
+                                                    <Border
+                                                        x:Name="border"
+                                                        Background="{TemplateBinding Background}"
+                                                        BorderBrush="{TemplateBinding BorderBrush}"
+                                                        BorderThickness="{TemplateBinding BorderThickness}"
+                                                        CornerRadius="3 3 3 3"
+                                                        SnapsToDevicePixels="True">
+                                                        <TextBlock
+                                                            HorizontalAlignment="Center"
+                                                            VerticalAlignment="Center"
+                                                            Foreground="{TemplateBinding Foreground}"
+                                                            Text="{TemplateBinding Content}" />
+                                                    </Border>
+                                                    <ControlTemplate.Triggers>
+                                                        <Trigger Property="IsMouseOver" Value="True">
+                                                            <Setter TargetName="border" Property="Background" Value="orange" />
+                                                            <Setter Property="Foreground" Value="WhiteSmoke" />
+                                                        </Trigger>
+                                                        <Trigger Property="IsPressed" Value="True">
+                                                            <Setter TargetName="border" Property="Background" Value="darkorange" />
+                                                        </Trigger>
+                                                    </ControlTemplate.Triggers>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Style>
+                                </Button.Style>
+
+                            </Button>
+                        </Grid>
+
+                    </Border>
+                    <Border
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        Margin="20,20,10,10"
+                        Padding="50,10,0,20"
+                        BorderBrush="WhiteSmoke"
+                        BorderThickness="3"
+                        CornerRadius="5">
+                        <Border.Effect>
+                            <DropShadowEffect
+                                BlurRadius="5"
+                                Opacity="1"
+                                ShadowDepth="0"
+                                Color="WhiteSmoke" />
+
+                        </Border.Effect>
+
+                        <Border.Style>
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="Background" Value="Transparent" />
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="WhiteSmoke" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Border.Style>
+
+                        <Grid Background="Transparent">
+                            <Grid.RowDefinitions>
+
+                                <RowDefinition />
+                                <RowDefinition />
+
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition Width="95" />
+                            </Grid.ColumnDefinitions>
+
+
+                            <TextBox
+                                Grid.Row="0"
+                                Grid.RowSpan="2"
+                                Width="110"
+                                Margin="2,0,0,0"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                materialDesign:HintAssist.HelperText="数据来源：区间报表"
+                                materialDesign:HintAssist.HelperTextFontSize="12"
+                                
+                                IsEnabled="False"
+                                Text="工作量数据分析" />
+                            <Button
+                                x:Name="btnAnalysis"
+                                Grid.Column="1"
+                                Grid.RowSpan="2"
+                                Margin="20,0,0,0"
+                                HorizontalAlignment="Left"
+                                Click="btnAnalysis_Click"
+                                Content="启动"
+                                FontSize="10">
+                                <Button.Style>
+                                    <Style TargetType="Button">
+                                        <Setter Property="Width" Value="35" />
+                                        <Setter Property="Height" Value="25" />
+                                        <Setter Property="Foreground" Value="WhiteSmoke" />
+                                        <Setter Property="BorderThickness" Value="0" />
+                                        <Setter Property="Background" Value="DarkCyan" />
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="Button">
+                                                    <Border
+                                                        x:Name="border"
+                                                        Background="{TemplateBinding Background}"
+                                                        BorderBrush="{TemplateBinding BorderBrush}"
+                                                        BorderThickness="{TemplateBinding BorderThickness}"
+                                                        CornerRadius="3 3 3 3"
+                                                        SnapsToDevicePixels="True">
+                                                        <TextBlock
+                                                            HorizontalAlignment="Center"
+                                                            VerticalAlignment="Center"
+                                                            Foreground="{TemplateBinding Foreground}"
+                                                            Text="{TemplateBinding Content}" />
+                                                    </Border>
+                                                    <ControlTemplate.Triggers>
+                                                        <Trigger Property="IsMouseOver" Value="True">
+                                                            <Setter TargetName="border" Property="Background" Value="orange" />
+                                                            <Setter Property="Foreground" Value="WhiteSmoke" />
+                                                        </Trigger>
+                                                        <Trigger Property="IsPressed" Value="True">
+                                                            <Setter TargetName="border" Property="Background" Value="darkorange" />
+                                                        </Trigger>
+                                                    </ControlTemplate.Triggers>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Style>
+                                </Button.Style>
+
+                            </Button>
+                        </Grid>
+
+                    </Border>
+                </Grid>
+            </TabItem>
+            <TabItem Name="zlbhHook" Header="中联设置">
+                <Grid x:Name="zlbhGrid" >
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid Margin="15 15 8 0">
+
+                        <Border  Margin="0 0 0 0" BorderBrush="WhiteSmoke" BorderThickness="5" CornerRadius="5"  Background="White" >
+                            <Border.Effect>
+                                <DropShadowEffect Color="WhiteSmoke" ShadowDepth="1" BlurRadius="5" Opacity="0.5" Direction="290"/>
+                            </Border.Effect>
+                            <Border.Style>
+                                <Style TargetType="{x:Type Border}">
+                                    <Setter Property="Background" Value="Transparent" />
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="WhiteSmoke" />
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Border.Style>
+                            <Grid x:Name="mainBtn" >
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="132*"/>
+                                    <ColumnDefinition Width="110*"/>
+                                    <ColumnDefinition Width="21*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="30"/>
+                                    <RowDefinition/>
+                                    <RowDefinition Height="55"/>
+                                </Grid.RowDefinitions>
+                                <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="84,5,62,0" Text="中联注入程序" FontSize="16" FontFamily="微软雅黑" Foreground="DarkOliveGreen" HorizontalAlignment="Center"></TextBlock>
+                                <Border Grid.Row="1"  Grid.Column="0" BorderBrush="Gray"  Margin="20 10 20 25" BorderThickness="0" CornerRadius="5">
+                                    <Border.Effect>
+                                        <DropShadowEffect Color="Gray" ShadowDepth="2" BlurRadius="15" Opacity="0.5" Direction="290"/>
+                                    </Border.Effect>
+                                    <Button x:Name="button_origon" Click="button_origon_Click"  Content="ORIGIN APP" FontSize="14"    Style="{StaticResource btnStyle}" Cursor="Hand"></Button>
+                                </Border>
+
+                                <Border Grid.Row="1"   Grid.Column="1"  BorderBrush="Gray"  Margin="20 10 20 25" BorderThickness="0" CornerRadius="5" Grid.ColumnSpan="2">
+                                    <Border.Effect>
+                                        <DropShadowEffect Color="Gray" ShadowDepth="2" BlurRadius="15" Opacity="0.5" Direction="290"/>
+                                    </Border.Effect>
+                                    <Button x:Name="button_hooked" Click="button_hooked_Click" Content="HOOK APP" FontSize="14"  Style="{StaticResource btnStyle}" Cursor="Hand"></Button>
+                                </Border>
+                                <TextBlock Grid.Row="2" Grid.ColumnSpan="3" FontSize="8" TextWrapping="WrapWithOverflow" Text="zlbh会弹出 [扶贫、计生家庭] 提醒，且在点击医嘱、切换病人每个click操作均会弹出窗口，此程序旨在屏蔽弹窗，提升工作效率，不改变原程序任何功能。此程序采用原生代码的inline hook方式来实现，存在问题：中联zlbh在client的同时会从服务器校验所有文件的md5来实现热更新...所以现hook掉update。需要更新时只需要ORIGIN APP恢复更新，并再次HOOK即可。" >
+                       <ToolTipService.ToolTip>
+                           这是第一行&#x0A;
+                           这是第二行
+                       </ToolTipService.ToolTip>
+                                </TextBlock>
+                            </Grid>
+
+                        </Border>
+                    </Grid>
+                    <Grid Margin="8 15 15 0" Grid.Column="1" Grid.Row="0">
+                        <Border  Margin="0" BorderBrush="WhiteSmoke" BorderThickness="5" CornerRadius="5"  Background="White" >
+                            <Border.Effect>
+                                <DropShadowEffect Color="WhiteSmoke" ShadowDepth="1" BlurRadius="5" Opacity="0.5" Direction="290"/>
+                            </Border.Effect>
+                            <Border.Style>
+                                <Style TargetType="{x:Type Border}">
+                                    <Setter Property="Background" Value="Transparent" />
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="WhiteSmoke" />
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Border.Style>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="30"/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="0 5 0 0" Text="首页其他项自动化Beta" FontSize="16" FontFamily="微软雅黑" Foreground="DarkOliveGreen" HorizontalAlignment="Center"></TextBlock>
+                                <CheckBox Name="checkBtnOtherFill" Grid.Row ="1" Content="开启自动化" HorizontalAlignment="Center" VerticalAlignment="Center"  FontSize="16"  Foreground="DarkCyan" IsChecked="True" >
+
+                                </CheckBox>
+                            </Grid>
+
+                        </Border>
+
+                    </Grid>
+                    <Grid Margin="15" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
+                        <Border  Margin="0 0 0 0" Grid.RowSpan="2" Grid.ColumnSpan="3" BorderBrush="WhiteSmoke" BorderThickness="5" CornerRadius="5"  Background="white" >
+                            <Border.Effect>
+                                <DropShadowEffect Color="WhiteSmoke" ShadowDepth="1" BlurRadius="5" Opacity="0.5" Direction="290"/>
+                            </Border.Effect>
+                            <Border.Style>
+                                <Style TargetType="{x:Type Border}">
+                                    <Setter Property="Background" Value="Transparent" />
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="WhiteSmoke" />
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Border.Style>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <uc:LabelInput x:Name="ResidentPhysician" Text="住院医师:" Value="罗玉龙" HorizontalAlignment="Center"  PreviewTextInput="LabelInput_TextInput" Width="150"/>
+                                <uc:LabelInput x:Name="AttendingPhysician" Grid.Column="1" Text="主治医师:" Value="刘益宏" HorizontalAlignment="Center" PreviewTextInput="LabelInput_TextInput" Width="150"/>
+                                <uc:LabelInput x:Name="AssociateChiefPhysician" Grid.Column="2" Text="副主任医师:" Value="邓先桂" HorizontalAlignment="Center" PreviewTextInput="LabelInput_TextInput" Width="165"/>
+                                <uc:LabelInput x:Name="QualityControlDoctor" Grid.Column="0" Grid.Row="1" Text="质控医生:"  Value="刘益宏" HorizontalAlignment="Center" PreviewTextInput="LabelInput_TextInput" Width="150"/>
+                                <uc:LabelInput x:Name="QualityControlNurse" Grid.Column="1" Grid.Row="1" Text="质控护士:" Value="叶华顺" HorizontalAlignment="Center" PreviewTextInput="LabelInput_TextInput" Width="150"/>
+                                <uc:LabelInput x:Name="HeadOfDepartment" Grid.Column="2" Grid.Row="1" Text="科主任:" Value="邓先桂" HorizontalAlignment="Center" PreviewTextInput="LabelInput_TextInput" Width="165"/>
+
+
+
+                            </Grid>
+
+                        </Border>
+                    </Grid>
+                </Grid>
+            </TabItem>
+        </TabControl>
+
+
+
+    </Grid>
+
+
+</Window>

@@ -1,0 +1,301 @@
+﻿<Window
+    x:Class="MytoolMiniWPF.views.ReportCardSettingWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:MytoolMiniWPF.views"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:uc="clr-namespace:MytoolMiniWPF.customControls"
+    xmlns:xf="clr-namespace:XamlFlair;assembly=XamlFlair.WPF"
+    Title="ReportCardSettingWindow"
+    Width="340"
+    Height="100"
+    AllowsTransparency="True"
+    Background="WhiteSmoke"
+    MouseLeftButtonDown="Window_MouseLeftButtonDown"
+    ResizeMode="NoResize"
+    ShowInTaskbar="False"
+    WindowStyle="None"
+    mc:Ignorable="d">
+
+    <Window.Template>
+        <ControlTemplate TargetType="Window">
+            <Border Padding="5" Background="Transparent">
+                <Border Background="GhostWhite" CornerRadius="10">
+                    <Border.Effect>
+                        <DropShadowEffect
+                            BlurRadius="10"
+                            Opacity="0.5"
+                            ShadowDepth="0"
+                            Color="Gray" />
+
+                    </Border.Effect>
+
+                    <ContentPresenter ClipToBounds="True" />
+                </Border>
+            </Border>
+        </ControlTemplate>
+    </Window.Template>
+    <Window.Resources>
+        <Style x:Key="btn" TargetType="Button">
+            <Setter Property="Width" Value="70" />
+            <Setter Property="Height" Value="30" />
+            <Setter Property="Foreground" Value="Black" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Background" Value="GhostWhite" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border
+                            x:Name="border"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="5"
+                            SnapsToDevicePixels="True">
+                            <TextBlock
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Foreground="{TemplateBinding Foreground}"
+                                Text="{TemplateBinding Content}" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="orange" />
+                                <Setter Property="Foreground" Value="black" />
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="darkorange" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+    </Window.Resources>
+    <Grid Margin="5,5,5,5" xf:Animations.Primary="{StaticResource FadeInAndSlideFromTop}">
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition Width="40" />
+        </Grid.ColumnDefinitions>
+        <Border
+            x:Name="singleBorder"
+            Grid.Row="0"
+            Background="GhostWhite"
+            CornerRadius="10 0 0 0">
+
+            <Grid x:Name="singleGrid" Margin="0,0,0,2.5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100" />
+                    <ColumnDefinition Width="100" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <uc:LabelText
+                    x:Name="singleX"
+                    LeftText="X:"
+                    RightText="px" />
+                <uc:LabelText
+                    x:Name="singleY"
+                    Grid.Column="1"
+                    LeftText="Y:"
+                    RightText="px" />
+                <Button
+                    x:Name="btnSingle"
+                    Grid.Column="2"
+                    Margin="0"
+                    Click="btnSingle_Click"
+                    FontFamily="微软雅黑"
+                    FontSize="14"
+                    FontWeight="Bold"
+                    Style="{StaticResource btn}"
+                    ToolTip="标题为单行的感染病例报告卡" />
+                <TextBlock
+                    Grid.Row="1"
+                    Grid.Column="2"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    FontSize="14"
+                    IsHitTestVisible="False"
+                    Text="单行打印" />
+
+            </Grid>
+        </Border>
+        <Border
+            x:Name="DoubleBorder"
+            Grid.Row="1"
+            Background="GhostWhite"
+            CornerRadius="0 0 0 10">
+            <Grid x:Name="DoubleGrid" Margin="0,2.5,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100" />
+                    <ColumnDefinition Width="100" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <uc:LabelText
+                    x:Name="doubleX"
+                    LeftText="X:"
+                    RightText="px" />
+                <uc:LabelText
+                    x:Name="doubleY"
+                    Grid.Column="1"
+                    LeftText="Y:"
+                    RightText="px" />
+                <Button
+                    x:Name="btnDouble"
+                    Grid.Column="2"
+                    Margin="0"
+                    Click="btnDouble_Click"
+                    Style="{StaticResource btn}"
+                    ToolTip="标题为双行的感染病例报告卡" />
+                <TextBlock
+                    Grid.Row="1"
+                    Grid.Column="2"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    FontSize="14"
+                    IsHitTestVisible="False"
+                    Text="双行打印" />
+            </Grid>
+
+        </Border>
+
+
+        <Border
+            Grid.RowSpan="2"
+            Grid.Column="1"
+            Background="GhostWhite"
+            CornerRadius="0 10 10 0">
+            <Grid Grid.RowSpan="2" Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Button
+                    x:Name="btnClose"
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Click="btnClose_Click"
+                    FontSize="12"
+                    ToolTip="关闭">
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Width" Value="35" />
+                            <Setter Property="Height" Value="35" />
+                            <Setter Property="Foreground" Value="Black" />
+                            <Setter Property="BorderThickness" Value="0" />
+                            <Setter Property="Background" Value="GhostWhite" />
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border
+                                            x:Name="border"
+                                            Background="{TemplateBinding Background}"
+                                            BorderBrush="{TemplateBinding BorderBrush}"
+                                            BorderThickness="{TemplateBinding BorderThickness}"
+                                            CornerRadius="10"
+                                            SnapsToDevicePixels="True">
+                                            <TextBlock
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center"
+                                                Foreground="{TemplateBinding Foreground}"
+                                                Text="{TemplateBinding Content}" />
+                                        </Border>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter TargetName="border" Property="Background" Value="red" />
+                                                <Setter Property="Foreground" Value="black" />
+                                            </Trigger>
+                                            <Trigger Property="IsPressed" Value="True">
+                                                <Setter TargetName="border" Property="Background" Value="DarkRed" />
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </Button.Style>
+                </Button>
+                <materialDesign:PackIcon
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Width="25"
+                    Height="25"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Stretch"
+                    Foreground="Black"
+                    IsHitTestVisible="False"
+                    Kind="Power" />
+                <Button
+                    Name="btnSelectFont"
+                    Grid.Row="1"
+                    Click="btnSelectFont_Click"
+                    ToolTip="设置字体/字号">
+
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Width" Value="35" />
+                            <Setter Property="Height" Value="35" />
+
+                            <Setter Property="FontFamily" Value="微软雅黑" />
+                            <Setter Property="FontSize" Value="14" />
+                            <Setter Property="Foreground" Value="Black" />
+                            <Setter Property="BorderThickness" Value="0" />
+                            <Setter Property="Background" Value="GhostWhite" />
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border
+                                            x:Name="border"
+                                            Background="{TemplateBinding Background}"
+                                            BorderBrush="{TemplateBinding BorderBrush}"
+                                            BorderThickness="{TemplateBinding BorderThickness}"
+                                            CornerRadius="5"
+                                            SnapsToDevicePixels="True">
+                                            <TextBlock
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center"
+                                                Foreground="{TemplateBinding Foreground}"
+                                                Text="{TemplateBinding Content}" />
+                                        </Border>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter TargetName="border" Property="Background" Value="orange" />
+                                                <Setter Property="Foreground" Value="black" />
+                                            </Trigger>
+                                            <Trigger Property="IsPressed" Value="True">
+                                                <Setter TargetName="border" Property="Background" Value="darkorange" />
+                                                <Setter Property="Foreground" Value="WhiteSmoke" />
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </Button.Style>
+
+                </Button>
+                <materialDesign:PackIcon
+                    Grid.Row="1"
+                    Width="25"
+                    Height="25"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    IsHitTestVisible="False"
+                    Kind="FormatFont" />
+
+            </Grid>
+
+
+        </Border>
+
+
+    </Grid>
+
+</Window>
