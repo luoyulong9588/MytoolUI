@@ -48,10 +48,17 @@ namespace MytoolMiniWPF.views
 
         private void btnCopy_Click(object sender, RoutedEventArgs e)
         {
-            Toast.Show(this,"复制成功！", new ToastOptions { Icon = ToastIcons.Information, ToastMargin = new Thickness(2), Time = 2000, Location = ToastLocation.OwnerCenter });
+            
 
             TextRange textRange = new TextRange(richBoxResult.Document.ContentStart, richBoxResult.Document.ContentEnd);
             common.ClipBoardHelper.CopyText(textRange.Text);
+            App.Current.Dispatcher.Invoke((System.Action)delegate ()
+            {
+                Toast.Show(this, "复制成功！", new ToastOptions { Icon = ToastIcons.Information, ToastMargin = new Thickness(2), Time = 2000, Location = ToastLocation.OwnerCenter });
+
+            });
+            System.Threading.Thread.Sleep(500);
+            this.Close();
 
 
         }

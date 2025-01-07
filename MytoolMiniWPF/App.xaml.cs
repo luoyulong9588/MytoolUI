@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Threading;
+using System.Globalization;
 
 namespace MytoolMiniWPF
 {
@@ -16,6 +17,14 @@ namespace MytoolMiniWPF
     {
         private const string MutexName = "CQMU.OfficeTool.MytoolUI"; // 定义互斥锁名称  
         private Mutex mutex;
+
+        public App(){
+            // 设置中文区域
+            var cultureInfo = new CultureInfo("zh-CN");
+            Thread.CurrentThread.CurrentCulture = cultureInfo;
+            Thread.CurrentThread.CurrentUICulture = cultureInfo;
+            InitializeComponent();
+        }
 
         protected override void OnStartup(StartupEventArgs e)
         {

@@ -11,6 +11,8 @@ using Color = System.Drawing.Color;
 
 namespace MytoolMiniWPF
 {
+    
+
     public struct BookMark
     {
         public static string addrAlways = "addrAlways";
@@ -202,10 +204,7 @@ namespace MytoolMiniWPF
 
     }
 
-   
-
-
-
+  
     public class Patient
     {
         public string Name
@@ -402,7 +401,6 @@ namespace MytoolMiniWPF
               }
     }
 
-
     public class TNM
     { 
         public string T { get; set; }
@@ -466,5 +464,20 @@ namespace MytoolMiniWPF
         }
 
 
+    }
+
+    public static class Global {
+
+        public static string mySqlConnectionString { get; set; }
+        static  Global()
+        {
+            #if DEBUG
+                        // 在调试模式下使用本地数据库
+                        mySqlConnectionString = "Server=localhost;Database=mytooldata;Uid=mytool;Pwd=123321;Connection Timeout=10;charset=utf8;Allow User Variables=True;allowPublicKeyRetrieval=true;SslMode=None;";
+#else
+                    // 在发布模式下使用远程数据库
+                    mySqlConnectionString = "Server=10.61.28.66;Database=mytooldata;Uid=mytool;Pwd=123321;Connection Timeout=10;charset=utf8;Allow User Variables=True;allowPublicKeyRetrieval=true;SslMode=None;";
+#endif
+        }
     }
 }

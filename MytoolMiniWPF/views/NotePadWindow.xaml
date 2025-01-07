@@ -445,13 +445,14 @@
                 FontSize="14"
                 FontWeight="Light" Cursor="" />
             <ToggleButton
-                Height="22"
-                Width="50"
+                Height="20"
+                Width="40"
                 x:Name="toggleBtnIsNoteMode"
                 Grid.Column="4"
                 
                 Click="toggleBtnIsNoteMode_Click"
                 IsChecked="False" 
+                
                 Style="{StaticResource CustomToggleButtonWithSliderStyle}"
                 Cursor="Hand"/>
         </Grid>

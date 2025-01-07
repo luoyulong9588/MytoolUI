@@ -26,6 +26,9 @@ using System.Threading;
 using Microsoft.Office.Interop.Excel;
 using Window = System.Windows.Window;
 using Action = System.Action;
+using MytoolMiniWPF.common.RecoginitionFunc;
+using MySql.Data.MySqlClient;
+
 
 namespace MytoolMiniWPF.views
 {
@@ -34,7 +37,7 @@ namespace MytoolMiniWPF.views
     /// </summary>
     public partial class RecoginitionWindow : Window
     {
-        private string connectionString = "Data Source=D:\\MytoolDataFiles\\data\\recognition_data.db;Version=3;";
+        private string host;
         private string query = "SELECT * FROM recognition";  // 替换为你的实际查询
         private string query_directory = "SELECT * FROM zlbh_path";
         private string insert_directory = "INSERT INTO zlbh_path (directory) VALUES (@zlbh_directory)";
@@ -47,24 +50,39 @@ namespace MytoolMiniWPF.views
         {
             InitializeComponent();
             currentPath = System.IO.Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName);
-            LoadData();
+
+            
+            try
+            {
+                LoadData();
+            }
+            catch (MySqlException)
+            {
+                UMessageBox.Show("MySqlException Error", $"数据库链接出现错误，请检查网络链接和服务器状态。");
+
+            }
+            catch  (TimeoutException ex)
+            {
+                UMessageBox.Show("TimeoutException Error", $"链接超时，请检查服务器网络。");
+            }
+            catch  (Exception ex) {
+                UMessageBox.Show("未知错误", ex.ToString());
+            }
+            
         }
         private void LoadData()
         {
-            if (!File.Exists("D:\\MytoolDataFiles\\data\\recognition_data.db"))
-            {
-                return;
-            }
-            textBoxDir.Text = GetDirectoryFromDatabase();
+            
+            
             texBlockShowDoctor.Text = string.IsNullOrEmpty(selectUserComboBox.Text) ? "当前医生:未筛选" : $"当前医生:{selectUserComboBox.Text}";
 
             List<MyDataModel> data = new List<MyDataModel>();
             data.Clear();
-            using (SQLiteConnection conn = new SQLiteConnection(connectionString))
+            using (MySqlConnection conn = new MySqlConnection(Global.mySqlConnectionString))
             {
                 conn.Open();
-                using (SQLiteCommand cmd = new SQLiteCommand(query, conn))
-                using (SQLiteDataReader reader = cmd.ExecuteReader())
+                using (MySqlCommand cmd = new MySqlCommand(query, conn))
+                using (MySqlDataReader reader = cmd.ExecuteReader())
                 {
                     while (reader.Read())
                     {
@@ -98,7 +116,7 @@ namespace MytoolMiniWPF.views
         {
             string directory = string.Empty;
 
-            using (SQLiteConnection conn = new SQLiteConnection(connectionString))
+            using (SQLiteConnection conn = new SQLiteConnection(Global.mySqlConnectionString))
             {
                 try
                 {
@@ -156,61 +174,19 @@ namespace MytoolMiniWPF.views
                     return;
                 }
                 ExecuteTestExe();
-                UpdateRecoginitionDb.Update(processName: "update_recognition_db.exe");
-                using (SQLiteConnection conn = new SQLiteConnection(connectionString))
-                {
-                    conn.Open();
-                    // 开始事务
-                    using (var transaction = conn.BeginTransaction())
-                    {
-                        // 1. 删除现有数据
-                        using (SQLiteCommand deleteCmd = new SQLiteCommand(deleteQuery, conn))
-                        {
-                            deleteCmd.ExecuteNonQuery();
-                        }
-
-                        // 2. 插入新数据
-                        using (SQLiteCommand insertCmd = new SQLiteCommand(insert_directory, conn))
-                        {
-                            insertCmd.Parameters.AddWithValue("@zlbh_directory", textBoxDir.Text);
-                            insertCmd.ExecuteNonQuery();
-                        }
-
-                        // 提交事务
-                        transaction.Commit();
-                    }
-                }
-                    // 创建SQLite命令
-
             }
+            LoadData();
         }
         public void ExecuteTestExe()
         {
-            // 获取当前目录
-            string currentDirectory = Directory.GetCurrentDirectory();
-            string subfolder = "医检互认日志处理";
-
-            // 定义可执行文件路径
-            string exePath = Path.Combine(currentDirectory, subfolder, "analysis_log_files.exe");
-
             // 定义参数
             string arguments = textBoxDir.Text;
-
-            // 创建并配置进程启动信息
-            ProcessStartInfo startInfo = new ProcessStartInfo
-            {
-                FileName = exePath,  // 指定要执行的程序路径
-                Arguments = arguments,  // 传递的参数
-                UseShellExecute = false,  // 如果你不想使用外壳来启动进程
-                CreateNoWindow = true  // 不显示命令行窗口
-            };
-
             try
             {
-                // 启动进程
-                Process process = Process.Start(startInfo);
-                // 等待进程执行完毕（如果需要）
-                process.WaitForExit();
+                var analysis = new AnalysisLogFiles(arguments, Global.mySqlConnectionString);
+                analysis.Start();
+                var update = new UpdateRecoginitionDb(Global.mySqlConnectionString);
+                update.Start();
             }
             catch (Exception ex)
             {
@@ -218,6 +194,7 @@ namespace MytoolMiniWPF.views
                 // 错误处理
 
             }
+            
         }
 
         private void buttonFilter_Click(object sender, RoutedEventArgs e)
@@ -230,11 +207,11 @@ namespace MytoolMiniWPF.views
                 string doctor = selectUserComboBox.Text;
                 if (string.IsNullOrEmpty(selectUserComboBox.Text))
                 {
-                    query = $" SELECT * FROM recognition where log_date between '{startDate}' and '{endDate}'";
+                    query = $" SELECT * FROM recognition where LogDate between '{startDate}' and '{endDate}'";
                 }
                 else
                 {
-                    query = $" SELECT * FROM recognition where log_date between '{startDate}' and '{endDate}' and doctor = '{doctor}'";
+                    query = $" SELECT * FROM recognition where LogDate between '{startDate}' and '{endDate}' and doctor = '{doctor}'";
 
                 }
                 LoadData();

@@ -335,7 +335,7 @@ namespace MytoolMiniWPF.common
                 {  //肯定为工人
                     if (vocations.Any(v => vocation.Contains(v)) || insurances.Any(i => medicalInsurance.Contains(i)))
                     {
-                        UMessageBox.Show("注意！", $"患者为“{medicalInsurance}”，但首页职业信息为{vocation}，请注意手动更新！");
+                        UMessageBox.Show("注意！", $"患者为“{medicalInsurance}”，w{vocation}，请注意手动更新！");
                     }
                         if (addr_work.Length<3)
                     {
@@ -356,7 +356,7 @@ namespace MytoolMiniWPF.common
                     {
                         UMessageBox.Show("注意！", $"患者为“{medicalInsurance}”，但首页职业信息为{vocation}，请注意手动更新！");
                     }
-                    EnterText(CONST_ADDR_WORK, "-");
+                    EnterText(CONST_ADDR_WORK, "无");
                     EnterText(CONST_PHONE_WORK, "");
                     EnterText(CONST_MAIL_WORK, "");
 

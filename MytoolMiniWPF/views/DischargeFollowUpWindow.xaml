@@ -8,8 +8,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:xf="clr-namespace:XamlFlair;assembly=XamlFlair.WPF"
     Title="出院随访"
-    Width="600"
-    Height="300"
+    Width="960"
+    Height="680"
     AllowDrop="True"
     AllowsTransparency="True"
     Icon="pack://application:,,,/resources/ico/FollowUp.ico"
@@ -31,13 +31,43 @@
         </ControlTemplate>
 
     </Window.Template>
+    <Window.Resources>
+        <Style x:Key="IconFont">
+            <Setter Property="TextElement.FontFamily" Value="pack://application:,,,/resources/font/#iconfont" />
+            <Setter Property="TextElement.FontSize" Value="16" />
+            <Setter Property="TextElement.FontWeight" Value="UltraBold" />
+            <Setter Property="TextElement.Foreground" Value="#FF673AB7" />
+
+        </Style>
+        <Style x:Key="CustomButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="Foreground" Value="Black" />
+            <Setter Property="FontSize" Value="20" />
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="Transparent" />
+                    <Setter Property="Foreground" Value="Red"/>
+                    <Setter Property="Cursor" Value="Hand"/>
+                </Trigger>
+                <Trigger Property="IsFocused" Value="True">
+                    <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+                    <!-- 去掉焦点样式 -->
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
     <Grid
         xf:Animations.Primary="{xf:Animate BasedOn={StaticResource FadeIn}, Duration=800}"
         >
         <Grid.RowDefinitions>
             <RowDefinition Height="40" />
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="50"/>
             <RowDefinition />
-            <RowDefinition />
+            <RowDefinition Height="30"/>
         </Grid.RowDefinitions>
         <Grid>
             <Grid.ColumnDefinitions>
@@ -134,7 +164,7 @@
                 x:Name="btnBrowse"
                 Grid.Column="2"
                 Click="btnBrowse_Click"
-                Content="浏览.."
+                Content="打开.."
                 FontSize="16"
                 ToolTip="选择文件" >
                 <Button.Style>
@@ -184,27 +214,22 @@
                 </Button.Style>
             </Button>
         </Grid>
-        <Grid Grid.Row="2">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="100" />
-                <ColumnDefinition />
-                <ColumnDefinition Width="125" />
-                <ColumnDefinition Width="125" />
-            </Grid.ColumnDefinitions>
-            <Label
-                Grid.Column="0"
-                Margin="0,0,5,0"
-                HorizontalAlignment="Right"
-                VerticalContentAlignment="Center"
-                Content="用户名:"
-                FontSize="16"
-                FontWeight="Medium" />
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
+            <TextBlock Grid.Column="1"  VerticalAlignment="Center" Text="Start Date:" Margin="5" FontSize="14" Cursor=""/>
+            <DatePicker Grid.Column="2" Name="StartDatePicker" Width="130" Margin="5" FontSize="13" Cursor="" VerticalAlignment="Center" SelectedDateChanged="StartDatePicker_SelectedDateChanged">
+            </DatePicker>
+            <TextBlock  Grid.Column="3" VerticalAlignment="Center" Text="End Date:" Margin="5" FontSize="14"/>
+            <DatePicker Grid.Column="4" Name="EndDatePicker" Width="130" Margin="5" FontSize="13" VerticalAlignment="Center" SelectedDateChanged="EndDatePicker_SelectedDateChanged"/>
+            <TextBlock VerticalAlignment="Center" Grid.Column="2" Text="Doctor:" Margin="5" FontSize="14"/>
             <ComboBox
-                Name="selectUserComboBox"
-                Grid.Column="1"
-                Margin="5,0,5,0"
-                materialDesign:HintAssist.Hint="单击选择姓名"
-                FontSize="16">
+                 Name="selectUserComboBox"
+                 Grid.Column="3"
+                 Margin="5,0,5,0"
+                 Width="100"
+                 materialDesign:HintAssist.Hint="选择姓名"
+                 FontSize="14"
+                SelectionChanged="selectUserComboBox_SelectionChanged"
+                >
                 <ComboBoxItem Content="罗玉龙" />
                 <ComboBoxItem Content="刘益宏" />
                 <ComboBoxItem Content="彭育欢" />
@@ -214,33 +239,138 @@
                 <ComboBoxItem Content="张李" />
                 <ComboBoxItem Content="付饶" />
             </ComboBox>
-            <Button
-                x:Name="btnStart"
+            <Button 
                 Grid.Column="2"
-                Width="100"
-                Margin="5,0,20,0"
-                materialDesign:ButtonProgressAssist.IsIndeterminate="False"
-                materialDesign:ButtonProgressAssist.IsIndicatorVisible="True"
-                materialDesign:ButtonProgressAssist.Value="-1"
-                Click="btnStart_Click"
-                Content="开  始"
-                FontFamily="微软雅黑"
-                FontSize="16"
-                FontWeight="Normal"
-                Style="{StaticResource MaterialDesignOutlinedButton}"
-                ToolTip="开始生成" />
+                HorizontalAlignment="Left"
+      
+                Content="Filter"
+                Width="75" 
+                Margin="22 0 0 0" 
+                Height="30"
+                FontSize="14"
+                x:Name="buttonFilter"
+                    Click="buttonFilter_Click"
+                >
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Width" Value="60" />
+                        <Setter Property="Height" Value="30" />
+                        <Setter Property="Foreground" Value="Black" />
+                        <Setter Property="BorderThickness" Value="0.5" />
+                        <Setter Property="Background" Value="WhiteSmoke" />
+                        <Setter Property="Cursor" Value="Arrow" />
+
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="Button">
+                                    <Border
+                                x:Name="border"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="3"
+                                SnapsToDevicePixels="True">
+                                        <TextBlock
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Foreground="{TemplateBinding Foreground}"
+                                    Text="{TemplateBinding Content}" />
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter TargetName="border" Property="Background" Value="#FF673AB7" />
+
+                                            <Setter Property="Foreground" Value="WhiteSmoke" />
+                                        </Trigger>
+                                        <Trigger Property="IsPressed" Value="True">
+                                            <Setter TargetName="border" Property="Background" Value="Gray" />
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Cursor" Value="Hand" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+
             <Button
-                x:Name="btnOpenDir"
-                Grid.Column="3"
-                Width="100"
-                Margin="5,0,20,0"
-                Click="btnOpenDir_Click"
-                Content="浏览目录"
-                FontFamily="微软雅黑"
-                FontSize="16"
-                FontWeight="Normal"
-                Style="{StaticResource MaterialDesignOutlinedButton}"
-                ToolTip="打开生成目录" Cursor="Hand" />
-        </Grid>
+                        x:Name="btnStart"
+                        Grid.Column="2"
+                        Width="75"
+                        Margin="23,0,0,0"
+                        materialDesign:ButtonProgressAssist.IsIndeterminate="False"
+                        materialDesign:ButtonProgressAssist.IsIndicatorVisible="True"
+                        materialDesign:ButtonProgressAssist.Value="-1"
+                        Click="btnStart_Click"
+                        Content="开  始"
+                        FontFamily="微软雅黑"
+                        FontSize="16"
+                        FontWeight="Normal"
+                        ToolTip="开始生成" >
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Width" Value="60" />
+                        <Setter Property="Height" Value="30" />
+                        <Setter Property="Foreground" Value="Black" />
+                        <Setter Property="BorderThickness" Value="0.5" />
+                        <Setter Property="Background" Value="WhiteSmoke" />
+                        <Setter Property="Cursor" Value="Arrow" />
+
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="Button">
+                                    <Border
+                x:Name="border"
+                Background="{TemplateBinding Background}"
+                BorderBrush="{TemplateBinding BorderBrush}"
+                BorderThickness="{TemplateBinding BorderThickness}"
+                CornerRadius="3"
+                SnapsToDevicePixels="True">
+                                        <TextBlock
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Foreground="{TemplateBinding Foreground}"
+                    Text="{TemplateBinding Content}" />
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter TargetName="border" Property="Background" Value="#FF673AB7" />
+
+                                            <Setter Property="Foreground" Value="WhiteSmoke" />
+                                        </Trigger>
+                                        <Trigger Property="IsPressed" Value="True">
+                                            <Setter TargetName="border" Property="Background" Value="Gray" />
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Cursor" Value="Hand" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+        </StackPanel>
+
+        <DataGrid Grid.Row="3" x:Name="dataGridPatiansInfo" AutoGenerateColumns="True" HorizontalAlignment="Stretch"  VerticalAlignment="Stretch"  Margin="28 10 28 10" Background="Transparent" Cursor="" >
+        </DataGrid>
+        <StackPanel Orientation="Horizontal" Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock Text="是否导入文件：" Margin="10 0 0 0"></TextBlock>
+            <TextBlock Text="未导入" Name="textblockInport"></TextBlock>
+            <TextBlock Text="当前筛选医生：" Margin="20 0 0 0"></TextBlock>
+            <TextBlock Text="未选择" Name="textblockFilterUser"/>
+            <TextBlock Text="起始日期：" Margin="20 0 0 0"></TextBlock>
+            <TextBlock Text="null" Name="textblockStartDate"></TextBlock>
+            <TextBlock Text="结束日期：" Margin="20 0 0 0"></TextBlock>
+            <TextBlock Text="null" Name="textblockEndDate"></TextBlock>
+        </StackPanel>
     </Grid>
 </Window>

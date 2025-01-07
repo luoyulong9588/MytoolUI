@@ -81,12 +81,12 @@ namespace MytoolMiniWPF.views
                 UMessageBox.Show("请先关闭笔记模式！");
                 return;
             }
-            BuildDischargeRecord app = new BuildDischargeRecord();
-            ResultWindow.Show(app.Start(GetRichText()));
+            //BuildDischargeRecord app = new BuildDischargeRecord()/*;*/
+            //ResultWindow.Show(app.Start(GetRichText()));
             try
             {
 
-                app = new BuildDischargeRecord();
+                var app = new BuildDischargeRecord();
                 ResultWindow.Show(app.Start(GetRichText()));
             }
             catch (Exception ex)

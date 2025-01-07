@@ -23,15 +23,11 @@ namespace MytoolMiniWPF.common
         private string userName = "罗玉龙";
         private List<string> pathList = new List<string>();
         public List<Patient> patientReportedList = new List<Patient>();
-
-        private ListView listViewAMI;
-        private ListView listViewApoplexy;
-        private ListView listViewCOPD;
         private FileStream[] streams = new FileStream[7];
         private System.Windows.Window parentWindow = null;
-        public FillCardToWordForChornicDiseases(List<Patient> patientList, System.Windows.Window window)
+        public FillCardToWordForChornicDiseases(List<Patient> list, System.Windows.Window window)
         {
-            this.patientList = patientList;
+            this.patientList = list;
             this.parentWindow= window;
             string path = new DatabaseUnit().GetFolderPath().chronicPath;
             projectDir = string.IsNullOrEmpty(path) ? AppDomain.CurrentDomain.BaseDirectory + "慢病报卡" : path;
@@ -43,11 +39,11 @@ namespace MytoolMiniWPF.common
         public void ChangeStartBtnStyle(System.Windows.Controls.Button button,bool isStart)
         {
             bool isIndeterminate = false;
-            string content = "开      始";
+            string content = "开始";
             if (isStart)
             {
                 isIndeterminate = true;
-                content = "等     待..";
+                content = "等待..";
             }
 
             App.Current.Dispatcher.Invoke((Action)delegate ()
@@ -58,15 +54,13 @@ namespace MytoolMiniWPF.common
             });
 
         }
-        public List<string> startProgram(string userName,  ListView listViewCOPD, ListView listViewAMI, ListView listViewApoplexy)
+        public List<string> startProgram(string userName)
         {
             this.userName = userName;
             checkFolder(this.projectDir);
             checkFolder(Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName) + "\\cache\\");
             int maxLenth = this.patientList.Count;
-            this.listViewCOPD= listViewCOPD;
-            this.listViewAMI= listViewAMI;
-            this.listViewApoplexy= listViewApoplexy;
+
 
             
             for (int i = 0; i < streams.Length; i++)
@@ -243,9 +237,29 @@ namespace MytoolMiniWPF.common
                     // 把诊断时间限制在25天之内;
                     inday = outday.AddDays(-25) > inday ? outday.AddDays(-25) : inday;
 
-                    document.Range.Bookmarks[BookMark.reportTime].Text = outday.ToString("yyyy年MM月dd日");
-                    document.Range.Bookmarks[BookMark.diagTime].Text = inday.ToString("yyyy年MM月dd日");
-                    document.Range.Bookmarks[BookMark.ensureTime].Text = inday.ToString("yyyy年MM月dd日");
+                    //document.Range.Bookmarks[BookMark.reportTime].Text = outday.ToString("yyyy年MM月dd日");  # 这是原本的，出院日期，作为报卡日期。现在：如果是非慢性肺病，改为生成日期。
+                    //document.Range.Bookmarks[BookMark.diagTime].Text = inday.ToString("yyyy年MM月dd日");
+                    //document.Range.Bookmarks[BookMark.ensureTime].Text = inday.ToString("yyyy年MM月dd日");
+
+                    if (classify == "肺病报卡")
+                    {
+                        document.Range.Bookmarks[BookMark.reportTime].Text = outday.ToString("yyyy年MM月dd日");  
+                        document.Range.Bookmarks[BookMark.diagTime].Text = inday.ToString("yyyy年MM月dd日");
+                        document.Range.Bookmarks[BookMark.ensureTime].Text = inday.ToString("yyyy年MM月dd日");
+                    }
+                    else
+                    {
+                        // 如果是非慢性肺病，改为生成日期。随机诊断日期，在4日之内。
+
+                        document.Range.Bookmarks[BookMark.reportTime].Text =DateTime.Now.ToString("yyyy年MM月dd日");
+                        Random random = new Random();
+                        int randomInt = random.Next(1,5);
+
+                        document.Range.Bookmarks[BookMark.diagTime].Text = DateTime.Now.AddDays(-randomInt).ToString("yyyy年MM月dd日");
+                        document.Range.Bookmarks[BookMark.ensureTime].Text = DateTime.Now.AddDays(-randomInt).ToString("yyyy年MM月dd日");
+                    }
+
+
                     document.Range.Bookmarks[BookMark.icdNumber].Text = icd10Dict[diagSselect[i]];
                     //document.Range.Bookmarks[BookMark.relation].Text = "本人";
                     document.Range.Bookmarks[BookMark.phoneContact].Text = person.Phone;
@@ -269,37 +283,18 @@ namespace MytoolMiniWPF.common
                         document.Range.Bookmarks[BookMark.diagnoseString].Text = person.MainDiagnose;
 
 
-
-                        System.Windows.Application.Current.Dispatcher.BeginInvoke(new Action(() =>
-                        {
-                            this.listViewAMI.Items.Add(new ListViewItem { Content = person.Name });
-                        }));
-
-
                     }
                     else if (person.MainDiagnose == "脑梗死" || person.MainDiagnose == "脑出血")
                     {
                         List<string> apoplexyList = new List<string> { "①②⑨", "①②⑨", "①②⑨", "①②⑨", "①②⑨", "①②⑨", "①②⑤⑨", "①⑤" };
                         document.Range.Bookmarks[BookMark.diagoseNumer].Text = apoplexyList[new Random().Next(apoplexyList.Count)];
                         document.Range.Bookmarks[BookMark.diagnoseString].Text = person.MainDiagnose;
-                        System.Windows.Application.Current.Dispatcher.BeginInvoke(new Action(() =>
-                        {
-                            this.listViewApoplexy.Items.Add(new ListViewItem { Content = person.Name });
 
-                        }));
 
                     }
                     else
                     {
                         document.Range.Bookmarks[BookMark.diagoseNumer].Text = diagnoseList[new Random().Next(diagnoseList.Count)];
-
-                        System.Windows.Application.Current.Dispatcher.BeginInvoke(new Action(() =>
-                        {
-                            this.listViewCOPD.Items.Add(new ListViewItem { Content = person.Name });
-
-                            
-                        }));
-
 
                     }
                     try

@@ -8,8 +8,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:xf="clr-namespace:XamlFlair;assembly=XamlFlair.WPF"
     Title="慢病报卡"
-    Width="800"
-    Height="450"
+    Width="1050"
+    Height="680"
     AllowDrop="True"
     AllowsTransparency="True"
     Background="#A0f6f3f7"
@@ -36,7 +36,52 @@
         </ControlTemplate>
 
     </Window.Template>
+    <Window.Resources>
+        <Style TargetType="Button" x:Key="myButton">
+            <Setter Property="Width" Value="60" />
+            <Setter Property="Height" Value="30" />
+            <Setter Property="Foreground" Value="Black" />
+            <Setter Property="BorderThickness" Value="0.5" />
+            <Setter Property="Background" Value="WhiteSmoke" />
+            <Setter Property="Cursor" Value="Arrow" />
 
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border
+                            x:Name="border"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="3"
+                            SnapsToDevicePixels="True">
+                            <TextBlock
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Foreground="{TemplateBinding Foreground}"
+                                Text="{TemplateBinding Content}" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#FF673AB7" />
+                                <Setter Property="Foreground" Value="WhiteSmoke" />
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="Gray" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Cursor" Value="Hand" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <!-- 自定义 CheckBox 样式 -->
+    </Window.Resources>
+    
     <Grid xf:Animations.Primary="{xf:Animate BasedOn={StaticResource FadeIn}, Duration=800}" AllowDrop="True">
         <Grid.RowDefinitions>
             <RowDefinition Height="40" />
@@ -176,7 +221,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="40" />
                 <RowDefinition Height="40" />
-                <RowDefinition />
+                <RowDefinition Height="430"/>
 
             </Grid.RowDefinitions>
             <Grid
@@ -269,30 +314,22 @@
 
             </Grid>
 
-            <Grid
-                x:Name="checkGrid"
-                Grid.Row="1"
-                Margin="5,5,5,5">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="80" />
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                    <ColumnDefinition Width="120" />
-                </Grid.ColumnDefinitions>
-                <Label
-                    Grid.Column="0"
-                    HorizontalAlignment="Right"
-                    VerticalAlignment="Center"
-                    Content="用户名:"
-                    FontSize="16"
-                    FontWeight="Medium" />
+            
+
+            <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Center" Margin="30 0 0 0">
+                <TextBlock VerticalAlignment="Center" Text="Start Date:" Margin="5" FontSize="14" Cursor=""/>
+                <DatePicker Name="StartDatePicker" Width="120" Margin="5" FontSize="13" Cursor=""/>
+                <TextBlock VerticalAlignment="Center" Text="End Date:" Margin="5" FontSize="14"/>
+
+                <DatePicker Name="EndDatePicker" Width="120" Margin="5" FontSize="13" />
+                <TextBlock VerticalAlignment="Center" Text="Doctor:" Margin="5" FontSize="14"/>
                 <ComboBox
                     Name="selectUserComboBox"
                     Grid.Column="1"
-                    Margin="5,0,25,0"
-                    materialDesign:HintAssist.Hint="单击选择姓名"
-                    FontSize="16">
+                    Margin="5,0,5,0"
+                    materialDesign:HintAssist.Hint="Choose"
+                    Width="70"
+                    FontSize="14">
                     <ComboBoxItem Content="罗玉龙" />
                     <ComboBoxItem Content="刘益宏" />
                     <ComboBoxItem Content="彭育欢" />
@@ -302,48 +339,76 @@
                     <ComboBoxItem Content="张李" />
                     <ComboBoxItem Content="付饶" />
                 </ComboBox>
-
-                <CheckBox
-                    x:Name="chkBoxCheckAMI"
-                    Grid.Column="2"
-                    Margin="0,0,0,0"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    Content="检查心血管事件"
+                <Button 
+                    Content="Filter"
+                    Width="75" 
+                    Margin="5" 
+                    Height="30"
+                    FontSize="14"
+                    x:Name="buttonFilter"
+                    Click="buttonFilter_Click"
+                    Style="{StaticResource myButton}"
+                    >
+                </Button>
+                <Button 
+                            x:Name="btnStart"
+                            Margin="5 0 5 0"
+                            materialDesign:ButtonProgressAssist.IsIndeterminate="False"
+                            materialDesign:ButtonProgressAssist.IsIndicatorVisible="True"
+                            materialDesign:ButtonProgressAssist.Value="-1"
+                            Click="btnStart_Click"
+                            Content="Build"
+                            Cursor="Hand"
+                            FontSize="16"
+                            Style="{StaticResource myButton}"
+                            ToolTip="开始格式化文件" >
+                </Button>
+                <Button
+                    Name="btnPrint"
+                    Click="btnPrint_Click"
+                    Content="Print"
+                    Margin="5 0 5 0" 
+                    Cursor="Hand"
                     FontSize="16"
-                    IsChecked="True" />
-                <CheckBox
-                    x:Name="chkBoxCheckapoplexy"
-                    Grid.Column="3"
-                    Margin="0,0,0,0"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    Content="检查脑卒中"
-                    FontSize="16"
-                    IsChecked="True" />
+                    IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                    Style="{StaticResource myButton}"
+                    ToolTip="打印本次所有生成的报卡（仅限本次）" />
 
-            </Grid>
+                <Button x:Name="openDir"
+                            Click="btnOpenDir_Click"
+                            Content="Directory"
+                        
+                            Margin="5 0 5 0" 
+                            Cursor="Hand"
+                            Width="85"
+                            FontSize="16"
+                            IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                            Style="{StaticResource myButton}"
+                            ToolTip="打开保存的慢病报卡目录" 
+                        >
 
+                </Button>
+            </StackPanel>
 
-            <Grid
+           <Grid
                 x:Name="showMessageGrid"
                 Grid.Row="2"
                 Margin="0,20,10,5">
                 <Grid.RowDefinitions>
                     <RowDefinition />
+                    <RowDefinition Height="15"/>
 
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
                     <ColumnDefinition />
                     <ColumnDefinition />
-                    <ColumnDefinition Width="120" />
                 </Grid.ColumnDefinitions>
-
+               
                 <Border
                     Grid.Column="0"
                     Margin="10,5,5,5"
-                    BorderBrush="MediumPurple"
+                    BorderBrush="Gray"
                     BorderThickness="1"
                     CornerRadius="5">
                     <Grid>
@@ -351,24 +416,24 @@
                             <RowDefinition Height="30" />
                             <RowDefinition />
                         </Grid.RowDefinitions>
-                        <Border Background="#FF673AB7" CornerRadius="4 4 0 0 ">
-                            <Label
-                                x:Name="labelTitleCOPD"
-                                HorizontalContentAlignment="Center"
-                                FontFamily="微软雅黑"
-                                FontSize="16"
-                                Foreground="White">
-                                慢性肺病
-                            </Label>
+                        <Border Background="DarkCyan" CornerRadius="4 4 0 0 " Grid.ColumnSpan="2">
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <Label
+                            x:Name="labelTitleCOPD"
+                            HorizontalContentAlignment="Center"
+                            FontFamily="微软雅黑"
+                            FontSize="16"
+                            Foreground="White">
+                                    慢性肺病
+                                </Label>
+                                <CheckBox Name="checkBoxCOPD" Background="GhostWhite"  IsChecked="True" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5 3 0 0"></CheckBox>
+                            </StackPanel>
+                            
                         </Border>
-                        <ListView
-                            x:Name="listViewCopd"
-                            Grid.Row="1"
-                            Height="auto"
-                            HorizontalAlignment="Stretch"
-                            VerticalAlignment="Stretch"
-                            FontSize="12"
-                            ScrollViewer.VerticalScrollBarVisibility="Auto" />
+                        <DataGrid Grid.Row="1" x:Name="dataGridCopd" Background="Transparent" >
+                            
+                        </DataGrid>
+                        
                     </Grid>
 
                 </Border>
@@ -376,7 +441,7 @@
                 <Border
                     Grid.Column="1"
                     Margin="7.5,5,7.5,5"
-                    BorderBrush="MediumPurple"
+                    BorderBrush="Gray"
                     BorderThickness="1"
                     CornerRadius="5">
                     <Grid>
@@ -384,22 +449,30 @@
                             <RowDefinition Height="30" />
                             <RowDefinition />
                         </Grid.RowDefinitions>
-                        <Border Background="#FF673AB7" CornerRadius="4 4 0 0 ">
-                            <Label
+                        <Border Background="DarkCyan" CornerRadius="4 4 0 0 ">
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <Label
                                 Name="labelTitleAMI"
                                 HorizontalContentAlignment="Center"
                                 FontFamily="微软雅黑"
                                 FontSize="16"
-                                Foreground="White">
-                                心血管事件
-                            </Label>
+                                Foreground="White">     
+                                    心血管事件
+                                </Label>
+
+                                <CheckBox
+                                                Background="GhostWhite"
+                                                x:Name="chkBoxCheckAMI"
+                                                Margin="5,2,0,0"
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center"
+                                            
+                                                IsChecked="True" />     
+                            </StackPanel>
                         </Border>
-                        <ListView
-                            x:Name="listViewAMI"
-                            Grid.Row="1"
-                            HorizontalAlignment="Stretch"
-                            VerticalAlignment="Stretch"
-                            FontSize="12" />
+                        <DataGrid Grid.Row="1" x:Name="dataGridAMI" Background="Transparent" >
+
+                        </DataGrid>
 
                     </Grid>
 
@@ -407,7 +480,7 @@
                 <Border
                     Grid.Column="2"
                     Margin="5,5,10,5"
-                    BorderBrush="MediumPurple"
+                    BorderBrush="Gray"
                     BorderThickness="1"
                     CornerRadius="5">
                     <Grid>
@@ -415,7 +488,8 @@
                             <RowDefinition Height="30" />
                             <RowDefinition />
                         </Grid.RowDefinitions>
-                        <Border Background="#FF673AB7" CornerRadius="4 4 0 0 ">
+                        <Border Background="DarkCyan" CornerRadius="4 4 0 0 ">
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                             <Label
                                 x:Name="labelTitleAPoplexy"
                                 HorizontalContentAlignment="Center"
@@ -424,85 +498,28 @@
                                 Foreground="White">
                                 脑卒中
                             </Label>
+
+                                <CheckBox
+    
+                            Background="GhostWhite"
+                            x:Name="chkBoxCheckapoplexy"
+                         
+                            Margin="5,2,0,0"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            IsChecked="True" />
+                            </StackPanel>
                         </Border>
-                        <ListView
-                            x:Name="listViewApoplexy"
-                            Grid.Row="1"
-                            Grid.Column="2"
-                            Margin="5,5,10,5"
-                            HorizontalAlignment="Stretch"
-                            VerticalAlignment="Stretch"
-                            FontSize="12" />
+
+                        <DataGrid Grid.Row="1" x:Name="dataGridApoplexy" Background="Transparent" >
+
+                            </DataGrid>
                     </Grid>
 
                 </Border>
-                <Grid x:Name="optionsGrid" Grid.Column="3">
-                    <Grid.RowDefinitions>
-                        <RowDefinition />
-                        <RowDefinition />
-                        <RowDefinition />
-                        <RowDefinition />
-
-                    </Grid.RowDefinitions>
-
-                    <Button
-                        x:Name="btnStart"
-                        Grid.Column="0"
-                        Height="28"
-                        Margin="0"
-                        materialDesign:ButtonProgressAssist.IsIndeterminate="False"
-                        materialDesign:ButtonProgressAssist.IsIndicatorVisible="True"
-                        materialDesign:ButtonProgressAssist.Value="-1"
-                        Click="btnStart_Click"
-                        Content="开      始"
-                        Cursor="Hand"
-                        FontSize="16"
-                        Style="{StaticResource MaterialDesignOutlinedButton}"
-                        ToolTip="开始格式化文件" />
-
-
-                    <Button
-                        x:Name="btnOpenDir"
-                        Grid.Row="1"
-                        Grid.Column="0"
-                        Height="28"
-                        Margin="0"
-                        Click="btnOpenDir_Click"
-                        Content="打开目录"
-                        Cursor="Hand"
-                        FontSize="16"
-                        IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
-                        Style="{StaticResource MaterialDesignOutlinedButton}"
-                        ToolTip="打开保存的慢病报卡目录" />
-                    <Button
-                        x:Name="cleanBtn"
-                        Grid.Row="2"
-                        Grid.Column="0"
-                        Height="28"
-                        Margin="0"
-                        Click="cleanBtn_Click"
-                        Content="清      除"
-                        Cursor="Hand"
-                        FontSize="16"
-                        IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
-                        Style="{StaticResource MaterialDesignOutlinedButton}"
-                        ToolTip="清除所有已填报的报卡信息" />
-
-                    <Button
-                        Name="btnPrint"
-                        Grid.Row="3"
-                        Grid.Column="0"
-                        Height="28"
-                        Margin="0"
-                        Click="btnPrint_Click"
-                        Content="打      印"
-                        Cursor="Hand"
-                        FontSize="16"
-                        IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
-                        Style="{StaticResource MaterialDesignOutlinedButton}"
-                        ToolTip="打印本次所有生成的报卡（仅限本次）" />
-
-                </Grid>
+                <TextBlock Grid.Row="1" Grid.Column="0"  Name="countCOPD" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <TextBlock Grid.Row="1" Grid.Column="1"  Name="countAMI" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <TextBlock Grid.Row="1" Grid.Column="2"  Name="countApoplexy" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             </Grid>
 
 

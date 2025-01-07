@@ -148,12 +148,12 @@ namespace MytoolMiniWPF.common
 
             if (GetText(CONST_WORK_ADDR).Length < 3)
             {
-                EnterText(CONST_WORK_ADDR, "-");
+                EnterText(CONST_WORK_ADDR, "无");
                 EnterText(CONST_VOCATION, "农民");
             }
             else
             {
-                EnterText(CONST_WORK_ADDR, patient.WorkAddr ?? "-");
+                EnterText(CONST_WORK_ADDR, patient.WorkAddr ?? "无");
 
             }
 

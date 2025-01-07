@@ -13,9 +13,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViewModel.Base", "ViewModel
 EndProject
 Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "Analysis", "Analysis\Analysis.pyproj", "{F13A5929-8335-42D1-9F85-75F019760F33}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleTest1", "ConsoleTest1\ConsoleTest1.csproj", "{4116F562-0A69-424F-88A1-50A5E533CBD8}"
-EndProject
-Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "医检互认日志处理", "医检互认日志处理\医检互认日志处理.pyproj", "{E8643329-79F6-46A1-8F91-055A412110BD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UpdateLogo", "UpdateLogo\UpdateLogo.csproj", "{C8A7540E-475C-47ED-A045-14E083841793}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,12 +39,10 @@ Global
 		{144D7F52-25A8-493E-8A34-42EF790BE1F8}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F13A5929-8335-42D1-9F85-75F019760F33}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F13A5929-8335-42D1-9F85-75F019760F33}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4116F562-0A69-424F-88A1-50A5E533CBD8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4116F562-0A69-424F-88A1-50A5E533CBD8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4116F562-0A69-424F-88A1-50A5E533CBD8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4116F562-0A69-424F-88A1-50A5E533CBD8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E8643329-79F6-46A1-8F91-055A412110BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E8643329-79F6-46A1-8F91-055A412110BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C8A7540E-475C-47ED-A045-14E083841793}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C8A7540E-475C-47ED-A045-14E083841793}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C8A7540E-475C-47ED-A045-14E083841793}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C8A7540E-475C-47ED-A045-14E083841793}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -10,7 +10,7 @@ using System.Windows;
 
 namespace MytoolMiniWPF.common
 {
-    internal static class UpdateRecoginitionDb
+    internal static class UpdateRecoginitionDb1
     {
 
         public static void Update(string processName)

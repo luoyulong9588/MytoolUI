@@ -191,7 +191,7 @@
                 Width="80"
                 Height="30"
                 Click="btnClose_Click"
-                Content="确定"
+                Content="关闭"
                 Style="{StaticResource BtnInfoStyle}" />
             <Button
                 x:Name="btnCopy"
@@ -199,7 +199,7 @@
                 Width="80"
                 Height="30"
                 Click="btnCopy_Click"
-                Content="复制"
+                Content="复制并关闭"
                 Style="{StaticResource BtnInfoStyle}" />
         </Grid>
     </Grid>

@@ -43,6 +43,7 @@
             </Border>
         </ControlTemplate>
     </Window.Template>
+
     <Window.Resources>
         <Style x:Key="BtnClose" TargetType="Button">
             <Setter Property="Width" Value="42" />
@@ -211,7 +212,7 @@
                 Foreground="OrangeRed"
                 LeftText="PO2:"
                 RightText="mmHg" />
-            
+
             <uc:LabelText
                 x:Name="na_box"
                 Grid.Row="3"
