@@ -149,7 +149,6 @@ namespace MytoolMiniWPF.views
                 selectUser = this.selectUserComboBox.Text;
             });
             
-
             Excel.Application xlapp = new Excel.Application();
             xlapp.DisplayAlerts = false;
             xlapp.Visible = false;
